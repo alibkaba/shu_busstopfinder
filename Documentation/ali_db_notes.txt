@@ -1,0 +1,319 @@
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+CALL ADDSTATE ('CT', 'Connecticut');
+CALL ADDSTATE ('MA', 'Massachusetts');
+CALL ADDSTATE ('CA', 'California');
+CALL ADDSTATE ('FL', 'Florida');
+CALL ADDSTATE ('NY', 'New York');
+CALL ADDDISTRICT ('1', 'Norwalk');
+CALL ADDDISTRICT ('2', 'Boston');
+CALL ADDDISTRICT ('3', 'Los Angeles');
+CALL ADDDISTRICT ('1', 'New Haven');
+CALL ADDDISTRICT ('1', 'Stratford');
+CALL ADDDISTRICT ('4', 'Miami');
+CALL ADDDISTRICT ('5', 'Queens');
+CALL ADDDISTRICT ('5', 'Albany');
+CALL ADDSCHOOL ('1', 'norwalk school', '125 East Avenue', 'Norwalk', '06852', '1-555-555-5555');
+CALL ADDSCHOOL ('2', 'new haven school', 'ma boston 101 STREET AVE.', '12', '06574', '1-555-555-55552');
+CALL ADDSCHOOL ('3', 'S3', 'ca la 101 STREET AVE.', '12', '06574', '1-555-555-55553');
+CALL ADDSCHOOL ('6', 'S4', 'florida miami 101 STREET AVE.', '12', '06574', '1-555-555-55554');
+CALL ADDSCHOOL ('7', 'S5', 'new york queens 101 STREET AVE.', '12', '06574', '1-555-555-55555');
+CALL ADDSCHOOL ('8', 'S6', 'albany 101 STREET AVE.', '06574', '12', '1-555-555-55556');
+CALL ADDSCHOOL ('4', 'S7', 'ct stratford 101 STREET AVE.', '12', '06574', '1-555-555-55557');
+CALL ADDSCHOOL ('4', 'S8', 'ct new haven 101 STREET AVE.', '12', '06574', '1-555-555-55558');
+CALL ADDBUSSTOPS ('1','1','RIVERSIDE AV & HILL ST','6:10 AM');
+CALL ADDBUSSTOPS ('1','1','PONUS AV & ELLS ST','7:00 AM');
+CALL ADDBUSSTOPS ('1','2','STYLES AV & PENNY LA','8:50');
+CALL ADDBUSSTOPS ('1','2','PONUS AV & LANCASTER DR','10:17 AM');
+CALL ADDBUSSTOPS ('1','3','MAHER DR & STEPPINGSTONE PL','8:00 PM');
+
+SELECT * FROM STATES WHERE STATE_ID = '1' UNION SELECT * FROM DISTRICTS WHERE DISTRICT_ID = '1' UNION SELECT * FROM SCHOOLS WHERE SCHOOL_ID = '1';
+
+SELECT 
+STATES.STATE_ID, STATES.STATE_ABBV, STATES.STATE_NAME, 
+DISTRICTS.DISTRICT_ID, DISTRICTS.DISTRICT_NAME 
+FROM STATES JOIN DISTRICTS ON STATES.STATE_ID = DISTRICTS.STATE_ID;
+
+SELECT 
+STATES.STATE_ID, STATES.STATE_ABBV, STATES.STATE_NAME, 
+DISTRICTS.DISTRICT_ID, DISTRICTS.DISTRICT_NAME,
+SCHOOLS.SCHOOL_ID, SCHOOLS.SCHOOL_ADDRESS, SCHOOLS.SCHOOL_ZIP, SCHOOLS.SCHOOL_PHONE, SCHOOLS.SCHOOL_ENDPOINT,
+ROUTES.ROUTE_ID, ROUTES.BUS_STARTPOINT
+FROM STATES JOIN DISTRICTS JOIN SCHOOLS JOIN ROUTES ON STATES.STATE_ID = DISTRICTS.STATE_ID AND DISTRICTS.DISTRICT_ID = SCHOOLS.DISTRICT_ID AND SCHOOLS.SCHOOL_ID = ROUTES.SCHOOL_ID;
+
+
+Select distinct
+    *
+from
+    SCHOOLS SCHOOLS_TABLE
+        inner join
+    ACCOUNTS ACCOUNTS_TABLE ON ACCOUNTS_TABLE.USER_ID = '6'
+        left join
+    STATES STATES_TABLE_STATE_LEVEL ON STATES_TABLE_STATE_LEVEL.STATE_ID = ACCOUNTS_TABLE.STATE_ID
+        and ACCOUNTS_TABLE.STATE_ID is not null
+        left join
+    SCHOOLS SCHOOLS_TABLE_STATE_LEVEL ON SCHOOLS_TABLE_STATE_LEVEL.STATE_ID = STATES_TABLE_STATE_LEVEL.STATE_ID
+        left join
+    DISTRICTS DISTRICTS_TABLE_DISTRICT_LEVEL ON DISTRICTS_TABLE_DISTRICT_LEVEL.DISTRICT_ID = ACCOUNTS_TABLE.DISTRICT_ID
+        and ACCOUNTS_TABLE.DISTRICT_ID is not null
+        left join
+    SCHOOLS SCHOOLS_TABLE_DISTRICT_LEVEL ON SCHOOLS_TABLE_DISTRICT_LEVEL.DISTRICT_ID = DISTRICTS_TABLE_DISTRICT_LEVEL.DISTRICT_ID
+        left join
+    SCHOOLS SCHOOLS_TABLE_SCHOOL_LEVEL ON SCHOOLS_TABLE_SCHOOL_LEVEL.SCHOOL_ID = ACCOUNTS_TABLE.SCHOOL_ID
+        and ACCOUNTS_TABLE.SCHOOL_ID is not null
+where
+    (SCHOOLS_TABLE.SCHOOL_ID = SCHOOLS_TABLE_STATE_LEVEL.SCHOOL_ID
+        or SCHOOLS_TABLE.SCHOOL_ID = SCHOOLS_TABLE_DISTRICT_LEVEL.SCHOOL_ID
+        or SCHOOLS_TABLE.SCHOOL_ID = SCHOOLS_TABLE_SCHOOL_LEVEL.SCHOOL_ID);
+
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+
+DROP TABLE IF EXISTS `djkabau1_BUSTOP`.`UNITTEST` ;
+
+CREATE TABLE IF NOT EXISTS `djkabau1_BUSTOP`.`UNITTEST` (
+  `idtable1` INT NOT NULL,
+  `INPUTS` VARCHAR(200) NULL,
+  `OUTPUTS` VARCHAR(200) NULL,
+  PRIMARY KEY (`idtable1`))
+ENGINE = InnoDB;
+
+USE `djkabau1_BUSTOP` ;
+-----------------
+
+-----------------
+DROP TABLE `djkabau1_BUSTOP`.`UNITTEST`;
+random strings
+http://www.random.org/strings/
+INSERT INTO UNITTEST (`INPUTS`) VALUES ('o
+'),('d
+'),('f
+'),('O
+'),('b
+'),('Y
+'),('X
+'),('u
+'),('8
+'),('V
+'),('0
+'),('D
+'),('g
+'),('w
+'),('1
+'),('s
+'),('k
+'),('c
+'),('3
+'),('h
+'),('gs
+'),('ej
+'),('F9
+'),('fl
+'),('Py
+'),('OT
+'),('w7
+'),('zn
+'),('qg
+'),('Jz
+'),('ez
+'),('Ig
+'),('t5
+'),('Y7
+'),('yS
+'),('T0
+'),('Gk
+'),('fx
+'),('An
+'),('2n
+'),('YK0
+'),('1KR
+'),('aWr
+'),('kuc
+'),('QUW
+'),('aXk
+'),('zuT
+'),('JCe
+'),('hbg
+'),('5nQ
+'),('wDy
+'),('VzQ
+'),('f0L
+'),('yDJ
+'),('Oh7
+'),('66x
+'),('vAZ
+'),('2sF
+'),('Dlp
+'),('dEs
+'),('IdZ7
+'),('pn1l
+'),('QhN7
+'),('0peH
+'),('oNJx
+'),('AAw3
+'),('jYia
+'),('V26U
+'),('WYOm
+'),('WslE
+'),('rEnx
+'),('UrRU
+'),('8y7I
+'),('9eYJ
+'),('CzJu
+'),('FKBn
+'),('9QNS
+'),('odyq
+'),('aRjT
+'),('ofaT
+'),('MXj80
+'),('7QKfo
+'),('4MMyI
+'),('9ftlx
+'),('fvpre
+'),('5JI8I
+'),('95e7c
+'),('xzI1x
+'),('LoVx7
+'),('DnH7Y
+'),('xmbbf
+'),('k9tuW
+'),('EMhSX
+'),('e27yC
+'),('jzfr5
+'),('FEWws
+'),('FnVqC
+'),('DRWRW
+'),('J1Rmu
+'),('FFMS7
+'),('FtYBX3
+'),('uno4ei
+'),('w5TJqS
+'),('JUKrlD
+'),('feoI0f
+'),('t8yoHB
+'),('GXbsCF
+'),('pTsHbu
+'),('8rn1OW
+'),('LaKnlt
+'),('QiLS19
+'),('wZzqQc
+'),('sdtaoI
+'),('jbn3t3
+'),('Eewmug
+'),('gRUcLz
+'),('WyFzWP
+'),('TEHFv3
+'),('n4U2F1
+'),('2EWDXW
+'),('i4uOWGS
+'),('CaaKbK4
+'),('1HBoVz1
+'),('f5EsnlC
+'),('QRjVLQY
+'),('RyyL92g
+'),('pSid83h
+'),('9ZZxezp
+'),('TNO9iP6
+'),('alEmxzh
+'),('Zdmka1p
+'),('HeONfYc
+'),('xTjwdLj
+'),('l4dPpNd
+'),('zVVGqwb
+'),('uyIdr93
+'),('4gRa59C
+'),('45z2DwU
+'),('IjcsfY5
+'),('lbpUtmC
+'),('Ei8kKDy0
+'),('tiK2M3Tm
+'),('oERGHsHp
+'),('QxeAwTIU
+'),('E0OngCbS
+'),('eu98FV4W
+'),('GWco51xm
+'),('S21Vptn4
+'),('93wMXWT4
+'),('BnN3DkDl
+'),('sK75XPHg
+'),('XsR6pHtk
+'),('Oo2sUIrc
+'),('lLcLF6xT
+'),('BwzSZHsJ
+'),('vcBuCWdZ
+'),('RU4A8xP6
+'),('MMVgh9Lx
+'),('TlFEqMbj
+'),('wb9tOtLg
+'),('KOxG1i7C3
+'),('1ICqjtbyt
+'),('NHklT1Qxz
+'),('8KcCqQec1
+'),('GDnlmtLVb
+'),('DfbpaDR6E
+'),('5fJa6zpVC
+'),('7qyO28QdN
+'),('YE9LT3i5H
+'),('oZojgf33V
+'),('4yyZhH2LG
+'),('bYTqb3CRQ
+'),('DSfjLns5H
+'),('HLHpOV6fQ
+'),('MSx5V1NVh
+'),('6vUa0nvau
+'),('ggiSjcmw5
+'),('x9FpsTu5p
+'),('h8foe8WTS
+'),('zQ2W4V7cY
+'),('57K4rYBjUs
+'),('dmJN4efEZg
+'),('XBAs2fLitz
+'),('E7g9e3xNM3
+'),('ycgZCXc7bn
+'),('D1xqdeLSLx
+'),('boHfSkvkRu
+'),('emJM1dVIwn
+'),('rUDuHrdAJw
+'),('e7DQKcs6dq
+'),('okg2UqmeI6
+'),('hj8D1Hp4Vw
+'),('6tE0hwEtR6
+'),('eCQcVzoyeq
+'),('X7thyb1A2b
+'),('iPuxnxaIoe
+'),('RxtokWSxHY
+'),('M2OSjKdGYn
+'),('NbCLf0ZufQ
+'),('JHJSKmFcXh
+'),('Qz23XKNy1QEtsAe12R04
+'),('t64PKc3FU6PU9jWIFrhb
+'),('e0P2mlhVWfJ6hQpaP3lF
+'),('Ifc5phMH0EGx8ZLqW3B7
+'),('ICGmIoK9vUNdcT6uGMYE
+'),('pi0f30IWPu9v3yxd4L3N
+'),('HVWLcjYmJQXFUdzg4FEQ
+'),('qBv21izlrE9Fe4c9hm29
+'),('annLBm3TcRILFTSIifgw
+'),('GRI58BcQmoXGW4gJHwyG
+'),('Hn34d4SK3H1MYIQVUysA
+'),('Co4zKamNmOAkqtCf8QAh
+'),('Qr2bLDLW6ybzL1YNqu9e
+'),('QznykfL7N8O4iKiWx9ni
+'),('kGVBr6FakYoUHDHBecFd
+'),('apG9kHt6Ac3TilfMW9xf
+'),('oFXzcqt4vCusNGr7cQcR
+'),('PglSypJm6bwwQXSpn2Rk
+'),('rPAioNUspW7FLidzstRA
+'),('NtBi300V3rAmZaJQ23zO
+'),('wmgJnuZTLu8iOgeji7oASOodFhVlnIYRPB4P7luu
+'),('WQPnmYqeuUQEJDnfNHQOiFXkJMPJY7V4oI6bGglHGJKdDvGHOBCCEIC5mBoG
+'),('hBenlCQ96LyrNVBoa6waKCN9i0XK7sApe67EHsWG6UflVhk10uhaX6GWnXsQQjlH8tvZLQv24rospLEb
+'),('KGHYEG75g2snNpzXrz6vnf84HrKLsuDRXuos44YDuQvDWa8aSZhi4bosw3pKgmgTAMdOALrODPN1fvLi5D9pAZdItUinkVu5k4DO');

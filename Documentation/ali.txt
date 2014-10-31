@@ -1,0 +1,892 @@
+10/30/14
+What did I accomplish yesterday?
+
+
+What will I do today? (or what did you do today?)
+
+
+What obstacles are impeding my progress?
+
+
+10/29/14
+What did I accomplish yesterday?
+some clean up + presentation
+
+What will I do today? (or what did you do today?)
+some clean up + presentation plus will suggest reducing sprint back from 2 weeks to 1 week.
+
+What obstacles are impeding my progress?
+
+
+10/28/14
+What did I accomplish yesterday?
+some clean up
+
+What will I do today? (or what did you do today?)
+some clean up + presentation
+
+What obstacles are impeding my progress?
+not really sure, just trying to get things done
+
+10/27/14
+What did I accomplish yesterday?
+see below
+
+What will I do today? (or what did you do today?)
+some clean up
+
+What obstacles are impeding my progress?
+not really sure, just trying to get things done
+
+10/26/14
+What did I accomplish yesterday?
+see below
+
+What will I do today? (or what did you do today?)
+worked with marlon on getting things done. See github history.
+
+What obstacles are impeding my progress?
+not really sure, just trying to get things done
+
+10/25/14
+What did I accomplish yesterday?
+see below
+
+What will I do today? (or what did you do today?)
+worked with Marlon on getting things done. See github history.
+
+What obstacles are impeding my progress?
+a lot of confusion
+
+10/24/14
+What did I accomplish yesterday?
+n/a
+
+What will I do today? (or what did you do today?)
+wrap up the #1, section 1.
+attempt to do some unit test on the DB
+http://alibkaba.com/cs604/ali/user.php
+
+
+What obstacles are impeding my progress?
+Ali Kaba <alibkaba@gmail.com> Fri, Oct 24, 2014 at 9:38 AM 
+To: Marlon Bermudez <mba5454@gmail.com>
+Cc: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>, CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+All --
+Just a few inputs:
+1. NONE of the codes are written in any classes (whether its JavaScript or PHP), I mentioned it before and will mention it again; I, Ali Kaba do not know how to write PHP in classes.
+2. My JavaScript isn't as polished as my PHP, so #2 to #5 cannot happen with my current javascript skills.  I've been attempting to work on it but I requested 2 days ago if someone can do something for me and I received no response. Here it is here: I want JS to alert the value that is selected from the drop down menu, see my index.php Test 4.  Please, provide me this code by tonight so I can work on it.
+3. Please, I just want everyone to understand I am writing the control and the model so expect me to be busy along with other things
+4. I am attempting to unit test my database
+5. I still have to work with you Marlon with the google maps address strings so I hope we can work on this tomorrow.
+6. It appears I am not as fast of a learner as you guys, dedicating just a few hours (2-4) to learn something.  I take longer, I've spent at least more than a full day on 2-3 weeks.  This is another reason why I wanted to do points but we all decided not to do it but now I regret agreeing to that.
+7. All the busuiness logic will be writing as you see in the link below.  NO classes, no separate JavaScript page, everything in one page.  I can't drop everything because no one listened to me when I warned I won't drop anything near the end because of something like this, I was very clear as you all recall it. See my notes.
+I am aggregated at myself because I wasn't clear enough on my skills level in the languages we use but now we all know so unless someone can do what I can't do, we (or you guys) will have to think of something.
+Today + Tomorrow, my job is to finish unit testing some of the DB and work with the Google maps part, wrap things up with #1 and work on the Google maps API portion.
+Here, you can see the work I've done if you haven't looked at it yet: http://alibkaba.com/cs604/ali/index.php 
+ Ali Kaba <alibkaba@gmail.com> Fri, Oct 24, 2014 at 10:03 AM 
+To: Marlon Bermudez <mba5454@gmail.com>
+Cc: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>, CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+All --
+What are we using to display the different routes?
+See link below 
+http://alibkaba.com/cs604/ali/user.php
+What you see in that link is as much as I can so far for #1, without the JS and business logic built inside the page. 
+
+Ali Kaba <alibkaba@gmail.com> Fri, Oct 24, 2014 at 1:35 PM 
+To: Marlon Bermudez <mba5454@gmail.com>
+Cc: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>, CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+Sounds like a plan, and I believe there is an un-event distribution of work and it needs to be rectified.
+ 
+---
+Best Regards,
+Ali Kaba
+email: alibkaba@gmail.com
+mobile: 203.676.4161
+----------------
+Please consider the environment before printing this e-mail.  Let's think sustainability.
+----------------
+CONFIDENTIALITY NOTICE: This e-mail message, including any attachments, is for the sole use of the intended recipient(s) and may contain confidential and privileged information. Any unauthorized review, use, disclosure, or distribution is prohibited. If you are not the intended recipient, please contact the sender by reply e-mail and destroy all copies of the original message.
+On Fri, Oct 24, 2014 at 10:49 AM, Marlon Bermudez <mba5454@gmail.com> wrote:
+Great, let's talk tonight, then we can work tomorrow from 9:30am to 2pm on it and I can help as needed to answer questions. 
+Call you at 10pm tonight. 
+Thank You,
+Marlon Bermudez
+Please note my new email is IT@MarlonBermudez.com
+On Oct 24, 2014, at 10:37 AM, Ali Kaba <alibkaba@gmail.com> wrote:
+Marlon --
+That's fine, we can talk tonight.  I only have tomorrow morning up until ~2 PM.
+This is the definition of the MVC in our case
+Model - Database
+View - fronts page facing the users
+Controller - PHP, JavaScript classes handling the information between the view and model.  This is where the business logic resides.
+Model:
+Create DB Diagrams ||| Ali ||| DONE
+Setup MySQL DB on webhost ||| Ali ||| DONE
+Deploy the tables  ||| Ali ||| DONE
+Unit Test the Stored Procedures ||| Ali ||| IN-PROGRESS
+Verify accounts only see what they should see ||| Ali ||| DONE
+Controller:
+Test data coming from the DB is going into the API correctly ||| Ali, Marlon ||| IN-PROGRESS
+Start working on the control to add functionality between the web pages and the database ||| Ali, somebody else ||| IN-PROGRESS
+Test ability to create an account that saves on the DB ||| Ali ||| NEW <--- sprint 4
+Put the business logic in the control ||| Ali, somebody else ||| NEW <--- sprint 4
+ 
+---
+Best Regards,
+Ali Kaba
+email: alibkaba@gmail.com
+mobile: 203.676.4161
+----------------
+Please consider the environment before printing this e-mail.  Let's think sustainability.
+----------------
+CONFIDENTIALITY NOTICE: This e-mail message, including any attachments, is for the sole use of the intended recipient(s) and may contain confidential and privileged information. Any unauthorized review, use, disclosure, or distribution is prohibited. If you are not the intended recipient, please contact the sender by reply e-mail and destroy all copies of the original message.
+On Fri, Oct 24, 2014 at 10:27 AM, Marlon Bermudez <mba5454@gmail.com> wrote:
+Ali, it will be google maps. It will be easier for both of us to review the 5 user stories tonight or tomorrow and what we need todo. It is key so we can be on the same page and it simplifies everything. 
+Let me know if you are available tonight and not tomorrow after 9am. I will be working on the project tomorrow after 9am, and I will so the integration for all parts once everyone completes their sections. 
+Thank You, 
+ 
+
+ 
+
+
+
+10/23/14
+What did I accomplish yesterday?
+see previous day
+
+What will I do today? (or what did you do today?)
+couldn't make it to class
+
+What obstacles are impeding my progress?
+see previous day
+
+10/22/14
+What did I accomplish yesterday?
+added everyone's stuff online
+http://alibkaba.com/cs604/ali/
+http://alibkaba.com/cs604/cj/
+http://alibkaba.com/cs604/scott/
+http://alibkaba.com/cs604/marlon/
+
+What will I do today? (or what did you do today?)
+Did a few test, that can be located on
+http://alibkaba.com/cs604/ali/index.php
+will start writing unit test for the database
+study for the test
+
+What obstacles are impeding my progress?
+I am unable to meet current user stories because I cannot produce javascript for the ideas we have, at least not by myself to meet the deadline.
+I also cannot learn classes fast enough with the amount of work-items I have.
+we are communicating via email but here is the load-down.
+
+
+Gmail Ali Kaba <alibkaba@gmail.com> 
+Bus Route
+12 messages 
+Bermudez, Marlon <bermudezm@mail.sacredheart.edu> Thu, Oct 16, 2014 at 7:19 PM 
+To: Marlon Bermudez <mba5454@gmail.com>, Ali Kaba <alibkaba@gmail.com>
+Cc: CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+https://ist.berkeley.edu/as-ag/pub/pdf/mvc-seminar.pdf
+ 
+ 
+For this class, see great PDF to explains what he is talking about and something we could use later.
+ 
+ 
+Thanks,
+ 
+Marlon
+ 
+ 
+Ali Kaba <alibkaba@gmail.com> Thu, Oct 16, 2014 at 8:44 PM 
+To: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>
+Cc: Marlon Bermudez <mba5454@gmail.com>, CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+WHO IS UNCLE BOB?!
+ 
+[Quoted text hidden]
+ 
+ 
+Marlon Bermudez <mba5454@gmail.com> Mon, Oct 20, 2014 at 9:33 PM 
+To: Ali Kaba <alibkaba@gmail.com>
+Cc: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>, CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+Ali, I found this you gave us earlier this semester.  Can you upload your updated phps to the FTP site?  What the is public http:// url so we can access the folder via the browser and see it in action?
+Scott, CJ: how is the GUI coming?
+I uploaded my section yesterday, but still have a few things to do.   I separated the Google Maps API into functions, and troubleshot the route calculation.  I will need to use a new method since passing the variables doesn't work due to async nature of that Google API function. 
+All --
+FTP:  Where you will dump any files (html, etc)
+ftp.alibkaba.com (use plain ftp, not SFTP)
+marlon@alibkaba.com
+dCl7A?QvnvUm
+ftp.alibkaba.com (use plain ftp, not SFTP)
+cj@alibkaba.com
+7Ga)b]+qqdMQ
+ftp.alibkaba.com (use plain ftp, not SFTP)
+scott@alibkaba.com
+UB2[4xP{Z!uM
+I will wrap up the Database EER Diagram and have it up sometimes tomorrow afternoon but here are the connection detail:
+schema: djkabau1_BUSTOP
+user: djkabau1_admin  (this account has all priviledges)
+password: k?h4F=g4Ra{O
+hostname is 173.254.28.68 port is 3306
+I use https://dev.mysql.com/downloads/workbench/
+In order to access this remotely, for security reasons I can only whitelist connections therefore you will need to email me your IP address (eg. 10.20.10.2) or your CLASS (eg. 10.20.10.0/24).
+I have to leave class early on Thursday so I would like to meet @ 6 PM in the computer lab 109b or something (that small room).
+*****NOTE: just double checking...
+Even though we will have HTML5 in the webpages, you will still need to use PHP and save the document as a .php to communicate with the database so be aware of it if you aren't.  Do not use plugins, it complicates thing down the road...just an FYI
+[Quoted text hidden] 
+ 
+Ali Kaba <alibkaba@gmail.com> Tue, Oct 21, 2014 at 10:40 AM 
+To: Marlon Bermudez <mba5454@gmail.com>
+Cc: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>, CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+GM All --
+The link is http://www.alibkaba.com/cs604/.  I created each of our folders, so it will be http://www.alibkaba.com/cs604/ali/, http://www.alibkaba.com/cs604/scott/, http://www.alibkaba.com/cs604/marlon/, http://www.alibkaba.com/cs604/cj/
+My current .php is http://www.alibkaba.com/cs604/ali/index.php.
+I honestly can't learn classes and how to make them work right now, so I will put the business logic for everything on a single page. 
+ 
+[Quoted text hidden]
+ 
+ 
+Marlon Bermudez <mba5454@gmail.com> Tue, Oct 21, 2014 at 12:34 PM 
+To: Ali Kaba <alibkaba@gmail.com>
+Cc: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>, CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+Ali, can you do a Git pull and upload all our stuff also?
+We need to have it separated for the presentation next week, but as long as it works first then we can work on separating the business logic. 
+Thank You,
+Marlon Bermudez
+Please note my new email is IT@MarlonBermudez.com
+[Quoted text hidden]
+ 
+ 
+Ali B. Kaba <alibkaba@gmail.com> Tue, Oct 21, 2014 at 4:32 PM 
+To: Marlon Bermudez <mba5454@gmail.com>
+Cc: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>, CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+We can do that.  Can someone write the JavaScript part?  We need to add a bunch of listeners.  Who can work on that?
+Please feel free to contact me if you have any questions or comments.
+[Quoted text hidden] 
+ 
+Marlon Bermudez <mba5454@gmail.com> Tue, Oct 21, 2014 at 11:30 PM 
+To: "Ali B. Kaba" <alibkaba@gmail.com>
+Cc: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>, CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+Scott, CJ: how is the front end coming along? Once you update the files push them so we can see them in Git. 
+I know we are going to work on the test, just wanted to touch base on our progress as a group.  Based on Paul's requirements for our presentation I put the info below together.   We should all have our sections fully functional by Thursday, so we can integrate over the weekend into Monday, test on Tuesday, and prepare for presentation on Wednesday for next Thursday. 
+We need 4 or 5 user Stories that we can discuss on Thursday after the exam, but they will be things that the web page will do.   I should be able to do the 2 in bold, and between Scott, CJ and Ali can work on the GUI and DB to show connectivity of loading data from the Database and do the other 2 bold User stories. 
+For next week, we should have the 5 User Stories below completed for the first iteration.  We can choose different user Stories, but from our original list these are the ones that align better with what we are doing.  
+We should have files like the ones below, and have our Styles in CSS and functions in a .JS file.  This week we can get it to work, but functions need to be separate from front end GUI.  See mine 2 files as an example. 
+user.html (Scott, CJ, Marlon for Maps section)  then I will work with both of you to add my section
+login.html (Scott, Ali)
+admin.html (Scott, CJ)
+GoogleMapsAPIRepository.js (Marlon)
+DB.js or PHP (Ali. ) (it might be easier to do the DB section in Javascript to skip PHP, better for writing unit testing and scaling with repositories and calling functions)
+[1]As a Student/Parent, I want to search for my school in my state and school district, so that I can search for the bus stops.
+1) Ali's section will test connectivity to the database via unit test (test writing, reading, modifying, and deleting)
+2) Ali's php or Javascript will connect to DB and load states in the table then populate Scott/CJ's State drop down list.  This drop down will have a listener for the user to click and select a state
+3) Once the user selects a state, the listener will query the database for the districts in that state, and it will populate and show the District selection drop down.  This drop down will also have a listener for a selection
+4) Once the user selects a district, the listener will query the database for the schools in that district, and populate them on a drop down then show the drop down list
+5) Once the user selects a school, the listener will query the database for the buses and bus stops for each bus for that school, then show and display them in a list. 
+[2]As a Student/Parent, I want to find the Closest Bus Stop to my address so that I know which bus to take at what time. (Marlon)
+6) The user will then have the ability to enter their address in a text box to search for the closes bus stop to that address.  
+7) Javascript will use the loaded bus routes for that school, and use Google Maps api to find the closes bus stop, and display the Bus number, Bus stop address, and Bus stop time to the user. 
+[3]As a Student/Parent, I want to Display Bus Stops on a map so that I can see how close they are. (Marlon
+8) A google map will appear and show markers for the user's entered address, and the bus stops within 1-2 miles of that address. 
+[4]As a Webmaster, I want to login to the Dashboard, so I can manage districts, schools, and bus routes. 
+9) an login.html will allow the administrator to enter an user name and password that will query the database, and check the credentials, if successful it will load admin.html (no session keepalive or auth after this for now)
+[5]As a School Administrator, I want to manage Bus Stops so that I can add, remove and modify them.
+10) an admin.html page will have a similar interface to steps 1-5 above, and then allow the admin to enter Bus Number, which then will have entries for Bus Stop Time, Bus Stop address, and enter as many as needed, then save them to the database.   This User story should have connectivity to DB, 
+User Stories from our document on Git. 
+As a School Administrator, I want to register for a School Account so that I can manage the bus stops. 
+As a School Administrator, I want to manage Bus Stops so that I can add, remove and modify them. 
+As a Webmaster, I want to login to the Dashboard, so I can manage districts, schools, and bus routes. 
+As a Webmaster, I want to Manage School Accounts so that School Administrators can manage bus stops for their schools. 
+As a Student/Parent, I want to search for my school in my state and school district, so that I can search for the bus stops. 
+As a Student/Parent, I want to Display Bus Stops on a map so that I can see how close they are. 
+As a Student/Parent, I want to find the Closest Bus Stop to my address so that I know which bus to take at what time. 
+As a Student/Parent, I want to get directions from the closes bus stop so that I can walk or drive there. 
+As a Student/Parent, I want to print directions to the bus route so that I can talk them with me. 
+As a Student/Parent, I want to email directions to the bus route so that I can have them on my phone. 
+[Quoted text hidden] 
+ 
+Ali Kaba <alibkaba@gmail.com> Wed, Oct 22, 2014 at 9:39 AM 
+To: Marlon Bermudez <mba5454@gmail.com>
+Cc: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>, CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+All --
+I hate to be pessimist but based of the amount of time we put in so far every week since we started, we will not be able to complete this by next week.  This is what I was fearing earlier this month during our meeting that we would eventually rush near some dead lines and that I can't promise those extra hours.
+Anyway I need someone with a vast knowledge in javascript because it will take me longer to get where I want to go:
+I want JS to alert the value that is selected from the drop down menu, see my index.php Test 4.
+As far as the user stories:
+As a School Administrator, I want to manage Bus Stops so that I can add, remove and modify them. 
+I can do this but it will have to be at least in sprint 4 or 5
+As a Webmaster, I want to login to the Dashboard, so I can manage districts, schools, and bus routes. 
+there is no dashboard yet, so sprint 4 BUT I can make the login portion work.  Just to prove that a user can login
+As a Student/Parent, I want to search for my school in my state and school district, so that I can search for the bus stops. 
+That's what we are currently working
+As a Student/Parent, I want to Display Bus Stops on a map so that I can see how close they are.
+This will come right after the previous one...depending on when we finish it.
+As a Student/Parent, I want to find the Closest Bus Stop to my address so that I know which bus to take at what time.
+will happen when previous one is solved too
+We are hustling to work on one user story, so I don't think we will reach the other 4 so I suggest we dumb them down a bit so we can meet them.
+User registers accounts
+User logs in
+User selects state
+User selects district
+User selects school
+user views bus stops of school
+user prints school stops
+etc etc, something like that.
+I cannot meet today nor tomorrow because my focus needs to be on my test tomorrow, but I can meet Friday on after that.
+I have a job on the following two Thursdays, so I will be leaving early however I am more than willing to have a web meet any other day.
+ 
+[Quoted text hidden]
+ 
+ 
+Ali Kaba <alibkaba@gmail.com> Wed, Oct 22, 2014 at 9:58 AM 
+To: Marlon Bermudez <mba5454@gmail.com>
+Cc: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>, CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+For Filezilla
+https://filezilla-project.org/
+Create the new site
+Inline image 2
+connect and you will be in:
+Inline image 3
+ 
+[Quoted text hidden]
+ 
+ 
+Marlon Bermudez <mba5454@gmail.com> Wed, Oct 22, 2014 at 12:42 PM 
+To: Ali Kaba <alibkaba@gmail.com>
+Cc: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>, CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com> 
+Ali, based on your update, we have an emergency situation. A few weeks ago we had agreed that you would be able to populate data from database into Scott's GUI. 
+We need to update the professor today. 
+The 5 user stories I wrote as long as the front end is completed and the database is working and can read and write data by this Thursday, we should have no issues completing these.   They won't take more than 2-4 hours to complete from all ends.   It is a very simple setup, but we need the logic working. 
+We need to talk today, even if separately. I can call after 5:30pm. 
+Ali, please email Paul and copy us on it if you really feel we cannot meet any requirements for this first iteration, but I think we are fine as long as we all invest 3-4 hours by next Wednesday. I have gone to bed at 3am several times working on this project because I don't have time before 11pm. 
+Thank You,
+Marlon Bermudez
+Please note my new email is IT@MarlonBermudez.com
+[Quoted text hidden]
+ 
+ 
+Bermudez, Marlon <bermudezm@mail.sacredheart.edu> Wed, Oct 22, 2014 at 2:40 PM 
+To: Scott Polis <scottpolis@gmail.com>, CJ Buynovsky <cjbuynovsky@gmail.com>, Ali Kaba <alibkaba@gmail.com> 
+Scott, see this email below. It has all the info you need to put together the front end. Ali is responsible for making the connecting to and from the Db, and it can integrate with your front end once you setup the listeners and JavaScript is setup to load data from the Db. 
+The page you have now with the pictures can be the user.html and you need an admin page. 
+Read the email I sent yesterday completely, and it will help clarify what we need to the front end. 
+We need to get everything working, then we can separate the logic. 
+ Thank You, 
+Marlon Bermudez
+ Begin forwarded message:
+From: Marlon Bermudez <mba5454@gmail.com>
+Date: October 21, 2014 at 11:30:08 PM EDT
+To: "Ali B. Kaba" <alibkaba@gmail.com>
+Cc: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>, CJ Buynovsky <cjbuynovsky@gmail.com>,  Scott Polis <scottpolis@gmail.com>
+Subject: Re: Bus Route
+[Quoted text hidden]
+ 
+ 
+Ali Kaba <alibkaba@gmail.com> Wed, Oct 22, 2014 at 2:56 PM 
+To: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>
+Cc: Scott Polis <scottpolis@gmail.com>, CJ Buynovsky <cjbuynovsky@gmail.com> 
+Ali, based on your update, we have an emergency situation. A few weeks ago we had agreed that you would be able to populate data from database into Scott's GUI. 
+The 3 drop down menu are working. State, District and School.  I will insert data from the database into district nad school since the tables are empty.
+alibkaba.com/cs604/ali/index.php
+There is no need to email Paul because we are a group and we are being graded that way.
+Reduce the user stories so it reachable and increase as needed.
+Here are the work-items I did.
+Sprint 1:
+Create DB Diagrams ||| Ali ||| DONE
+Setup MySQL DB on webhost ||| Ali ||| DONE
+Deploy the tables  ||| Ali ||| DONE
+Sprint 2:
+Verify accounts only see what they should see ||| Ali ||| DONE
+Use PHP to pull data from the DB ||| Ali ||| DONE (Completed in Sprint 3) (I couldn't complete this until this: Create a Dashboard page ||| Scott ||| DONE (received on the 10th of October)
+Test data coming from the DB is going into the API correctly ||| Ali, Marlon ||| IN-PROGRESS
+Sprint 3:
+Unit Test the Stored Procedures ||| Ali ||| IN-PROGRESS
+Start working on the control to add functionality between the web pages and the database ||| Ali, somebody else ||| IN-PROGRESS   <-----This will need to be broken down into several work-items
+Sprint 4:
+Test ability to create an account that saves on the DB ||| Ali ||| NEW
+Put the business logic in the control ||| Ali, somebody else ||| NEW
+I can only work on 3 work-items at a time but if someone can whip me some ajax/javascript scripts on-demand, I will be able to finish everything on time.
+ 
+[Quoted text hidden]
+
+10/21/14
+What did I accomplish yesterday?
+n/a
+
+What will I do today? (or what did you do today?)
+study for the test
+
+What obstacles are impeding my progress?
+n/a
+
+10/20/14
+What did I accomplish yesterday?
+read up on php classes
+
+What will I do today? (or what did you do today?)
+test the php classes
+
+What obstacles are impeding my progress?
+learning how to create classes in php
+
+10/19/14
+What did I accomplish yesterday?
+n/a
+
+What will I do today? (or what did you do today?)
+read up on php classes
+
+What obstacles are impeding my progress?
+learning how to create classes in php
+
+10/18/14
+What did I accomplish yesterday?
+n/a
+
+What will I do today? (or what did you do today?)
+n/a
+
+What obstacles are impeding my progress?
+n/a
+
+10/17/14
+What did I accomplish yesterday?
+n/a
+
+What will I do today? (or what did you do today?)
+n/a
+
+What obstacles are impeding my progress?
+n/a
+
+10/16/14
+What did I accomplish yesterday?
+class
+
+What will I do today? (or what did you do today?)
+class and meeting
+
+What obstacles are impeding my progress?
+n/a
+
+10/15/14
+What did I accomplish yesterday?
+nothing
+
+What will I do today? (or what did you do today?)
+class
+
+What obstacles are impeding my progress?
+n/a
+
+10/14/14
+What did I accomplish yesterday?
+nothing
+
+What will I do today? (or what did you do today?)
+nothing
+
+What obstacles are impeding my progress?
+n/a
+
+10/13/14
+What did I accomplish yesterday?
+nothing
+
+What will I do today? (or what did you do today?)
+nothing
+
+What obstacles are impeding my progress?
+n/a
+
+10/12/14
+What did I accomplish yesterday?
+nothing
+
+What will I do today? (or what did you do today?)
+created a few store procedures.
+
+What obstacles are impeding my progress?
+
+
+10/11/14
+What did I accomplish yesterday?
+nothing
+
+What will I do today? (or what did you do today?)
+nothing
+
+What obstacles are impeding my progress?
+nothing
+
+10/10/14
+What did I accomplish yesterday?
+class and meeting
+
+What will I do today? (or what did you do today?)
+see meeting notes.
+work some store procedures and unit test them
+work on the google api pages. it will request data from the table. will work with Marlon today or in the few days
+Activity Diagram (on hold)
+Conceptual Website Diagram
+emailed everyone the diagrams listed above.
+
+What obstacles are impeding my progress?
+nothing at the moment
+
+10/9/14
+What did I accomplish yesterday?
+see below
+
+What will I do today? (or what did you do today?)
+class and meeting
+
+What obstacles are impeding my progress?
+see below
+
+10/8/14
+What did I accomplish yesterday?
+work item:
+Verify accounts only see what they should see ||| Ali ||| QA
+
+What will I do today? (or what did you do today?)
+QA work item on a webpage
+Verify accounts only see what they should see ||| Ali ||| QA
+
+What obstacles are impeding my progress?
+1. waiting for webpages to put some php on from. scott and cj
+2. the google maps db + php needs. marlon
+
+10/7/14
+What did I accomplish yesterday?
+wrote the query
+
+What will I do today? (or what did you do today?)
+test the query.  if it works, add the admin portion in it
+
+What obstacles are impeding my progress?
+need to test that query
+
+10/6/14
+What did I accomplish yesterday?
+nothing
+
+What will I do today? (or what did you do today?)
+query works.
+done with work item:
+Verify accounts only see what they should see ||| Ali ||| QA
+
+Select distinct
+    *
+from
+    SCHOOLS SCHOOLS_TABLE
+        inner join
+    ACCOUNTS ACCOUNTS_TABLE ON ACCOUNTS_TABLE.USER_ID = '1'
+        left join
+    STATES STATES_TABLE_STATE_LEVEL ON STATES_TABLE_STATE_LEVEL.STATE_ID = ACCOUNTS_TABLE.STATE_ID
+        and ACCOUNTS_TABLE.STATE_ID is not null
+        left join
+    SCHOOLS SCHOOLS_TABLE_STATE_LEVEL ON SCHOOLS_TABLE_STATE_LEVEL.STATE_ID = STATES_TABLE_STATE_LEVEL.STATE_ID
+        left join
+    DISTRICTS DISTRICTS_TABLE_DISTRICT_LEVEL ON DISTRICTS_TABLE_DISTRICT_LEVEL.DISTRICT_ID = ACCOUNTS_TABLE.DISTRICT_ID
+        and ACCOUNTS_TABLE.DISTRICT_ID is not null
+        left join
+    SCHOOLS SCHOOLS_TABLE_DISTRICT_LEVEL ON SCHOOLS_TABLE_DISTRICT_LEVEL.DISTRICT_ID = DISTRICTS_TABLE_DISTRICT_LEVEL.DISTRICT_ID
+        left join
+    SCHOOLS SCHOOLS_TABLE_SCHOOL_LEVEL ON SCHOOLS_TABLE_SCHOOL_LEVEL.SCHOOL_ID = ACCOUNTS_TABLE.SCHOOL_ID
+        and ACCOUNTS_TABLE.SCHOOL_ID is not null
+where
+    (SCHOOLS_TABLE.SCHOOL_ID = SCHOOLS_TABLE_STATE_LEVEL.SCHOOL_ID
+        or SCHOOLS_TABLE.SCHOOL_ID = SCHOOLS_TABLE_DISTRICT_LEVEL.SCHOOL_ID
+        or SCHOOLS_TABLE.SCHOOL_ID = SCHOOLS_TABLE_SCHOOL_LEVEL.SCHOOL_ID);
+
++I removed the endpoint on schools and routes for now.
+
+What obstacles are impeding my progress?
+nothing
+
+10/5/14
+What did I accomplish yesterday?
+nothing
+
+What will I do today? (or what did you do today?)
+nothing
+
+What obstacles are impeding my progress?
+nothing
+
+10/4/14
+What did I accomplish yesterday?
+nothing
+
+What will I do today? (or what did you do today?)
+nothing
+
+What obstacles are impeding my progress?
+nothing
+
+10/3/14
+What did I accomplish yesterday?
+We had a meeting
+
+What will I do today? (or what did you do today?)
+Filter out the user stories, email everyone about it to keep it update to date as noted below:
+work on my DB query if possible.
+Ali Kaba <alibkaba@gmail.com> Fri, Oct 3, 2014 at 9:39 AM 
+To: "Bermudez, Marlon" <bermudezm@mail.sacredheart.edu>
+Cc: CJ Buynovsky <cjbuynovsky@gmail.com>, Scott Polis <scottpolis@gmail.com>, Marlon Bermudez <mba5454@gmail.com> 
+To everyone --
+Hey, I updated quiet a few things on the github site but what I need everyone to do is to check out the User_Stories.txt and add what you've done for the first sprint (Scott and CJ and possibly Marlon).
+Be a specific as possible, break it down so we can have all of sprint 1 completed.  Don't put things like working on website because the whole project is a website and it will always be in progress.
+See how I completed all my stuff?  Deploy tables...done, create DB diagram..done.  Something you did and try to keep the format the same so its easy to go read it.  Feel free to add additional work items on any sprints in the foreseeable future so we can all look at it
+Break things down, very important.
+Update documents (meetings, user stories, etc).  We all see when changes are made in github and keep track of everything. 
+ 
+What obstacles are impeding my progress?
+nothing per group meeting
+
+
+10/2/14
+What did I accomplish yesterday?
+nothing
+
+What will I do today? (or what did you do today?)
+meeting
+
+What obstacles are impeding my progress?
+meeting
+
+
+Select from user
+inner join accounts account_id on accounts.user_id = users.user_id
+left join schools on accounts.school_id is not null and school.school_id = accounts.school_id
+left join district on 
+
+10/1/14
+What did I accomplish yesterday?
+Nothing
+
+What will I do today? (or what did you do today?)
+I created a Microsoft project file to keep track of our task.  We need to implement the point system and detail out work items.  That is what Agile is all about, not completing the project but adjusting.
+Marlon sent an email:
+How is everyone doing?
+Ali, for the database did you test loading a value from the database using php? You can enter static text on a table and make sure you can read it on php and display it on the screen. For sprint 1 this would show that we have the database and are able to connect to it. 
+I uploaded a second html, this one has a different approach to calculating the distance and I have to combine both html files I uploaded and use text boxes to enter addresses for sprint 2. 
+See you all tomorrow at 6:30pm. 
+ Thank You, 
+Marlon Bermudez
+
+I replied with this:
+Marlon --
+Like we discussed (and I think its also in the adjusted sprint 1 + 2) we cannot load data into the DB from the view (HTML) side because we do not have a control in place (php, etc).  The data is added into the tables from the DB.
+On Sprint 2, we will pull data (after it has been added from the UI).  on sprint 3 or 4, we will add/modify data into the DB from the UI.
+We cannot connect because I cannot write php when:
+1.  I don't know how scott's and CJ's page looks like
+2. I don't have time to do all that for sprint 1 thus the adjusted sprint 1 was put in place Monday
+Let me know if the meeting and/or the adjusted sprints need to be re-edited to be a bit more clear because it is very important that we are all on the same page
+
+end of email
+So that is what I will want to discuss tomorrow, we need to keep track of what needs to be done.  Things won't magically 
+I will update our meeting document too.
+
+
+What obstacles are impeding my progress?
+What is listed above.  A lot of work is being listed and this isn't waterfall.  Purpose of this class is to learn agile so we need to adjust and start keep track and be more organized, its not a race.
+
+
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+9/30/14
+What did I accomplish yesterday?
+What is listed below
+
+What will I do today? (or what did you do today?)
+Nothing, I have to study for another class.
+i will put some stuff on ali help.txt to help other team mates!
+updated D:\school\shu-cs604\busroute\scrub_notes\meetings.txt
+
+What obstacles are impeding my progress?
+What is listed below
+
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+9/29/14
+What did I accomplish yesterday?
+We have a meeting and I discussed with Marlon on how the pages will communicate with the database.
+Marlon suggested something along the lines of user id 1-100 are amdin, 200-300 are states, etc.
+I was going to sleep on it and see how I can compile it.
+
+What will I do today? (or what did you do today?)
+After thinking about Marlon's idea, it does reduce the amount of if statements but I think I found a new way to handle this: Roles.
+I will be adding a new table called User and modify the Accounts table.
+This cahnge will allow hte following:
+A person can manage 0 or more state
+A person can manage 0 or more district
+A person can manage 0 or more school
+
+How does a person manage 0 or more state, district, school?
+For each access, a account (role) will be created.  The role will use the same exact query.
+In other words, if you have a square for school, rectangle for district and triangle for state, it will always be the same shape (the query) but it will be a different color (the value in the query).
+For example, here is a record in the accounts table:
+01. User name "Bob" can access join schools in district "New Haven" join districts in "CT".   <---this is a state admin
+02. User name "John" can access join schools in district "Fairfield" 						  <---this is a district admin
+03. User name "Steve" can access join school named "SHU"									  <---this is a school admin
+04. User name "Tony" can access join school named "SHU"										  <---this is a school admin for SHU and FU
+05. User name "John' cna access join schools in district "New Haven" 						  <---this is a district admin
+06. User name "Tony" can access join school named "YALE"									  <---this is a school admin
+
+Tony can access two schools in two different districts (Fairfield (SHU) and New Haven (YALE))
+Bob has access to all the joints.
+I will have to figure out how I will implement this but this will pretty much delete over 60% of if statements in the UI and on the back end.
+
+What obstacles are impeding my progress?
+I have to test this new idea, it is the best solution for a long run and I should be able to get it, test it tonight if not tomorrow.
+We have a problem...who is handles the control?
+View | Control | Model?
+
+I edited the User Stories.txt because we will not meet our sprint one unless we change the sprint.  impossible, we have no control.
+The next sprint will be control intensive at just pull the data (not writing data from the UI)  Data will be added into the DB on the backend.
+
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+9/28/14
+What did I accomplish yesterday?
+Database was created. see documentation.
+
+What will I do today? (or what did you do today?)
+I will work on this today OR on 9/29/14.
+Work on some statements (insert, edit, delete)
+
+What obstacles are impeding my progress?
+Quiet a lot, we need to adjust our sprints to meet wednesday's sprint 1.  see user stories.txt
+
+Questions for today's meeting:
+Admin Features:
+1)Admin account will be hard coded and will have an username and password
+That can be done with the current state of the db.
+
+2)The Admin account will be able to manage all aspects of the website, including approving State, District and school accounts
+Admin Page
+Once an admin, the code from the UI will present everything (see SUGGESTIONS XYZ below on how that will work)
+
+1)Admin Login page allows user to enter username and password, also has a forgot password link
+I thinnk we should put the forgot passwork feature in a different sprint however it is a very easy feature to add.
+
+2)After successful login, admin is able to manage pending registrations, current registrations, and also manage State, District, and School accounts and reset passwords as needed
+Database Values:  Admin_Name, Admin_Email, Admin_Password
+We are moving too quickly here, let's put any sort of pending/validation feature (state validates district names, etc) into another sprint.
+The bottom line here is, you can create an account (state, district, school) and it automatically adds it into the DB.
+The validation process (from personal experience) will make sprint 1 longer than it should.
+
+1)User sees a page with a drop down to select   Search my Bus stop by selecting   [State] [District][School]      User selects state, which enables and populates District drop down, once selected enables and populates schools
+That can be done with the current state of the db.
+
+2)User selects School and the school information loads such as Name, address and phone number
+That can be done with the current state of the db.
+
+3)User is able to click a button to display a list of bus stops on that page or click find my bus
+I do not know how google's API works.  I will ask you or look it up on what parameters the API looks for (GPS coordinance or actual addresses)
+
+4)When the user clicks find my bus the geolocation for their mobile device can be used and they have the option to use an address they can enter in a text field
+This seems a bit hard (taking geo from a mobile device), maybe we can put this on another sprint.
+
+5)Then Google Maps API will calculate entered address to all bus stop addresses and find closes bus stop and provide info, it will also provide options for walking driving direction to that closes bus stop, then allowed to print or email those directions
+see SUGGESTIONS XYZ
+
+
+
+SUGGESTIONS XYZ ||| SUGGESTIONS XYZ ||| SUGGESTIONS XYZ ||| SUGGESTIONS XYZ
+I think integrating google maps api with the db should be put on sprint 2.  at this moment, we should just put hte google maps on the UI and not worry on if it pulls data.
+Sprint 1 should be redefine to simply allow people to create accounts, populate the db with data and display the google maps api (not necessarily have the routes working but maybe display an address of the school)
+
+Anyway here's how I propose to have the webpages working.
+Admin page and the user page are on the same page, let's call it the Dashboard.php.
+The only difference is between a user (state,district,school,admin), when they go to any pages within the UI, a query goes out to the db to check the value of state_id, district_id, school_id and admin.  if the value 00, things will be presented on the page.
+This is pretty much it:
+
+if (admin != 00)
+  {admin dashboard coding}
+else
+  {if (state !=00)
+    {state dashboard coding}
+  else
+    {if (district != 00)
+      {district dashboard coding}
+    else
+      {if (school != 00)  <--- the additional if is just a precaution.
+        {school dashboard coding}
+      }
+    }
+  }
+eg. if I go to dashboard and the query returns to
+
+So with the admin being hard coded, we will also hard code a state,district and school with the value = 00.
+I am sure there are better ways but leaving a (null) isn't one of them.  If something better comes up, we can discuss it and implement it.
+
+
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+9/27/14
+What did I accomplish yesterday?
+Nothing
+
+What will I do today? (or what did you do today?)
+Do what I was planning to do yesterday
+
+What obstacles are impeding my progress?
+Same as yesterday's log
+
+
+
+9/26/14
+What did I accomplish yesterday?
+we had class, we talked about a bunch of things, got situated with GitHub
+
+What will I do today? (or what did you do today?)
+cleared the scrub notes of cj, marlon and scott.
+created a documentation folder.
+added my diagrams file into the documentation folder
+copied use case diagram into my diagram file
+deleted use case diagram
+
+I plan on working on finishing the ER diagram today (when that is done, I will simply put it in mysql workbench to create the db for me)
+If I have enough time, I will test the tables and later create stored procedures with the queries I used to test the db.
+if I have enough time, I may be able to share some contents to help the team with .php connections.  This maybe part of another sprint
+I need to re-read the sprints, I believe I maybe trying to perform more than one sprints.
+
+What obstacles are impeding my progress?
+The create account page and the admin page, the php code that will be used as well as queries that will be used.  This, I need to work with scott and cj.
+
+
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+9/25/14
+What did I accomplish yesterday?
+Made the ER Diagram
+Created FTP accounts to the website which will be www.alibkaba.com/cs604
+Sent my github account to Paul
+sent impeding questions to team mates
+
+What will I do today? (or what did you do today?)
+We have class, I will not be able to do any work
+we will talk about how often we will do scrub notes
+we will also talk about how often we need to meet (via skype or phone)
+we talked about some changes for the database, how the pages will be created using php
+I left class early but will email the prof. the next day.
+
+What obstacles are impeding my progress?
+To who ever works on the user and admin page:
+where do you want the SQL to be placed?  Stored procedure or lay them on in the page?
+Are we encrypting (salting, etc) the password?
+Do we verify to see if the user's email is valid?  There is a built in php function for that.  If you don't know I can tell you
+Are we going to have anything pre-populated?  State?  District?  School names?

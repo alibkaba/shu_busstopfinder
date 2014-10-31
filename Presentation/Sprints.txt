@@ -1,0 +1,53 @@
+Agile Programming
+ADJUSTED SPRINT 1
+SPRINT 1 || SPRINT 1 || SPRINT 1 || SPRINT 1 || SPRINT 1 || SPRINT 1 || SPRINT 1 || SPRINT 1 || SPRINT 1 || SPRINT 1 ||  
+From 9-25-14 to 10-1-14
+
+Work Items ||| Assigned ||| Status (NEW, ON-HOLD, IN-PROGRESS, QA, DONE)
+
+Create the web pages ||| CJ ||| DONE
+Create DB Diagrams ||| Ali ||| DONE
+Setup MySQL DB on webhost ||| Ali ||| DONE
+Deploy the tables  ||| Ali ||| DONE
+Setup Google Maps API ||| Marlon ||| DONE
+Get Google Maps API key ||| Marlon ||| DONE
+
+
+ADJUSTED SPRINT 2
+SPRINT 2 || SPRINT 2 || SPRINT 2 || SPRINT 2 || SPRINT 2 || SPRINT 2 || SPRINT 2 || SPRINT 2 || SPRINT 2 || SPRINT 2 || 
+From 10-2-14 to 10-15-14
+
+Work Items ||| Assigned ||| Status (NEW, ON-HOLD, IN-PROGRESS, QA, DONE)
+
+Create a RoutPageV1 page ||| Scott ||| DONE
+Verify accounts only see what they should see ||| Ali ||| DONE
+Add the map onto a web page ||| Marlon ||| DONE
+Test data coming from the DB is going into the API correctly ||| Ali, Marlon ||| IN-PROGRESS
+
+ADJUSTED SPRINT 3
+SPRINT 3 || SPRINT 3 || SPRINT 3 || SPRINT 3 || SPRINT 3 || SPRINT 3 || SPRINT 3 || SPRINT 3 || SPRINT 3 || SPRINT 3 || 
+From 10-16-14 to 10-29-14
+
+Work Items ||| Assigned ||| Status (NEW, ON-HOLD, IN-PROGRESS, QA, DONE)
+
+Integrate RoutPageV1 with the database ||| Ali ||| DONE
+Create a login,registration, etc. pages ||| CJ & Scott ||| NEW
+Save data from a page to the DB ||| Ali ||| DONE
+add data from a page to the DB ||| Ali ||| DONE
+delete data from a page to the DB ||| Ali ||| DONE
+Use PHP to pull data from the DB ||| Ali ||| DONE
+Polish user.php (all js in 1 file and all ajax php in 1 page) ||| Ali ||| DONE
+Merge both my main.js and Scott's main.js into 1 main.js file ||| Ali ||| DONE
+
+ADJUSTED SPRINT 4
+SPRINT 4 || SPRINT 4 || SPRINT 4 || SPRINT 4 || SPRINT 4 || SPRINT 4 || SPRINT 4 || SPRINT 4 || SPRINT 4 || SPRINT 4 ||
+From 10-30-14 to 10-13-14
+
+Work Items ||| Assigned ||| Status (NEW, IN PROGRESS, QA, DONE)
+
+Put the business logic in the control |||  ||| NEW
+Unit Test the Stored Procedures ||| Ali ||| ON-HOLD
+Write the code that will keep the session of a logged in user when navigating through the website |||  ||| NEW
+Data to be added into the DB |||  ||| NEW
+modify data from a page to the DB ||| Ali ||| NEW
+Add a PHP framework (http://laravel.com/) ||| Ali ||| NEW

@@ -1,0 +1,37 @@
+ <!DOCTYPE html>
+            <html>
+            <head>
+            <title>Bus Route draft Google Maps API logic</title>
+            <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+            <meta charset="utf-8">
+            <style>
+            html, body, #map-canvas {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            }
+            </style>
+            <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+			<script src="Google_Maps_API_Repository.js"></script>  
+			<script>
+			 var start = document.getElementById("User_Address").value;
+			</script>
+            </head>
+            <body>
+           
+				<div>
+					<label for="address"> Your Home Address:</label> <input type="text" id="User_Address"/>	
+					<button onclick="calcRoute(User_Address.value)">Get Directions</button>
+					<button onclick="Map_Address(User_Address.value)"> ClickMe </button> 
+				</div>
+
+            
+
+				<div id="directions_panel" style="margin:20px;background-color:#FFEE77;"></div>
+				<div id="addresses_panel"  style="margin:20px;background-color:#FFEE77;"></div>
+				<div id="map-canvas" style="float:left;width:70%; height:40%"></div>
+			
+
+
+            </body>
+            </html>

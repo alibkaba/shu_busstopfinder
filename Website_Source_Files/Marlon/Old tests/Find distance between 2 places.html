@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>New test for finding distance</title>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #map-canvas {
+        height: 100%;
+        width: 50%;
+      }
+      #content-pane {
+        float:right;
+        width:48%;
+        padding-left: 2%;
+      }
+      #outputDiv {
+        font-size: 11px;
+      }
+    </style>
+    <script>
+var map;
+var geocoder;
+var bounds = new google.maps.LatLngBounds();
+var markersArray = [];
+
+
+var a = '933 Hope St stamford ct usa';
+var b = 'Norwalk ct usa';
+
+var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=B|FF0000|000000';
+var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=A|FFFF00|000000';
+
+
+
+function initialize() {
+  var opts = {
+    center: new google.maps.LatLng(0, 0),
+    zoom: 10
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'), opts);
+  geocoder = new google.maps.Geocoder();
+}
+
+function calculateDistances() {
+var a = document.getElementById("start").value;
+var b = document.getElementById("end").value;
+
+  var service = new google.maps.DistanceMatrixService();
+  service.getDistanceMatrix(
+    {
+	
+      origins: [a],
+      destinations: [b],
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.IMPERIAL,
+      avoidHighways: false,
+      avoidTolls: false
+    }, callback);
+}
+
+function callback(response, status) {
+  if (status != google.maps.DistanceMatrixStatus.OK) {
+    alert('Error was: ' + status);
+  } else {
+    var origins = response.originAddresses;
+    var destinations = response.destinationAddresses;
+    var outputDiv = document.getElementById('outputDiv');
+    outputDiv.innerHTML = '';
+    deleteOverlays();
+
+    for (var i = 0; i < origins.length; i++) {
+      var results = response.rows[i].elements;
+      addMarker(origins[i], false);
+      for (var j = 0; j < results.length; j++) {
+        addMarker(destinations[j], true);
+        outputDiv.innerHTML += origins[i] + ' to ' + destinations[j]
+            + ': ' + results[j].distance.text + ' in '
+            + results[j].duration.text + '<br>';
+      }
+    }
+  }
+}
+
+function addMarker(location, isDestination) {
+  var icon;
+  if (isDestination) {
+    icon = destinationIcon;
+  } else {
+    icon = originIcon;
+  }
+  geocoder.geocode({'address': location}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      bounds.extend(results[0].geometry.location);
+      map.fitBounds(bounds);
+      var marker = new google.maps.Marker({
+        map: map,
+        position: results[0].geometry.location,
+        icon: icon
+      });
+      markersArray.push(marker);
+    } else {
+      alert('Geocode was not successful for the following reason: '
+        + status);
+    }
+  });
+}
+
+function deleteOverlays() {
+  for (var i = 0; i < markersArray.length; i++) {
+    markersArray[i].setMap(null);
+  }
+  markersArray = [];
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="content-pane">
+      <div id="inputs">
+        <pre>
+Test of mileage between 2 addresses
+Note: use dropdown only as the text boxes are still in progress
+        </pre>
+        <p><button type="button" onclick="calculateDistances();">Calculate
+          distances</button></p>
+      </div>
+      <div id="outputDiv"></div>
+    </div>
+  
+	
+	    
+<form>
+From: <input type="text" name="from_address"><br>
+To: <input type="text" name="to_address">
+</form>
+          			
+			
+		<div>		
+		<form action="">
+		<select id="start">
+		<option value="933 hope st stamford ct">USCC</option>
+		<option value="norwalk ct">Norwalk</option>
+		</select>
+		</form>
+		<form action="">
+		<select id="end">
+		<option value="5151 Park Ave, Fairfield, CT 06825">SHU</option>
+		</select>
+		</form>
+		
+		<section>
+		<div id="map-canvas" style="float:left;width:60%; height:60%; margin:auto;position:absolute;top:0;left:0;bottom:0;right:0"></div>
+		</section>
+		
+  </body>
+</html>
