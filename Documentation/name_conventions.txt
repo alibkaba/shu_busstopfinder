@@ -5,19 +5,26 @@ user aka Index.php
 <form>
 	id=state_form_id
 	
-	<select)
-	id=select_state_form_id
+	<select>
+	id=select_state_id
 	
 <form>
 	id=district_form_id
 	
-<form>
-	id=school_form_id
+	<select>
+	id=select_district_id
 	
 <form>
 	id=school_form_id
 	
-
+	<select>
+	id=select_school_id
+	
+<form>
+	id=school_form_id
+	
+	<select>
+	id=select_busstop_id
 
 Login ||| Login ||| Login ||| Login ||| 
 <form>
@@ -192,7 +199,7 @@ id=div_school_id
 id=div_busstop_id
 
 	<select>
-	id=<select>_busstop_id
+	id=select_busstop_id
 	
 	<form>
 	id=busstop_form_id

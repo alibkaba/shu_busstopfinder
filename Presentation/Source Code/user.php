@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html" charset=utf-8" />
 <meta name="viewport" content="width=320, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="main.css">
 <meta charset = "UTF-8" />
