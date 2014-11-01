@@ -1,6 +1,6 @@
 function initialize() {
 
-    //-----------load SQL values here--------------
+    //-----------load SQL values here------------
 
     var state = "CT"
     var School_District= "Norwalk Public School";
