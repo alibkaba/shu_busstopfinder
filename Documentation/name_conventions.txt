@@ -1,7 +1,22 @@
 Name Conventions:
 
 User ||| User ||| User ||| User ||| 
-
+user aka Index.php
+<form>
+	id=state_form_id
+	
+	<select)
+	id=select_state_form_id
+	
+<form>
+	id=district_form_id
+	
+<form>
+	id=school_form_id
+	
+<form>
+	id=school_form_id
+	
 
 
 Login ||| Login ||| Login ||| Login ||| 
@@ -62,7 +77,7 @@ id=div_state_id
 	id=select_state_id
 	
 	<form>
-	id=select_state_form_id
+	id=state_form_id
 		
 		text field
 		id=state_name_id
@@ -98,7 +113,7 @@ id=div_district_id
 	id=select_district_id
 	
 	<form>
-	id=select_district_form_id
+	id=district_form_id
 		
 		text field
 		id=district_name_id
@@ -129,7 +144,7 @@ id=div_school_id
 	id=select_school_id
 	
 	<form>
-	id=select_school_form_id
+	id=school_form_id
 		
 		text field
 		id=school_name_id
@@ -180,7 +195,7 @@ id=div_busstop_id
 	id=<select>_busstop_id
 	
 	<form>
-	id=select_district_form_id
+	id=busstop_form_id
 		
 		text field
 		id=busstop_number_id
