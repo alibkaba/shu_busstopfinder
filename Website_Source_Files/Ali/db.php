@@ -1,79 +1,40 @@
 <?php
-/* error_reporting(E_ALL); */
-/* ini_set('display_errors', '1'); */
-$h = "localhost";
+// Start: Database Connection
+$dsn = "mysql:host=localhost;dbname=djkabau1_BUSTOP";
 $u = "djkabau1_admin";
 $p = "k?h4F=g4Ra{O";
-$db = "djkabau1_BUSTOP";
-$mysqliconn = new mysqli($h, $u, $p, $db);
-$PDOconn = new PDO('mysql:host=localhost;dbname=djkabau1_BUSTOP', $u, $p);
-$PDOconn->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false);
-if ($mysqliconn->connect_errno) {
-    echo "Oops some thing went wrong, failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+$PDOconn = new PDO($dsn, $u, $p);
+try {
+    $PDOconn = new PDO($dsn, $u, $p);
+} catch (PDOException $e) {
+    echo 'Connection failed: ' . $e->getMessage();
 }
+// End: Database Connection
 
-
-//-----------------------Marlon created template functions for Ali to use-----------------------------------//
-/* ----DB Unit test Section----  */
-function DB_Unit_Test_Read_From_DB(){
-
+// Start: State_ID_For_District From User.php
+if (isset($_GET['State_ID_For_District'])){
+	// Stripslashes
+	$State_ID_For_District = stripslashes($_GET["State_ID_For_District"]);
+	
+	// DB Query
+	$Get_District_ID_Query = 'select DISTRICT_ID, DISTRICT_NAME from DISTRICTS where STATE_ID = :State_ID_For_District';
+	$Get_District_ID = $PDOconn->prepare($Get_District_ID_Query);
+	$Get_District_ID->bindParam(':State_ID_For_District', $State_ID_For_District, PDO::PARAM_INT);
+	$Get_District_ID->execute();
+	$Districts_Data_From_Single_State_ID = $Get_District_ID->fetchAll();	
+	$Districts_Data_From_Single_State_ID_Array = array();
+	foreach ($Districts_Data_From_Single_State_ID as $row){
+		$Districts_Data_From_Single_State_ID_Array[] = $row['DISTRICT_ID'] . "&" .$row['DISTRICT_NAME'] ;
+	}
+	echo implode("\n", $Districts_Data_From_Single_State_ID_Array);
 }
+// End: State_ID_For_District From User.php
 
-function DB_Unit_Test_Write_To_DB(){
-
-}
-
-function DB_Unit_Test_Update_DB(){
-
-}
-
-function DB_Unit_Test_Delete_From_DB(){
-
-}
-/* ----DB Unit test Section----  */
-
-
-
-function Get_States(){
-//new States Array
-//Query PHP
-
-return States
-}
-
-
-function Get_Districs(State){
-//New Districts Array
-
-return Districts
-}
-
-
-
-function Get_Schools(District){
-//New Schools Array
-
-return Schools
-}
-
-function Get_Bus_Routes(School){
-//New Bus_Routes Object Array. each Object will have  {Stop_Time:null, Stop_Address:"address", Distance_to_Stop:null, latitude: null, longitude: null}
-
-return Bus_Routes
-}
-
-
-
-//-----------------------Marlon created template functions for Ali to use-----------------------------------//
-
-
-
-
-
-
-
-
-
-
-
+// Self Note: DO NOT CLOSE THE DB CONNECTION HERE. close it on the page its coming from
 ?>
+<!-- Districts_Data_From_Single_State_ID_Array To User.php (doing it here because I don't know if how to do the get with js/jquery) -->
+<!-- Districts_Data_From_Single_State_ID_Array is the array and has & signs between each variable -->
+<script type="text/javascript">
+var Districts_Data_From_Single_State_ID_Array = <?php echo '["' . implode('", "', $Districts_Data_From_Single_State_ID_Array) . '"]' ?>;
+alert(Districts_Data_From_Single_State_ID_Array);
+</script>

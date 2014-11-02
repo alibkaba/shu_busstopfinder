@@ -18,7 +18,7 @@ foreach ($rows as $row){
 	$options[] = "<option value='{$row['SCHOOL_ID']}'>{$row['SCHOOL_NAME']}</option>";
 }
 echo implode("\n", $options);
-
+echo "</select>";
 // Closes DB connection
 $PDOconn = null;
 ?>
