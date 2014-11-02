@@ -1,35 +1,35 @@
 Name Conventions
 
-== HTML
-== JAVASCRIPT
+== HTML/JAVASCRIPT
 == PHP
 == DB
 
-
 ========================================
 ========================================
-===============HTML=====================
+============HTML/JAVASCRIPT=============
 ========================================
 ========================================
 User ||| User ||| User ||| User ||| 
-user aka Index.php
 <form>
 	id=state_form_id
 	
 	<select>
 	id=select_state_id
+	onchange=GET_District(this.value)
 	
 <form>
 	id=district_form_id
 	
 	<select>
 	id=select_district_id
+	onchange=GET_School(this.value)
 	
 <form>
 	id=school_form_id
 	
 	<select>
 	id=select_school_id
+	onchange=GET_BusStop(this.value)
 	
 <form>
 	id=school_form_id
@@ -244,3 +244,19 @@ id=div_busstop_id
 		id:delete_busstop_id
 		name:delete_busstop_name
 		value:Delete
+
+========================================
+========================================
+=================PHP====================
+========================================
+========================================
+
+
+========================================
+========================================
+==================DB====================
+========================================
+========================================
+
+See Diagram:
+Database EER Diagram and ER Diagram for names used
