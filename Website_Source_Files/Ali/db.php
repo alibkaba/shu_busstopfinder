@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-<body>
 <?php
 // Start: Database Connection
 $dsn = "mysql:host=localhost;dbname=djkabau1_BUSTOP";
@@ -32,28 +29,6 @@ if (isset($_GET['State_ID_For_District'])){
 	}
 	echo implode("\n", $Districts_Data_From_Single_State_ID_Array);
 // End: State_ID_For_District From User.php
-
-// Self Note: DO NOT CLOSE THE DB CONNECTION HERE. close it on the page its coming from
-?>
-<!-- Districts_Data_From_Single_State_ID_Array To User.php (doing it here because I don't know if how to do the get with js/jquery) -->
-<!-- Districts_Data_From_Single_State_ID_Array is the array and has & signs between each variable -->
-<form id="school_form_id">
-	<select id="select_school_id">
-		<option value="">Select your School</option>
-	</select>
-</form>
-<!-- Districts_Data_From_Single_State_ID_Array To User.php (doing it here because I don't know if how to do the get with js/jquery) -->
-<!-- Districts_Data_From_Single_State_ID_Array is the array and has & signs between each variable -->
-<script type="text/javascript">
-var Districts_Data_From_Single_State_ID_Array = <?php echo '["' . implode('", "', $Districts_Data_From_Single_State_ID_Array) . '"]' ?>;
-alert(Districts_Data_From_Single_State_ID_Array);
-
-//////////////////////////////////////// ON LOAD
-//////////////////////////////////////// ON LOAD
-</script>
-<?php
 }
 // End: GET_District()
 ?>
-</body>
-</html>
