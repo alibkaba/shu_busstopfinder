@@ -6,8 +6,8 @@ DB_Unit_Test_Update_DB()
 DB_Unit_Test_Delete_From_DB()
 */
 
-aler("UT")
-}
+//alert("UT")
+};
 //----------------------------By Scott Polis-------------------------------//
 
 function Get_Districts(State){
@@ -17,7 +17,7 @@ function Get_Districts(State){
 	document.getElementById('districtForm').style.display = 'block';
 	}
 
-}
+};
 
 function Get_Schools(District) {
 //Here it needs to call PHP using Ajax, pass District and receive an array of Schools, then update the Drop Down School with the contents of the array
@@ -26,7 +26,7 @@ function Get_Schools(District) {
 	if (x == "Norwalk"){
 	document.getElementById('schoolForm').style.display = 'block';
 	}
-}
+};
 
 function Get_Bus_Routes(School) {
 //Here it needs to call PHP using Ajax, pass School and receive an array of Objects from PHP, then display the table
@@ -44,7 +44,7 @@ function Get_Bus_Routes(School) {
 	else {
 	
 	}
-}
+};
 /* google info goes here with selected schools */
 function busRoutSelect() {
 
@@ -98,7 +98,7 @@ var busRout404 =[["Bus #","Time","Location"],
 	else {
 	
 	}
-}
+};
 
 function addToRout(){
 	var number = document.getElementById("bus_number").value;
@@ -106,7 +106,7 @@ function addToRout(){
 	var location = document.getElementById("bus_stop").value;
 	busRout404.push([number, time, location]);
 	alert("stop added: "+ number + " " + time + " " + location );
-}				
+};				
 
 function createTable(tableData) {
   var table = document.createElement('table'), tableBody = document.createElement('tbody');
@@ -121,7 +121,7 @@ function createTable(tableData) {
   });
   table.appendChild(tableBody);
   document.body.appendChild(table);
-}
+};
 
 function checkCred(){
 	var userEmail = document.getElementById('usersEmail').value;
@@ -135,7 +135,7 @@ function checkCred(){
 		}
 	else
 		alert("Incorrect username or password");
-}
+};
 //----------------------------By Scott Polis-------------------------------//
 
 
@@ -143,7 +143,7 @@ function checkCred(){
 
 
 //----------------------------By Marlon Bermudez-------------------------------//
-function initialize() {
+function Initialize_Google_Maps_API() {
 
     //-----------load SQL values here--------------
 
@@ -159,9 +159,6 @@ function initialize() {
 };
 
 function Get_Bus_Stops(){
-
-    //Query number of bus stops for School
-
     var Bus_Stops =[]
     Bus_Stops[0]= {Stop_Time:null, Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop:null, latitude: null, longitude: null}
     Bus_Stops[1]= {Stop_Time:null, Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop:null, latitude: null, longitude: null}
@@ -173,14 +170,14 @@ function Get_Bus_Stops(){
     Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop:null, latitude: null, longitude: null}
 
     return Bus_Stops;
-
 };
 
 function Map_Address(latitude, longitude, address){
-    var directionsDisplay;
+    var Display_Directions;
     var map;
-    directionsDisplay = new google.maps.DirectionsRenderer();
+    Display_Directions = new google.maps.DirectionsRenderer();
     var New_Map = new google.maps.LatLng(latitude, longitude);
+	
     var mapOptions = {
         zoom:13,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -188,21 +185,19 @@ function Map_Address(latitude, longitude, address){
     }
 
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-    directionsDisplay.setMap(map);
+    Display_Directions.setMap(map);
+	
     return map;
-
 };
 
 
 function Display_Stops_Pannel(Bus_Stops){
-
     var AddressPanel = document.getElementById('addresses_panel');
     AddressPanel.innerHTML = '';
-    // For each address, display summary information.
+
     for (var Bus_Stop_Address = 0; Bus_Stop_Address < Bus_Stops.length; Bus_Stop_Address++) {
         AddressPanel.innerHTML += Bus_Stops[Bus_Stop_Address].Stop_Address + '</b><br>';
     }
-
 };
 
 function Get_Shortest_Distance_To_Stops(User_Address,Bus_Stops){
@@ -217,26 +212,22 @@ function Get_Shortest_Distance_To_Stops(User_Address,Bus_Stops){
             Shortest_distance = Bus_Stops[stop].Distance_to_Stop;
             Bus_Stop_Address = Bus_Stops[stop].Stop_Address;
         }
-
     }
 	alert(Bus_Stop_Address)
 	alert(Shortest_distance)
     Map_Shortest_Bus_Stop(User_Address, Bus_Stop_Address)
-
-}
+};
 
 
 function Calculate_Distance_To_Stops(User_Address) {
     var latitude= 41.117744;
     var longitude = -73.4081575;
-    var summaryPanel = document.getElementById('directions_panel');
+    var summaryPanel = document.getElementById('directions_panel'); //del
     var Array_position=0
     var directionsDisplay;
-    var directionsService = new google.maps.DirectionsService();
+   
     var map;
-	var lat, lon; 
-			
-			
+
     directionsDisplay = new google.maps.DirectionsRenderer();
     var New_Map = new google.maps.LatLng(latitude, longitude);
 
@@ -249,102 +240,80 @@ function Calculate_Distance_To_Stops(User_Address) {
     directionsDisplay.setMap(map);
 
     Bus_Stops = Get_Bus_Stops();
+	var test;
 
-    for (var Bus_Stop = 0; Bus_Stop < Bus_Stops.length; Bus_Stop++) {
-        var request = {
-            origin:User_Address,
-            destination:Bus_Stops[Bus_Stop].Stop_Address,
-            travelMode: google.maps.TravelMode.DRIVING
-        };
+   // for (var Bus_Stop = 0; Bus_Stop < Bus_Stops.length; Bus_Stop++) {
+	for (var Bus_Stop = 0; Bus_Stop < 1; Bus_Stop++) {
+        var Distance_From_User_Address_To_Bus_Stop;
+		var summaryPanel = document.getElementById('directions_panel');
+      
+		alert(Bus_Stops[Bus_Stop].Stop_Address)
+		Get_Distance_From_User_Address_To_Bus_Stop(User_Address, Bus_Stops, Bus_Stop);
+		
+		alert("calc")
+		alert(test)
+		/*
+		
+		alert(Bus_Stops[Bus_Stop].Distance_to_Stop)
+		alert(Bus_Stops[Bus_Stop].Bus_Stop_Address)
+		
+		summaryPanel.innerHTML += ' Distance From: ' + User_Address + '   ';
+		summaryPanel.innerHTML += 'To: ' + Bus_Stops[Bus_Stop].Bus_Stop_Address + '     ';
+		summaryPanel.innerHTML += ' is : ' + Bus_Stops[Bus_Stop].Distance_to_Stop + '<br>';
+*/
 
-        directionsService.route(request, function(response, status) {
-
-            if (status == google.maps.DirectionsStatus.OK) {
-                //var distance = response.routes[0].legs[0].distance.text;
-                //var directions = response.routes[0];
-                var route = response.routes[0];
-                var summaryPanel = document.getElementById('directions_panel');
-
-                // For each route, display summary information.
-                for (var route_leg = 0; route_leg < route.legs.length; route_leg++) { //should be one only
-                    summaryPanel.innerHTML += ' Distance From: ' + route.legs[route_leg].start_address + '   ';
-                    summaryPanel.innerHTML += 'To: ' + route.legs[route_leg].end_address + '     ';
-                    var distance = parseFloat(route.legs[route_leg].distance.text)
-                    summaryPanel.innerHTML += ' is : ' + distance + '<br>';
-                    Bus_Stops[Array_position].Distance_to_Stop =  distance;
-                }
-
-                Array_position = Array_position + 1;
-
-                if (Array_position == Bus_Stops.length) { //Must pass array at this point
-                    Get_Shortest_Distance_To_Stops(User_Address,Bus_Stops)
-                }
-            }
-			else{
-			alert("Address not found via Geocoder will need to use Geolocation for iteration 2")
-			
-			
-			}
-        });
     }
 };
 
-function Get_Coordinates(Address){
-	var latitude, longitude;
-    var Bus_Stops = Get_Bus_Stops();
-	var geocoder = new google.maps.Geocoder();
+function Get_Distance_From_User_Address_To_Bus_Stop(User_Address, Bus_Stops, Bus_Stop){
 
-	var Address_Coordinates =[]
-    Address_Coordinates[0]= {Latitude:null, Longitude: null, Address: Address}
+	var distance;
+	var directionsService = new google.maps.DirectionsService();
+	var request = {
+		origin:User_Address,
+		destination:Bus_Stops[Bus_Stop].Stop_Address,
+		travelMode: google.maps.TravelMode.DRIVING
+	};
+	
+	alert("bus address")
+	alert(Bus_Stops[Bus_Stop].Stop_Address)
+	
+	directionsService.route(request, function(response, status) {
+
+	if (status == google.maps.DirectionsStatus.OK) {
+		
+		var route = response.routes[0];
+		distance = parseFloat(response.routes[0].legs[0].distance.text);
+		alert("get")
+		alert(distance)
+			
+	}
+	else{
+		alert("Address not found via Geocoder will need to use Geolocation for iteration 2")
+		
+	}
+	});
+
+
+alert("finally")
+alert(distance)
+
 	
 
-	geocoder.geocode( { 'address': Address}, function(results, status) {
 
-		if (status == google.maps.GeocoderStatus.OK) {
-			Address_Coordinates[0].Latitude = results[0].geometry.location.lat();
-			Address_Coordinates[0].Longitude = results[0].geometry.location.lng();
-			alert(Address_Coordinates[0].Latitude )
-			alert(Address_Coordinates[0].Longitude)
-					
-			Add_Marker(Address_Coordinates[0].Latitude,Address_Coordinates[0].Longitude)
-					
-		}
-		else{
-			alert("could not map address: " + status)
-		}
-	})
+	
+	
+	
 
-return Address_Coordinates;
-}
+};
+
+function Update_Bus_Routes_Array(Bus_Stops, Bus_Stop){
 
 
-function Add_Marker(latitude, longitude){
-
-  var myLatlng = new google.maps.LatLng(latitude,longitude);
-  var mapOptions = {
-    zoom: 15,
-    center: myLatlng
-  };
-
-  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-  var contentString = 'Latitude: ' + latitude + ' Longitude: ' + longitude;
-
-  var infowindow = new google.maps.InfoWindow({
-      content: contentString
-  });
-
-  var marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      title: 'Marker'
-  });
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.open(map,marker);
-  });
-		
 
 }
+
+
 
 function Map_Shortest_Bus_Stop(User_Address, Bus_Stop_Address){
     var latitude= 41.117744;
@@ -417,11 +386,6 @@ function Map_Shortest_Bus_Stop(User_Address, Bus_Stop_Address){
 
 function Show_Bus_Stops() { //limit is 5 addresses, need to look for alternative to get lat and lng from addresses 
     var Bus_Stops = Get_Bus_Stops();
-	
-	
-	
-	
-	
 
     var map = new google.maps.Map(document.getElementById('map-canvas'));
     var bounds = new google.maps.LatLngBounds();
@@ -472,6 +436,6 @@ function Show_Bus_Stops() { //limit is 5 addresses, need to look for alternative
 
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', Initialize_Google_Maps_API);
 
 //----------------------------By Marlon Bermudez-------------------------------//
