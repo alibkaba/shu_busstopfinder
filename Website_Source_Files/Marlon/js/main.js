@@ -318,36 +318,40 @@ return Address_Coordinates;
 }
 
 function Use_My_Location(){
-var map;
+	var map;
 
-var mapOptions = {
-    zoom: 15
-  };
-  map = new google.maps.Map(document.getElementById('map-canvas'),
+	var mapOptions = {
+		zoom: 15
+	};
+	map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
-
-  // Try HTML5 geolocation
+	  
+	// Try HTML5 geolocation
   if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-		var pos = new google.maps.LatLng(position.coords.latitude,
+      var pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
-		alert('Latitude: 'position.coords.latitude + 'Longitude: ' + position.coords.longitude)
+									   
+	alert(position.coords.latitude)
+	alert(position.coords.longitude)
 
-		var infowindow = new google.maps.InfoWindow({
-			map: map,
-			position: pos,
-			content: 'Location found using HTML5.'
-		});
+      var infowindow = new google.maps.InfoWindow({
+        map: map,
+        position: pos,
+        content: 'Location found using HTML5.'
+      });
 
-		map.setCenter(pos);
-		}, function() {
-			alert('Error: The Geolocation service failed.')
-		});
-		} else {
-			alert('Error: Your browser doesn\'t support geolocation.')
-		}
+      map.setCenter(pos);
+    }, function() {
+	  alert('Error: The Geolocation service failed.')
+    });
+	} else {
+		alert('Error: Your browser doesn\'t support geolocation.')
+	}
+};
 
-}
+
+
 
 function Add_Marker(latitude, longitude){
 
