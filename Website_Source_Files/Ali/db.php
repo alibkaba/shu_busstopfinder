@@ -22,12 +22,13 @@ if (isset($_GET['State_ID_For_District'])){
 	$Get_District_ID = $PDOconn->prepare($Get_District_ID_Query);
 	$Get_District_ID->bindParam(':State_ID_For_District', $State_ID_For_District, PDO::PARAM_INT);
 	$Get_District_ID->execute();
-	$Districts_Data_From_Single_State_ID = $Get_District_ID->fetchAll();	
-	$Districts_Data_From_Single_State_ID_Array = array();
-	foreach ($Districts_Data_From_Single_State_ID as $row){
-		$Districts_Data_From_Single_State_ID_Array[] = $row['DISTRICT_ID'] . "&" .$row['DISTRICT_NAME'] ;
-	}
-	echo implode("\n", $Districts_Data_From_Single_State_ID_Array);
+	$Districts_Data_From_Single_State_ID = $Get_District_ID->fetchAll();
+	echo json_encode($Districts_Data_From_Single_State_ID);
+	//$Districts_Data_From_Single_State_ID_Array = array();
+	//foreach ($Districts_Data_From_Single_State_ID as $row){
+	//	$Districts_Data_From_Single_State_ID_Array[] = $row['DISTRICT_ID'] . "&" .$row['DISTRICT_NAME'] ;
+	//}
+	//echo implode("\n", $Districts_Data_From_Single_State_ID_Array);
 // End: State_ID_For_District From User.php
 }
 // End: GET_District()

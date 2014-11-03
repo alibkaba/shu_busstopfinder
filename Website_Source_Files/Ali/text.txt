@@ -1,5 +1,1 @@
-Connecticut
-New York
-Alabama
-Florida
-Texas
+[{"DISTRICT_ID":"1","0":"1","DISTRICT_NAME":"Norwalk","1":"Norwalk"},{"DISTRICT_ID":"4","0":"4","DISTRICT_NAME":"New Haven","1":"New Haven"},{"DISTRICT_ID":"5","0":"5","DISTRICT_NAME":"Stratford","1":"Stratford"}]
