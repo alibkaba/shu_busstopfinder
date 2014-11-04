@@ -15,7 +15,7 @@
 <?php
 include'db.php';
 $Get_All_States_Query = 'select STATE_ID, STATE_NAME from STATES';
-echo "<select id=\"select_state_id\" onchange=\"GET_District(this.value)\">";
+echo "<select id=\"select_state_id\" onchange=\"test(this.value)\">";
 $All_States_Array = array();
 $All_States_Array[] = "<option value=''>Select your state</option>";
 	foreach ($PDOconn->query($Get_All_States_Query) as $row) {
