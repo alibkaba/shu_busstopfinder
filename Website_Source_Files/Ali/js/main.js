@@ -1,4 +1,5 @@
-// Event Listeners
+// Start: District Down Drop
+// Start: Ajax
 function GET_District(State_ID_For_District) {
 	var xmlhttp;    
 	if (State_ID_For_District=="")	{
@@ -14,19 +15,27 @@ function GET_District(State_ID_For_District) {
 	// When it responds
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				// JSON Parse it into District_Data
 				var District_Data = JSON.parse(xmlhttp.responseText);
+				// Send it for process
 				GOT_District(District_Data);
 			}
 	}
+	// Send it to that URL
 	xmlhttp.open("GET","db.php?State_ID_For_District=" + State_ID_For_District,true);
 	xmlhttp.send();
-	
-return xmlhttp;
 }
+// End: Ajax
 
-function test (state){
-var test1 = [];
-test1 = GET_District(state);
-alert(test1[0]);
-
+// Start: Create the <Select>
+function GOT_District(District_Data) {
+		var out = "";
+		var i;
+		for(i = 0; i < District_Data.length; i++) {
+			out += '<a href="' + District_Data[i].DISTRICT_ID + '">' + 
+			District_Data[i].DISTRICT_NAME+ '</a><br>';
+		}
+		document.getElementById("DistrictPlaceHolder").innerHTML = out;
 }
+// End: Create the <Select>
+// End: District Down Drop
