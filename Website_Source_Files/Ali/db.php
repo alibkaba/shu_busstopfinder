@@ -11,11 +11,11 @@ try {
 }
 // End: Database Connection
 
-// Start: GET_District()
+// Start: Get_District()
 // Start: State_ID_For_District From User.php
-if (isset($_GET['State_ID_For_District'])){
+if (isset($_POST['State_ID_For_District'])){
 	// Stripslashes
-	$State_ID_For_District = stripslashes($_GET["State_ID_For_District"]);
+	$State_ID_For_District = stripslashes($_POST["State_ID_For_District"]);
 	
 	// DB Query
 	$Get_District_ID_Query = 'select DISTRICT_ID, DISTRICT_NAME from DISTRICTS where STATE_ID = :State_ID_For_District';
@@ -31,5 +31,5 @@ if (isset($_GET['State_ID_For_District'])){
 	//echo implode("\n", $Districts_Data_From_Single_State_ID_Array);
 // End: State_ID_For_District From User.php
 }
-// End: GET_District()
+// End: Get_District()
 ?>
