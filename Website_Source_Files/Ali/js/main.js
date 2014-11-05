@@ -1,7 +1,8 @@
 // Start: District Down Drop
 // Start: Ajax
-function GET_District(State_ID_For_District) {
-	var xmlhttp;    
+function Get_District() {
+	var xmlhttp;
+	alert(x);
 	if (State_ID_For_District=="")	{
 		document.getElementById("select_district_id").innerHTML="";
 	return;
