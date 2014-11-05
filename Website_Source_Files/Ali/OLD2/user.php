@@ -11,11 +11,11 @@
 <title>Welcome to Bus Stops</title> 
 </head>
 <body>
-<form id="state_form_id">
+<form id="state_form_id" method="POST">
 <?php
 include'db.php';
 $Get_All_States_Query = 'select STATE_ID, STATE_NAME from STATES';
-echo "<select id=\"select_state_id\" onchange=\"Get_District(this.value)\">";
+echo "<select id=\"select_state_id\">";
 $All_States_Array = array();
 $All_States_Array[] = "<option value=''>Select your state</option>";
 	foreach ($PDOconn->query($Get_All_States_Query) as $row) {
