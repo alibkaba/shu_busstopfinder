@@ -19,8 +19,4 @@ describe("user", function(){
         expect(User.getAge()).toBeGreaterThan(20);
 
     });
-
-
-
-
 });
