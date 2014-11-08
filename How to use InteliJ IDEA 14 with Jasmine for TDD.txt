@@ -1,0 +1,9 @@
+https://www.youtube.com/playlist?list=PLOxOmO43E6Jt0SruKGxtZs-W3PJN90G_a
+
+use jasmine-standalone-2.0.3.zip in this project.
+
+Warning: I wasted 3 hours trying to get InteliJ IDEA in Windows to work with Jasmine.
+
+I will be doing the coding manually and using SpecRunner.html to test
+
+See Website_Source_Files\Marlon\Unit Testing\Find My Route
