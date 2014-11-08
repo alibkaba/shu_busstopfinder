@@ -1,27 +1,27 @@
 $(document).ready(function(){
-	// ajax setup
+	var AD = "park ave";
+	var LA = "1111";
+	var LO = "2222";
+	var action = "WriteCoordinates";
+	//var myData = " address is: " + AD + " latitude is: " + LA + " longitude is: " + LO + " action is: " + action;
+	var myData = {AD: "park ave"};
+	
+	$('#gogo').click(function(){
+		$.ajax({data: myData});
+	});
+	
 	$.ajaxSetup({
 		url: 'db.php',
 		type: 'POST',
 		cache: 'false',
-		success: function(){
-			alert('success');
+		data: myData,
+		success: function(data){
+			alert('data');
+			console.log(data);
 		},
 		error: function(){
 			alert('failure');
 		}
-	});
-
-	// any voting button (up/down) clicked event
-	$('#gogo').click(function(){
-		var AD = "Address";
-		var LA = "latitude";
-		var LO = "longitude";
-		var action = "WriteCoordinates";
-		var data = {'AD' : AD, 'LA' : LA, 'LO' : LO,'action' : action };
-		
-		$.ajax({data: {'AD' : AD, 'LA' : LA, 'LO' : LO,'action' : action }});
-		alert('AD= ' + AD + ' LA= ' + LA  + ' LO= ' + LO + ' action= ' + action);
 	});
 });
 

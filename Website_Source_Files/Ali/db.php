@@ -11,7 +11,7 @@ try {
 }
 // End: Database Connection
 
-echo $_POST['AD'];
+echo $_POST['data'];
 echo "<script type='text/javascript'>alert('bottom');</script>";
 //Function to check if the request is an AJAX request
 function is_ajax() {
