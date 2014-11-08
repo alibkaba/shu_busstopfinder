@@ -1,8 +1,8 @@
 <?php
 // Start: Database Connection
 $dsn = "mysql:host=localhost;dbname=djkabau1_BUSTOP";
-$u = "djkabau1_admin";
-$p = "k?h4F=g4Ra{O";
+$u = "djkabau1_busstop";
+$p = "-E&805Wzy&@b";
 $PDOconn = new PDO($dsn, $u, $p);
 try {
     $PDOconn = new PDO($dsn, $u, $p);
