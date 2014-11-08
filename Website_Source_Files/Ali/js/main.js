@@ -1,10 +1,10 @@
 $(document).ready(function(){
-	var AD = "park ave";
-	var LA = "1111";
-	var LO = "2222";
+
+	var Address = "park ave"; // PUT google's variables in this
+	var Latitude = "1111"; // PUT google's variables in this
+	var Longitude = "2222"; // PUT google's variables in this
 	var action = "WriteCoordinates";
-	//var myData = " address is: " + AD + " latitude is: " + LA + " longitude is: " + LO + " action is: " + action;
-	var myData = {AD: "park ave"};
+	var myData = {Address: Address, Latitude: Latitude, Longitude: Longitude, action: action};
 	
 	$('#gogo').click(function(){
 		$.ajax({data: myData});
@@ -12,27 +12,15 @@ $(document).ready(function(){
 	
 	$.ajaxSetup({
 		url: 'db.php',
-		type: 'POST',
+		type: 'post',
 		cache: 'false',
-		data: myData,
 		success: function(data){
-			alert('data');
+			alert('success');
 			console.log(data);
 		},
 		error: function(){
 			alert('failure');
 		}
 	});
+	
 });
-
-function WriteCoordinates(Address, Latitude, Longitude) {
-
-}
-
-function ReadCoordinates(Address, Latitude, Longitude) {
-
-}
-
-function ReadCoordinates(Address, Latitude, Longitude) {
-
-}
