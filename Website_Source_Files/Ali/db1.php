@@ -9,14 +9,53 @@ try {
 } catch (PDOException $e) {
     echo 'Connection failed: ' . $e->getMessage();
 }
-// End: Database Connection Unit Test
 
-function Incoming_Ajax() {
-	return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+function Connect_to_DB(){
+
+}
+// End: Database Connection Unit Test
+function Validate_Ajax_Request() {
+	if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+		Is_Action_Valid(return);
+	}	
 }
 
+[0]
+$action
+$action {schoolid: "1" Address: "1111 strat", School: "bjach" schoolid: "2" Address: "1111 strat", School: "bjach" 
+function Is_Action_Valid(){
+	if (isset($_POST["action"]) && !empty($_POST["action"])){
+		$action = $_POST["action"];
+		DB_Operation($action);
+	}
+}
+
+function DB_Operation($action){
+	echo $action;
+	switch($action) {
+			case "GetStates": GetStates();
+			break;
+			case "GetDistricts": GetDistricts();
+			break;
+			case "GetSchools": GetSchools();
+			break;
+			case "GetBusStops": GetBusStops();
+			break;
+			case "LogIn": LogIn();
+			break;
+			case "ReadCoordinates": ReadCoordinates();
+			break;
+			case "WriteCoordinates": WriteCoordinates();
+			break;
+			case "UpdateCoordinates": UpdateCoordinates();
+			break;
+			case "DeleteCoordinates": DeleteCoordinates();
+			break;
+		}
+}
+/*
 if (Incoming_Ajax()) {
-	if (isset($_POST["action"]) && !empty($_POST["action"])) { //Checks if action value exists
+	if (isset($_POST["action"]) && !empty($_POST["action"])) {
 		$action = $_POST["action"];
 		switch($action) {
 			case "GetStates": GetStates();
@@ -40,7 +79,7 @@ if (Incoming_Ajax()) {
 		}
 	}
 }
-
+*/
 function WriteCoordinates(){
 	global $PDOconn;
 	$Address = stripslashes($_POST["Address"]);

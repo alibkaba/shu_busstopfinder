@@ -15,7 +15,6 @@ $(document).ready(function(){
 		type: 'post',
 		cache: 'false',
 		success: function(data){
-			alert('success');
 			console.log(data);
 		},
 		error: function(){
