@@ -19,23 +19,26 @@ if (Incoming_Ajax()) {
 	if (isset($_POST["action"]) && !empty($_POST["action"])) { //Checks if action value exists
 		$action = $_POST["action"];
 		switch($action) {
+			case "GetStates": GetStates();
+			break;
+			case "GetDistricts": GetDistricts();
+			break;
+			case "GetSchools": GetSchools();
+			break;
+			case "GetBusStops": GetBusStops();
+			break;
+			case "LogIn": LogIn();
+			break;
 			case "ReadCoordinates": ReadCoordinates();
 			break;
-		switch($action) {
 			case "WriteCoordinates": WriteCoordinates();
 			break;
-		switch($action) {
 			case "UpdateCoordinates": UpdateCoordinates();
 			break;
-		switch($action) {
 			case "DeleteCoordinates": DeleteCoordinates();
 			break;
 		}
 	}
-}
-
-function ReadCoordinates(){
-	global $PDOconn;
 }
 
 function WriteCoordinates(){
@@ -51,19 +54,4 @@ function WriteCoordinates(){
 	$Statement->bindParam(':Longitude', $Longitude, PDO::PARAM_STR, 100);
 	$Statement->execute();
 }
-
-function UpdateCoordinates(){
-	global $PDOconn;
-	$Address = stripslashes($_POST["Address"]);
-	$Latitude = stripslashes($_POST["Latitude"]);
-	$Longitude = stripslashes($_POST["Longitude"]);
-}
-
-function DeleteCoordinates(){
-	global $PDOconn;
-	$Address = stripslashes($_POST["Address"]);
-	$Latitude = stripslashes($_POST["Latitude"]);
-	$Longitude = stripslashes($_POST["Longitude"]);
-}
-
 ?>
