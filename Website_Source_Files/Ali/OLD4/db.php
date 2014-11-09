@@ -1,6 +1,5 @@
 <?php
-// Start: Database Connection
-// Put this in a function/class of some sort
+// Start: Database Connection Unit Test
 $dsn = "mysql:host=localhost;dbname=djkabau1_BUSTOP";
 $u = "djkabau1_busstop";
 $p = "-E&805Wzy&@b";
@@ -10,50 +9,14 @@ try {
 } catch (PDOException $e) {
     echo 'Connection failed: ' . $e->getMessage();
 }
-
-function Connect_to_DB(){
-
-}
 // End: Database Connection Unit Test
-function Validate_Ajax_Request() {
-	if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
-		Is_Action_Valid(return);
-	}	
+
+function Incoming_Ajax() {
+	return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 }
 
-function Is_Action_Valid(){
-	if (isset($_POST["action"]) && !empty($_POST["action"])){
-		$action = $_POST["action"];
-		DB_Operation($action);
-	}
-}
-
-function DB_Operation($action){
-	echo $action;
-	switch($action) {
-			case "GetStates": GetStates();
-			break;
-			case "GetDistricts": GetDistricts();
-			break;
-			case "GetSchools": GetSchools();
-			break;
-			case "GetBusStops": GetBusStops();
-			break;
-			case "LogIn": LogIn();
-			break;
-			case "ReadCoordinates": ReadCoordinates();
-			break;
-			case "WriteCoordinates": WriteCoordinates();
-			break;
-			case "UpdateCoordinates": UpdateCoordinates();
-			break;
-			case "DeleteCoordinates": DeleteCoordinates();
-			break;
-		}
-}
-/*
 if (Incoming_Ajax()) {
-	if (isset($_POST["action"]) && !empty($_POST["action"])) {
+	if (isset($_POST["action"]) && !empty($_POST["action"])) { //Checks if action value exists
 		$action = $_POST["action"];
 		switch($action) {
 			case "GetStates": GetStates();
@@ -77,7 +40,7 @@ if (Incoming_Ajax()) {
 		}
 	}
 }
-*/
+
 function WriteCoordinates(){
 	global $PDOconn;
 	$Address = stripslashes($_POST["Address"]);
