@@ -33,8 +33,7 @@ function GOT_District(District_Data) {
 		var out = "";
 		var i;
 		for(i = 0; i < District_Data.length; i++) {
-			out += '<a href="' + District_Data[i].DISTRICT_ID + '">' + 
-			District_Data[i].DISTRICT_NAME+ '</a><br>';
+			out += '<a href="' + District_Data[i].DISTRICT_ID + '">' + District_Data[i].DISTRICT_NAME+ '</a><br>';
 		}
 		document.getElementById("DistrictPlaceHolder").innerHTML = out;
 }

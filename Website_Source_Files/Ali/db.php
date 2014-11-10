@@ -29,26 +29,26 @@ function Validate_action(){
 
 function DB_Operation($action){
 	switch($action) {
-		case "GetStates": GetStates();
+		case "Get_States": Get_States();
 		break;
-		case "GetDistricts": GetDistricts();
+		case "Get_Districts": Get_Districts();
 		break;
-		case "GetSchools": GetSchools();
+		case "Get_Schools": Get_Schools();
 		break;
-		case "GetBusStops": GetBusStops();
+		case "Get_BusStops": Get_BusStops();
 		break;
-		case "LogIn": LogIn();
+		case "Log_In": LogIn();
 		break;
-		case "ReadCoordinates": ReadCoordinates();
+		case "Read_Coordinates": Read_Coordinates();
 		break;
-		case "WriteCoordinates": WriteCoordinates();
+		case "Write_Coordinates": Write_Coordinates();
 		break;
-		case "DeleteCoordinates": DeleteCoordinates();
+		case "Delete_Coordinates": Delete_Coordinates();
 		break;
 	}
 }
 
-function ReadCoordinates(){
+function Read_Coordinates(){
 	global $PDOconn;
 	$Address = stripslashes($_POST["Address"]);
 
@@ -56,9 +56,11 @@ function ReadCoordinates(){
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(':Address', $Address, PDO::PARAM_STR, 100);
 	$Statement->execute();
+	$Coordinates_Data = $Statement->fetchAll();
+	echo json_encode($Coordinates_Data);
 }
 
-function WriteCoordinates(){
+function Write_Coordinates(){
 	global $PDOconn;
 	$Address = stripslashes($_POST["Address"]);
 	$Latitude = stripslashes($_POST["Latitude"]);
@@ -72,7 +74,7 @@ function WriteCoordinates(){
 	$Statement->execute();
 }
 
-function DeleteCoordinates(){
+function Delete_Coordinates(){
 	global $PDOconn;
 	$Coordinates_ID = stripslashes($_POST["Coordinates_ID"]);
 

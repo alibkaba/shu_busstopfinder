@@ -11,6 +11,22 @@ function initialize() {
     Bus_Stops = Get_Bus_Stops();
     Map_Address(School_District_Lat, School_District_Lng, null);
     Display_Stops_Pannel(Bus_Stops);
+	
+	$.ajaxSetup({
+		url: 'db.php',
+		type: 'post',
+		cache: 'false',
+		async: false,
+		success: function(data){
+			alert('success');
+			console.log(data);
+		},
+		complete: function(){
+		},
+		error: function(){
+			alert('failure');
+		}
+	});
 
     return true;
 
@@ -69,7 +85,7 @@ function Get_Bus_Stops(School_ID){
     Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop:null, Latitude: null, Longitude: null}
     Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop:null, Latitude: null, Longitude: null}
     Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop:null, Latitude: null, Longitude: null}
-
+	
     return Bus_Stops;
 
 };
@@ -253,50 +269,44 @@ function Get_Coordinates(Address){
 }
 // START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
 /*
-Marlon Needs
-Coordinates table 
-write address latitude and longitude
-read  using given address, return primary id latitude and longitude
-empty  primary id delete row
-
-
 New Table named  Distance_to_user (, Bus_Number, Bus_Stop_Address, User_Address, Distance_to_user)
 1) write Bus_Number, Bus_Stop_Address, User_Address, Distance_to_user
 read return Bus_Number, Bus_Stop_Address, User_Address, Distance_to_user as an object or array of objects (Bus stops array)
 empty delete row
 2) return Bus_Number, Bus_Stop_Address, User_Address, Distance_to_user as an object or array of objects (Bus stops array)
 */
+
 function Write_Coordinates(Address, Latitude, Longitude){
-	var action = "WriteCoordinates";
-	var myData = {Address: Address, Latitude: Latitude, Longitude: Longitude, action: action};
-	
-	$.ajaxSetup({
-		url: 'db.php',
-		type: 'post',
-		cache: 'false',
-		success: function(data){
-			alert('success');
-			console.log(data);
-		},
-		error: function(){
-			alert('failure');
-		}
-	});
-	$.ajax({data: myData});
-	
+	var action = "Write_Coordinates";
+	var Write_Coordinates_Data = {Address: Address, Latitude: Latitude, Longitude: Longitude, action: action};
+	$.ajax({data: Write_Coordinates_Data});
 };
 
+function Read_Coordinates(Address){
+	var action = "Read_Coordinates";
+	var Read_Coordinates_Data = {Address: Address, action: action};
+	Coordinates_Data = $.ajax({data: Read_Coordinates_Data}).responseText;
+	Strip_Coordinates(Coordinates_Data);
+};
 
-	function Read_Coordinates(Address){
+function Strip_Coordinates(Coordinates_Data){
+	var i;
+	Coordinates_Data = jQuery.parseJSON(Coordinates_Data);
+	for(i = 0; i < Coordinates_Data.length; i++) {
+		var Coordinates_ID = Coordinates_Data[i].COORDINATES_ID;
+		var Address = Coordinates_Data[i].ADDRESS;
+		var Latitude = Coordinates_Data[i].LATITUDE;
+		var Longitude = Coordinates_Data[i].LONGITUDE;
+	}
+	return Coordinates_ID, Address, Latitude, Longitude;
+};
 
-	return Latitude, Longitude;
-	};
-
-	function Delete_Coordinates(Address){
-
-	return true; //if deleted
-	};
-
+function Delete_Coordinates(Coordinates_ID){//works
+	var action = "Delete_Coordinates";
+	var Delete_Coordinates_Data = {Coordinates_ID: Coordinates_ID, action: action};
+	$.ajax({data: Delete_Coordinates_Data});
+return true;
+};
 
 // END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
 
