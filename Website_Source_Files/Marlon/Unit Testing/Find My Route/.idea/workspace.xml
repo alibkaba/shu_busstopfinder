@@ -61,9 +61,11 @@
           <file leaf-file-name="main_spec.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/spec/main_spec.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.6738392" vertical-offset="816" max-vertical-offset="2074">
-                  <caret line="85" column="6" selection-start-line="85" selection-start-column="6" selection-end-line="85" selection-end-column="6" />
-                  <folding />
+                <state vertical-scroll-proportion="0.038505096" vertical-offset="0" max-vertical-offset="1343">
+                  <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#42#0" expanded="false" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -75,8 +77,8 @@
           <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="1.4043036" vertical-offset="2024" max-vertical-offset="6443">
-                  <caret line="192" column="4" selection-start-line="192" selection-start-column="4" selection-end-line="192" selection-end-column="4" />
+                <state vertical-scroll-proportion="-0.11551529" vertical-offset="2040" max-vertical-offset="5457">
+                  <caret line="114" column="52" selection-start-line="114" selection-start-column="52" selection-end-line="114" selection-end-column="52" />
                   <folding />
                 </state>
               </provider>
@@ -99,8 +101,8 @@
         <option value="$PROJECT_DIR$/User.html" />
         <option value="$PROJECT_DIR$/spec/example_spec.js" />
         <option value="$PROJECT_DIR$/SpecRunner.html" />
-        <option value="$PROJECT_DIR$/spec/main_spec.js" />
         <option value="$PROJECT_DIR$/src/main.js" />
+        <option value="$PROJECT_DIR$/spec/main_spec.js" />
       </list>
     </option>
   </component>
@@ -548,12 +550,12 @@
       <workItem from="1415413063662" duration="966000" />
       <workItem from="1415414202233" duration="465000" />
       <workItem from="1415415604459" duration="893000" />
-      <workItem from="1415416631770" duration="40052000" />
+      <workItem from="1415416631770" duration="41248000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44341000" />
+    <option name="totallyTimeSpent" value="45537000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -785,16 +787,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/main_spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6738392" vertical-offset="816" max-vertical-offset="2074">
-          <caret line="85" column="6" selection-start-line="85" selection-start-column="6" selection-end-line="85" selection-end-column="6" />
-          <folding />
+        <state vertical-scroll-proportion="0.038505096" vertical-offset="0" max-vertical-offset="1343">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4043036" vertical-offset="2024" max-vertical-offset="6443">
-          <caret line="192" column="4" selection-start-line="192" selection-start-column="4" selection-end-line="192" selection-end-column="4" />
+        <state vertical-scroll-proportion="-0.11551529" vertical-offset="2040" max-vertical-offset="5457">
+          <caret line="114" column="52" selection-start-line="114" selection-start-column="52" selection-end-line="114" selection-end-column="52" />
           <folding />
         </state>
       </provider>
