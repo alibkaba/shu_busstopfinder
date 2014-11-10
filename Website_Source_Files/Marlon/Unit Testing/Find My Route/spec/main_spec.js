@@ -9,52 +9,51 @@ describe("Test Get Bus Stops", function(){
 });
 */
 describe("Test Creating New Bus Stop Objects", function(){
-    it("a new Bus Stop Object can be created by passing required data", function () {
-        var New_Bus_Stop = Create_Bus_Stop_Object("1", "9:00", "20 Main St Norwalk CT", null, "-1", "-1")
+    it("creates a new Bus Stop Object by passing Stop Time and Stop Address", function () {
 
+        var New_Bus_Stop = Create_Bus_Stop_Object( "9:00", "20 Main St Norwalk CT")
         expect(New_Bus_Stop.Stop_Address).toContain('20 Main St Norwalk CT');
         expect(New_Bus_Stop.Distance_to_Stop).toBeNull();
     });
-    it("a new Bus Stop Object will not be created if missing data", function () {
-        var New_Bus_Stop = Create_Bus_Stop_Object("1", "9:00", "20 Main St Norwalk CT", null, "-1")
 
-        expect(New_Bus_Stop.Stop_Address).toContain('20 Main St Norwalk CT');
-        expect(New_Bus_Stop.Distance_to_Stop).toBeNull();
+
+    it("a new Bus Stop Object will not be created if missing Stop time and address parameters", function () {
+        var New_Bus_Stop = Create_Bus_Stop_Object();
+        expect(New_Bus_Stop).toBeFalsy();
+
+    });
+
+    it("a new Bus Stop Object will not be created if missing address parameter", function () {
+        var New_Bus_Stop = Create_Bus_Stop_Object("9:00");
+        expect(New_Bus_Stop).toBeFalsy();
     });
 
 
 });
 
 describe("Test Create Array of Bus Stops Objects", function(){
-    var New_Array = []
+    var New_Bus_Array = []
 
-    it("array can be empty", function () {
-        var New_Bus_Array = Create_Array_of_Bus_Stop_Objects(New_Array, null);
-        expect(New_Bus_Array.length).toBe(0);
+    it("can validate a Bus_Stop_Object", function(){
+        var New_Bus_Stop = Create_Bus_Stop_Object("9:00", "20 Main St Norwalk CT");
+        expect(Validate_Bus_Stop_Object(New_Bus_Stop)).toBeTruthy();
     });
-    it("can add Bus Stop object entries if there is an address", function(){
-        var New_Bus_Array = []
-        var New_Bus_Stop = Create_Bus_Stop_Object("1", "9:00", "20 Main St Norwalk CT", null, "-1", "-1")
-        New_Bus_Array = Create_Array_of_Bus_Stop_Objects(New_Array, New_Bus_Stop);
+    it("can add Bus Objects to Array", function(){
+        var New_Bus_Stop = Create_Bus_Stop_Object("9:00", "20 Main St Norwalk CT");
+        expect(Validate_Bus_Stop_Object(New_Bus_Stop)).toBeTruthy();
+        New_Bus_Array.push(New_Bus_Stop);
         expect(New_Bus_Array.length).toBe(1);
-
+        New_Bus_Stop = Create_Bus_Stop_Object("9:20", "30 Main St Norwalk CT");
+        New_Bus_Array.push(New_Bus_Stop);
+        expect(New_Bus_Array.length).toBe(2);
     });
-
-    it("will not add Bus Stop object to array if it is missing the address", function(){
-        var New_Bus_Array = []
-        var New_Bus_Stop = Create_Bus_Stop_Object("1", "9:00", "20 Main St Norwalk CT", null, "-1", "-1")
-        New_Bus_Array = Create_Array_of_Bus_Stop_Objects(New_Array);
-        expect(New_Bus_Array.length).toBe(1);
-
-    });
-
 
 });
 
 
 
 describe("Test Get Bus Stops for School ID", function(){
-    var School_ID = '1'
+    var School_ID = '1';
 
     it("should return array with valid data", function () {
         var New_Bus_Array = Get_Bus_Stops_for_School(School_ID);
@@ -63,7 +62,8 @@ describe("Test Get Bus Stops for School ID", function(){
         expect(New_Bus_Array[0].Distance_to_Stop).toBeNull();
         expect(New_Bus_Array[0].Latitude).not.toBeNull();
         expect(New_Bus_Array[0].Longitude).not.toBeNull();
-
+        expect(Validate_Bus_Stop_Object(New_Bus_Array[0])).toBeTruthy();
+        expect(New_Bus_Array.length).toBeGreaterThan(0);
     });
 
 });
@@ -74,16 +74,18 @@ describe("Test Mapping an Address", function(){
     var Longitude = -73.4081575;
 
     it("Google Maps API should receive addresses", function () {
-
-        //expect(Map_Address(Latitude, Longitude, User_Address)).not.toBeNull();
-
-
+        //expect(Map_Address(Latitude, Longitude, User_Address)).toHaveBeenCalled();
     });
 
 });
 
 
+describe("Test Displaying Stops on a Panel", function(){
+    it("should be able to display list of stops", function () {
+        //expect(Map_Address(Latitude, Longitude, User_Address)).toHaveBeenCalled();
+    });
 
+});
 
 
 

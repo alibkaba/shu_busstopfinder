@@ -1,5 +1,5 @@
 
-
+var Master = [];
 //----------------------------By Marlon Bermudez-------------------------------//
 function initialize() {
 
@@ -11,6 +11,7 @@ function initialize() {
     var School_District_Lng = -73.4081575;
 
     Bus_Stops = Get_Bus_Stops();
+    Master = Bus_Stops;
     Map_Address(School_District_Lat, School_District_Lng, null);
     Display_Stops_Pannel(Bus_Stops);
 
@@ -19,26 +20,36 @@ function initialize() {
 }
 
 
-function Create_Bus_Stop_Object(Stop_ID, Stop_Time, Stop_Address, Distance_to_Stop, Latitude, Longitude){
-    this.Stop_ID = Stop_ID;
-    this.Stop_Time = Stop_Time;
-    this.Stop_Address = Stop_Address;
-    this.Distance_to_Stop = Distance_to_Stop;
-    this.Latitude = Latitude;
-    this.Longitude = Longitude;
+function Create_Bus_Stop_Object( Stop_Time, Stop_Address){
+    if(typeof Stop_Time != 'undefined' && typeof Stop_Address != 'undefined'){
+        this.Stop_Time = Stop_Time;
+        this.Stop_Address = Stop_Address;
+        this.Distance_to_Stop = null;
+        this.Latitude = null;
+        this.Longitude = null;
+        this.Stop_ID = null;
 
-    return this;
+        return this;
+    }
+    else {
+        console.log("Cannot create Bus Stop Object because it is missing data");
+        return false;
+    }
 }
 
 
-function Create_Array_of_Bus_Stop_Objects(Bus_Stops_Array, Bus_Stop_Object){
-    this.Bus_Stops_Array = Bus_Stops_Array;
 
-    if (Bus_Stop_Object != null){
-        Bus_Stops_Array.push(Bus_Stop_Object);
+function Validate_Bus_Stop_Object(Bus_Stop_Object){
+
+    if(typeof Bus_Stop_Object != 'undefined' && Bus_Stop_Object.Stop_Time != null && Bus_Stop_Object.Stop_Address != null){
+        return true;
+    }
+    else {
+        console.log("Bus Stop Object is invalid");
+        return false;
     }
 
-    return Bus_Stops_Array;
+
 }
 
 function Get_Bus_Stops_for_School(School_ID){
@@ -80,6 +91,7 @@ function Map_Address(latitude, longitude, address){
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
     directionsDisplay.setMap(map);
     return map;
+
 
 };
 
@@ -204,7 +216,7 @@ function Get_Coordinates(Address){
         else{
             alert("could not map address: " + status)
         }
-    })
+    });
 
     return Address_Coordinates;
 }
@@ -246,7 +258,6 @@ function Use_My_Location(){
 
 
 function Add_Marker(latitude, longitude){
-
     var myLatlng = new google.maps.LatLng(latitude,longitude);
     var mapOptions = {
         zoom: 15,
@@ -254,9 +265,7 @@ function Add_Marker(latitude, longitude){
     };
 
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
     var contentString = 'Latitude: ' + latitude + ' Longitude: ' + longitude;
-
     var infowindow = new google.maps.InfoWindow({
         content: contentString
     });
@@ -269,8 +278,6 @@ function Add_Marker(latitude, longitude){
     google.maps.event.addListener(marker, 'click', function() {
         infowindow.open(map,marker);
     });
-
-
 }
 
 function Map_Shortest_Bus_Stop(User_Address, Bus_Stop_Address){
@@ -283,25 +290,16 @@ function Map_Shortest_Bus_Stop(User_Address, Bus_Stop_Address){
     var directionsDisplay;
     var directionsService = new google.maps.DirectionsService();
     var map;
-
-
     directionsDisplay = new google.maps.DirectionsRenderer();
-
     var New_Map = new google.maps.LatLng(latitude, longitude);
-
     var mapOptions = {
         zoom: 15,
         center: New_Map
     }
-
-
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
     directionsDisplay.setMap(map);
-
-
     var start = User_Address;
     var end = Bus_Stop_Address;
-
     var request = {
         origin:start,
         destination:end,
@@ -309,56 +307,35 @@ function Map_Shortest_Bus_Stop(User_Address, Bus_Stop_Address){
     };
 
     directionsService.route(request, function(response, status) {
-
         if (status == google.maps.DirectionsStatus.OK) {
-
             var distance = response.routes[0].legs[0].distance.text;
             var directions = response.routes[0];
             directionsDisplay.setDirections(response);
-
             var route = response.routes[0];
             var summaryPanel = document.getElementById('directions_panel');
-
-            // For each route, display summary information.
             for (var route_leg = 0; route_leg < route.legs.length; route_leg++) { //should be one only
-
                 var routeSegment = route_leg + 1;
                 summaryPanel.innerHTML += ' Distance From: ' + route.legs[route_leg].start_address + '   ';
                 summaryPanel.innerHTML += 'To: ' + route.legs[route_leg].end_address + '     ';
                 var distance = parseFloat(route.legs[route_leg].distance.text)
                 summaryPanel.innerHTML += ' is : ' + distance + '<br>';
-
             }
-
         }
         else{
             alert("Something went wrong, could not map the address")
         }
-
     });
-
-
-
 }
 
 
 function Show_Bus_Stops() { //limit is 5 addresses, need to look for alternative to get lat and lng from addresses 
     var Bus_Stops = Get_Bus_Stops();
-
-
-
-
-
-
     var map = new google.maps.Map(document.getElementById('map-canvas'));
     var bounds = new google.maps.LatLngBounds();
     var infowindow = new google.maps.InfoWindow();
 
     for (var Bus_Stop = 0; Bus_Stop < Bus_Stops.length; Bus_Stop++) {
-
         var geocoder = new google.maps.Geocoder();
-
-
         geocoder.geocode( { 'address': Bus_Stops[Bus_Stop].Stop_Address}, function(results, status) {
 
             if (status == google.maps.GeocoderStatus.OK) {
@@ -366,7 +343,6 @@ function Show_Bus_Stops() { //limit is 5 addresses, need to look for alternative
                 Bus_Stops[Bus_Stop].longitude = results[0].geometry.location.lng();
                 //  alert(Bus_Stops[Bus_Stop].latitude)
                 //  alert(Bus_Stops[Bus_Stop].latitude)
-
             }
             else{
                 alert("could not map address: " + status)
@@ -387,15 +363,9 @@ function Show_Bus_Stops() { //limit is 5 addresses, need to look for alternative
             infowindow.open(map, this);
         });
 
-
         map.fitBounds(bounds);
 
-
-
     }
-
-
-
 
 }
 
