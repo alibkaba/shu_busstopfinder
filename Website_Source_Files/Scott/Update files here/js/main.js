@@ -6,58 +6,78 @@ DB_Unit_Test_Update_DB()
 DB_Unit_Test_Delete_From_DB()
 */
 
-aler("UT")
+//aler("UT")
 }
 //----------------------------By Scott Polis-------------------------------//
+function LoadStuffs(toLoad){
 
-function Get_Districts(State){
+var select = document.getElementById(toLoad);
+var options = ["1", "2", "3", "4", "5", "6"];//Ajax gets array from DB
+for(var i = 0; i < options.length; i++) {
+    var opt = options[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    select.appendChild(el);
+}
+    
+}
+function Get_Districts(){
 //Here it needs to call PHP using Ajax, pass State and receive an array of Districts, then update the drop down School with the contents of the array
-   var x = document.getElementById("State").value;
-	if (x == "CT"){
+	var stateArray =[];
+    var state = document.getElementById('State').value;
+
+    if (state == "New York"){
 	document.getElementById('districtForm').style.display = 'block';
 	}
-
+    else if (state == "Connecticut"){
+    document.getElementById('districtForm').style.display = 'block';
+    }
+    else if (state == "New Hampshir"){
+    document.getElementById('districtForm').style.display = 'block';
+    }
 }
 
 function Get_Schools(District) {
 //Here it needs to call PHP using Ajax, pass District and receive an array of Schools, then update the Drop Down School with the contents of the array
+    var districtArray =[];
+    var district = document.getElementById('District').value;
 
-    var x = document.getElementById("District").value;
-	if (x == "Norwalk"){
+	if (district == "Norwalk"){
 	document.getElementById('schoolForm').style.display = 'block';
 	}
 }
 
 function Get_Bus_Routes(School) {
 //Here it needs to call PHP using Ajax, pass School and receive an array of Objects from PHP, then display the table
+    var schoolArray =[];
+    var school = document.getElementById('School').value;
 
-    var x = document.getElementById("School").value;
-	if (x == "Brien McMahon"){ 
+	if (school == "Brien McMahon"){ 
 	document.getElementById('busForm').style.display = 'block';
 	}
-	else if (x == "Rotton"){
+	else if (school == "Rotton"){
 	document.getElementById('busForm').style.display = 'block';
 	}
-	else if (x == "Norwalk High"){
+	else if (school == "Norwalk High"){
 	document.getElementById('busForm').style.display = 'block';
-	}
-	else {
-	
 	}
 }
 /* google info goes here with selected schools */
-function busRoutSelect() {
+function busRoutSelect(Bus) {
+var bus = document.getElementById('Bus').value;
+var routArray=[];
 
-var busRout401 =[["Bus #","Time","Location"],
-				["401","6:51","Riverside AV (southbound) & Hill ST"],
-				["401","6:54","Pontus AV & Ells ST"],
-				["401","6:56","Pontus AV & Cornwall RD"],
-				["401","7:00","Glen AV & Short ST"],
-				["401","7:01","Ledgewood DR & Styles LA"],
-				["401","7:02","Styles LA & Penny LA"],
-				["401","7:03","Pontus AV & Lancaster DR"],
-				["401","7:05","Maher DR & Steppingstone PL"],
-				["401","7:15","Brien McMahon"]];
+var busRout401 =[["Bus #","Time","Location"," Distance"," Latitude"," Longitude"],
+                ["401","6:51","Riverside AV (southbound) & Hill ST","Distance","Lat","Long"],
+                ["401","6:54","Pontus AV & Ells ST","Distance","Lat","Long"],
+                ["401","6:56","Pontus AV & Cornwall RD","Distance","Lat","Long"],
+                ["401","7:00","Glen AV & Short ST","Distance","Lat","Long"],
+                ["401","7:01","Ledgewood DR & Styles LA","Distance","Lat","Long"],
+                ["401","7:02","Styles LA & Penny LA","Distance","Lat","Long"],
+                ["401","7:03","Pontus AV & Lancaster DR","Distance","Lat","Long"],
+                ["401","7:05","Maher DR & Steppingstone PL","Distance","Lat","Long"],
+                ["401","7:15","Brien McMahon","Distance","Lat","Long"]];
 
 var busRout402 =[["Bus #","Time","Location"],
 				["402","6:50","Richards AV & Geneva RD"],
@@ -82,22 +102,22 @@ var busRout402 =[["Bus #","Time","Location"],
 var busRout404 =[["Bus #","Time","Location"],
 				["404", "7:12", "SO Norwalk Station & State ST"]];
 				
-    var x = document.getElementById("Bus").value;
-	if (x == "Rout401"){ 
+	if (bus == "Rout401"){ 
+    //checkForTable();
 	createTable(busRout401);
 	document.getElementById('addStop').style.display = 'block';
 	}
-	else if (x == "Rout402"){
-	createTable(busRout402);
+	else if (bus == "Rout402"){
+	//checkForTable();
+    createTable(busRout402);
 	document.getElementById('addStop').style.display = 'block';
 	}
-	else if (x == "Rout404"){
+	else if (bus == "Rout404"){
+    checkForTable();
 	createTable(busRout404);
 	document.getElementById('addStop').style.display = 'block';
 	}
-	else {
-	
-	}
+
 }
 
 function addToRout(){
@@ -106,20 +126,38 @@ function addToRout(){
 	var location = document.getElementById("bus_stop").value;
 	busRout404.push([number, time, location]);
 	alert("stop added: "+ number + " " + time + " " + location );
-}				
+}	
+
+function removeSelected(objectToBeRemoved){
+    var toRemove = document.getElementById(objectToBeRemoved).value;
+    toRemove.remove(toRemove.selectedIndex);
+    alert("Removed " + objectToBeRemoved.value);
+}
+function modifySelected(){
+
+}
+function addNew(){
+
+}
+
+
+function checkForTable(){
+    var routeTable=document.getElementById("routeTable");
+    routeTable.remove(routeTable);
+}
 
 function createTable(tableData) {
-  var table = document.createElement('table'), tableBody = document.createElement('tbody');
-  tableData.forEach(function(rowData) {
-    var row = document.createElement('tr');
-    rowData.forEach(function(cellData) {
-      var cell = document.createElement('td');
-      cell.appendChild(document.createTextNode(cellData));
-      row.appendChild(cell);
+    var table = document.createElement('routeTable'), tableBody = document.createElement('tbody');
+    tableData.forEach(function(rowData) {
+        var row = document.createElement('tr');
+        rowData.forEach(function(cellData) {
+            var cell = document.createElement('td');
+            cell.appendChild(document.createTextNode(cellData));
+            row.appendChild(cell);
+        });
+        tableBody.appendChild(row);
     });
-    tableBody.appendChild(row);
-  });
-  table.appendChild(tableBody);
+    table.appendChild(tableBody);
   document.body.appendChild(table);
 }
 
