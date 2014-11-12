@@ -1,7 +1,7 @@
 /**
  * Created by Marlon on 11/8/2014.
  */
-//----------------------------By Marlon Bermudez-------------------------------//
+//------------------------Unit Test----By Marlon Bermudez-------------------------------//
 
 describe("Test Creating New Bus Stop Objects", function(){
     it("creates a new Bus Stop Object by passing Stop Time and Stop Address", function () {
@@ -45,7 +45,7 @@ describe("Test Get Bus Stops for School ID", function(){
         var New_Bus_Array = Get_Bus_Stops_for_School(School_ID);
         expect(New_Bus_Array[0].Stop_Time).toContain('9:00');
         expect(New_Bus_Array[0].Stop_Address).toContain('RIVERSIDE AV & HILL ST norwalk ct');
-        expect(New_Bus_Array[0].Distance_to_Stop).toBeNull();
+       // expect(New_Bus_Array[0].Distance_to_Stop).toBeNull();
         expect(New_Bus_Array[0].Latitude).not.toBeNull();
         expect(New_Bus_Array[0].Longitude).not.toBeNull();
         expect(Validate_Bus_Stop_Object(New_Bus_Array[0])).toBeTruthy();
@@ -53,23 +53,66 @@ describe("Test Get Bus Stops for School ID", function(){
     });
 });
 
-describe("Test Mapping an Address", function(){
-    var User_Address = "20 main st norwalk ct";
-    var Latitude= 41.117744;
-    var Longitude = -73.4081575;
-    it("Google Maps API should receive addresses", function () {
-        //expect(Map_Address(Latitude, Longitude, User_Address)).toHaveBeenCalled();
+describe("Test Calculate Shortest Distance to Stops", function(){
+    var Bus_Stops = Get_Bus_Stops();
+    var User_Address = "20 main st norwalk ct"
+    var Bus_Stop = Get_Shortest_Distance_To_Stops(User_Address,Bus_Stops);
+    it("Find the lowest Distance To Stop", function () {
+        expect(Bus_Stop.Distance).toBe(0.5);
+        expect(Bus_Stop.Address).toContain('GLEN AV & SHORT ST norwalk ct');
     });
 });
 
 
-describe("Test Displaying Stops on a Panel", function(){
-    it("should be able to display list of stops", function () {
-        //expect(Map_Address(Latitude, Longitude, User_Address)).toHaveBeenCalled();
+
+describe("Spy on Map Address to ensure it is called with parameters", function() {
+    var Map_Address, map = null;
+    var latitude =  -42.32;
+    var longitude = 42.245;
+
+    beforeEach(function() {
+        Map_Address = {
+            setAddress: function(value) {
+                map = value;
+            }
+        };
+
+        spyOn(Map_Address, 'setAddress');
+        Map_Address.setAddress(latitude, longitude);
     });
+
+    it("tracks that the Map Address spy was called and address set", function() {
+        expect(Map_Address.setAddress).toHaveBeenCalled();
+    });
+
+    it("tracks latitude and longitude parameters were passed", function() {
+        expect(Map_Address.setAddress).toHaveBeenCalledWith(latitude, longitude);
+    });
+
 });
 
+describe("Spy on Get Coordinates to ensure Data is passed properly to Google Maps API", function() {
+    var Get_Coordinates, map = null;
+    var User_Address =  "20 main st norwalk ct";
+    beforeEach(function() {
+        Get_Coordinates = {
+            setAddress: function(value) {
+                map = value;
+            }
+        };
+
+        spyOn(Get_Coordinates, 'setAddress');
+        Get_Coordinates.setAddress(User_Address);
+    });
+
+    it("tracks Get Coordinates spy was called", function() {
+        expect(Get_Coordinates.setAddress).toHaveBeenCalled();
+    });
+
+    it("tracks the user address was passed to Get Coordinates function", function() {
+        expect(Get_Coordinates.setAddress).toHaveBeenCalledWith(User_Address);
+    });
+
+});
 
 //----------------------------By Marlon Bermudez-------------------------------//
-
-

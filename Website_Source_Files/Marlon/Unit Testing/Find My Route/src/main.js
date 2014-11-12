@@ -1,6 +1,5 @@
 
-var Master = [];
-//----------------------------By Marlon Bermudez-------------------------------//
+//------------------------Source Code----By Marlon Bermudez-------------------------------//
 function initialize() {
 
     //-----------load SQL values here--------------
@@ -55,14 +54,14 @@ function Get_Bus_Stops_for_School(School_ID){
 
 function Get_Bus_Stops(){
     var Bus_Stops =[];
-    Bus_Stops[0]= {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.117744, Longitude: 41.117744};
-    Bus_Stops[1]= {Stop_Time:null, Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop:null, Latitude: null, Longitude: null};
-    Bus_Stops[2]= {Stop_Time:null, Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop:null, Latitude: null, Longitude: null};
-    Bus_Stops[3]= {Stop_Time:null, Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop:null, Latitude: null, Longitude: null}
-    Bus_Stops[4]= {Stop_Time:null, Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop:null, Latitude: null, Longitude: null}
-    Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop:null, Latitude: null, Longitude: null}
-    Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop:null, Latitude: null, Longitude: null}
-    Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop:null, Latitude: null, Longitude: null}
+    Bus_Stops[0]= {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: 1, Latitude: 41.117744, Longitude: 41.117744};
+    Bus_Stops[1]= {Stop_Time:null, Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: 1.5, Latitude: null, Longitude: null};
+    Bus_Stops[2]= {Stop_Time:null, Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: 2.5, Latitude: null, Longitude: null};
+    Bus_Stops[3]= {Stop_Time:null, Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: 0.5, Latitude: null, Longitude: null}
+    Bus_Stops[4]= {Stop_Time:null, Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: 2.5, Latitude: null, Longitude: null}
+    Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: 0.65, Latitude: null, Longitude: null}
+    Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: 6, Latitude: null, Longitude: null}
+    Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: 1.2, Latitude: null, Longitude: null}
     return Bus_Stops;
 
 }
@@ -93,22 +92,20 @@ function Display_Stops_Pannel(Bus_Stops){
 }
 
 function Get_Shortest_Distance_To_Stops(User_Address,Bus_Stops){
-    var Shortest_distance;
+    var Shortest_distance = Bus_Stops[0].Distance_to_Stop;
     var Bus_Stop_Address;
-    for (var stop = 0; stop < Bus_Stops.length; stop++) {
-        if (stop == 0){
-            Shortest_distance = Bus_Stops[stop].Distance_to_Stop;
-            Bus_Stop_Address = Bus_Stops[stop].Stop_Address;
-        }
-        else if (Bus_Stops[stop].Distance_to_Stop < Shortest_distance) {
+    for (var stop = 1; stop < Bus_Stops.length; stop++) {
+        if (Bus_Stops[stop].Distance_to_Stop < Shortest_distance && typeof Bus_Stops[stop].Distance_to_Stop != 'undefined') {
             Shortest_distance = Bus_Stops[stop].Distance_to_Stop;
             Bus_Stop_Address = Bus_Stops[stop].Stop_Address;
         }
 
     }
-    alert(Bus_Stop_Address);
-    alert(Shortest_distance);
-    Map_Shortest_Bus_Stop(User_Address, Bus_Stop_Address)
+   // alert(Bus_Stop_Address);
+    //alert(Shortest_distance);
+    var Bus_Stop = {Address: Bus_Stop_Address, Distance: Shortest_distance};
+    return Bus_Stop;
+    //Map_Shortest_Bus_Stop(User_Address, Bus_Stop_Address)
 }
 
 
