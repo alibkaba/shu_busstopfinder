@@ -42,23 +42,6 @@
     </fieldset>
 </form>
 <script type="text/javascript">
-    //can't use initialize()
-    $.ajaxSetup({
-        url: 'db.php',
-        type: 'post',
-        cache: 'false',
-        async: false,
-        success: function(data){
-            alert('success');
-            console.log(data);
-        },
-        complete: function(){
-        },
-        error: function(){
-            alert('failure');
-        }
-    });
-
     function Test_Write_Coordinates(){
         var Address = document.getElementById("Write_Address").value;
         var Latitude = document.getElementById("Write_Latitude").value;

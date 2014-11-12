@@ -1,19 +1,7 @@
 //----------------------------By Marlon Bermudez-------------------------------//
-function initialize() {
-
-    //-----------load SQL values here--------------
-
-    var state = "CT";
-    var School_District= "Norwalk Public School";
-    var School_District_Lat= 41.117744;
-    var School_District_Lng = -73.4081575;
-
-    Bus_Stops = Get_Bus_Stops();
-    Map_Address(School_District_Lat, School_District_Lng, null);
-    Display_Stops_Pannel(Bus_Stops);
-
-    // START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
-    $.ajaxSetup({
+// START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
+$( document ).ready(function() {
+$.ajaxSetup({
         url: 'db.php',
         type: 'post',
         cache: 'false',
@@ -28,8 +16,20 @@ function initialize() {
             alert('failure');
         }
     });
-    // END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
+});
+// END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
+function initialize() {
 
+    //-----------load SQL values here--------------
+
+    var state = "CT";
+    var School_District= "Norwalk Public School";
+    var School_District_Lat= 41.117744;
+    var School_District_Lng = -73.4081575;
+
+    Bus_Stops = Get_Bus_Stops();
+    Map_Address(School_District_Lat, School_District_Lng, null);
+    Display_Stops_Pannel(Bus_Stops);
     return true;
 
 }
@@ -310,21 +310,17 @@ function Write_Coordinates(Address, Latitude, Longitude){
 
 function Read_Coordinates(Address){
     var action = "Read_Coordinates";
-    var Coordinates_ID;
-    var Latitude;
-    var Longitude;
     var Read_Coordinates_Data = {Address: Address, action: action};
     Coordinates_Data = $.ajax({data: Read_Coordinates_Data}).responseText;
     Coordinates_Data = jQuery.parseJSON(Coordinates_Data);
     var i;
     for(i = 0; i < Coordinates_Data.length; i++) {
-        Coordinates_ID = Coordinates_Data[i].COORDINATES_ID;
-        Address = Coordinates_Data[i].ADDRESS;
-        Latitude = Coordinates_Data[i].LATITUDE;
-        Longitude = Coordinates_Data[i].LONGITUDE;
+        var Coordinates_ID = Coordinates_Data[i].COORDINATES_ID;
+        var Address = Coordinates_Data[i].ADDRESS;
+        var Latitude = Coordinates_Data[i].LATITUDE;
+        var Longitude = Coordinates_Data[i].LONGITUDE;
     }
-    alert(Coordinates_ID);
-    return Coordinates_ID, Address, Latitude, Longitude;
+    return Coordinates_Data = {Coordinates_ID: Coordinates_ID, Address:Address, Latitude:Latitude, Longitude:Longitude};
 }
 
 function Delete_Coordinates(Coordinates_ID){
@@ -343,12 +339,8 @@ function Read_Distances(User_Address){
     var action = "Read_Distances";
     var Read_Distances_Data = {User_Address: User_Address, action: action};
     Distances_Data = $.ajax({data: Read_Distances_Data}).responseText;
-    Strip_Distances(Distances_Data);
-}
-
-function Strip_Distances(Distances_Data){
-    var i;
     Distances_Data = jQuery.parseJSON(Distances_Data);
+	var i;
     for(i = 0; i < Distances_Data.length; i++) {
         var Distances_ID = Distances_Data[i].DISTANCES_ID;
         var Bus_Number = Distances_Data[i].BUS_NUMBER;
@@ -357,7 +349,7 @@ function Strip_Distances(Distances_Data){
         var User_Address = Distances_Data[i].USER_ADDRESS;
         var Distances = Distances_Data[i].DISTANCES;
     }
-    return Distances_ID, Bus_Number, Bus_Stop_Time, Bus_Stop_Address, User_Address, Distances;
+	return Distances_Data = {Distances_ID:Distances_ID,Bus_Number:Bus_Number,Bus_Stop_Time:Bus_Stop_Time,Bus_Stop_Address:Bus_Stop_Address,User_Address:User_Address,Distances:Distances};
 }
 
 function Delete_Distances(Distances_ID){
