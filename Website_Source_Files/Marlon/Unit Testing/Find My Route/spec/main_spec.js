@@ -1,6 +1,4 @@
-/**
- * Created by Marlon on 11/8/2014.
- */
+
 //------------------------Unit Test----By Marlon Bermudez-------------------------------//
 
 describe("Test Creating New Bus Stop Objects", function(){
