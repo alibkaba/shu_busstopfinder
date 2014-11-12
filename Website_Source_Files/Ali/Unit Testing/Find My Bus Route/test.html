@@ -15,13 +15,29 @@
     <fieldset>
         Address: <input type="text" id = "Address" value="5151 Park Ave." disabled><br>
         Latitude: <input type="text" id = "Latitude"  value="123456" disabled><br>
-        Longitude: <input type="text" id = "Longitude" value="654321" disabled><br><br>
+        Longitude: <input type="text" id = "Longitude" value="654321" disabled><br>
     </fieldset>
 </form>
 <div id="Test_Read_Coordinates1"></div>
 <div id="Test_Read_Coordinates2"></div>
 <div id="Test_Read_Coordinates3"></div>
 <div id="Test_Read_Coordinates4"></div>
+<br><br>
+<form method="post">
+    <fieldset>
+        Bus_Number: <input type="text" id = "Bus_Number" value="5151" disabled><br>
+        Bus_Stop_Time: <input type="text" id = "Bus_Stop_Time"  value="6 AM" disabled><br>
+        Bus_Stop_Address: <input type="text" id = "Bus_Stop_Address" value="5151 Park Ave." disabled><br>
+		User_Address: <input type="text" id = "User_Address" value="50 Main St." disabled><br>
+		Distances: <input type="text" id = "Distances" value="500" disabled><br>
+    </fieldset>
+</form>
+<div id="Test_Read_Distances1"></div>
+<div id="Test_Read_Distances2"></div>
+<div id="Test_Read_Distances3"></div>
+<div id="Test_Read_Distances4"></div>
+<div id="Test_Read_Distances5"></div>
+<div id="Test_Read_Distances6"></div>
 <br><br>
 <script type="text/javascript">
 function unit_test_initialize(){
@@ -40,7 +56,8 @@ function unit_test_initialize(){
             alert('failure');
         }
     });
-	Test_Write_Coordinates();
+	//Test_Write_Coordinates();
+	Test_Write_Distances();
 }
 	
 function Test_Write_Coordinates(){
@@ -54,9 +71,9 @@ function Test_Write_Coordinates(){
 function Test_Read_Coordinates(Address, Latitude, Longitude){
 	Read_Coordinates(Address);
 	document.getElementById("Test_Read_Coordinates1").innerHTML = "COORDINATE_ID is "+Coordinates_Data[0].COORDINATES_ID;
-	document.getElementById("Test_Read_Coordinates2").innerHTML = "ADDRESS is "+Coordinates_Data[0].ADDRESS
-	document.getElementById("Test_Read_Coordinates3").innerHTML = "LATITUDE is "+Coordinates_Data[0].LATITUDE
-	document.getElementById("Test_Read_Coordinates4").innerHTML = "LONGITUDE is "+Coordinates_Data[0].LONGITUDE
+	document.getElementById("Test_Read_Coordinates2").innerHTML = "ADDRESS is "+Coordinates_Data[0].ADDRESS;
+	document.getElementById("Test_Read_Coordinates3").innerHTML = "LATITUDE is "+Coordinates_Data[0].LATITUDE;
+	document.getElementById("Test_Read_Coordinates4").innerHTML = "LONGITUDE is "+Coordinates_Data[0].LONGITUDE;
 	var Coordinates_ID = Coordinates_Data[0].COORDINATES_ID;
 	Test_Delete_Coordinates(Coordinates_ID);
 }
@@ -65,6 +82,31 @@ function Test_Delete_Coordinates(Coordinates_ID){
 	Delete_Coordinates(Coordinates_ID);
 }
 	
+function Test_Write_Distances(){
+	var Bus_Number = document.getElementById("Bus_Number").value;
+	var Bus_Stop_Time = document.getElementById("Bus_Stop_Time").value;
+	var Bus_Stop_Address = document.getElementById("Bus_Stop_Address").value;
+	var User_Address = document.getElementById("User_Address").value;
+	var Distances = document.getElementById("Distances").value;
+	Write_Distances(Bus_Number, Bus_Stop_Time, Bus_Stop_Address, User_Address, Distances);
+	Test_Read_Distances(Bus_Number, Bus_Stop_Time, Bus_Stop_Address, User_Address, Distances);
+}
+
+function Test_Read_Distances(Bus_Number, Bus_Stop_Time, Bus_Stop_Address, User_Address, Distances){
+	Read_Distances(User_Address);
+	document.getElementById("Test_Read_Coordinates1").innerHTML = "Distances_ID is "+Distances_Data[0].DISTANCES_ID;
+	document.getElementById("Test_Read_Coordinates2").innerHTML = "BUS_NUMBER is "+Distances_Data[0].BUS_NUMBER;
+	document.getElementById("Test_Read_Coordinates3").innerHTML = "LATITUDE is "+Distances_Data[0].BUS_STOP_TIME;
+	document.getElementById("Test_Read_Coordinates4").innerHTML = "BUS_STOP_ADDRESS is "+Distances_Data[0].BUS_STOP_ADDRESS;
+	document.getElementById("Test_Read_Coordinates5").innerHTML = "USER_ADDRESS is "+Distances_Data[0].USER_ADDRESS;
+	document.getElementById("Test_Read_Coordinates6").innerHTML = "DISTANCES is "+Distances_Data[0].DISTANCES;
+	var Distances_ID = Distances_Data[0].Distances_ID;
+	Test_Delete_Distances(Distances_ID);
+}
+
+function Test_Delete_Distances(Distances_ID){
+	Delete_Coordinates(Distances_ID);
+}
 //alert("Distances_ID id is "+Distances_Data[0].Distances_ID+"\nBus_Number is "+Distances_Data[0].BUS_NUMBER+"\nBus_Stop_Time is "+Distances_Data[0].BUS_STOP_TIME+"\nBus_Stop_Address is "+Distances_Data[0].BUS_STOP_ADDRESS+"\nUser_Address is "+Distances_Data[0].USER_ADDRESS+"\nDistances is "+Distances_Data[0].DISTANCES);
 </script>
 </body>
