@@ -4,11 +4,9 @@ describe("Coordinates", function(){
     var Address;
     var Latitude;
     var Longitude;
-    var Write_Coordinates_Data;
     var Read_Coordinates;
     var Coordinates_Data;
     var Strip_Coordinates;
-    var Delete_Coordinate_Data;
     beforeEach(function() {
         Address = "Address";
         Latitude = "Latitude";
@@ -20,32 +18,84 @@ describe("Coordinates", function(){
         Address = null;
         Latitude = null;
         Longitude = null;
-        Write_Coordinates_Data = null;
         Read_Coordinates = null;
         Coordinates_Data = null;
         Strip_Coordinates = null;
-        Delete_Coordinate_Data = null;
     });
     it("Write_Coordinates", function (){
         action = "Write_Coordinates";
-        //Write_Coordinates_Data = {Address: Address, Latitude: Latitude, Longitude: Longitude, action: action};
         expect(action).toContain("Write_Coordinates");
         expect(Address).toContain("Address");
         expect(Latitude).toContain("Latitude");
         expect(Longitude).toContain("Longitude");
-        //expect(Write_Coordinates_Data).toHaveBeenCalledWith({ Address: 'Address', Latitude: 'Latitude', Longitude: 'Longitude', action: 'Write_Coordinates' });
     });
     it("Read_Coordinates", function (){
         action = "Read_Coordinates";
+        expect(action).toContain("Read_Coordinates");
     });
     it("Strip_Coordinates", function (){
         action = "Strip_Coordinates";
+        expect(action).toContain("Strip_Coordinates");
     });
     it("Delete_Coordinates", function (){
         action = "Delete_Coordinates";
         Coordinates_ID = "1";
         expect(action).toContain("Delete_Coordinates");
         expect(Coordinates_ID).toContain("1");
-        //expect(Delete_Coordinate_Data).toHaveBeenCalled();
+    });
+});
+
+describe("Distances", function(){
+    var action;
+    var Distances_ID;
+    var Bus_Number;
+    var Bus_Stop_Time;
+    var Bus_Stop_Address;
+    var User_Address;
+    var Distances;
+    var Read_Distances;
+    var Distances_Data;
+    var Strip_Distances;
+    beforeEach(function() {
+        Bus_Number = "Bus_Number";
+        Bus_Stop_Time = "Bus_Stop_Time";
+        Bus_Stop_Address = "Bus_Stop_Address";
+        User_Address = "User_Address";
+        Distances = "Distances";
+    });
+    afterEach(function() {
+        action = null;
+        Distances_ID = null;
+        Bus_Number = null;
+        Bus_Stop_Time = null;
+        Bus_Stop_Address = null;
+        User_Address = null;
+        Distances = null;
+        Read_Distances = null;
+        Distances_Data = null;
+        Strip_Distances = null;
+    });
+    it("Write_Distances", function (){
+        action = "Write_Distances";
+        expect(action).toContain("Write_Distances");
+        expect(Bus_Number).toContain("Bus_Number");
+        expect(Bus_Stop_Time).toContain("Bus_Stop_Time");
+        expect(Bus_Stop_Address).toContain("Bus_Stop_Address");
+        expect(User_Address).toContain("User_Address");
+        expect(Distances).toContain("Distances");
+    });
+    it("Read_Distances", function (){
+        action = "Read_Distances";
+        expect(action).toContain("Read_Distances");
+    });
+    it("Strip_Distances", function (){
+        action = "Strip_Distances";
+        expect(action).toContain("Strip_Distances");
+    });
+    it("Delete_Distances", function (){
+        action = "Delete_Distances";
+        Distances_ID = "1";
+        expect(action).toContain("Delete_Distances");
+        expect(Distances_ID).toContain("1");
     });
 });

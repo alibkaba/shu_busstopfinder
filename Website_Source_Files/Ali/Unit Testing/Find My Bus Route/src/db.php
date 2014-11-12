@@ -29,15 +29,7 @@ function Validate_action(){
 
 function DB_Operation($action){
 	switch($action) {
-		case "Get_States": Get_States();
-		break;
-		case "Get_Districts": Get_Districts();
-		break;
-		case "Get_Schools": Get_Schools();
-		break;
-		case "Get_BusStops": Get_BusStops();
-		break;
-		case "Log_In": LogIn();
+		case "Read_Bus_Stops": Read_Bus_Stops();
 		break;
 		case "Read_Coordinates": Read_Coordinates();
 		break;
@@ -45,7 +37,24 @@ function DB_Operation($action){
 		break;
 		case "Delete_Coordinates": Delete_Coordinates();
 		break;
+		case "Read_Distances": Read_Distances();
+		break;
+		case "Write_Distances": Write_Distances();
+		break;
+		case "Delete_Distances": Delete_Distances();
+		break;
 	}
+}
+function Read_Bus_Stops(){
+	global $PDOconn;
+	$School_ID = stripslashes($_POST["School_ID"]);
+
+	$Query = 'CALL READ_BUS_STOPS (:School_ID)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(':School_ID', School_ID, PDO::PARAM_STR, 100);
+	$Statement->execute();
+	$Coordinates_Data = $Statement->fetchAll();
+	echo json_encode($Coordinates_Data);
 }
 
 function Read_Coordinates(){
@@ -81,6 +90,46 @@ function Delete_Coordinates(){
 	$Query = 'CALL DELETE_COORDINATES (:Coordinates_ID)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(':Coordinates_ID', $Coordinates_ID, PDO::PARAM_STR, 100);
+	$Statement->execute();
+}
+
+function Read_Distances(){
+	global $PDOconn;
+	$User_Address = stripslashes($_POST["User_Address"]);
+
+	$Query = 'CALL READ_DISTANCES (:User_Address)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(':User_Address', $User_Address, PDO::PARAM_STR, 100);
+	$Statement->execute();
+	$Distances_Data = $Statement->fetchAll();
+	echo json_encode($Distances_Data);
+}
+
+function Write_Distances(){
+	global $PDOconn;
+	$Bus_Number = stripslashes($_POST["Bus_Number"]);
+	$Bus_Stop_Time = stripslashes($_POST["Bus_Stop_Time"]);
+	$Bus_Stop_Address = stripslashes($_POST["Bus_Stop_Address"]);
+	$User_Address = stripslashes($_POST["User_Address"]);
+	$Distances = stripslashes($_POST["Distances"]);
+
+	$Query = 'CALL WRITE_DISTANCES (:Bus_Number, :Bus_Stop_Time, :Bus_Stop_Address, :User_Address, :Distances)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(':Bus_Number', $Bus_Number, PDO::PARAM_STR, 100);
+	$Statement->bindParam(':Bus_Stop_Time', $Bus_Stop_Time, PDO::PARAM_INT, 50);
+	$Statement->bindParam(':Bus_Stop_Address', $Bus_Stop_Address, PDO::PARAM_INT, 100);
+	$Statement->bindParam(':User_Address', $User_Address, PDO::PARAM_INT, 100);
+	$Statement->bindParam(':Distances', $Distances, PDO::PARAM_INT, 100);
+	$Statement->execute();
+}
+
+function Delete_Distances(){
+	global $PDOconn;
+	$Distances_ID = stripslashes($_POST["Distances_ID"]);
+
+	$Query = 'CALL DELETE_DISTANCES (:Distances_ID)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(':Distances_ID', $Distances_ID, PDO::PARAM_STR, 100);
 	$Statement->execute();
 }
 ?>

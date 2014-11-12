@@ -67,9 +67,50 @@ function Get_Bus_Stops_for_School(School_ID){
 // START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
 // START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
 // START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
+function Get_Bus_Stops_From_DB(School_ID){
+    var action = "Read_Bus_Stops";
+    var Bus_Stops = [];
+    var Read_Bus_Stops = {School_ID: School_ID, action: action};
+   var Bus_Stops_Data = $.ajax({data: Read_Bus_Stops}).responseText;
+    //Bus_Stops = Parse_Bus_Stop_into_Array(Bus_Stops_Data);
+    return Bus_Stops_Data;
+};
+
+function Parse_Bus_Stop_into_Array(Bus_Stops_Data){
+    var i;
+    var Bus_Stops=[];
+    Bus_Stops_Data = jQuery.parseJSON(Bus_Stops_Data);
+    for(i = 0; i < Bus_Stops_Data.length; i++) {
+        Bus_Stops[i]= {
+            School_ID: Bus_Stops_Data[i].SCHOOL_ID,
+            Bus_Stop_Number: Bus_Stops_Data[i].BUS_NUMBER,
+            Bus_Stop_Time: Bus_Stops_Data[i].BUS_STOP_TIME,
+            Bus_Stop_Address: Bus_Stops_Data[i].BUS_STOP_ADDRESS,
+            Distance_to_Stop: null,
+            Latitude: Bus_Stops_Data[i].BUS_STOP_LATITUDE,
+            Longitude: Bus_Stops_Data[i].BUS_STOP_LONGITUDE,
+           /* if(Bus_Stops_Data[i].BUS_STOP_LONGITUDE != null){
+                Temp_User_Address: Bus_Stops_Data[i].BUS_STOP_LONGITUDE;
+            }
+            else{
+            Temp_User_Address: null
+
+        }*/
+
+    }
+
+
+    }
+    return Bus_Stops;
+}
+
 function Get_Bus_Stops(School_ID){
-//Ali queries DB using School_ID and gets array 
-    var Bus_Stops =[];
+    var Bus_Stops_Jason =[];
+    var Bus_Stops = []
+    Bus_Stops_Jason = Get_Bus_Stops_From_DB(School_ID);
+    Bus_Stops = Parse_Bus_Stop_into_Array(Bus_Stops_Jason)
+
+
 	//Bus_Stops = returned array from DB
 	//if returning a JSON format, use for loop to populate array
 	// Bus_Stops= {School_ID: 1, Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.117744, Longitude: 41.117744};
@@ -87,7 +128,6 @@ function Get_Bus_Stops(School_ID){
     Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop:null, Latitude: null, Longitude: null}
 	
     return Bus_Stops;
-
 };
 
 // END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
@@ -251,8 +291,8 @@ function Get_Coordinates(Address){
         if (status == google.maps.GeocoderStatus.OK) {
             Address_Coordinates[0].Latitude = results[0].geometry.location.lat();
             Address_Coordinates[0].Longitude = results[0].geometry.location.lng();
-            alert(Address_Coordinates[0].Latitude )
-            alert(Address_Coordinates[0].Longitude)
+            alert(Address_Coordinates[0].Latitude );
+            alert(Address_Coordinates[0].Longitude);
 			
 			// START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
 			Write_Coordinates(Address, Address_Coordinates[0].Latitude, Address_Coordinates[0].Longitude);
@@ -264,30 +304,30 @@ function Get_Coordinates(Address){
         else{
             alert("could not map address: " + status)
         }
-    })
+    });
     //return Address_Coordinates;
 }
 // START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
-/*
-New Table named  Distance_to_user (, Bus_Number, Bus_Stop_Address, User_Address, Distance_to_user)
-1) write Bus_Number, Bus_Stop_Address, User_Address, Distance_to_user
-read return Bus_Number, Bus_Stop_Address, User_Address, Distance_to_user as an object or array of objects (Bus stops array)
-empty delete row
-2) return Bus_Number, Bus_Stop_Address, User_Address, Distance_to_user as an object or array of objects (Bus stops array)
-*/
+
+// When someone wants to add a bus stop, they call this:function Get_Coordinates(Address)
+//that gets the Latitude and longitude which writes it in the DB
+//
 
 function Write_Coordinates(Address, Latitude, Longitude){
 	var action = "Write_Coordinates";
 	var Write_Coordinates_Data = {Address: Address, Latitude: Latitude, Longitude: Longitude, action: action};
 	$.ajax({data: Write_Coordinates_Data});
-};
+}
 
 function Read_Coordinates(Address){
 	var action = "Read_Coordinates";
 	var Read_Coordinates_Data = {Address: Address, action: action};
 	Coordinates_Data = $.ajax({data: Read_Coordinates_Data}).responseText;
-	Strip_Coordinates(Coordinates_Data);
-};
+    var Coordinates = [];
+    Coordinates =Strip_Coordinates(Coordinates_Data);
+
+    return Coordinates;
+}
 
 function Strip_Coordinates(Coordinates_Data){
 	var i;
@@ -299,14 +339,46 @@ function Strip_Coordinates(Coordinates_Data){
 		var Longitude = Coordinates_Data[i].LONGITUDE;
 	}
 	return Coordinates_ID, Address, Latitude, Longitude;
-};
+}
 
-function Delete_Coordinates(Coordinates_ID){//works
+function Delete_Coordinates(Coordinates_ID){
 	var action = "Delete_Coordinates";
 	var Delete_Coordinates_Data = {Coordinates_ID: Coordinates_ID, action: action};
 	$.ajax({data: Delete_Coordinates_Data});
-return true;
-};
+}
+
+function Write_Distances(Bus_Number, Bus_Stop_Time, Bus_Stop_Address, User_Address, Distances){
+	var action = "Write_Distances";
+	var Write_Distances_Data = {Bus_Number: Bus_Number, Bus_Stop_Time: Bus_Stop_Time, Bus_Stop_Address: Bus_Stop_Address, User_Address: User_Address, Distances: Distances, action: action};
+	$.ajax({data: Write_Distances_Data});
+}
+
+function Read_Distances(User_Address){
+	var action = "Read_Distances";
+	var Read_Distances_Data = {User_Address: User_Address, action: action};
+	Distances_Data = $.ajax({data: Read_Distances_Data}).responseText;
+	Strip_Distances(Distances_Data);
+}
+
+function Strip_Distances(Distances_Data){
+	var i;
+	Distances_Data = jQuery.parseJSON(Distances_Data);
+	for(i = 0; i < Distances_Data.length; i++) {
+		var Distances_ID = Distances_Data[i].DISTANCES_ID;
+		var Bus_Number = Distances_Data[i].BUS_NUMBER;
+		var Bus_Stop_Time = Distances_Data[i].BUS_STOP_TIME;
+		var Bus_Stop_Address = Distances_Data[i].BUS_STOP_ADDRESS;
+		var User_Address = Distances_Data[i].USER_ADDRESS;
+		var Distances = Distances_Data[i].DISTANCES;
+	}
+	return Distances_ID, Bus_Number, Bus_Stop_Time, Bus_Stop_Address, User_Address, Distances;
+}
+
+function Delete_Distances(Distances_ID){
+	var action = "Delete_Coordinates";
+	var Delete_Distances_Data = {Distances_ID: Distances_ID, action: action};
+	$.ajax({data: Delete_Distances_Data});
+}
 
 // END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
 
