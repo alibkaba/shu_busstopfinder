@@ -11,7 +11,8 @@ function initialize() {
     Bus_Stops = Get_Bus_Stops();
     Map_Address(School_District_Lat, School_District_Lng, null);
     Display_Stops_Pannel(Bus_Stops);
-	
+
+    // START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
 	$.ajaxSetup({
 		url: 'db.php',
 		type: 'post',
@@ -27,6 +28,7 @@ function initialize() {
 			alert('failure');
 		}
 	});
+    // END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
 
     return true;
 
@@ -64,8 +66,6 @@ function Get_Bus_Stops_for_School(School_ID){
 }
 
 
-// START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
-// START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
 // START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
 function Get_Bus_Stops_From_DB(School_ID){
     var action = "Read_Bus_Stops";
@@ -130,8 +130,6 @@ function Get_Bus_Stops(School_ID){
     return Bus_Stops;
 };
 
-// END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
-// END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
 // END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
 
 function Map_Address(latitude, longitude, address){
@@ -230,14 +228,12 @@ function Calculate_Distance_To_Stops(User_Address) {
                     var distance = parseFloat(route.legs[route_leg].distance.text)
                     summaryPanel.innerHTML += ' is : ' + distance + '<br>';
                     Bus_Stops[Array_position].Distance_to_Stop =  distance;
+
 					// START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
-					// START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
-					// START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
-					// Distance_To_User Table ( Bus-Stop_Address, Distance_to_user, User_Address)
+					Distance_To_User Table ( Bus-Stop_Address, Distance_to_user, User_Address)
 					//Add_New_Distance_To_user (Bus-Stop_Address, Distance_to_user,User_Address)
 					// END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
-					// END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
-					// END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
+
 					
                 }
 
@@ -260,7 +256,6 @@ function Calculate_Distance_To_Stops(User_Address) {
 };
 
 function Add_Bus_Stop(){
-
 //get bus number input from user
 
 // loop array?
@@ -277,6 +272,7 @@ function Add_Bus_Stop(){
 
 }
 
+// START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
 function Get_Coordinates(Address){
     var latitude, longitude;
     var Bus_Stops = Get_Bus_Stops();
@@ -307,7 +303,6 @@ function Get_Coordinates(Address){
     });
     //return Address_Coordinates;
 }
-// START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
 
 // When someone wants to add a bus stop, they call this:function Get_Coordinates(Address)
 //that gets the Latitude and longitude which writes it in the DB
