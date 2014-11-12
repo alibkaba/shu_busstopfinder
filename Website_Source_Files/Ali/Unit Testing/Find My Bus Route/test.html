@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset=utf-8" />
+    <meta name="viewport" content="width=320, initial-scale=1"> <!-- Ali -->
+    <script src="src/main.js"></script> <!-- Ali -->
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script> <!-- Ali -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> <!-- Ali -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="jquery-1.11.1.min.js"></script>
+    <title>Unit Test Jquery to PHP</title>
+</head>
+<body onload="unit_test_initialize()">
+<form method="post">
+    <fieldset>
+        Address: <input type="text" id = "Address" value="5151 Park Ave." disabled><br>
+        Latitude: <input type="text" id = "Latitude"  value="123456" disabled><br>
+        Longitude: <input type="text" id = "Longitude" value="654321" disabled><br><br>
+    </fieldset>
+</form>
+<div id="Test_Read_Coordinates1"></div>
+<div id="Test_Read_Coordinates2"></div>
+<div id="Test_Read_Coordinates3"></div>
+<div id="Test_Read_Coordinates4"></div>
+<br><br>
+<script type="text/javascript">
+function unit_test_initialize(){
+	$.ajaxSetup({
+        url: 'db.php',
+        type: 'post',
+        cache: 'false',
+        async: false,
+        success: function(data){
+            alert('success');
+            console.log(data);
+        },
+        complete: function(){
+        },
+        error: function(){
+            alert('failure');
+        }
+    });
+	Test_Write_Coordinates();
+}
+	
+function Test_Write_Coordinates(){
+	var Address = document.getElementById("Address").value;
+	var Latitude = document.getElementById("Latitude").value;
+	var Longitude = document.getElementById("Longitude").value;
+	Write_Coordinates(Address, Latitude, Longitude);
+	Test_Read_Coordinates(Address, Latitude, Longitude);
+}
+
+function Test_Read_Coordinates(Address, Latitude, Longitude){
+	Read_Coordinates(Address);
+	document.getElementById("Test_Read_Coordinates1").innerHTML = "COORDINATE_ID is "+Coordinates_Data[0].COORDINATES_ID;
+	document.getElementById("Test_Read_Coordinates2").innerHTML = "ADDRESS is "+Coordinates_Data[0].ADDRESS
+	document.getElementById("Test_Read_Coordinates3").innerHTML = "LATITUDE is "+Coordinates_Data[0].LATITUDE
+	document.getElementById("Test_Read_Coordinates4").innerHTML = "LONGITUDE is "+Coordinates_Data[0].LONGITUDE
+	var Coordinates_ID = Coordinates_Data[0].COORDINATES_ID;
+	Test_Delete_Coordinates(Coordinates_ID);
+}
+
+function Test_Delete_Coordinates(Coordinates_ID){
+	Delete_Coordinates(Coordinates_ID);
+}
+	
+//alert("Distances_ID id is "+Distances_Data[0].Distances_ID+"\nBus_Number is "+Distances_Data[0].BUS_NUMBER+"\nBus_Stop_Time is "+Distances_Data[0].BUS_STOP_TIME+"\nBus_Stop_Address is "+Distances_Data[0].BUS_STOP_ADDRESS+"\nUser_Address is "+Distances_Data[0].USER_ADDRESS+"\nDistances is "+Distances_Data[0].DISTANCES);
+</script>
+</body>
+</html>
