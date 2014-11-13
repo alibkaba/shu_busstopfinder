@@ -1,17 +1,13 @@
 //------------------------Source Code----By Marlon Bermudez-------------------------------//
-function initialize() {
+function Initialize_Google_Maps_API() {
 
     //-----------load SQL values here--------------
-    var state = "CT";
-    var School_District= "Norwalk Public School";
     var School_District_Lat= 41.117744;
     var School_District_Lng = -73.4081575;
-
-    Bus_Stops = Get_Bus_Stops();
-    Master = Bus_Stops;
+    var Bus_Stops = Get_Bus_Stops();
     Map_Address(School_District_Lat, School_District_Lng, null);
     Display_Stops_Pannel(Bus_Stops);
-    return true;
+    //return true;
 }
 
 
@@ -66,19 +62,20 @@ function Get_Bus_Stops(){
 }
 
 function Map_Address(latitude, longitude, address){
-    var directionsDisplay;
+    var Display_Map;
     var map;
-    directionsDisplay = new google.maps.DirectionsRenderer();
-    var New_Map = new google.maps.LatLng(latitude, longitude);
+    Display_Map = new google.maps.DirectionsRenderer();
+    var address = new google.maps.LatLng(latitude, longitude);
     var mapOptions = {
         zoom:13,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        center: New_Map
+        center: address
     };
 
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-    directionsDisplay.setMap(map);
-    return map;
+    alert(typeof map);
+    Display_Map.setMap(map);
+
 }
 
 
@@ -109,42 +106,26 @@ function Get_Shortest_Distance_To_Stops(User_Address,Bus_Stops){
 
 
 function Calculate_Distance_To_Stops(User_Address) {
-    var latitude= 41.117744;
-    var longitude = -73.4081575;
-    var summaryPanel = document.getElementById('directions_panel');
+    var latitude= 41.117744, longitude = -73.4081575;
     var Array_position=0;
-    var directionsDisplay;
-    var directionsService = new google.maps.DirectionsService();
-    var map;
-    var lat, lon;
-    directionsDisplay = new google.maps.DirectionsRenderer();
+    var Google_Directions_Service = new google.maps.DirectionsService();
     var New_Map = new google.maps.LatLng(latitude, longitude);
-    var mapOptions = {
-        zoom: 15,
-        center: New_Map
-    };
-
-    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-    directionsDisplay.setMap(map);
-
-    Bus_Stops = Get_Bus_Stops();
+    var Map_Options = {zoom: 15, center: New_Map};
+    var map = new google.maps.Map(document.getElementById("map-canvas"), Map_Options);
+    var Bus_Stops = Get_Bus_Stops();
 
     for (var Bus_Stop = 0; Bus_Stop < Bus_Stops.length; Bus_Stop++) {
-        var request = {
+        var Directions_Request = {
             origin:User_Address,
             destination:Bus_Stops[Bus_Stop].Stop_Address,
             travelMode: google.maps.TravelMode.DRIVING
         };
 
-        directionsService.route(request, function(response, status) {
+        Google_Directions_Service.route(Directions_Request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 var route = response.routes[0];
-                var summaryPanel = document.getElementById('directions_panel');
                 for (var route_leg = 0; route_leg < route.legs.length; route_leg++) { //should be one only
-                    summaryPanel.innerHTML += ' Distance From: ' + route.legs[route_leg].start_address + '   ';
-                    summaryPanel.innerHTML += 'To: ' + route.legs[route_leg].end_address + '     ';
                     var distance = parseFloat(route.legs[route_leg].distance.text)
-                    summaryPanel.innerHTML += ' is : ' + distance + '<br>';
                     Bus_Stops[Array_position].Distance_to_Stop =  distance;
                 }
                 Array_position = Array_position + 1;
@@ -159,6 +140,8 @@ function Calculate_Distance_To_Stops(User_Address) {
     }
 }
 
+
+
 function Get_Coordinates(Address){
     var latitude, longitude;
     var Bus_Stops = Get_Bus_Stops();
@@ -169,8 +152,8 @@ function Get_Coordinates(Address){
         if (status == google.maps.GeocoderStatus.OK) {
             Address_Coordinates[0].Latitude = results[0].geometry.location.lat();
             Address_Coordinates[0].Longitude = results[0].geometry.location.lng();
-            alert(Address_Coordinates[0].Latitude );
-            alert(Address_Coordinates[0].Longitude);
+           // alert(Address_Coordinates[0].Latitude );
+            //alert(Address_Coordinates[0].Longitude);
             Add_Marker(Address_Coordinates[0].Latitude,Address_Coordinates[0].Longitude)
         }
         else{
@@ -308,5 +291,5 @@ function Show_Bus_Stops() { //limit is 5 addresses, need to look for alternative
     }
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', Initialize_Google_Maps_API);
 //----------------------------By Marlon Bermudez-------------------------------//
