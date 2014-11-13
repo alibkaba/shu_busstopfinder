@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset=utf-8" />
-    <meta name="viewport" content="width=320, initial-scale=1"> <!-- Ali -->
-    <script src="src/main.js"></script> <!-- Ali -->
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script> <!-- Ali -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> <!-- Ali -->
+    <meta name="viewport" content="width=320, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script src="jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="src/main.js"></script>
     <title>Unit Test</title>
 </head>
 <p>The tests below are integrating all my coding into one unit test.<p>
@@ -40,16 +41,6 @@
 <div id="Test_Read_Distances5"></div>
 <div id="Test_Read_Distances6"></div>
 <br><br>
-<form method="post">
-    <fieldset>
-        Bus_Number: <input type="text" id = "Bus_Number" value="5151" disabled><br>
-        Bus_Stop_Time: <input type="text" id = "Bus_Stop_Time"  value="6:00 AM" disabled><br>
-        Bus_Stop_Address: <input type="text" id = "Bus_Stop_Address" value="5151 Park Ave." disabled><br>
-		User_Address: <input type="text" id = "User_Address" value="50 Main St." disabled><br>
-		Distances: <input type="text" id = "Distances" value="500" disabled><br>
-    </fieldset>
-</form>
-<br><br>
 <script type="text/javascript">
 function unit_test_initialize(){
 	$.ajaxSetup({
@@ -58,17 +49,20 @@ function unit_test_initialize(){
         cache: 'false',
         async: false,
         success: function(data){
-            alert('success');
+            //alert('Ajax Sent');
             console.log(data);
         },
         complete: function(){
         },
         error: function(){
-            alert('failure');
+            alert('Ajax Failed');
         }
     });
 	Test_Write_Coordinates();
 }
+
+	var  match = '<span class="label label-success">match</span>';
+	var  notmatch = '<span class="label label-danger">not a match</span>';
 	
 function Test_Write_Coordinates(){
 	var Address = document.getElementById("Address").value;
@@ -81,9 +75,26 @@ function Test_Write_Coordinates(){
 function Test_Read_Coordinates(Address, Latitude, Longitude){
 	Read_Coordinates(Address);
 	document.getElementById("Test_Read_Coordinates1").innerHTML = "COORDINATE_ID is "+Coordinates_Data[0].COORDINATES_ID;
-	document.getElementById("Test_Read_Coordinates2").innerHTML = "ADDRESS is "+Coordinates_Data[0].ADDRESS;
-	document.getElementById("Test_Read_Coordinates3").innerHTML = "LATITUDE is "+Coordinates_Data[0].LATITUDE;
-	document.getElementById("Test_Read_Coordinates4").innerHTML = "LONGITUDE is "+Coordinates_Data[0].LONGITUDE;
+	if (Address = Coordinates_Data[0].ADDRESS){
+		document.getElementById("Test_Read_Coordinates2").innerHTML = "ADDRESS from the database is a "+match;
+	}
+	else{
+		document.getElementById("Test_Read_Coordinates2").innerHTML = "ADDRESS  from the database is a "+notmatch;
+	}
+	
+	if (Latitude = Coordinates_Data[0].LATITUDE){
+		document.getElementById("Test_Read_Coordinates3").innerHTML = "LATITUDE  from the database is "+match;
+	}
+	else{
+		document.getElementById("Test_Read_Coordinates3").innerHTML = "LATITUDE  from the database is "+notmatch;
+	}
+	
+	if (Longitude = Coordinates_Data[0].LONGITUDE){
+		document.getElementById("Test_Read_Coordinates4").innerHTML = "LONGITUDE  from the database is "+match;
+	}
+	else{
+		document.getElementById("Test_Read_Coordinates4").innerHTML = "LONGITUDE  from the database is "+notmatch;
+	}
 	var Coordinates_ID = Coordinates_Data[0].COORDINATES_ID;
 	Test_Delete_Coordinates(Coordinates_ID);
 }
@@ -106,17 +117,47 @@ function Test_Write_Distances(){
 function Test_Read_Distances(Bus_Number, Bus_Stop_Time, Bus_Stop_Address, User_Address, Distances){
 	Read_Distances(User_Address);
 	document.getElementById("Test_Read_Distances1").innerHTML = "Distances_ID is "+Distances_Data[0].DISTANCES_ID;
-	document.getElementById("Test_Read_Distances2").innerHTML = "BUS_NUMBER is "+Distances_Data[0].BUS_NUMBER;
-	document.getElementById("Test_Read_Distances3").innerHTML = "Bus_Stop_Time is "+Distances_Data[0].BUS_STOP_TIME;
-	document.getElementById("Test_Read_Distances4").innerHTML = "BUS_STOP_ADDRESS is "+Distances_Data[0].BUS_STOP_ADDRESS;
-	document.getElementById("Test_Read_Distances5").innerHTML = "USER_ADDRESS is "+Distances_Data[0].USER_ADDRESS;
-	document.getElementById("Test_Read_Distances6").innerHTML = "DISTANCES is "+Distances_Data[0].DISTANCES;
-	var Distances_ID = Distances_Data[0].Distances_ID;
+	
+	if(Bus_Number = Distances_Data[0].BUS_NUMBER){
+		document.getElementById("Test_Read_Distances2").innerHTML = "BUS_NUMBER  from the database is "+match;
+	}
+	else{
+		document.getElementById("Test_Read_Distances2").innerHTML = "BUS_NUMBER  from the database is "+notmatch;
+	}
+	
+	if(Bus_Stop_Time = Distances_Data[0].BUS_STOP_TIME){
+		document.getElementById("Test_Read_Distances3").innerHTML = "Bus_Stop_Time  from the database is "+match;
+	}
+	else{
+		document.getElementById("Test_Read_Distances3").innerHTML = "Bus_Stop_Time  from the database is "+notmatch;
+	}
+	
+	if(Bus_Stop_Address = Distances_Data[0].BUS_STOP_ADDRESS){
+		document.getElementById("Test_Read_Distances4").innerHTML = "BUS_STOP_ADDRESS  from the database is "+match;
+	}
+	else{
+		document.getElementById("Test_Read_Distances4").innerHTML = "BUS_STOP_ADDRESS  from the database is "+notmatch;
+	}
+	
+	if(User_Address = Distances_Data[0].USER_ADDRESS){
+		document.getElementById("Test_Read_Distances5").innerHTML = "USER_ADDRESS  from the database is "+match;
+	}
+	else{
+		document.getElementById("Test_Read_Distances5").innerHTML = "USER_ADDRESS  from the database is "+notmatch;
+	}
+	
+	if(Distances = Distances_Data[0].DISTANCES){
+		document.getElementById("Test_Read_Distances6").innerHTML = "DISTANCES  from the database is "+match;
+	}
+	else{
+		document.getElementById("Test_Read_Distances6").innerHTML = "DISTANCES  from the database is "+notmatch;
+	}	
+	var Distances_ID = Distances_Data[0].DISTANCES_ID;
 	Test_Delete_Distances(Distances_ID);
 }
 
 function Test_Delete_Distances(Distances_ID){
-	Delete_Coordinates(Distances_ID);
+	Delete_Distances(Distances_ID);
 }
 //alert("Distances_ID id is "+Distances_Data[0].Distances_ID+"\nBus_Number is "+Distances_Data[0].BUS_NUMBER+"\nBus_Stop_Time is "+Distances_Data[0].BUS_STOP_TIME+"\nBus_Stop_Address is "+Distances_Data[0].BUS_STOP_ADDRESS+"\nUser_Address is "+Distances_Data[0].USER_ADDRESS+"\nDistances is "+Distances_Data[0].DISTANCES);
 </script>

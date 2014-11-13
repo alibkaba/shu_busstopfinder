@@ -81,15 +81,6 @@ function Get_Bus_Stops_for_School(School_ID){
 
 
 // START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
-function Get_Bus_Stops_From_DB(School_ID){
-    var action = "Read_Bus_Stops";
-    var Bus_Stops = [];
-    var Read_Bus_Stops = {School_ID: School_ID, action: action};
-    var Bus_Stops_Data = $.ajax({data: Read_Bus_Stops}).responseText;
-    //Bus_Stops = Parse_Bus_Stop_into_Array(Bus_Stops_Data);
-    return Bus_Stops_Data;
-};
-
  function Read_Coordinates(Address){
     var action = "Read_Coordinates";
     var Read_Coordinates_Data = {Address: Address, action: action};
@@ -97,6 +88,7 @@ function Get_Bus_Stops_From_DB(School_ID){
     Coordinates_Data = jQuery.parseJSON(Coordinates_Data);
     return Coordinates_Data;
 }
+
 function Read_Bus_Stops(School_ID){
 	var action = "Read_Bus_Stops";
 	var Read_Bus_Stops_Data = {School_ID: School_ID, action: action};
@@ -322,7 +314,7 @@ function Read_Distances(User_Address){
 }
 
 function Delete_Distances(Distances_ID){
-    var action = "Delete_Coordinates";
+    var action = "Delete_Distances";
     var Delete_Distances_Data = {Distances_ID: Distances_ID, action: action};
     $.ajax({data: Delete_Distances_Data});
 }
