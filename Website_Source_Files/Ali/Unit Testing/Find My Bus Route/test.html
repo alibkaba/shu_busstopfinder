@@ -8,8 +8,9 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> <!-- Ali -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script src="jquery-1.11.1.min.js"></script>
-    <title>Unit Test Jquery to PHP</title>
+    <title>Unit Test</title>
 </head>
+<p>The tests below are integrating all my coding into one unit test.<p>
 <body onload="unit_test_initialize()">
 <form method="post">
     <fieldset>
@@ -26,7 +27,7 @@
 <form method="post">
     <fieldset>
         Bus_Number: <input type="text" id = "Bus_Number" value="5151" disabled><br>
-        Bus_Stop_Time: <input type="text" id = "Bus_Stop_Time"  value="6 AM" disabled><br>
+        Bus_Stop_Time: <input type="text" id = "Bus_Stop_Time"  value="6:00 AM" disabled><br>
         Bus_Stop_Address: <input type="text" id = "Bus_Stop_Address" value="5151 Park Ave." disabled><br>
 		User_Address: <input type="text" id = "User_Address" value="50 Main St." disabled><br>
 		Distances: <input type="text" id = "Distances" value="500" disabled><br>
@@ -38,6 +39,16 @@
 <div id="Test_Read_Distances4"></div>
 <div id="Test_Read_Distances5"></div>
 <div id="Test_Read_Distances6"></div>
+<br><br>
+<form method="post">
+    <fieldset>
+        Bus_Number: <input type="text" id = "Bus_Number" value="5151" disabled><br>
+        Bus_Stop_Time: <input type="text" id = "Bus_Stop_Time"  value="6:00 AM" disabled><br>
+        Bus_Stop_Address: <input type="text" id = "Bus_Stop_Address" value="5151 Park Ave." disabled><br>
+		User_Address: <input type="text" id = "User_Address" value="50 Main St." disabled><br>
+		Distances: <input type="text" id = "Distances" value="500" disabled><br>
+    </fieldset>
+</form>
 <br><br>
 <script type="text/javascript">
 function unit_test_initialize(){
@@ -56,8 +67,7 @@ function unit_test_initialize(){
             alert('failure');
         }
     });
-	//Test_Write_Coordinates();
-	Test_Write_Distances();
+	Test_Write_Coordinates();
 }
 	
 function Test_Write_Coordinates(){
@@ -80,6 +90,7 @@ function Test_Read_Coordinates(Address, Latitude, Longitude){
 
 function Test_Delete_Coordinates(Coordinates_ID){
 	Delete_Coordinates(Coordinates_ID);
+	Test_Write_Distances();
 }
 	
 function Test_Write_Distances(){
@@ -94,12 +105,12 @@ function Test_Write_Distances(){
 
 function Test_Read_Distances(Bus_Number, Bus_Stop_Time, Bus_Stop_Address, User_Address, Distances){
 	Read_Distances(User_Address);
-	document.getElementById("Test_Read_Coordinates1").innerHTML = "Distances_ID is "+Distances_Data[0].DISTANCES_ID;
-	document.getElementById("Test_Read_Coordinates2").innerHTML = "BUS_NUMBER is "+Distances_Data[0].BUS_NUMBER;
-	document.getElementById("Test_Read_Coordinates3").innerHTML = "LATITUDE is "+Distances_Data[0].BUS_STOP_TIME;
-	document.getElementById("Test_Read_Coordinates4").innerHTML = "BUS_STOP_ADDRESS is "+Distances_Data[0].BUS_STOP_ADDRESS;
-	document.getElementById("Test_Read_Coordinates5").innerHTML = "USER_ADDRESS is "+Distances_Data[0].USER_ADDRESS;
-	document.getElementById("Test_Read_Coordinates6").innerHTML = "DISTANCES is "+Distances_Data[0].DISTANCES;
+	document.getElementById("Test_Read_Distances1").innerHTML = "Distances_ID is "+Distances_Data[0].DISTANCES_ID;
+	document.getElementById("Test_Read_Distances2").innerHTML = "BUS_NUMBER is "+Distances_Data[0].BUS_NUMBER;
+	document.getElementById("Test_Read_Distances3").innerHTML = "Bus_Stop_Time is "+Distances_Data[0].BUS_STOP_TIME;
+	document.getElementById("Test_Read_Distances4").innerHTML = "BUS_STOP_ADDRESS is "+Distances_Data[0].BUS_STOP_ADDRESS;
+	document.getElementById("Test_Read_Distances5").innerHTML = "USER_ADDRESS is "+Distances_Data[0].USER_ADDRESS;
+	document.getElementById("Test_Read_Distances6").innerHTML = "DISTANCES is "+Distances_Data[0].DISTANCES;
 	var Distances_ID = Distances_Data[0].Distances_ID;
 	Test_Delete_Distances(Distances_ID);
 }

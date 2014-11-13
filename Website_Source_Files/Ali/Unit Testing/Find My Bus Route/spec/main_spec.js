@@ -4,9 +4,10 @@ describe("Coordinates", function(){
     var Address;
     var Latitude;
     var Longitude;
+    var Write_Coordinates;
     var Read_Coordinates;
     var Coordinates_Data;
-    var Strip_Coordinates;
+    var Delete_Coordinates;
     beforeEach(function() {
         Address = "Address";
         Latitude = "Latitude";
@@ -18,9 +19,10 @@ describe("Coordinates", function(){
         Address = null;
         Latitude = null;
         Longitude = null;
+        Write_Coordinates = null;
         Read_Coordinates = null;
         Coordinates_Data = null;
-        Strip_Coordinates = null;
+        Delete_Coordinates = null;
     });
     it("Write_Coordinates", function (){
         action = "Write_Coordinates";
@@ -32,10 +34,6 @@ describe("Coordinates", function(){
     it("Read_Coordinates", function (){
         action = "Read_Coordinates";
         expect(action).toContain("Read_Coordinates");
-    });
-    it("Strip_Coordinates", function (){
-        action = "Strip_Coordinates";
-        expect(action).toContain("Strip_Coordinates");
     });
     it("Delete_Coordinates", function (){
         action = "Delete_Coordinates";
@@ -53,9 +51,10 @@ describe("Distances", function(){
     var Bus_Stop_Address;
     var User_Address;
     var Distances;
+    var Write_Distances;
     var Read_Distances;
     var Distances_Data;
-    var Strip_Distances;
+    var Delete_Distances;
     beforeEach(function() {
         Bus_Number = "Bus_Number";
         Bus_Stop_Time = "Bus_Stop_Time";
@@ -71,9 +70,10 @@ describe("Distances", function(){
         Bus_Stop_Address = null;
         User_Address = null;
         Distances = null;
+        Write_Distances = null;
         Read_Distances = null;
+        Delete_Distances = null;
         Distances_Data = null;
-        Strip_Distances = null;
     });
     it("Write_Distances", function (){
         action = "Write_Distances";
@@ -87,10 +87,6 @@ describe("Distances", function(){
     it("Read_Distances", function (){
         action = "Read_Distances";
         expect(action).toContain("Read_Distances");
-    });
-    it("Strip_Distances", function (){
-        action = "Strip_Distances";
-        expect(action).toContain("Strip_Distances");
     });
     it("Delete_Distances", function (){
         action = "Delete_Distances";

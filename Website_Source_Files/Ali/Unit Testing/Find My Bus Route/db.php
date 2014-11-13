@@ -29,6 +29,12 @@ function Validate_action(){
 
 function DB_Operation($action){
 	switch($action) {
+		case "Read_States": Read_States();
+		break;
+		case "Read_Districts": Read_Districts();
+		break;
+		case "Read_Schools": Read_Schools();
+		break;
 		case "Read_Bus_Stops": Read_Bus_Stops();
 		break;
 		case "Read_Coordinates": Read_Coordinates();
@@ -45,16 +51,51 @@ function DB_Operation($action){
 		break;
 	}
 }
+
+function Read_States(){
+	global $PDOconn;
+
+	$Query = 'CALL READ_STATES';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->execute();
+	$States_Data = $Statement->fetchAll();
+	echo json_encode($States_Data);
+}
+
+function Read_Districts(){
+	global $PDOconn;
+	$State_ID = stripslashes($_POST["State_ID"]);
+
+	$Query = 'CALL READ_DISTRICTS (:State_ID)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(':State_ID', State_ID, PDO::PARAM_INT);
+	$Statement->execute();
+	$Districts_Data = $Statement->fetchAll();
+	echo json_encode($Districts_Data);
+}
+
+function Read_Schools(){
+	global $PDOconn;
+	$District_ID = stripslashes($_POST["District_ID"]);
+
+	$Query = 'CALL READ_SCHOOLS (:District_ID)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(':District_ID', District_ID, PDO::PARAM_INT);
+	$Statement->execute();
+	$Schools_Data = $Statement->fetchAll();
+	echo json_encode($Schools_Data);
+}
+
 function Read_Bus_Stops(){
 	global $PDOconn;
 	$School_ID = stripslashes($_POST["School_ID"]);
 
 	$Query = 'CALL READ_BUS_STOPS (:School_ID)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':School_ID', School_ID, PDO::PARAM_STR, 100);
+	$Statement->bindParam(':School_ID', School_ID, PDO::PARAM_INT);
 	$Statement->execute();
-	$Coordinates_Data = $Statement->fetchAll();
-	echo json_encode($Coordinates_Data);
+	$Bus_Stops_Data = $Statement->fetchAll();
+	echo json_encode($Bus_Stops_Data);
 }
 
 function Read_Coordinates(){
@@ -89,7 +130,7 @@ function Delete_Coordinates(){
 
 	$Query = 'CALL DELETE_COORDINATES (:Coordinates_ID)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':Coordinates_ID', $Coordinates_ID, PDO::PARAM_STR, 100);
+	$Statement->bindParam(':Coordinates_ID', $Coordinates_ID, PDO::PARAM_INT);
 	$Statement->execute();
 }
 
@@ -129,7 +170,7 @@ function Delete_Distances(){
 
 	$Query = 'CALL DELETE_DISTANCES (:Distances_ID)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':Distances_ID', $Distances_ID, PDO::PARAM_STR, 100);
+	$Statement->bindParam(':Distances_ID', $Distances_ID, PDO::PARAM_INT);
 	$Statement->execute();
 }
 ?>
