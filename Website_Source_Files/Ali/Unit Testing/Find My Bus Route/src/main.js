@@ -284,7 +284,13 @@ function Write_Coordinates(Address, Latitude, Longitude){
     var Write_Coordinates_Data = {Address: Address, Latitude: Latitude, Longitude: Longitude, action: action};
     $.ajax({data: Write_Coordinates_Data});
 }
-
+/*
+function Write_Coordinates(Write_Coordinates_Data)){
+    var action = "Write_Coordinates";
+    var Coordinates_Data = {Address: Write_Coordinates_Data.Address, Latitude: Write_Coordinates_Data.Latitude, Longitude: Write_Coordinates_Data.Longitude, action: action};
+    $.ajax({data: Coordinates_Data});
+}
+*/
 function Read_Coordinates(Address){
     var action = "Read_Coordinates";
     var Read_Coordinates_Data = {Address: Address, action: action};

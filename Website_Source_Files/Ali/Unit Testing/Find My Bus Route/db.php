@@ -54,6 +54,9 @@ function DB_Operation($action){
 	}
 }
 
+//create object for each. name the class what the strings are.
+//classes instead of cases.
+
 function Read_States(){
 	global $PDOconn;
 
