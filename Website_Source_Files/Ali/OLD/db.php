@@ -1,14 +1,13 @@
 <?php
-/* error_reporting(E_ALL); */
-/* ini_set('display_errors', '1'); */
-$h = "localhost";
-$u = "djkabau1_admin";
-$p = "k?h4F=g4Ra{O";
-$db = "djkabau1_BUSTOP";
-$mysqliconn = new mysqli($h, $u, $p, $db);
-$PDOconn = new PDO('mysql:host=localhost;dbname=djkabau1_BUSTOP', $u, $p);
-$PDOconn->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false);
-if ($mysqliconn->connect_errno) {
-    echo "Oops some thing went wrong, failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+$dsn = "mysql:host=localhost;dbname=djkabau1_BUSTOP";
+$u = "djkabau1_busstop";
+$p = ",&O%9{A3d0*v";
+//$u = "djkabau1_admin";
+//$p = "E!o0)nd?5)B2";
+$PDOconn = new PDO($dsn, $u, $p);
+try {
+    $PDOconn = new PDO($dsn, $u, $p);
+} catch (PDOException $e) {
+    echo 'Connection failed: ' . $e->getMessage();
 }
 ?>

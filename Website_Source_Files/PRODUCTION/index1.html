@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html" charset=utf-8" />
-<meta name="viewport" content="width=320, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<script type="text/javascript" src="js/main.js"></script>
+<link rel="stylesheet" type="text/css" href="css/main.css">
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<!-- <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script> -->
 <title>Welcome to Bus Stops</title>
 </head>
 <body>
+<select id="Select_States" onchange="Read_Districts(this.value)">
+	<option value=''>Select your State</option>
+</select>
+<select id="Select_Districts" onchange="Read_Schools(this.value)">
+	<option value=''>Select your District</option>
+</select>
+<select id="Select_Schools" onchange="Read_Bus_Stops(this.value)">
+	<option value=''>Select your School</option>
+</select>
 </body>
 </html>

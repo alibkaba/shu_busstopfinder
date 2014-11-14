@@ -1,18 +1,15 @@
 <?php
-// Start: Database Connection
-// Put this in a function/class of some sort
 $dsn = "mysql:host=localhost;dbname=djkabau1_BUSTOP";
 $u = "djkabau1_busstop";
-$p = "-E&805Wzy&@b";
+$p = ",&O%9{A3d0*v";
 //$u = "djkabau1_admin";
-//$p = "k?h4F=g4Ra{O";
+//$p = "E!o0)nd?5)B2";
 $PDOconn = new PDO($dsn, $u, $p);
 try {
     $PDOconn = new PDO($dsn, $u, $p);
 } catch (PDOException $e) {
     echo 'Connection failed: ' . $e->getMessage();
 }
-// End: Database Connection
 
 Validate_Ajax_Request();
 
@@ -73,7 +70,7 @@ function Read_Districts(){
 
 	$Query = 'CALL READ_DISTRICTS (:State_ID)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':State_ID', State_ID, PDO::PARAM_INT);
+	$Statement->bindParam(':State_ID', $State_ID, PDO::PARAM_INT);
 	$Statement->execute();
 	$Districts_Data = $Statement->fetchAll();
 	echo json_encode($Districts_Data);
@@ -85,7 +82,7 @@ function Read_Schools(){
 
 	$Query = 'CALL READ_SCHOOLS (:District_ID)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':District_ID', District_ID, PDO::PARAM_INT);
+	$Statement->bindParam(':District_ID', $District_ID, PDO::PARAM_INT);
 	$Statement->execute();
 	$Schools_Data = $Statement->fetchAll();
 	echo json_encode($Schools_Data);
@@ -97,7 +94,7 @@ function Read_Bus_Stops(){
 
 	$Query = 'CALL READ_BUS_STOPS (:School_ID)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':School_ID', School_ID, PDO::PARAM_INT);
+	$Statement->bindParam(':School_ID', $School_ID, PDO::PARAM_INT);
 	$Statement->execute();
 	$Bus_Stops_Data = $Statement->fetchAll();
 	echo json_encode($Bus_Stops_Data);
