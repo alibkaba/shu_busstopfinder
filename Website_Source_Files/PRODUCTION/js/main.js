@@ -7,7 +7,7 @@ console.log( "ready!" );
 		cache: 'false',
 		async: false,
 		success: function(data){
-			alert('Ajax sent');
+			//alert('Ajax sent');
 			console.log(data);
 		},
 		complete: function(){
