@@ -17,19 +17,15 @@ console.log( "ready!" );
 		}
 	});
 	
-	Read_States();
-	
-	function Read_States(){
-		Clear_Districts_Options();
-		var action = "Read_States";
-		var Read_States_Data = {action: action};
-		States_Data = $.ajax({data: Read_States_Data}).responseText;
-		States_Data = jQuery.parseJSON(States_Data);
-		Select_States(States_Data);
-	}	
+	Read_States();	
 });
-function Clear_Districts_Options(){
-	document.getElementById('Select_Districts').options.length = 1;
+
+function Read_States(){
+	var action = "Read_States";
+	var Read_States_Data = {action: action};
+	States_Data = $.ajax({data: Read_States_Data}).responseText;
+	States_Data = jQuery.parseJSON(States_Data);
+	Select_States(States_Data);
 }
 
 function Select_States(States_Data){
@@ -41,11 +37,14 @@ function Select_States(States_Data){
 }
 
 function Read_Districts(State_ID){
-		var action = "Read_Districts";
-		var Read_Districts_Data = {State_ID: State_ID, action: action};
-		Districts_Data = $.ajax({data: Read_Districts_Data}).responseText;
-		Districts_Data = jQuery.parseJSON(Districts_Data);
-		Select_Districts(Districts_Data);
+	Reset_Districts();
+	Reset_Schools();
+	Reset_Bus_Stops();
+	var action = "Read_Districts";
+	var Read_Districts_Data = {State_ID: State_ID, action: action};
+	Districts_Data = $.ajax({data: Read_Districts_Data}).responseText;
+	Districts_Data = jQuery.parseJSON(Districts_Data);
+	Select_Districts(Districts_Data);
 }
 
 function Select_Districts(Districts_Data){
@@ -56,12 +55,17 @@ function Select_Districts(Districts_Data){
 	}
 }
 
+function Reset_Districts(){
+	document.getElementById('Select_Districts').options.length = 1;
+}
+
 function Read_Schools(District_ID){
-		var action = "Read_Schools";
-		var Read_Schools_Data = {District_ID: District_ID, action: action};
-		Schools_Data = $.ajax({data: Read_Schools_Data}).responseText;
-		Schools_Data = jQuery.parseJSON(Schools_Data);
-		Select_Schools(Schools_Data);
+	Reset_Schools();
+	var action = "Read_Schools";
+	var Read_Schools_Data = {District_ID: District_ID, action: action};
+	Schools_Data = $.ajax({data: Read_Schools_Data}).responseText;
+	Schools_Data = jQuery.parseJSON(Schools_Data);
+	Select_Schools(Schools_Data);
 }
 
 function Select_Schools(Schools_Data){
@@ -71,6 +75,15 @@ function Select_Schools(Schools_Data){
 		select.options[select.options.length] = new Option(Schools_Data[i].SCHOOL_NAME, Schools_Data[i].SCHOOL_ID);
 	}
 }
+
+function Reset_Schools(){
+	document.getElementById('Select_Schools').options.length = 1;
+}
+
+function Reset_Bus_Stops(){
+
+}
+
 // END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
 
 //----------------------------By Marlon Bermudez-------------------------------//
