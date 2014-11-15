@@ -105,6 +105,8 @@ function Get_Shortest_Distance_To_Stops(User_Address,Bus_Stops){
 }
 
 
+
+
 function Calculate_Distance_To_Stops(User_Address) {
     var latitude= 41.117744, longitude = -73.4081575;
     var Array_position=0;
@@ -141,6 +143,34 @@ function Calculate_Distance_To_Stops(User_Address) {
 }
 
 
+function Get_XY(Address){
+    var latitude, longitude;
+    var Bus_Stops = Get_Bus_Stops();
+    var geocoder = new google.maps.Geocoder();
+    var Address_Coordinates =[]
+    Address_Coordinates[0]= {Latitude:null, Longitude: null, Address: Address};
+    geocoder.geocode( {'address': Address}, makeCallback(Address));
+
+
+
+}
+
+function makeCallback(Address) {
+    var Address_Coordinates =[]
+    Address_Coordinates[0]= {Latitude:null, Longitude: null, Address: Address};
+
+    var geocodeCallBack = function(results, status) {
+
+        alert( results[0].formatted_address);
+        Address_Coordinates[0].Latitude = results[0].geometry.location.lat();
+        Address_Coordinates[0].Longitude = results[0].geometry.location.lng();
+
+    };
+
+    return results[0].formatted_address;
+}
+
+
 
 function Get_Coordinates(Address){
     var latitude, longitude;
@@ -160,6 +190,7 @@ function Get_Coordinates(Address){
             alert("could not map address: " + status)
         }
     });
+
     return Address_Coordinates;
 }
 
