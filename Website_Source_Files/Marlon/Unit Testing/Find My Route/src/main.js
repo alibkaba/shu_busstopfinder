@@ -153,8 +153,59 @@ function Get_XY(Address){
 
 
 
-}
 
+}
+/*
+function test(Address){
+    var addr = new Array(5);
+    addr[0] = new google.maps.LatLng(-27.352646,-53.384881);
+    addr[1] = new google.maps.LatLng(-27.344648,-53.395009);
+    addr[2] = new google.maps.LatLng(-27.365562,-53.388859);
+    addr[3] = new google.maps.LatLng(-27.366241,-53.401655);
+    addr[4] = new google.maps.LatLng(-27.360467,-53.397476);
+
+
+    var a = new google.maps.LatLng(-27.352901,-53.402745);
+    var menorDistancia;
+    var destinoFinal;
+
+
+    var service = new google.maps.DistanceMatrixService();
+
+
+    service.getDistanceMatrix(
+        {
+            origins: [a,a,a,a,a],
+            destinations: [addr[0],addr[1],addr[2],addr[3],addr[4]],
+            travelMode: google.maps.DirectionsTravelMode.DRIVING
+        }, callback);
+
+
+}*/
+/*
+function callback(response, status) {
+    //lert("CHEGOU AQUI")
+    if (status == google.maps.DistanceMatrixStatus.OK) {
+        var origins = response.originAddresses;
+        var destinations = response.destinationAddresses;
+
+
+            var results = response.rows[i].elements;
+            for (var j = 0; j < results.length; j++) {
+                var element = results[j];
+                var distance = element.distance.text;
+                var duration = element.duration.text;
+                var from = origins[i];
+                var to = destinations[j];
+                if(distance < menorDistancia || i==0){
+                    menorDistancia = distance;
+                    destinoFinal = to;
+                }
+            }
+        }
+    }
+}
+*//*
 function makeCallback(Address) {
     var Address_Coordinates =[]
     Address_Coordinates[0]= {Latitude:null, Longitude: null, Address: Address};
@@ -170,29 +221,72 @@ function makeCallback(Address) {
     return results[0].formatted_address;
 }
 
+*/
 
 
 function Get_Coordinates(Address){
-    var latitude, longitude;
-    var Bus_Stops = Get_Bus_Stops();
-    var geocoder = new google.maps.Geocoder();
-    var Address_Coordinates =[]
-    Address_Coordinates[0]= {Latitude:null, Longitude: null, Address: Address};
-    geocoder.geocode( { 'address': Address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            Address_Coordinates[0].Latitude = results[0].geometry.location.lat();
-            Address_Coordinates[0].Longitude = results[0].geometry.location.lng();
-           // alert(Address_Coordinates[0].Latitude );
-            //alert(Address_Coordinates[0].Longitude);
-            Add_Marker(Address_Coordinates[0].Latitude,Address_Coordinates[0].Longitude)
-        }
-        else{
-            alert("could not map address: " + status)
-        }
+    /*
+    var Location = {Latitude: 0, Longitude: 0, Address: Address};
+     var geocoder = new google.maps.Geocoder();
+     //var Location;
+
+
+     geocoder.geocode({
+     'address': Address
+     }, function(response, status) {Get_Latitude_and_Longitude(response, status, Location)});
+
+
+     alert(Location.Latitude);
+     */
+
+
+    var Location = {Latitude: 0, Longitude: 0, Address: Address};
+
+     Convert_Address_to_LatLng(Address, function(Location) {
+        //alert("after call call");
+        alert("Finally: " + Location.Latitude + ", " + Location.Longitude);
+        return Location;
     });
 
-    return Address_Coordinates;
+    alert(typeof  Location);
+    alert("Outside: " + Location.Latitude + ", " + Location.Longitude);
+
+
 }
+
+function Convert_Address_to_LatLng(Address, Return_callback){
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode( { 'address': Address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            var Location = {Latitude: 0, Longitude: 0, Address: Address};
+            Location.Latitude = results[0].geometry.location.lat();
+            Location.Longitude = results[0].geometry.location.lng();
+            Return_callback(Location);
+        } else {
+            alert('Geocode could not convert addresses, Error: : ' + status);
+        }
+    });
+}
+
+/*
+function Get_Latitude_and_Longitude(response, status, Location){
+    alert("LL Callback");
+    //var Location = {Latitude: 0, Longitude: 0, Address: 0};
+    if (status == google.maps.DistanceMatrixStatus.OK) {
+        var Location = {Latitude: 0, Longitude: 0, Address: Location.Address};
+
+        Location.Latitude = response[0].geometry.location.lat();
+        Location.Longitude = response[0].geometry.location.lng();
+        alert(Location.Latitude + ", " + Location.Longitude );//return Location;
+
+    }
+    else {
+
+        alert("Could not get Coordinates. Error: " + status)
+    }
+   // return Location;
+}
+*/
 
 function Use_My_Location(){
     var map;
