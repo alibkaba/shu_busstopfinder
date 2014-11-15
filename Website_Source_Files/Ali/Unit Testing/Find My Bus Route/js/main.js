@@ -1,53 +1,90 @@
 // START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||	
-function start() {
+$( document ).ready(function() {
+console.log( "ready!" );
 	$.ajaxSetup({
-        url: 'db.php',
-        type: 'post',
-        cache: 'false',
-        async: false,
-        success: function(data){
-            alert('success');
-            console.log(data);
-        },
-        complete: function(){
-        },
-        error: function(){
-            alert('failure');
-        }
-    });
+		url: 'db.php',
+		type: 'post',
+		cache: 'false',
+		async: false,
+		success: function(data){
+			//alert('Ajax sent');
+			console.log(data);
+		},
+		complete: function(){
+		},
+		error: function(){
+			alert('Ajax failed');
+		}
+	});
+	
+	Read_States();
 	
 	function Read_States(){
+		Clear_Districts_Options();
 		var action = "Read_States";
-		var Read_Coordinates_Data = {action: action};
-		States_Data = $.ajax({data: Read_Coordinates_Data}).responseText;
+		var Read_States_Data = {action: action};
+		States_Data = $.ajax({data: Read_States_Data}).responseText;
 		States_Data = jQuery.parseJSON(States_Data);
-		Select_State(States_Data);
-	}
+		Select_States(States_Data);
+	}	
+});
+function Clear_Districts_Options(){
+	document.getElementById('Select_Districts').options.length = 1;
 }
-/*
-function Select_State(States_Data){
-	var select = document.getElementById("Select_State");
+
+function Select_States(States_Data){
+	var select = document.getElementById("Select_States");
 	var i;
 	for(i = 0; i < States_Data.length; i++) {
-		select.options[select.options.length] = new Option(States_Data[i]STATE_ID., States_Data[i].STATE_NAME);
+		select.options[select.options.length] = new Option(States_Data[i].STATE_NAME, States_Data[i].STATE_ID);
 	}
 }
-*/
-// END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
-//----------------------------By Marlon Bermudez-------------------------------//
-function initialize() {
-    //-----------load SQL values here--------------
-	
-    var state = "CT";
-    var School_District= "Norwalk Public School";
-    var School_District_Lat= 41.117744;
-    var School_District_Lng = -73.4081575;
 
-    Bus_Stops = Read_Bus_Stops();
-    Map_Address(School_District_Lat, School_District_Lng, null);
-    Display_Stops_Pannel(Bus_Stops);
-    return true;
+function Read_Districts(State_ID){
+		var action = "Read_Districts";
+		var Read_Districts_Data = {State_ID: State_ID, action: action};
+		Districts_Data = $.ajax({data: Read_Districts_Data}).responseText;
+		Districts_Data = jQuery.parseJSON(Districts_Data);
+		Select_Districts(Districts_Data);
 }
+
+function Select_Districts(Districts_Data){
+	var select = document.getElementById("Select_Districts");
+	var i;
+	for(i = 0; i < Districts_Data.length; i++) {
+		select.options[select.options.length] = new Option(Districts_Data[i].DISTRICT_NAME, Districts_Data[i].DISTRICT_ID);
+	}
+}
+
+function Read_Schools(District_ID){
+		var action = "Read_Schools";
+		var Read_Schools_Data = {District_ID: District_ID, action: action};
+		Schools_Data = $.ajax({data: Read_Schools_Data}).responseText;
+		Schools_Data = jQuery.parseJSON(Schools_Data);
+		Select_Schools(Schools_Data);
+}
+
+function Select_Schools(Schools_Data){
+	var select = document.getElementById("Select_Schools");
+	var i;
+	for(i = 0; i < Schools_Data.length; i++) {
+		select.options[select.options.length] = new Option(Schools_Data[i].SCHOOL_NAME, Schools_Data[i].SCHOOL_ID);
+	}
+}
+// END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
+
+//----------------------------By Marlon Bermudez-------------------------------//
+/*
+var state = "CT";
+var School_District= "Norwalk Public School";
+var School_District_Lat= 41.117744;
+var School_District_Lng = -73.4081575;
+
+Bus_Stops = Read_Bus_Stops();
+Map_Address(School_District_Lat, School_District_Lng, null);
+Display_Stops_Pannel(Bus_Stops);
+return true;
+*/
 
 function Create_Bus_Stop_Object(Stop_ID, Stop_Time, Stop_Address, Distance_to_Stop, Latitude, Longitude){
     this.Stop_ID = Stop_ID;
@@ -58,8 +95,8 @@ function Create_Bus_Stop_Object(Stop_ID, Stop_Time, Stop_Address, Distance_to_St
     this.Longitude = Longitude;
 
     return this;
+	
 }
-
 
 function Create_Array_of_Bus_Stop_Objects(Bus_Stops_Array, Bus_Stop_Object){
     this.Bus_Stops_Array = Bus_Stops_Array;
@@ -517,6 +554,6 @@ function Show_Bus_Stops() { //limit is 5 addresses, need to look for alternative
 
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+//google.maps.event.addDomListener(window, 'load', initialize);
 
 //----------------------------By Marlon Bermudez-------------------------------//

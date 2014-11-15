@@ -70,7 +70,7 @@ function Read_Districts(){
 
 	$Query = 'CALL READ_DISTRICTS (:State_ID)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':State_ID', State_ID, PDO::PARAM_INT);
+	$Statement->bindParam(':State_ID', $State_ID, PDO::PARAM_INT);
 	$Statement->execute();
 	$Districts_Data = $Statement->fetchAll();
 	echo json_encode($Districts_Data);
@@ -82,7 +82,7 @@ function Read_Schools(){
 
 	$Query = 'CALL READ_SCHOOLS (:District_ID)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':District_ID', District_ID, PDO::PARAM_INT);
+	$Statement->bindParam(':District_ID', $District_ID, PDO::PARAM_INT);
 	$Statement->execute();
 	$Schools_Data = $Statement->fetchAll();
 	echo json_encode($Schools_Data);
@@ -94,7 +94,7 @@ function Read_Bus_Stops(){
 
 	$Query = 'CALL READ_BUS_STOPS (:School_ID)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':School_ID', School_ID, PDO::PARAM_INT);
+	$Statement->bindParam(':School_ID', $School_ID, PDO::PARAM_INT);
 	$Statement->execute();
 	$Bus_Stops_Data = $Statement->fetchAll();
 	echo json_encode($Bus_Stops_Data);
