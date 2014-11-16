@@ -61,6 +61,7 @@ function Reset_Districts(){
 
 function Read_Schools(District_ID){
 	Reset_Schools();
+	Reset_Bus_Stops();
 	var action = "Read_Schools";
 	var Read_Schools_Data = {District_ID: District_ID, action: action};
 	Schools_Data = $.ajax({data: Read_Schools_Data}).responseText;
@@ -80,8 +81,46 @@ function Reset_Schools(){
 	document.getElementById('Select_Schools').options.length = 1;
 }
 
-function Reset_Bus_Stops(){
+function Read_Bus_Stops(School_ID){
+	var action = "Read_Bus_Stops";
+	var Read_Bus_Stops_Data = {School_ID: School_ID, action: action};
+	Bus_Stops_Data = $.ajax({data: Read_Bus_Stops_Data}).responseText;
+	Bus_Stops_Data = jQuery.parseJSON(Bus_Stops_Data);
+	Table_Bus_Stops(Bus_Stops_Data);
+	//Bus_Stops_Data[i].BUS_ID;
+	//Bus_Stops_Data[i].BUS_NUMBER;
+	//Bus_Stops_Data[i].BUS_STOP_TIME;
+	//Bus_Stops_Data[i].BUS_STOP_ADDRESS;
+	//Bus_Stops_Data[i].BUS_STOP_LATITUDE;
+	//Bus_Stops_Data[i].BUS_STOP_LONGITUDE;
+};
 
+function Table_Bus_Stops(Bus_Stops_Data){
+	var Last_Bus;
+	var Bus_Stops_Table = '<thead><tr><th>Bus #</th><th>Stop Time</th><th>Stop Address</th></tr></thead><tbody>';
+	var i;
+	var j;
+	var Row_Span;
+	for(i = 0; i < Bus_Stops_Data.length; i++) {
+		j = Bus_Stops_Data[i].BUS_NUMBER;
+		Bus_Stops_Table += '<tr>';
+		Row_Span = 0;
+		for(j = i; Bus_Stops_Data[i].BUS_NUMBER != Last_Bus && j < Bus_Stops_Data.length && Bus_Stops_Data[j].BUS_NUMBER == Bus_Stops_Data[i].BUS_NUMBER; j++) {
+			Row_Span++;
+		}
+		if (Row_Span > 0){
+			Last_Bus = Bus_Stops_Data[i].BUS_NUMBER;
+			Bus_Stops_Table += '<td rowspan="' + Row_Span +'">' + j +'</td>';
+		}
+			Bus_Stops_Table += '<td>' + Bus_Stops_Data[i].BUS_STOP_TIME + '</td><td>' + Bus_Stops_Data[i].BUS_STOP_ADDRESS + '</td></tr>';
+	}
+	Bus_Stops_Table += '</tbody>';
+	document.getElementById("Bus_Stops_Table").innerHTML = Bus_Stops_Table;
+}
+
+function Reset_Bus_Stops(){
+	var Bus_Stops_Table = '<thead><tr><th>Bus #</th><th>Stop Time</th><th>Stop Address</th></tr></thead>';
+	document.getElementById("Bus_Stops_Table").innerHTML = Bus_Stops_Table;             
 }
 
 // END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
@@ -138,21 +177,6 @@ function Get_Bus_Stops_for_School(School_ID){
     Coordinates_Data = jQuery.parseJSON(Coordinates_Data);
     return Coordinates_Data;
 }
-
-function Read_Bus_Stops(School_ID){
-	var action = "Read_Bus_Stops";
-	var Read_Bus_Stops_Data = {School_ID: School_ID, action: action};
-	Bus_Stops_Data = $.ajax({data: Read_Bus_Stops_Data}).responseText;
-	Bus_Stops = jQuery.parseJSON(Bus_Stops_Data);
-
-    return Bus_Stops;
-	//Bus_Stops[i].BUS_ID;
-	//Bus_Stops[i].BUS_NUMBER;
-	//Bus_Stops[i].BUS_STOP_TIME;
-	//Bus_Stops[i].BUS_STOP_ADDRESS;
-	//Bus_Stops[i].BUS_STOP_LATITUDE;
-	//Bus_Stops[i].BUS_STOP_LONGITUDE;
-};
 
 // END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
 
