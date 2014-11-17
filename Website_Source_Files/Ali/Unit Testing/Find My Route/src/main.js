@@ -1,6 +1,7 @@
 // ------------------------------------------Ali coded items BELOW --------------------------------//
 
 $( document ).ready(function() {
+	Start_Web_Storage();
     console.log( "ready!" );
     $.ajaxSetup({
         url: 'db.php',
@@ -17,7 +18,6 @@ $( document ).ready(function() {
             alert('Ajax failed');
         }
     });
-
     Read_States();
 });
 
@@ -88,12 +88,6 @@ function Read_Bus_Stops(School_ID){
     Bus_Stops_Data = $.ajax({data: Read_Bus_Stops_Data}).responseText;
     Bus_Stops_Data = jQuery.parseJSON(Bus_Stops_Data);
     Table_Bus_Stops(Bus_Stops_Data);
-    //Bus_Stops_Data[i].BUS_ID;
-    //Bus_Stops_Data[i].BUS_NUMBER;
-    //Bus_Stops_Data[i].BUS_STOP_TIME;
-    //Bus_Stops_Data[i].BUS_STOP_ADDRESS;
-    //Bus_Stops_Data[i].BUS_STOP_LATITUDE;
-    //Bus_Stops_Data[i].BUS_STOP_LONGITUDE;
 };
 
 function Table_Bus_Stops(Bus_Stops_Data){
@@ -117,6 +111,7 @@ function Table_Bus_Stops(Bus_Stops_Data){
     }
     Bus_Stops_Table += '</tbody>';
     document.getElementById("Bus_Stops_Table").innerHTML = Bus_Stops_Table;
+	$('#BusModal').modal('toggle');
 }
 
 function Reset_Bus_Stops(){
@@ -124,97 +119,51 @@ function Reset_Bus_Stops(){
     document.getElementById("Bus_Stops_Table").innerHTML = Bus_Stops_Table;
 }
 
-function Read_Coordinates(Address){
-    var action = "Read_Coordinates";
-    var Read_Coordinates_Data = {Address: Address, action: action};
-    Coordinates_Data = $.ajax({data: Read_Coordinates_Data}).responseText;
-    Coordinates_Data = jQuery.parseJSON(Coordinates_Data);
-    return Coordinates_Data;
+$('#Delete_Account_Alert').on('click', function() {
+    var message = 'Your text goes here';
+    Delete_Alert(message);
+});
+
+function Delete_Alert(){
+	var message = 'Are you sure you want to delete your account?';
+	document.getElementById("delete_alert_placeholder").innerHTML = '<div class="alert alert-danger" role="alert"><span>'+message+'</span><div class="form-group"><button type="button" class="btn btn-danger" id="Delete_Account">Yes, delete my account</button><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button></div></div>';
 }
 
-
-function Get_Coordinates(Address){
-    var latitude, longitude;
-    var Bus_Stops = Read_Bus_Stops();
-    var geocoder = new google.maps.Geocoder();
-
-    var Address_Coordinates =[]
-    Address_Coordinates[0]= {Latitude:null, Longitude: null, Address: Address}
-
-
-    geocoder.geocode( { 'address': Address}, function(results, status) {
-
-        if (status == google.maps.GeocoderStatus.OK) {
-            Address_Coordinates[0].Latitude = results[0].geometry.location.lat();
-            Address_Coordinates[0].Longitude = results[0].geometry.location.lng();
-            alert(Address_Coordinates[0].Latitude );
-            alert(Address_Coordinates[0].Longitude);
-
-            // START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||  START ALI ||
-            Write_Coordinates(Address, Address_Coordinates[0].Latitude, Address_Coordinates[0].Longitude);
-            // END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI || END ALI ||
-
-            Add_Marker(Address_Coordinates[0].Latitude,Address_Coordinates[0].Longitude)
-
-        }
-        else{
-            alert("could not map address: " + status)
-        }
-    });
-    //return Address_Coordinates;
+function Validate_Login(){
+	var Email = document.forms["Login_Form"]["Email"].value;
+	var Password = document.forms["Login_Form"]["Password"].value;
+	Encryption(Email, Password)
 }
 
-// When someone wants to add a bus stop, they call this:function Get_Coordinates(Address)
-//that gets the Latitude and longitude which writes it in the DB
-//
-
-function Write_Coordinates(Address, Latitude, Longitude){
-    var action = "Write_Coordinates";
-    var Write_Coordinates_Data = {Address: Address, Latitude: Latitude, Longitude: Longitude, action: action};
-    $.ajax({data: Write_Coordinates_Data});
-}
-/*
- function Write_Coordinates(Write_Coordinates_Data)){
- var action = "Write_Coordinates";
- var Coordinates_Data = {Address: Write_Coordinates_Data.Address, Latitude: Write_Coordinates_Data.Latitude, Longitude: Write_Coordinates_Data.Longitude, action: action};
- $.ajax({data: Coordinates_Data});
- }
- */
-function Read_Coordinates(Address){
-    var action = "Read_Coordinates";
-    var Read_Coordinates_Data = {Address: Address, action: action};
-    Coordinates_Data = $.ajax({data: Read_Coordinates_Data}).responseText;
-    Coordinates_Data = jQuery.parseJSON(Coordinates_Data);
-    return Coordinates_Data;
+function Encryption(Email, Password){
+	
+	Validate_Credentials(Email, Encrypted_Password)
 }
 
-function Delete_Coordinates(Coordinates_ID){
-    var action = "Delete_Coordinates";
-    var Delete_Coordinates_Data = {Coordinates_ID: Coordinates_ID, action: action};
-    $.ajax({data: Delete_Coordinates_Data});
+function Validate_Credentials(Email, Encrypted_Password){
+	var action = "Validate_Credentials";
+    var Validate_Credentials_Data = {Email: Email, Encrypted_Password: Encrypted_Password, action: action};
+    Validate_Credentials_Data = $.ajax({data: Validate_Credentials_Data}).responseText;
+    //put the login email into the session and bring them into dashboard.html
+	Start_Web_Storage(Email);
 }
 
-function Write_Distances(Bus_Number, Bus_Stop_Time, Bus_Stop_Address, User_Address, Distances){
-    var action = "Write_Distances";
-    var Write_Distances_Data = {Bus_Number: Bus_Number, Bus_Stop_Time: Bus_Stop_Time, Bus_Stop_Address: Bus_Stop_Address, User_Address: User_Address, Distances: Distances, action: action};
-    $.ajax({data: Write_Distances_Data});
+function Dashboard(Email){
+	localStorage.setItem("lastname", Email);
+	window.location = "dashboard.html";
 }
 
-function Read_Distances(User_Address){
-    var action = "Read_Distances";
-    var Read_Distances_Data = {User_Address: User_Address, action: action};
-    Distances_Data = $.ajax({data: Read_Distances_Data}).responseText;
-    Distances_Data = jQuery.parseJSON(Distances_Data);
-    return Distances_Data;
+function Start_Web_Storage(){
+	Email = "email@mail.com";
+	localStorage.setItem("email", Email);
+	if (typeof(Storage) != "undefined") {
+		document.getElementById("login_placeholder").innerHTML = "<p class=\"navbar-text\">Signed in as " + localStorage.getItem("email") + "</p>";
+	}
 }
 
-function Delete_Distances(Distances_ID){
-    var action = "Delete_Distances";
-    var Delete_Distances_Data = {Distances_ID: Distances_ID, action: action};
-    $.ajax({data: Delete_Distances_Data});
+function End_Web_Storage(Email){
+	localStorage.removeItem("email");
 }
-
-
 // ------------------------------------------Ali coded items ABOVE --------------------------------//
 
 // ------------------------------------------Marlon coded items BELOW --------------------------------//
