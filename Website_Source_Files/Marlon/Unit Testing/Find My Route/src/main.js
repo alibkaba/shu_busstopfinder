@@ -9,7 +9,7 @@ $( document ).ready(function() {
         async: false,
         success: function(data){
             //alert('Ajax sent');
-            console.log(data);
+           // console.log(data);
         },
         complete: function(){
         },
@@ -313,10 +313,12 @@ function Display_Stops_Pannel(Bus_Stops){
     }
 }
 
-function Get_Shortest_Distance_To_Stops(User_Address,Bus_Stops){
+function Get_Shortest_Distance_To_Stops(Bus_Stops){
     var Shortest_distance = Bus_Stops[0].Distance_to_Stop;
     var Bus_Stop_Address;
-    for (var stop = 1; stop < Bus_Stops.length; stop++) {
+    alert("Find lowest");
+    for (var stop = 0; stop < Bus_Stops.length; stop++) {
+        alert(Bus_Stops[stop].Distance_to_Stop );
         if (Bus_Stops[stop].Distance_to_Stop < Shortest_distance && typeof Bus_Stops[stop].Distance_to_Stop != 'undefined') {
             Shortest_distance = Bus_Stops[stop].Distance_to_Stop;
             Bus_Stop_Address = Bus_Stops[stop].Stop_Address;
@@ -326,6 +328,7 @@ function Get_Shortest_Distance_To_Stops(User_Address,Bus_Stops){
         }
 
     }
+    alert("Winner is " + Shortest_distance);
     var Bus_Stop = {Address: Bus_Stop_Address, Distance: Shortest_distance};
     return Bus_Stop;
     //Map_Shortest_Bus_Stop(User_Address, Bus_Stop_Address)
@@ -341,6 +344,8 @@ function Process_Bus_Stops(User_Address){
     alert("Process Bus Stops returned")
     alert(Bus_Stops[0].Stop_Address);
     alert(Bus_Stops[0].Distance);
+    Closest_Bus_Stop = Get_Shortest_Distance_To_Stops(Bus_Stops);
+    alert("The Closets Bus_Stop is " + Closest_Bus_Stop.Address + " which is " + Closest_Bus_Stop.Distance +" mi away");
 
 
 }
