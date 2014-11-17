@@ -217,6 +217,9 @@ function Delete_Distances(Distances_ID){
 
 // ------------------------------------------Ali coded items ABOVE --------------------------------//
 
+
+
+
 // ------------------------------------------Marlon coded items BELOW --------------------------------//
 
 
@@ -275,11 +278,11 @@ function Get_Bus_Stops(){
     Bus_Stops[0]= {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: 1, Latitude: 41.117744, Longitude: 41.117744};
     Bus_Stops[1]= {Stop_Time:null, Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: 1.5, Latitude: null, Longitude: null};
     Bus_Stops[2]= {Stop_Time:null, Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: 2.5, Latitude: null, Longitude: null};
-    Bus_Stops[3]= {Stop_Time:null, Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: 0.5, Latitude: null, Longitude: null}
-    Bus_Stops[4]= {Stop_Time:null, Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: 2.5, Latitude: null, Longitude: null}
-    Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: 0.65, Latitude: null, Longitude: null}
-    Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: 6, Latitude: null, Longitude: null}
-    Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: 1.2, Latitude: null, Longitude: null}
+    Bus_Stops[3]= {Stop_Time:null, Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: 0.5, Latitude: null, Longitude: null};
+    Bus_Stops[4]= {Stop_Time:null, Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: 2.5, Latitude: null, Longitude: null};
+    Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: 0.65, Latitude: null, Longitude: null};
+    Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: 6, Latitude: null, Longitude: null};
+    Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: 1.2, Latitude: null, Longitude: null};
     return Bus_Stops;
 
 }
@@ -329,9 +332,41 @@ function Get_Shortest_Distance_To_Stops(User_Address,Bus_Stops){
 }
 
 
+function Process_Bus_Stops(User_Address){
+    Bus_Stops = Get_Bus_Stops();
+    //var Bus_Stops = []
+    //alert(Bus_Stops[0].Stop_Address);
+   // alert("then");
+    Bus_Stops = Calculate_Distance_To_Stops(User_Address, Bus_Stops);
+    alert("Process Bus Stops returned")
+    alert(Bus_Stops[0].Stop_Address);
+    alert(Bus_Stops[0].Distance);
 
 
-function Calculate_Distance_To_Stops(User_Address) {
+}
+
+function Calculate_Distance_To_Stops(User_Address, Bus_Stops) {
+   // alert("Bus stop 1");
+   // alert(Bus_Stops[0].Stop_Address);
+    //console.log(Bus_Stops);
+    for (var Bus_Stop = 0; Bus_Stop < Bus_Stops.length; Bus_Stop++) {
+        var action = "Cal_Distance_PHP";
+        var Read_Bus_Stops_Data = {User_Address: User_Address, Bus_Stop_Address: Bus_Stops[Bus_Stop].Stop_Address, action: action};
+       // alert(Bus_Stops[Bus_Stop].Stop_Address);
+        var Distance = $.ajax({data: Read_Bus_Stops_Data}).responseText;
+        //Distance = jQuery.parseJSON(Coordinates);
+        //Coordinates = jQuery.parseJSON(Coordinates);
+       // console.log("After calling php");
+       // alert(Distance);
+        Bus_Stops[Bus_Stop].Distance = Distance;
+        //alert(Coordinates.Latitude);
+
+
+    }
+
+    return Bus_Stops;
+    /*
+
     var latitude= 41.117744, longitude = -73.4081575;
     var Array_position=0;
     var Google_Directions_Service = new google.maps.DirectionsService();
@@ -363,7 +398,7 @@ function Calculate_Distance_To_Stops(User_Address) {
                 alert("Address not found via Geocoder will need to use Geolocation for iteration 2")
             }
         });
-    }
+    }*/
 }
 
 function Process_Coordinates(Address){
@@ -380,7 +415,7 @@ function Get_PHPCoordinates(Address){
     var Coordinates = $.ajax({data: Read_Geocode_Data}).responseText;
     Coordinates = jQuery.parseJSON(Coordinates);
     //Coordinates = jQuery.parseJSON(Coordinates);
-    console.log("After calling php")
+    console.log("After calling php");
     console.log(Coordinates);
     //alert(Coordinates.Latitude);
     return Coordinates;

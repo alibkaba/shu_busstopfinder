@@ -52,6 +52,8 @@ function DB_Operation($action){
 		break;
 		case "Geocode_PHP": Geocode_PHP();
 		break;
+		case "Cal_Distance_PHP": Cal_Distance_PHP();
+		break;
 	}
 }
 
@@ -211,7 +213,35 @@ function Geocode_PHP(){
         }
          
     }else{
-        echo json_encode($resp['status']);
+        echo json_encode($response['status']);
+    }
+}
+
+function Cal_Distance_PHP(){
+	$API_KEY =AIzaSyBHummubX5vjuFy_QwzcXfDHzuOtmk3xUU;
+	$mode = walking;
+    $User_Address = stripslashes($_POST["User_Address"]);
+    $start = urlencode($User_Address);
+	$Bus_Stop_Address = stripslashes($_POST["Bus_Stop_Address"]);
+    $end = urlencode($Bus_Stop_Address);
+	
+    $url = "https://maps.googleapis.com/maps/api/distancematrix/json?sensor=false&origins=$start&destinations=$end&mode=$mode&units=imperial";
+    $resp_json = file_get_contents($url);
+    $response = json_decode($resp_json, true);
+
+    if($response['status']='OK'){
+		$distance = floatval($response['rows'][0]['elements'][0]['distance']['text']);
+        echo json_encode($distance);
+        /*if($distance){
+
+			 echo json_encode($distance);
+             
+        }else{
+            echo json_encode("Distance not returned properly?");
+        }*/
+         
+    }else{
+        echo json_encode($response['status']);
     }
 }
 
