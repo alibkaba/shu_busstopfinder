@@ -30,7 +30,6 @@
 					<li> <a href="#">Contact</a> </li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li> <a data-target="#SignUpModal" data-toggle="modal" href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a> </li>
 					<li><a data-target="#LoginModal" data-toggle="modal" href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a> </li>
 					<li style="list-style: none"></li>
 				</ul>
@@ -41,21 +40,21 @@
 		<div class="col-md-4">
 			<div class="text-center">
 				<select id="Select_States" onchange="Read_Districts(this.value)" class="selectpicker">
-					<option value=''> Select your State </option>
+					<option value=""> Select your State </option>
 				</select>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="text-center">
 				<select id="Select_Districts" onchange="Read_Schools(this.value)" class="selectpicker">
-					<option value=''> Select your District </option>
+					<option value=""> Select your District </option>
 				</select>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="text-center">
 				<select id="Select_Schools" onchange="Read_Bus_Stops(this.value)" class="selectpicker">
-					<option value=''> Select your School </option>
+					<option value=""> Select your School </option>
 				</select>
 				<button type="button" data-toggle="modal" data-target="#BusModal" disabled="disabled" id="Bus_Modal_Button">View Buses</button>
 			</div>

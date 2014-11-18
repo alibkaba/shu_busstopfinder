@@ -40,8 +40,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title" id="myModalLabel">Account</h4> </div>
 				<div class="modal-body">
 					<div class="form-group">
@@ -65,8 +64,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title" id="myModalLabel">Account - Change Password</h4> </div>
 				<h4>Change Password</h4>
 				<div class="modal-body">
@@ -96,8 +94,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title" id="myModalLabel">Account - Delete Account</h4> </div>
 				<div class="modal-body">
 					<form>
@@ -126,18 +123,35 @@
         </a>
       </h4> </div>
 			<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-				<div class="panel-body"> content </div>
+				<div class="panel-body">
+					<div class="form-group">
+						<select id="Select_States" onchange="Read_Districts(this.value)" class="selectpicker">
+							<option value=""> Select your State </option>
+						</select>
+					</div>
+					<button type="button" data-toggle="modal" data-target="#AddStateModal" disabled="enabled" id="State_Add_Modal_Button">Add</button>
+					<button type="button" data-toggle="modal" data-target="#ModifyStateModal" disabled="disabled" id="State_Modify_Modal_Button">Modify</button>
+					<button type="button" data-toggle="modal" data-target="#DeleteStateModal" disabled="disabled" id="State_Delete_Modal_Button">Delete</button>
+				</div>
 			</div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="headingTwo">
 				<h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Manage Districts
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> Manage Districts
         </a>
       </h4> </div>
 			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-				<div class="panel-body"> content </div>
+				<div class="panel-body">
+					<div class="form-group">
+						<select id="Select_Districts" onchange="Read_Schools(this.value)" class="selectpicker">
+							<option value=""> Select your District </option>
+						</select>
+					</div>
+					<button type="button" data-toggle="modal" data-target="#AddDistrictModal" disabled="enabled" id="District_Add_Modal_Button">Add</button>
+					<button type="button" data-toggle="modal" data-target="#ModifyDistrictModal" disabled="disabled" id="District_Modify_Modal_Button">Modify</button>
+					<button type="button" data-toggle="modal" data-target="#DeleteDistrictModal" disabled="disabled" id="District_Delete_Modal_Button">Delete</button>
+				</div>
 			</div>
 		</div>
 		<div class="panel panel-default">
@@ -148,18 +162,35 @@
         </a>
       </h4> </div>
 			<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-				<div class="panel-body"> content </div>
+				<div class="panel-body">
+					<div class="form-group">
+						<select id="Select_Schools" onchange="Read_Bus_Stops(this.value)" class="selectpicker">
+							<option value=""> Select your School </option>
+						</select>
+					</div>
+					<button type="button" data-toggle="modal" data-target="#AddSchoolModal" disabled="enabled" id="School_Add_Modal_Button">Add</button>
+					<button type="button" data-toggle="modal" data-target="#ModifySchoolModal" disabled="disabled" id="School_Modify_Modal_Button">Modify</button>
+					<button type="button" data-toggle="modal" data-target="#DeleteSchoolModal" disabled="disabled" id="School_Delete_Modal_Button">Delete</button>
+				</div>
 			</div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="headingThree">
 				<h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Manage Buses
+			Manage Buses
         </a>
       </h4> </div>
 			<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-				<div class="panel-body"> content </div>
+				<div class="panel-body">
+					<div class="form-group">
+						<select id="Select_Schools" onchange="Read_Bus_Stops(this.value)" class="selectpicker">
+							<option value=""> Select your School </option>
+						</select>
+					</div>
+					<button type="button" data-toggle="modal" data-target="#AddSchoolModal" disabled="enabled" id="School_Add_Modal_Button">Add/Modify</button>
+					<button type="button" data-toggle="modal" data-target="#DeleteSchoolModal" disabled="disabled" id="School_Delete_Modal_Button">Delete</button>
+				</div>
 			</div>
 		</div>
 	</div>
