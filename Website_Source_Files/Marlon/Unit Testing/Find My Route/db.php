@@ -220,6 +220,7 @@ function Geocode_PHP(){
 function Cal_Distance_PHP(){
 	$API_KEY =AIzaSyBHummubX5vjuFy_QwzcXfDHzuOtmk3xUU;
 	$mode = walking;
+	
     $User_Address = stripslashes($_POST["User_Address"]);
     $start = urlencode($User_Address);
 	$Bus_Stop_Address = stripslashes($_POST["Bus_Stop_Address"]);

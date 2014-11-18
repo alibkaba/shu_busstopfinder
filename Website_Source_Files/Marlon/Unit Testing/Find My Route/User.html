@@ -97,10 +97,10 @@
         <div>
             <label for="address">Enter your address:</label> <input id="User_Address" type="text">
             <button onclick= "Process_Bus_Stops(User_Address.value)">Find Closest Bus Stop </button>
-            <button onclick= "Get_Coordinates(User_Address.value)"> Get Coordinates </button>
+            <button onclick= "Process_Bus_Stops_Haversine(User_Address.value)">Find Closest Bus Stop Haversine </button>
+            <button onclick= "Get_Coordinates(User_Address.value)"> Get Address Coordinates </button>
             <button onclick= "Use_My_Location()"> Use My Location </button>
-            <button onclick="Process_Coordinates(User_Address.value)"> Process Coordinates </button>
-            <button onclick="Get_PHPCoordinates(User_Address.value)"> Coordinates via PHP </button>
+            <button onclick= "Map_Bus_Stops()"> Map Bus Stops </button>
         </div>
     </div>
 </div>
