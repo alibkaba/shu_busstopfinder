@@ -22,6 +22,7 @@ $( document ).ready(function() {
 });
 
 function Read_States(){
+	Disable_Bus_Modal();
     var action = "Read_States";
     var Read_States_Data = {action: action};
     States_Data = $.ajax({data: Read_States_Data}).responseText;
@@ -38,6 +39,7 @@ function Select_States(States_Data){
 }
 
 function Read_Districts(State_ID){
+	Disable_Bus_Modal();
     Reset_Districts();
     Reset_Schools();
     Reset_Bus_Stops();
@@ -61,6 +63,7 @@ function Reset_Districts(){
 }
 
 function Read_Schools(District_ID){
+	Disable_Bus_Modal();
     Reset_Schools();
     Reset_Bus_Stops();
     var action = "Read_Schools";
@@ -111,7 +114,17 @@ function Table_Bus_Stops(Bus_Stops_Data){
     }
     Bus_Stops_Table += '</tbody>';
     document.getElementById("Bus_Stops_Table").innerHTML = Bus_Stops_Table;
-	$('#BusModal').modal('toggle');
+	Enable_Bus_Modal();
+}
+
+function Enable_Bus_Modal(){
+	document.getElementById("Bus_Modal_Button").disabled = false;
+	document.getElementById("Bus_Modal_Button").className = "btn btn-success";
+}
+
+function Disable_Bus_Modal(){
+	document.getElementById("Bus_Modal_Button").disabled = true;
+	document.getElementById("Bus_Modal_Button").className = "btn btn-default";
 }
 
 function Reset_Bus_Stops(){

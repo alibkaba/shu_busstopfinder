@@ -1,160 +1,168 @@
 <!DOCTYPE html>
-
 <html lang="en">
-<head>
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta charset="utf-8" content="text/html" http-equiv="Content-Type">
-    <link href="http:///maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/.min.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet" type="text/css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-    <script src="http:///ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="src/main.js" type="text/javascript"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script><!-- <script type="text/javascript " src="lib/jquery-1.11.1.min.js "></script> -->
 
-    <title>Welcome to Bus Stops</title>
+<head>
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<meta charset="utf-8" content="text/html" http-equiv="Content-Type">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet" type="text/css">
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
+	<script src="src/main.js" type="text/javascript"></script>
+	<script src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<title>Welcome to Bus Stops</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Bus Stops</a>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">Bus Stops</a>
 				<div id="login_placeholder"></div>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="#">Home<span class="sr-only">(current)</span></a>
-                    </li>
-
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a data-target="#AccountModal" data-toggle="modal" href="#"><span class="glyphicon glyphicon-user"></span>Account</a>
-                    </li>
-
-                    <li>
-                        <a data-target="#LogoutModal" data-toggle="modal" href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="modal fade" id="AccountModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span></button>
-
-                    <h4 class="modal-title" id="myModalLabel">Account</h4>
-                </div>
-
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div class="text-center">
-                            <button class="btn btn-primary" data-dismiss="modal" data-target="#ChangePasswordModal" data-toggle="modal" type="button">Change Password</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="text-center">
-                            <button class="btn btn-primary" data-dismiss="modal" data-target="#DeleteAccountModal" data-toggle="modal" type="button">Delete Account</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="ChangePasswordModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span></button>
-
-                    <h4 class="modal-title" id="myModalLabel">Account - Change Password</h4>
-                </div>
-
-                <h4>Change Password</h4>
-
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="Old_Password">Old</label> <input class="form-control" id="Old_Password" placeholder="Old Password" type="password">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="New_PasswordA">New</label> <input class="form-control" id="New_PasswordA" placeholder="New Password" type="password">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="New_PasswordB">Confirm</label> <input class="form-control" id="New_PasswordB" placeholder="Confirm New Password" type="password">
-                        </div>
-
-                        <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Update</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="modal-footer">
-                    <button class="btn btn-default" data-dismiss="modal" data-target="#AccountModal" data-toggle="modal" type="button">Back</button> <button class="btn btn-default" data-dismiss=
-                    "modal" type="button">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="DeleteAccountModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span></button>
-
-                    <h4 class="modal-title" id="myModalLabel">Account - Delete Account</h4>
-                </div>
-
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="Password">Verify Password</label> <input class="form-control" id="Password" placeholder="Verify Password" type="password">
-                        </div>
-
-                        <div class="form-group">
-                            <button class="btn btn-danger" id="Delete_Account_Alert" onclick="Delete_Alert()" type="button">Delete</button>
-                        </div>
-
-                        <div id="delete_alert_placeholder"></div>
-                    </form>
-                </div>
-
-                <div class="modal-footer">
-                    <button class="btn btn-default" data-dismiss="modal" data-target="#AccountModal" data-toggle="modal" type="button">Back</button> <button class="btn btn-default" data-dismiss=
-                    "modal" type="button">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"> <a href="#">Home<span class="sr-only">(current)</span></a> </li>
+					<li> <a href="#">About</a> </li>
+					<li> <a href="#">Contact</a> </li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li> <a data-target="#AccountModal" data-toggle="modal" href="#"><span class="glyphicon glyphicon-user"></span>Account</a> </li>
+					<li> <a data-target="#LogoutModal" data-toggle="modal" href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a> </li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="modal fade" id="AccountModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Account</h4> </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<div class="text-center">
+							<button class="btn btn-primary" data-dismiss="modal" data-target="#ChangePasswordModal" data-toggle="modal" type="button">Change Password</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="text-center">
+							<button class="btn btn-primary" data-dismiss="modal" data-target="#DeleteAccountModal" data-toggle="modal" type="button">Delete Account</button>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="ChangePasswordModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Account - Change Password</h4> </div>
+				<h4>Change Password</h4>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="Old_Password">Old</label>
+							<input class="form-control" id="Old_Password" placeholder="Old Password" type="password"> </div>
+						<div class="form-group">
+							<label for="New_PasswordA">New</label>
+							<input class="form-control" id="New_PasswordA" placeholder="New Password" type="password"> </div>
+						<div class="form-group">
+							<label for="New_PasswordB">Confirm</label>
+							<input class="form-control" id="New_PasswordB" placeholder="Confirm New Password" type="password"> </div>
+						<div class="form-group">
+							<button class="btn btn-primary" type="submit">Update</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" data-target="#AccountModal" data-toggle="modal" type="button">Back</button>
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="DeleteAccountModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Account - Delete Account</h4> </div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="Password">Verify Password</label>
+							<input class="form-control" id="Password" placeholder="Verify Password" type="password"> </div>
+						<div class="form-group">
+							<button class="btn btn-danger" id="Delete_Account_Alert" onclick="Delete_Alert()" type="button">Delete</button>
+						</div>
+						<div id="delete_alert_placeholder"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" data-target="#AccountModal" data-toggle="modal" type="button">Back</button>
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="headingOne">
+				<h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Manage States
+        </a>
+      </h4> </div>
+			<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+				<div class="panel-body"> content </div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="headingTwo">
+				<h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Manage Districts
+        </a>
+      </h4> </div>
+			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+				<div class="panel-body"> content </div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="headingThree">
+				<h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+           Manage Schools
+        </a>
+      </h4> </div>
+			<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+				<div class="panel-body"> content </div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="headingThree">
+				<h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Manage Buses
+        </a>
+      </h4> </div>
+			<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+				<div class="panel-body"> content </div>
+			</div>
+		</div>
+	</div>
 </body>
+
 </html>
