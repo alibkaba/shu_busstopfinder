@@ -40,7 +40,9 @@ function DB_Operation($action){
 		break;
 		case "Geocode_PHP": Geocode_PHP();
 		break;
-		case "Validate_Credentials": Validate_Credentials();
+		case "Validate_Login": Validate_Login();
+		break;
+		case "Read_Accounts": Read_Accounts();
 		break;
 	}
 }
@@ -63,9 +65,9 @@ function Read_Districts(){
 	global $PDOconn;
 	$State_ID = stripslashes($_POST["State_ID"]);
 
-	$Query = 'CALL READ_DISTRICTS (:State_ID)';
+	$Query = 'CALL READ_DISTRICTS (?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':State_ID', $State_ID, PDO::PARAM_INT);
+	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
 	$Statement->execute();
 	$Districts_Data = $Statement->fetchAll();
 	echo json_encode($Districts_Data);
@@ -75,9 +77,9 @@ function Read_Schools(){
 	global $PDOconn;
 	$District_ID = stripslashes($_POST["District_ID"]);
 
-	$Query = 'CALL READ_SCHOOLS (:District_ID)';
+	$Query = 'CALL READ_SCHOOLS (?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':District_ID', $District_ID, PDO::PARAM_INT);
+	$Statement->bindParam(1, $District_ID, PDO::PARAM_INT);
 	$Statement->execute();
 	$Schools_Data = $Statement->fetchAll();
 	echo json_encode($Schools_Data);
@@ -87,23 +89,38 @@ function Read_Bus_Stops(){
 	global $PDOconn;
 	$School_ID = stripslashes($_POST["School_ID"]);
 
-	$Query = 'CALL READ_BUS_STOPS (:School_ID)';
+	$Query = 'CALL READ_BUS_STOPS (?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':School_ID', $School_ID, PDO::PARAM_INT);
+	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
 	$Statement->execute();
 	$Bus_Stops_Data = $Statement->fetchAll();
 	echo json_encode($Bus_Stops_Data);
 }
 
-function Validate_Credentials(){
+function Validate_Login(){
 	global $PDOconn;
-
-	$Query = 'CALL VALIDATE_CREDENTIALS';
+	$Email = stripslashes($_POST["Email"]);
+	$Encrypted_Password = stripslashes($_POST["Encrypted_Password"]);
+	
+	$Query = 'CALL VALIDATE_LOGIN (?, ?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(':School_ID', $School_ID, PDO::PARAM_INT);
+	$Statement->bindParam(1, $Email, PDO::PARAM_STR, 50);
+	$Statement->bindParam(2, $Encrypted_Password, PDO::PARAM_STR, 50);
 	$Statement->execute();
-	$Validate_Credentials_Data = $Statement->rowCount();
-	echo Validate_Credentials_Data;
+	$Login_Data  = $Statement->rowCount();
+	echo $Login_Data;
+}
+
+function Read_Accounts(){
+	global $PDOconn;
+	$Email = stripslashes($_POST["Email"]);
+	
+	$Query = 'CALL READ_ACCOUNTS (?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $Email, PDO::PARAM_STR, 50);
+	$Statement->execute();
+	$Accounts_Data = $Statement->rowCount();
+	//echo Accounts_Data;
 }
 
 // ------------------------------------------Ali coded items ABOVE --------------------------------//
