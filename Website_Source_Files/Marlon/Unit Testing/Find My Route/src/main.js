@@ -231,9 +231,9 @@ function Initialize_Google_Maps_API() {
     var School_District_Lat= 41.117744;
     var School_District_Lng = -73.4081575;
     var Bus_Stops = Get_Bus_Stops();
-    Map_Address(School_District_Lat, School_District_Lng, null);
-    Display_Stops_Pannel(Bus_Stops);
-    //return true;
+    //Map_Address(School_District_Lat, School_District_Lng, null);
+   // Display_Stops_Pannel(Bus_Stops);
+
 }
 
 
@@ -265,12 +265,17 @@ function Validate_Bus_Stop_Object(Bus_Stop_Object){
     }
 }
 
+
 function Get_Bus_Stops_for_School(School_ID){
     //Bus_Stops = QueryDBfor(School_ID)
     var Bus_Stop_Objects = [];
-    Bus_Stop_Objects = Get_Bus_Stops();
-    return Bus_Stop_Objects;
+    Bus_Stops = Get_Bus_Stops();
+   // alert(typeof Bus_Stops);
+    console.log(Bus_Stops);
+
+    return Bus_Stops;
 }
+
 
 
 function Get_Bus_Stops(){
@@ -283,10 +288,14 @@ function Get_Bus_Stops(){
     Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: 0.65, Latitude: 41.126766, Longitude: -73.4504417};
     Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: 6, Latitude: 41.1249925, Longitude: -73.4469242};
     Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: 1.2, Latitude: 41.120276, Longitude: -73.438289};
+
+   // this.Get_Bus_Stop_Array = function(){    return Bus_Stops; };
+   // this.Get_Number_of_Bus_Stops = function(){    return Bus_Stops.length; };
     return Bus_Stops;
 
 }
 
+/*
 function Map_Address(latitude, longitude, address){
     var Display_Map;
     var map;
@@ -303,8 +312,8 @@ function Map_Address(latitude, longitude, address){
     Display_Map.setMap(map);
 
 }
-
-
+*/
+/*
 function Display_Stops_Pannel(Bus_Stops){
     var AddressPanel = document.getElementById('addresses_panel');
     AddressPanel.innerHTML = '';
@@ -312,25 +321,34 @@ function Display_Stops_Pannel(Bus_Stops){
         AddressPanel.innerHTML += Bus_Stops[Stop_Address].Stop_Address + '</b><br>';
     }
 }
+*/
 
-function Get_Shortest_Distance_To_Stops(Bus_Stops){
-    var Shortest_distance = Bus_Stops[0].Distance_to_Stop;
-    var Stop_Address = Bus_Stops[0].Stop_Address;
-    for (var stop = 0; stop < Bus_Stops.length; stop++) {
-        if (Bus_Stops[stop].Distance_to_Stop < Shortest_distance && typeof Bus_Stops[stop].Distance_to_Stop != 'undefined') {
-            Shortest_distance = Bus_Stops[stop].Distance_to_Stop;
-            Stop_Address = Bus_Stops[stop].Stop_Address;
-        }
-        if (typeof Bus_Stops[stop].Distance_to_Stop == 'undefined'){
-            alert("Distance to Bus Stop is undefined")
-        }
-    }
-    var Bus_Stop = {Address: Stop_Address, Distance: Shortest_distance};
-    return Bus_Stop;
+
+function Process_Bus_Stops(User_Address){
+    Bus_Stops = Get_Bus_Stops();
+    var User_Coordinates = Convert_Coordinates_to_String(User_Address);
+    Bus_Stops = Calculate_Distance_To_Stops(User_Coordinates, Bus_Stops);
+    Closest_Bus_Stop = Get_Shortest_Distance_To_Stops(Bus_Stops);
+    alert("The Closest Bus_Stop is " + Closest_Bus_Stop.Address + " which is " + Closest_Bus_Stop.Distance +" miles away");
+    Map_Shortest_Bus_Stop(User_Coordinates, Closest_Bus_Stop.Address);
 }
 
+
+
+function Get_Coordinates(User_Address){
+    var action = "Geocode_PHP";
+    var Read_Geocode_Data = {Address: User_Address, action: action};
+    var Coordinates = $.ajax({data: Read_Geocode_Data}).responseText;
+    Coordinates = jQuery.parseJSON(Coordinates);
+    console.log("After calling php");
+    console.log(Coordinates);
+
+    return Coordinates;
+
+}
+
+
 function Convert_Coordinates_to_String(User_Address){
-    //alert(typeof  User_Address);
     if (typeof User_Address === 'object') {
         var User_Coordinates = User_Address.Latitude + "," + User_Address.Longitude;
         return User_Coordinates;
@@ -341,21 +359,39 @@ function Convert_Coordinates_to_String(User_Address){
         return User_Coordinates; }
 
     else {
-        alert ("Error, User Address is of type: " + typeof User_Address);
+        alert ("Error, User Address is of incorrect type: " + typeof User_Address);
     }
 
 }
 
 
-function Process_Bus_Stops(User_Address){
 
+
+function Process_Coordinates(Address){
+    var Location = Get_Coordinates(Address);
+    return Location;
+}
+
+
+
+
+
+
+
+
+function Process_Bus_Stops_Haversine(User_Address){
     Bus_Stops = Get_Bus_Stops();
-    var User_Coordinates = Convert_Coordinates_to_String(User_Address);
-    Bus_Stops = Calculate_Distance_To_Stops(User_Coordinates, Bus_Stops);
+    var User_Coordinates = Get_Coordinates(User_Address);
+    Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Coordinates, Bus_Stops);
     Closest_Bus_Stop = Get_Shortest_Distance_To_Stops(Bus_Stops);
     alert("The Closets Bus_Stop is " + Closest_Bus_Stop.Address + " which is " + Closest_Bus_Stop.Distance +" mi away");
-    Map_Shortest_Bus_Stop(User_Coordinates, Closest_Bus_Stop.Address);
+    Map_Shortest_Bus_Stop(User_Address, Closest_Bus_Stop.Address);
 }
+
+
+
+
+
 
 
 function Calculate_Distance_To_Stops(User_Address, Bus_Stops) {
@@ -369,35 +405,23 @@ function Calculate_Distance_To_Stops(User_Address, Bus_Stops) {
     return Bus_Stops;
 }
 
-
-
-function Get_Coordinates(User_Address){
-    var action = "Geocode_PHP";
-    var Read_Geocode_Data = {Address: User_Address, action: action};
-    var Coordinates = $.ajax({data: Read_Geocode_Data}).responseText;
-    Coordinates = jQuery.parseJSON(Coordinates);
-    console.log("After calling php");
-    console.log(Coordinates);
-    return Coordinates;
-
+function Get_Shortest_Distance_To_Stops(Bus_Stops){
+    var Shortest_distance = Bus_Stops[0].Distance_to_Stop;
+    var Stop_Address = Bus_Stops[0].Stop_Address;
+    for (var stop = 0; stop < Bus_Stops.length; stop++) {
+        if (Bus_Stops[stop].Distance_to_Stop < Shortest_distance && typeof Bus_Stops[stop].Distance_to_Stop != 'undefined') {
+            Shortest_distance = Bus_Stops[stop].Distance_to_Stop;
+            Stop_Address = Bus_Stops[stop].Stop_Address;
+        }
+        if (typeof Bus_Stops[stop].Distance_to_Stop == 'undefined'){
+            console.log("Distance to Bus Stop is undefined")//alert
+        }
+    }
+    var Bus_Stop = {Address: Stop_Address, Distance: Shortest_distance};
+    return Bus_Stop;
 }
 
 
-
-
-function Process_Coordinates(Address){
-    var Location = Get_Coordinates(Address);
-    return Location;
-}
-
-function Process_Bus_Stops_Haversine(User_Address){
-    Bus_Stops = Get_Bus_Stops();
-    var User_Coordinates = Get_Coordinates(User_Address);
-    Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Coordinates, Bus_Stops);
-    Closest_Bus_Stop = Get_Shortest_Distance_To_Stops(Bus_Stops);
-    alert("The Closets Bus_Stop is " + Closest_Bus_Stop.Address + " which is " + Closest_Bus_Stop.Distance +" mi away");
-    Map_Shortest_Bus_Stop(User_Address, Closest_Bus_Stop.Address);
-}
 
 function Calculate_Distance_To_Stops_Haversine(User_Coordinates, Bus_Stops) {
     for (var Bus_Stop = 0; Bus_Stop < Bus_Stops.length; Bus_Stop++) {
@@ -428,7 +452,7 @@ function Degrees_to_Radians(deg) {
 }
 
 
-
+/*
 //----------Remove--------------
 function Get_Coordinates_OLD(Address){
     var Location = {Latitude: 0, Longitude: 0, Address: Address};
@@ -453,7 +477,7 @@ function Convert_Address_to_LatLng(Address, Return_callback){
         }
     });
 }
-//----------Remove--------------
+//----------Remove--------------*/
 
 
 function Process_Location(){
@@ -500,34 +524,6 @@ function Use_My_Location(){
         alert('Error: Your browser doesn\'t support geolocation.')
     }
 }
-
-function Use_My_Location2(){
-    var map;
-    var mapOptions = {
-        zoom: 15
-    };
-    map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
-    if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            console.log(position.coords);
-            var Coordinates = { Latitude:position.coords.latitude, Longitude:position.coords.longitude };
-            //return Coordinates
-            var infowindow = new google.maps.InfoWindow({
-                map: map,
-                position: pos,
-                content: 'Location found using HTML5.'
-            });
-            map.setCenter(pos);
-        }, function() {
-            alert('Error: The Geolocation service failed.')
-        });
-    } else {
-        alert('Error: Your browser doesn\'t support geolocation.')
-    }
-}
-
 
 
 function Add_Marker(latitude, longitude){
