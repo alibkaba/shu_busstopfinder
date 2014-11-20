@@ -21,11 +21,10 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="index.html">Bus Stops</a>
-				<div id="login_placeholder"></div>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li> <a href="index.thml">Home</a> </li>
+					<li> <a href="index.html">Home</a> </li>
 					<li class="active"> <a href="dashboard.html">Dashboard<span class="sr-only">(current)</span></a> </li>
 					<li> <a href="about.html">About</a> </li>
 					<li> <a href="contact.html">Contact</a> </li>
@@ -100,7 +99,7 @@
 					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Login</h4> </div>
 				<div class="modal-body">
-					<form name="Login_Form" action="#" onsubmit="Create_User()" method="post">
+					<form name="Create_Account_Form" action="#" method="post">
 						<div class="form-group">
 							<label for="Email">Email</label>
 							<input class="form-control" id="Email" placeholder="Email" type="email"> </div>
@@ -144,86 +143,114 @@
 			</div>
 		</div>
 	</div>
-	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="headingOne">
-				<h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Manage States
-        </a>
-      </h4> </div>
-			<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-				<div class="panel-body">
-					<div class="form-group">
-						<select id="Select_States" onchange="Read_Districts(this.value)" class="selectpicker">
-							<option value=""> Select your State </option>
-						</select>
-					</div>
-					<button type="button" data-toggle="modal" data-target="#AddStateModal" disabled="enabled" id="State_Add_Modal_Button">Add</button>
-					<button type="button" data-toggle="modal" data-target="#ModifyStateModal" disabled="disabled" id="State_Modify_Modal_Button">Modify</button>
-					<button type="button" data-toggle="modal" data-target="#DeleteStateModal" disabled="disabled" id="State_Delete_Modal_Button">Delete</button>
-				</div>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="text-center">
+				<select id="Select_States" class="selectpicker">
+					<option value=""> Select your State </option>
+				</select>
 			</div>
 		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="headingTwo">
-				<h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> Manage Districts
-        </a>
-      </h4> </div>
-			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-				<div class="panel-body">
-					<div class="form-group">
-						<select id="Select_Districts" onchange="Read_Schools(this.value)" class="selectpicker">
-							<option value=""> Select your District </option>
-						</select>
-					</div>
-					<button type="button" data-toggle="modal" data-target="#AddDistrictModal" disabled="enabled" id="District_Add_Modal_Button">Add</button>
-					<button type="button" data-toggle="modal" data-target="#ModifyDistrictModal" disabled="disabled" id="District_Modify_Modal_Button">Modify</button>
-					<button type="button" data-toggle="modal" data-target="#DeleteDistrictModal" disabled="disabled" id="District_Delete_Modal_Button">Delete</button>
-				</div>
+		<div class="col-md-3">
+			<div class="text-center">
+				<select id="Select_Districts" class="selectpicker">
+					<option value=""> Select your District </option>
+				</select>
 			</div>
 		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="headingThree">
-				<h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-           Manage Schools
-        </a>
-      </h4> </div>
-			<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-				<div class="panel-body">
-					<div class="form-group">
-						<select id="Select_Schools" onchange="Read_Bus_Stops(this.value)" class="selectpicker">
-							<option value=""> Select your School </option>
-						</select>
-					</div>
-					<button type="button" data-toggle="modal" data-target="#AddSchoolModal" disabled="enabled" id="School_Add_Modal_Button">Add</button>
-					<button type="button" data-toggle="modal" data-target="#ModifySchoolModal" disabled="disabled" id="School_Modify_Modal_Button">Modify</button>
-					<button type="button" data-toggle="modal" data-target="#DeleteSchoolModal" disabled="disabled" id="School_Delete_Modal_Button">Delete</button>
-				</div>
+		<div class="col-md-3">
+			<div class="text-center">
+				<select id="Select_Schools" class="selectpicker">
+					<option value=""> Select your School </option>
+				</select>
 			</div>
 		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="headingThree">
-				<h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-			Manage Buses
-        </a>
-      </h4> </div>
-			<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-				<div class="panel-body">
-					<div class="form-group">
-						<select id="Select_Schools" onchange="Read_Bus_Stops(this.value)" class="selectpicker">
-							<option value=""> Select your School </option>
-						</select>
-					</div>
-					<button type="button" data-toggle="modal" data-target="#AddSchoolModal" disabled="enabled" id="School_Add_Modal_Button">Add/Modify</button>
-					<button type="button" data-toggle="modal" data-target="#DeleteSchoolModal" disabled="disabled" id="School_Delete_Modal_Button">Delete</button>
+		<div class="col-md-3">
+			<div class="text-center">
+				<button type="button" data-toggle="modal" data-target="#BusModal" disabled="disabled" id="Bus_Modal_Button">View Buses</button>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="text-center">
+				<button type="button" data-toggle="modal" data-target="#AddStateModal" id="State_Add_Modal_Button">Add</button>
+				<button type="button" data-toggle="modal" data-target="#ModifyStateModal" id="State_Modify_Modal_Button" disabled="disabled">Modify</button>
+				<button type="button" data-toggle="modal" data-target="#DeleteStateModal" id="State_Delete_Modal_Button" disabled="disabled">Delete</button>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="text-center">
+				<button type="button" data-toggle="modal" data-target="#" id="" disabled="disabled">Add</button>
+				<button type="button" data-toggle="modal" data-target="#" id="" disabled="disabled">Modify</button>
+				<button type="button" data-toggle="modal" data-target="#" id="" disabled="disabled">Delete</button>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="text-center">
+				<button type="button" data-toggle="modal" data-target="#" id="" disabled="disabled">Add</button>
+				<button type="button" data-toggle="modal" data-target="#" id="" disabled="disabled">Modify</button>
+				<button type="button" data-toggle="modal" data-target="#" id="" disabled="disabled">Delete</button>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="text-center">
+				<button type="button" data-toggle="modal" data-target="#" id="">Add</button>
+				<button type="button" data-toggle="modal" data-target="#" id="">Modify</button>
+				<button type="button" data-toggle="modal" data-target="#" id="">Delete</button>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="AddStateModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Add a State</h4> </div>
+				<div class="modal-body">
+					<form name="Add_State_Form" action="#" method="post">
+						<div class="form-group">
+							<label for="State_Name">State Name</label>
+							<input class="form-control" id="State_Name" placeholder="State Name" type="text"> </div>
+						<div class="form-group">
+							<button class="btn btn-default" type="submit" id="Add_State">Add</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="ModifyStateModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Modify a State</h4> </div>
+				<div class="modal-body">
+					<form name="Add_State_Form" action="#" method="post">
+						<div class="form-group">
+							<label for="State_Name">State Name</label>
+							<input class="form-control" id="State_Name" placeholder="State Name" type="text"> </div>
+						<div class="form-group">
+							<button class="btn btn-default" type="submit" id="Add_State">Add</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+	<div class="text-center">
+  <div class="container-fluid" id="login_placeholder">
+  </div>
+  </div>
+</nav>
 </body>
 
 </html>

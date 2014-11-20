@@ -42,7 +42,7 @@ function DB_Operation($action){
 		break;
 		case "Validate_Login": Validate_Login();
 		break;
-		case "Read_Accounts": Read_Accounts();
+		case "Add_State": Add_State();
 		break;
 	}
 }
@@ -111,16 +111,16 @@ function Validate_Login(){
 	echo $Login_Data;
 }
 
-function Read_Accounts(){
+function Add_State(){
 	global $PDOconn;
-	$Email = stripslashes($_POST["Email"]);
-	
-	$Query = 'CALL READ_ACCOUNTS (?)';
+	$State_Name = stripslashes($_POST["State_Name"]);
+
+	$Query = 'CALL ADD_STATE (?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(1, $Email, PDO::PARAM_STR, 50);
+	$Statement->bindParam(1, $State_Name, PDO::PARAM_INT);
 	$Statement->execute();
-	$Accounts_Data = $Statement->rowCount();
-	//echo Accounts_Data;
+	$Add_Response = $Statement->fetchAll();
+	echo json_encode($Add_Response);
 }
 
 // ------------------------------------------Ali coded items ABOVE --------------------------------//

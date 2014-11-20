@@ -19,7 +19,9 @@ $(document).ready(function() {
 	Read_States();
 	$("#Select_States").change(function() {
 		var State_ID = document.getElementById("Select_States").value;
-		Read_Districts(State_ID)
+		Read_Districts(State_ID);
+		Enable_State_Modify();
+		Enable_State_Delete();
 	});
 	$("#Select_Districts").change(function() {
 		var District_ID = document.getElementById("Select_States").value;
@@ -36,7 +38,14 @@ $(document).ready(function() {
 	$("#Logout").click(function() {
 		Logout();
 	});
-
+	$("#Add_State").click(function(e) {
+		e.preventDefault();
+		Add_State();
+	});
+	$("#State_Modify_Modal_Button").click(function(e) {
+		State_ID = document.getElementById("Select_States").value;
+		Show_Modify_State(State_ID);
+	});
 	function Read_States() {
 		Disable_Bus_Modal();
 		var action = "Read_States";
@@ -170,7 +179,7 @@ $(document).ready(function() {
 
 	function Reset_Bus_Stops() {
 		var Bus_Stops_Table = '<thead><tr><th>Bus #</th><th>Stop Time</th><th>Stop Address</th></tr></thead>';
-		document.getElementById("Bus_Stops_Table").innerHTML = Bus_Stops_Table;
+		//document.getElementById("Bus_Stops_Table").innerHTML = Bus_Stops_Table;
 	}
 	$('#Delete_Account_Alert').on('click', function() {
 		var message = 'Your text goes here';
@@ -195,7 +204,6 @@ $(document).ready(function() {
 	}
 
 	function Validate_Login(Email, Encrypted_Password) {
-		Encrypted_Password
 		var action = "Validate_Login";
 		var Login_Data;
 		var Validate_Login_Data = {
@@ -231,8 +239,7 @@ $(document).ready(function() {
 	function Start_Web_Storage() {
 		Storage_Email = localStorage.getItem("email");
 		if (Storage_Email != null) {
-			//Menus(Storage_Email);
-			Navigation_Right_Logged_In();
+			Logged_In();
 			document.getElementById("login_placeholder").innerHTML = '<p class="navbar-text">Signed in as ' + Storage_Email + '</p>';
 		}
 		else {
@@ -249,35 +256,11 @@ $(document).ready(function() {
 		localStorage.removeItem("email");
 	}
 
-	function Menus(Storage_Email) {
-		Read_Accounts(Storage_Email);
+	function Logged_In(){
+		Navigation_Right_Logged_In();
+		
 	}
-
-	function Read_Accounts(Storage_Email) {
-		var Email = Storage_Email;
-		var action = "Read_Accounts";
-		var Read_Accounts_Data = {
-			Email: Email,
-			action: action
-		};
-		Accounts_Data = $.ajax({
-			data: Read_Accounts_Data
-		}).responseText;
-		Accounts_Data = jQuery.parseJSON(Accounts_Data);
-		Root_Admin_Check(Accounts_Data);
-	}
-
-	function Root_Admin_Check(Accounts_Data) {
-		var Root_Admin = Accounts_Data[0].ADMIN;
-		if (Root_Admin != null) {
-			Root_Menus(); //show the menus
-			Root_Admin(); //fill the menus
-		}
-		else {
-			State_Admin_Check();
-		}
-	}
-
+	
 	function Navigation_Right_Logged_In() {
 		document.getElementById("navbar_right_placeholder").innerHTML = '<li> <a data-target="#AccountModal" data-toggle="modal" href="#"><span class="glyphicon glyphicon-user"></span>Account</a> </li><li> <a data-target="#LogoutModal" data-toggle="modal" href="#" id="Logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a> </li>';
 	}
@@ -285,6 +268,63 @@ $(document).ready(function() {
 	function Navigation_Right_Logged_Out() {
 		document.getElementById("navbar_right_placeholder").innerHTML = '<li><a data-target="#LoginModal" data-toggle="modal" href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a> </li>';
 	}
+	
+	function Add_State() {
+		var State_Name = document.forms["Add_State_Form"]["State_Name"].value;
+		var action = "Add_State";
+		var Response;
+		var Add_State_Data = {
+			State_Name: State_Name,
+			action: action
+		};
+		Response = $.ajax({
+			data: Add_State_Data
+		}).responseText;
+		Check_Response(Response);
+	}
+	
+	function Enable_State_Modify(){
+		document.getElementById("State_Modify_Modal_Button").disabled = false;
+	}
+	
+	function Enable_State_Delete(){
+		document.getElementById("State_Delete_Modal_Button").disabled = false;
+	}
+	
+	function Check_Response(Response) {
+		if (Response != '0') {
+			alert('Added');
+		}
+		else {
+			alert('Failed');
+		}
+	}
+	
+	function Show_Modify_State(State_ID) {
+		//display the state name in the text box
+		//document.forms["Modify_State_Form"]["State_Name"].value = State_Name;
+	}
+	
+	function Modify_State(State_ID, State_New_Name) {
+		var State_Name = document.forms["Add_State_Form"]["State_Name"].value;
+		var action = "Modify_State";
+		var Response;
+		var Add_State_Data = {
+			State_ID: State_ID,
+			State_New_Name: State_New_Name,
+			action: action
+		};
+		Response = $.ajax({
+			data: Modify_State_Data
+		}).responseText;
+		Check_Response(Response);
+	}
+	
+	function Delete_State() {
+		var State_Name = document.forms["Delete_State_Form"]["State_Name"].value;
+	}
+	
+
 });
 // ------------------------------------------Ali coded items ABOVE --------------------------------//
 // ------------------------------------------Marlon coded items BELOW --------------------------------//

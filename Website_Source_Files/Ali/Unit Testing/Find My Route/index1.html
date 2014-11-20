@@ -5,12 +5,12 @@
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<meta charset="utf-8" content="text/html" http-equiv="Content-Type">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" rel="stylesheet">
+	<!-- <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" rel="stylesheet"> -->
 	<link href="css/main.css" rel="stylesheet" type="text/css">
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+	<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script> -->
 	<script src="src/main.js" type="text/javascript"></script>
 	<script src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<title>Welcome to Bus Stops</title>
@@ -21,7 +21,6 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="index.html">Bus Stops</a>
-				<div id="login_placeholder"></div>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
@@ -35,39 +34,35 @@
 		</div>
 	</nav>
 	<div class="row">
-		<div class="col-md-4">
+	<div class="text-center">
+  <div class="col-md-12">Welcome message here, maybe picture</div>
+  </div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
 			<div class="text-center">
 				<select id="Select_States" class="selectpicker">
 					<option value=""> Select your State </option>
 				</select>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="text-center">
 				<select id="Select_Districts" class="selectpicker">
 					<option value=""> Select your District </option>
 				</select>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="text-center">
 				<select id="Select_Schools" class="selectpicker">
 					<option value=""> Select your School </option>
 				</select>
-				<button type="button" data-toggle="modal" data-target="#BusModal" disabled="disabled" id="Bus_Modal_Button">View Buses</button>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<div>
-				<label for="address">Enter your address:</label>
-				<input id="User_Address" type="text">
-				<button onclick="Calculate_Distance_To_Stops(User_Address.value)">Find Closest Bus Stop</button>
-				<button onclick="Get_Coordinates(User_Address.value)">Get Coordinates</button>
-				<button onclick="Use_My_Location()">Use My Location</button>
-				<button onclick="Process_Coordinates(User_Address.value)">Process Coordinates</button>
-				<button onclick="Get_PHPCoordinates(User_Address.value)">Coordinates via PHP</button>
+		<div class="col-md-3">
+			<div class="text-center">
+				<button type="button" data-toggle="modal" data-target="#BusModal" disabled="disabled" id="Bus_Modal_Button">View Buses</button>
 			</div>
 		</div>
 	</div>
@@ -94,14 +89,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-8">
-			<div id="map-canvas" style="float:left;width:600px; height:600px"></div>
-		</div>
-		<div class="col-md-4"></div>
-	</div>
-	<div id="addresses_panel" style="margin:20px;background-color:#FFEE77;"></div>
-	<div id="directions_panel" style="margin:20px;background-color:#FFEE77;"></div>
 	<div class="modal fade" id="LoginModal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -133,6 +120,11 @@
 			</div>
 		</div>
 	</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+	<div class="text-center">
+  <div class="container-fluid" id="login_placeholder">
+  </div>
+  </div>
 </body>
 
 </html>
