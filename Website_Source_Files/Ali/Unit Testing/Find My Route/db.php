@@ -44,6 +44,11 @@ function DB_Operation($action){
 		break;
 		case "Add_State": Add_State();
 		break;
+		case "Get_State_Name": Get_State_Name();
+		break;
+		case "Update_State": Update_State();
+		break;
+		case "Delete_State": Delete_State();
 	}
 }
 
@@ -119,8 +124,46 @@ function Add_State(){
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $State_Name, PDO::PARAM_INT);
 	$Statement->execute();
-	$Add_Response = $Statement->fetchAll();
-	echo json_encode($Add_Response);
+	$Add_State_Data = $Statement->fetchAll();
+	echo json_encode($Add_State_Data);
+}
+
+function Get_State_Name(){
+	global $PDOconn;
+	$State_ID = stripslashes($_POST["State_ID"]);
+
+	$Query = 'CALL GET_STATE_NAME (?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
+	$Statement->execute();
+	$Add_Response_Data = $Statement->fetchAll();
+	echo json_encode($Add_Response_Data);
+}
+
+function Update_State(){
+	global $PDOconn;
+	$State_ID = stripslashes($_POST["State_ID"]);
+	$New_State_Name = stripslashes($_POST["New_State_Name"]);
+
+	$Query = 'CALL UPDATE_STATE (?,?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
+	$Statement->bindParam(2, $New_State_Name, PDO::PARAM_STR, 50);
+	$Statement->execute();
+	$Update_Response_Data = $Statement->fetchAll();
+	echo json_encode($Update_Response_Data);
+}
+
+function Delete_State(){
+	global $PDOconn;
+	$State_ID = stripslashes($_POST["State_ID"]);
+
+	$Query = 'CALL DELETE_STATE (?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
+	$Statement->execute();
+	$Delete_Response_Data = $Statement->fetchAll();
+	echo json_encode($Delete_Response_Data);
 }
 
 // ------------------------------------------Ali coded items ABOVE --------------------------------//
