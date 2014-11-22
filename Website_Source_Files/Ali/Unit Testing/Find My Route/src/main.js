@@ -20,7 +20,7 @@ $(document).ready(function() {
 	var Row_Span;
 	var message;
 	var State_Name;
-	var Add_State_Data;
+	var Create_State_Data;
 	var Response;
 	var Login_Data;
 	var Validate_Login_Data;
@@ -55,10 +55,10 @@ $(document).ready(function() {
 		Reset_Schools();
 		Reset_Bus_Stops();
 		Disable_View_All_Buses_Button();
-		State_MDA_Buttons();
-		Reset_District_MDA_Buttons();
-		Reset_School_MDA_Buttons();
-		Reset_Bus_Number_MDA_Buttons();
+		State_UDC_Buttons();
+		Reset_District_UDC_Buttons();
+		Reset_School_UDC_Buttons();
+		Reset_Bus_Number_UDC_Buttons();
 		State_ID = document.getElementById("Select_States").value;
 		Read_Districts(State_ID);
 		Select_Districts(Districts_Data);
@@ -66,16 +66,16 @@ $(document).ready(function() {
 	$("#Select_Districts").change(function() {
 		Reset_Schools();
 		Reset_Bus_Stops();
-		District_MDA_Buttons();
-		Reset_School_MDA_Buttons();
-		Reset_Bus_Number_MDA_Buttons();
+		District_UDC_Buttons();
+		Reset_School_UDC_Buttons();
+		Reset_Bus_Number_UDC_Buttons();
 		District_ID = document.getElementById("Select_States").value;
 		Read_Schools(District_ID);
 		Select_Schools(Schools_Data);
 	});
 	$("#Select_Schools").change(function() {
-		School_MDA_Buttons();
-		Reset_Bus_Number_MDA_Buttons();
+		School_UDC_Buttons();
+		Reset_Bus_Number_UDC_Buttons();
 		School_ID = document.getElementById("Select_States").value;
 		Read_Bus_Stops(School_ID);
 		Table_Bus_Stops(Bus_Stops_Data);
@@ -87,9 +87,15 @@ $(document).ready(function() {
 	$("#Logout").click(function() {
 		Logout();
 	});
-	$("#Add_State").click(function(e) {
+	$("#Create_State_Name").change(function() {
+		Old_Value = "";
+		New_Value = document.getElementById("Create_State_Name").value;
+		Button_ID = "Create_State";
+		Blur_Button(Old_Value, New_Value, Button_ID);
+	});
+	$("#Create_State").click(function(e) {
 		e.preventDefault();
-		Add_State();
+		Create_State();
 	});
 	$("#Update_State_Modal_Button").click(function(e) {
 		State_ID = document.getElementById("Select_States").value;
@@ -100,7 +106,6 @@ $(document).ready(function() {
 		New_Value = document.getElementById("Update_State_Name").value;
 		Button_ID = "Update_State";
 		Blur_Button(Old_Value, New_Value, Button_ID);
-		District_ID = document.getElementById("Select_States").value;
 	});
 	$("#Update_State").click(function(e) {
 		e.preventDefault();
@@ -121,6 +126,10 @@ $(document).ready(function() {
 		e.preventDefault();
 		State_ID = document.getElementById("Select_States").value;
 		Delete_State(State_ID);
+	});
+	$("#Create_District").click(function(e) {
+		e.preventDefault();
+		Create_District();
 	});
 	$('#Delete_Account_Alert').on('click', function() {
 		message = 'Your text goes here';
@@ -144,7 +153,7 @@ $(document).ready(function() {
 	function Blur_Button(Old_Value, New_Value, Button_ID, Button_Class){
 		if(Old_Value != New_Value){
 			Button_Decision = false;
-			Button_Class = "btn btn-success";
+			Button_Class = "btn btn-success"
 			Disable_Or_Enable_Button(Button_ID, Button_Decision);
 			Change_Button_Class(Button_ID, Button_Class);
 		}
@@ -156,17 +165,17 @@ $(document).ready(function() {
 		}
 	}
 	
-		function Check_Add_Response(Add_Response_Data) {
-		if (Add_Response_Data !== "") {
+		function Check_Create_Response(Create_Response_Data) {
+		if (Create_Response_Data !== false) {
 			window.location.href = 'dashboard.html';
 		}
 		else {
-			alert('Add failed, please try again');
+			alert('Create failed, please try again');
 		}
 	}
 	
 	function Check_Update_Response(Update_Response_Data) {
-		if (Update_Response_Data !== "") {
+		if (Update_Response_Data !== false) {
 			window.location.href = 'dashboard.html';
 		}
 		else {
@@ -175,7 +184,7 @@ $(document).ready(function() {
 	}
 	
 	function Check_Delete_Response(Delete_Response_Data) {
-		if (Delete_Response_Data !== "") {
+		if (Delete_Response_Data !== false) {
 			window.location.href = 'dashboard.html';
 		}
 		else {
@@ -191,7 +200,7 @@ $(document).ready(function() {
 		Disable_Or_Enable_Button (Button_ID, Button_Decision);
 	}
 	
-	function State_MDA_Buttons(){
+	function State_UDC_Buttons(){
 		Button_Decision = false;
 		Button_Class = "btn btn-info";
 		Button_ID = "Update_State_Modal_Button";
@@ -203,13 +212,13 @@ $(document).ready(function() {
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 		
-		Button_ID = "Add_District_Modal_Button";
+		Button_ID = "Create_District_Modal_Button";
 		Button_Class = "btn btn-success";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
 	
-	function District_MDA_Buttons(){
+	function District_UDC_Buttons(){
 		Button_Decision = false;
 		Button_Class = "btn btn-info";
 		Button_ID = "Update_District_Modal_Button";
@@ -221,13 +230,13 @@ $(document).ready(function() {
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 		
-		Button_ID = "Add_School_Modal_Button";
+		Button_ID = "Create_School_Modal_Button";
 		Button_Class = "btn btn-success";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
 	
-	function Reset_District_MDA_Buttons(){
+	function Reset_District_UDC_Buttons(){
 		Button_Decision = true;
 		Button_Class = "btn btn-default";
 		Button_ID = "Update_District_Modal_Button";
@@ -239,13 +248,13 @@ $(document).ready(function() {
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 		
-		Button_ID = "Add_School_Modal_Button";
+		Button_ID = "Create_School_Modal_Button";
 		Button_Class = "btn btn-default";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
 	
-	function School_MDA_Buttons(){
+	function School_UDC_Buttons(){
 		Button_Decision = false;
 		Button_Class = "btn btn-info";
 		Button_ID = "Update_School_Modal_Button";
@@ -257,13 +266,13 @@ $(document).ready(function() {
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 		
-		Button_ID = "Add_Bus_Number_Modal_Button";
+		Button_ID = "Create_Bus_Number_Modal_Button";
 		Button_Class = "btn btn-success";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
 	
-	function Reset_School_MDA_Buttons(){
+	function Reset_School_UDC_Buttons(){
 		Button_Decision = true;
 		Button_Class = "btn btn-default";
 		Button_ID = "Update_School_Modal_Button";
@@ -275,13 +284,13 @@ $(document).ready(function() {
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 		
-		Button_ID = "Add_Bus_Number_Modal_Button";
+		Button_ID = "Create_Bus_Number_Modal_Button";
 		Button_Class = "btn btn-default";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
 	
-	function Bus_Number_MDA_Buttons(){
+	function Bus_Number_UDC_Buttons(){
 		Button_Decision = false;
 		Button_Class = "btn btn-info";
 		Button_ID = "Update_Bus_Number_Modal_Button";
@@ -294,7 +303,7 @@ $(document).ready(function() {
 		Change_Button_Class(Button_ID, Button_Class);
 	}
 	
-	function Reset_Bus_Number_MDA_Buttons(){
+	function Reset_Bus_Number_UDC_Buttons(){
 		Button_Decision = true;
 		Button_Class = "btn btn-default";
 		Button_ID = "Update_Bus_Number_Modal_Button";
@@ -384,7 +393,7 @@ $(document).ready(function() {
 			j = Bus_Stops_Data[i].BUS_NUMBER;
 			Bus_Stops_Table += '<tr>';
 			Row_Span = 0;
-			for (j = i; Bus_Stops_Data[i].BUS_NUMBER != Last_Bus && j < Bus_Stops_Data.length && Bus_Stops_Data[j].BUS_NUMBER == Bus_Stops_Data[i].BUS_NUMBER; j++) {
+			for (j = i; Bus_Stops_Data[i].BUS_NUMBER !== Last_Bus && j < Bus_Stops_Data.length && Bus_Stops_Data[j].BUS_NUMBER == Bus_Stops_Data[i].BUS_NUMBER; j++) {
 				Row_Span++;
 			}
 			if (Row_Span > 0) {
@@ -441,7 +450,7 @@ $(document).ready(function() {
 	}
 
 	function Login_Status(Email, Login_Data) {
-		if (Login_Data != '0') {
+		if (Login_Data !== '0') {
 			localStorage.setItem("email", Email);
 			window.location.href = 'dashboard.html';
 		}
@@ -451,7 +460,7 @@ $(document).ready(function() {
 	}
 
 	function Check_Web_Storage() {
-		if (typeof(Storage) != "undefined") {
+		if (typeof(Storage) !== "undefined") {
 			Start_Web_Storage();
 		}
 		else {
@@ -492,16 +501,16 @@ $(document).ready(function() {
 		document.getElementById("navbar_right_placeholder").innerHTML = '<li><a data-target="#LoginModal" data-toggle="modal" href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a> </li>';
 	}
 	
-	function Add_State() {
-		State_Name = document.getElementById("Add_State_Name").value;
-		action = "Add_State";
+	function Create_State() {
+		State_Name = document.getElementById("Create_State_Name").value;
+		action = "Create_State";
 		Ajax_Data = {
 			State_Name: State_Name,
 			action: action
 		};
 		Outgoing_Ajax(Ajax_Data);
-		Add_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-		Check_Add_Response(Add_Response_Data);
+		Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+		Check_Create_Response(Create_Response_Data);
 	}
 	
 	function Display_Update_State(State_ID) {
@@ -572,7 +581,7 @@ function Create_Bus_Stop_Object(Stop_Time, Stop_Address) {
 }
 
 function Validate_Bus_Stop_Object(Bus_Stop_Object) {
-	if (typeof Bus_Stop_Object != 'undefined' && Bus_Stop_Object.Stop_Time !== null && Bus_Stop_Object.Stop_Address !== null) {
+	if (typeof Bus_Stop_Object != 'undefined' && Bus_Stop_Object.Stop_Time != null && Bus_Stop_Object.Stop_Address != null) {
 		return true;
 	}
 	else {

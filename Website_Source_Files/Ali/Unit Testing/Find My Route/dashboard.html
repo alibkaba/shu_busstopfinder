@@ -150,7 +150,7 @@
 					<option value=""> Select your State </option>
 				</select>
 				</br>
-				<button type="button" data-toggle="modal" data-target="#AddStateModal" id="Add_State_Modal_Button" class="btn btn-success">Add</button>
+				<button type="button" data-toggle="modal" data-target="#CreateStateModal" id="Create_State_Modal_Button" class="btn btn-success">Create</button>
 				<button type="button" data-toggle="modal" data-target="#UpdateStateModal" id="Update_State_Modal_Button" class="btn btn-default" disabled="disabled">Update</button>
 				<button type="button" data-toggle="modal" data-target="#DeleteStateModal" id="Delete_State_Modal_Button" class="btn btn-default" disabled="disabled">Delete</button>
 			</div>
@@ -161,9 +161,9 @@
 					<option value=""> Select your District </option>
 				</select>
 				</br>
-				<button type="button" data-toggle="modal" data-target="#" id="Add_District_Modal_Button" class="btn btn-default" disabled="disabled">Add</button>
-				<button type="button" data-toggle="modal" data-target="#" id="Update_District_Modal_Button" class="btn btn-default" disabled="disabled">Update</button>
-				<button type="button" data-toggle="modal" data-target="#" id="Delete_District_Modal_Button" class="btn btn-default" disabled="disabled">Delete</button>
+				<button type="button" data-toggle="modal" data-target="#CreateDistrictModal" id="Create_District_Modal_Button" class="btn btn-default" disabled="disabled">Create</button>
+				<button type="button" data-toggle="modal" data-target="#UpdateDistrictModal" id="Update_District_Modal_Button" class="btn btn-default" disabled="disabled">Update</button>
+				<button type="button" data-toggle="modal" data-target="#DeleteDistrictModal" id="Delete_District_Modal_Button" class="btn btn-default" disabled="disabled">Delete</button>
 			</div>
 		</div>
 		<div class="col-md-3">
@@ -172,7 +172,7 @@
 					<option value=""> Select your School </option>
 				</select>
 				</br>
-				<button type="button" data-toggle="modal" data-target="#" id="Add_School_Modal_Button" class="btn btn-default" disabled="disabled">Add</button>
+				<button type="button" data-toggle="modal" data-target="#" id="Create_School_Modal_Button" class="btn btn-default" disabled="disabled">Create</button>
 				<button type="button" data-toggle="modal" data-target="#" id="Update_School_Modal_Button" class="btn btn-default" disabled="disabled">Update</button>
 				<button type="button" data-toggle="modal" data-target="#" id="Delete_School_Modal_Button" class="btn btn-default" disabled="disabled">Delete</button>
 			</div>
@@ -185,25 +185,25 @@
 				</br>
 				<button type="button" data-toggle="modal" data-target="#BusModal" id="View_All_Buses_Button" disabled="disabled" class="btn btn-default">View All Buses</button>
 				</br>
-				<button type="button" data-toggle="modal" data-target="#" id="Add_Bus_Number_Modal_Button" class="btn btn-default" disabled="disabled">Add</button>
+				<button type="button" data-toggle="modal" data-target="#" id="Create_Bus_Number_Modal_Button" class="btn btn-default" disabled="disabled">Create</button>
 				<button type="button" data-toggle="modal" data-target="#" id="Update_Bus_Number_Modal_Button" class="btn btn-default" disabled="disabled">Update</button>
 				<button type="button" data-toggle="modal" data-target="#" id="Delete_Bus_Number_Modal_Button" class="btn btn-default" disabled="disabled">Delete</button>
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="AddStateModal" tabindex="-1">
+	<div class="modal fade" id="CreateStateModal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
-					<h4 class="modal-title">Add a State</h4> </div>
+					<h4 class="modal-title">Create a State</h4> </div>
 				<div class="modal-body">
-					<form name="Add_State_Form" action="#" method="post">
+					<form name="Create_State_Form" action="#" method="post">
 						<div class="form-group">
 							<label for="State_Name">State Name</label>
-							<input class="form-control" id="Add_State_Name" placeholder="State Name" type="text"> </div>
+							<input class="form-control" id="Create_State_Name" placeholder="State Name" type="text"> </div>
 						<div class="form-group">
-							<button class="btn btn-default" type="submit" id="Add_State">Add</button>
+							<button class="btn btn-default" type="submit" id="Create_State" disabled="disabled">Create</button>
 						</div>
 					</form>
 				</div>
@@ -220,7 +220,7 @@
 					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Update a State</h4> </div>
 				<div class="modal-body">
-					<form name="Add_State_Form" action="#" method="post">
+					<form name="Create_State_Form" action="#" method="post">
 						<div class="form-group">
 							<label for="State_Name">State Name</label>
 							<input class="form-control" id="Update_State_Name" placeholder="State Name" type="text"> </div>
@@ -242,11 +242,76 @@
 					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title"> Delete a State</h4> </div>
 				<div class="modal-body">
-					<form name="Add_State_Form" action="#" method="post">
+					<form name="Create_State_Form" action="#" method="post">
 						<div class="alert alert-danger" id="Delete_State_Place_Holder">
 						</div>
 						<div class="form-group">
 								<button class="btn btn-danger" type="button" id="Delete_State">Yes</button><button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div> 
+	</div>
+	<div class="modal fade" id="CreateDistrictModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Create a District</h4> </div>
+				<div class="modal-body">
+					<form name="Create_State_Form" action="#" method="post">
+						<div class="form-group">
+							<label for="State_Name">District Name</label>
+							<input class="form-control" id="Create_State_Name" placeholder="District Name" type="text"> </div>
+						<div class="form-group">
+							<button class="btn btn-default" type="submit" id="Create_District">Create</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="UpdateDistrictModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Update a District</h4> </div>
+				<div class="modal-body">
+					<form name="Create_District_Form" action="#" method="post">
+						<div class="form-group">
+							<label for="State_Name">District Name</label>
+							<input class="form-control" id="Update_State_Name" placeholder="District Name" type="text"> </div>
+						<div class="form-group">
+							<button class="btn btn-default" type="submit" id="Update_District" disabled="disabled">Update</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="DeleteDistrictModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title"> Delete a District</h4> </div>
+				<div class="modal-body">
+					<form name="Create_District_Form" action="#" method="post">
+						<div class="alert alert-danger" id="Delete_District_Place_Holder">
+						</div>
+						<div class="form-group">
+								<button class="btn btn-danger" type="button" id="Delete_District">Yes</button><button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
 						</div>
 					</form>
 				</div>

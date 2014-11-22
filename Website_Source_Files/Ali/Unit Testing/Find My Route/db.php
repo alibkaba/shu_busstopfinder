@@ -42,7 +42,7 @@ function DB_Operation($action){
 		break;
 		case "Validate_Login": Validate_Login();
 		break;
-		case "Add_State": Add_State();
+		case "Create_State": Create_State();
 		break;
 		case "Get_State_Name": Get_State_Name();
 		break;
@@ -116,16 +116,16 @@ function Validate_Login(){
 	echo $Login_Data;
 }
 
-function Add_State(){
+function Create_State(){
 	global $PDOconn;
 	$State_Name = stripslashes($_POST["State_Name"]);
 
-	$Query = 'CALL ADD_STATE (?)';
+	$Query = 'CALL CREATE_STATE (?)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $State_Name, PDO::PARAM_INT);
 	$Statement->execute();
-	$Add_State_Data = $Statement->fetchAll();
-	echo json_encode($Add_State_Data);
+	$Create_State_Data = $Statement->fetchAll();
+	echo json_encode($Create_State_Data);
 }
 
 function Get_State_Name(){
@@ -136,8 +136,8 @@ function Get_State_Name(){
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
 	$Statement->execute();
-	$Add_Response_Data = $Statement->fetchAll();
-	echo json_encode($Add_Response_Data);
+	$Create_Response_Data = $Statement->fetchAll();
+	echo json_encode($Create_Response_Data);
 }
 
 function Update_State(){
