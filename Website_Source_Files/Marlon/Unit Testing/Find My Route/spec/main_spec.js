@@ -1,6 +1,31 @@
 
 // ------------------------------------------Marlon coded items BELOW --------------------------------//
 
+describe("Create new Bus object test", function() {
+    var Bus_Stop;
+    beforeEach(function() {  Bus_Stop = new Parada; });
+    it("creates a new object when passed parameters", function() {
+        spyOn(Bus_Stop, "Create_New");
+        Bus_Stop.Create_New("9:20", "20 scofield place norwalk ct");
+        expect(Bus_Stop.Create_New).toHaveBeenCalled();
+    });
+    it("can read data from object", function() {
+        Bus_Stop.Create_New("9:10", "20 scofield place norwalk ct");
+        expect(Bus_Stop.Stop_Time).toBe("9:10");
+    });
+    it("can update data on object", function() {
+        spyOn(Bus_Stop, "Set_Stop_Time");
+        Bus_Stop.Create_New("9:20", "20 scofield place norwalk ct");
+        expect(Bus_Stop.Stop_Time).toBe("9:20");
+        Bus_Stop.Set_Stop_Time("11:00");
+        expect(Bus_Stop.Set_Stop_Time).toHaveBeenCalled();
+        alert(Bus_Stop.Stop_Time);/////Doesn't pass
+
+    });
+
+});
+
+
 describe("Test Creating New Bus Stop Objects", function(){
     it("creates a new Bus Stop Object by passing Stop Time and Stop Address", function () {
         var New_Bus_Stop = Create_Bus_Stop_Object( "9:00", "20 Main St Norwalk CT")

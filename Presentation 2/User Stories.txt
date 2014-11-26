@@ -1,0 +1,7 @@
+As a Student/Parent, I want to search for my school in my state and school district, so that I can search for the bus stops.
+As a Student/Parent, I want to find the Closest Bus Stop to my address so that I know which bus to take at what time.
+As a Student/Parent, I want to Display Bus Stops on a map so that I can see how close they are.
+As a Student/Parent, I want to use my Phone's location to find the closes bus stop.
+As a Student/Parent, I want see how to get to the closes bus stop from my home on a map.
+As a Webmaster, I want to login to the Dashboard, so I can manage districts, schools, and bus routes. 
+As a School Administrator, I want to manage Bus Stops so that I can add, remove and modify them.

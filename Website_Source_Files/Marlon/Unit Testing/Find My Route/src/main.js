@@ -237,6 +237,59 @@ function Initialize_Google_Maps_API() {
 }
 
 
+function Parada (Stop_Time, Stop_Address){
+
+    this.Stop_Time;
+    this.Stop_Address;
+    this.Distance_to_Stop;
+    this.Latitude;
+    this.Longitude;
+    this.Stop_ID;
+
+    this.Create_New = function(Stop_Time, Stop_Address) {
+        if(typeof Stop_Time != 'undefined' && typeof Stop_Address != 'undefined'){
+            this.Stop_Time = Stop_Time;
+            this.Stop_Address = Stop_Address;
+            //return this;
+        }
+        else {
+            console.log("Cannot create Bus Stop Object because it is missing data");
+        }
+    };
+
+
+    this.Set_Stop_ID = function (Stop_ID) { this.Stop_ID = Stop_ID};
+    this.Set_Stop_Time = function (Stop_Time) { this.Stop_Time = Stop_Time};
+    this.Set_Stop_Address = function (Stop_Address) {this.Stop_Address = Stop_Address};
+    this.Set_Distance_to_User = function (Distance_to_User) {this.Distance_to_User = Distance_to_User};
+    this.Set_Latitude = function (Latitude) {this.Latitude = Latitude};
+    this.Set_Longitude = function (Longitude){this.Longitude = Longitude};
+
+    this.Get_Stop_ID = function () {return this.Stop_ID};
+    this.Get_Stop_Time = function() {return this.Stop_Time};
+    this.Get_Stop_Address = function () {return this.Stop_Address};
+    this.Get_Distance_to_User = function() {return this.Distance_to_User};
+    this.Get_Latitude = function () {return this.Latitude};
+    this.Get_Longitude = function (){return this.Longitude};
+
+}
+
+
+function Test_Object(){
+    var Bus_Stop = new Parada;
+    Bus_Stop.Create_New("9:20", "20 scofield place norwalk ct");
+    //alert(Bus_Stop.Stop_Time);
+    Bus_Stop.Set_Stop_Address("933 Hope st stamford ct");
+   // alert(Bus_Stop.Get_Stop_Address());
+    Bus_Stop.Set_Stop_Time("10:00");
+   // alert(Bus_Stop.Stop_Time);
+
+}
+
+
+
+
+
 function Create_Bus_Stop_Object( Stop_Time, Stop_Address){
     if(typeof Stop_Time != 'undefined' && typeof Stop_Address != 'undefined'){
         this.Stop_Time = Stop_Time;
