@@ -1,7 +1,7 @@
 // ------------------------------------------Ali coded items BELOW --------------------------------//
 $(document).ready(function() {
-	var action;//
-	var Ajax_Data;//
+	var action; //
+	var Ajax_Data; //
 	var State_ID;
 	var District_ID;
 	var School_ID;
@@ -20,7 +20,7 @@ $(document).ready(function() {
 	var Row_Span;
 	var message;
 	var State_Name;
-	var Create_State_Data;
+	var Create_State_Name;
 	var Response;
 	var Login_Data;
 	var Validate_Login_Data;
@@ -30,9 +30,8 @@ $(document).ready(function() {
 	var Button_ID;
 	var Button_Class;
 	var Button_Decision;
-	var Old_Value;//
-	var New_Value;//
-	
+	var Old_Value; //
+	var New_Value; //
 	Check_Web_Storage();
 	console.log("ready!");
 	$.ajaxSetup({
@@ -73,7 +72,6 @@ $(document).ready(function() {
 		Read_Bus_Stops();
 		Table_Bus_Stops(Bus_Stops_Data);
 	});
-	
 	$("#Login").click(function(e) {
 		e.preventDefault();
 		Login();
@@ -81,22 +79,56 @@ $(document).ready(function() {
 	$("#Logout").click(function() {
 		Logout();
 	});
-	$("#Create_State_Data").change(function() {
+	$("#Create_State_Name").change(function() {
 		Old_Value = "";
-		New_Value = document.getElementById("Create_State_Data").value;
+		New_Value = document.getElementById("Create_State_Name").value;
 		Button_ID = "Create_State";
+		Blur_Button(Old_Value, New_Value, Button_ID);
+	});
+	$("#Create_District_Name").change(function() {
+		Old_Value = "";
+		New_Value = document.getElementById("Create_District_Name").value;
+		Button_ID = "Create_District";
+		Blur_Button(Old_Value, New_Value, Button_ID);
+	});
+	$("#Create_School_Name").change(function() {
+		Old_Value = "";
+		New_Value = document.getElementById("Create_School_Name").value;
+		Button_ID = "Create_School";
+		Blur_Button(Old_Value, New_Value, Button_ID);
+	});
+	$("#Create_School_Address").change(function() {
+		Old_Value = "";
+		New_Value = document.getElementById("Create_School_Address").value;
+		Button_ID = "Create_School";
 		Blur_Button(Old_Value, New_Value, Button_ID);
 	});
 	$("#Create_State").click(function(e) {
 		e.preventDefault();
 		Create_State();
 	});
+	$("#Create_District").click(function(e) {
+		e.preventDefault();
+		Create_District();
+	});
+	$("#Create_School").click(function(e) {
+		e.preventDefault();
+		Create_School();
+	});
+	$("#Create_Bus_Stop").click(function(e) {
+		e.preventDefault();
+		Create_Bus_Stop();
+	});
 	$("#Update_State_Modal_Button").click(function(e) {
-		State_ID = document.getElementById("Select_States").value;
+		Grab_Selected_State_ID();
 		Display_Update_State(State_ID);
 	});
+	$("#Update_District_Modal_Button").click(function(e) {
+		Grab_Selected_District_ID();
+		Display_Update_District(District_ID);
+	});
 	$("#Update_State_Name").change(function() {
-		Old_Value = State_Name_Data[0].STATE_NAME;
+		Old_Value = State_Data[0].STATE_NAME;
 		New_Value = document.getElementById("Update_State_Name").value;
 		Button_ID = "Update_State";
 		Blur_Button(Old_Value, New_Value, Button_ID);
@@ -108,6 +140,19 @@ $(document).ready(function() {
 		document.getElementById("Update_State_Name").value = New_State_Name;
 		Update_State(State_ID, New_State_Name);
 	});
+	$("#Update_District_Name").change(function() {
+		Old_Value = District_Data[0].DISTRICT_NAME;
+		New_Value = document.getElementById("Update_District_Name").value;
+		Button_ID = "Update_District";
+		Blur_Button(Old_Value, New_Value, Button_ID);
+	});
+	$("#Update_District").click(function(e) {
+		e.preventDefault();
+		District_ID = Display_Update_District(District_ID);
+		New_State_Name = New_Value;
+		document.getElementById("Update_District_Name").value = New_District_Name;
+		Update_District(District_ID, New_District_Name);
+	});
 	$("#Delete_State_Modal_Button").click(function(e) {
 		e.preventDefault();
 		x = document.getElementById("Select_States").selectedIndex;
@@ -118,43 +163,61 @@ $(document).ready(function() {
 	});
 	$("#Delete_State").click(function(e) {
 		e.preventDefault();
-		State_ID = document.getElementById("Select_States").value;
+		Grab_Selected_State_ID();
 		Delete_State(State_ID);
-	});
-	$("#Create_District").click(function(e) {
-		e.preventDefault();
-		Create_District();
 	});
 	$('#Delete_Account_Alert').on('click', function() {
 		message = 'Your text goes here';
 		Delete_Alert(message);
 	});
-	
 	//Reused
-	function Outgoing_Ajax(Ajax_Data){
-		Incoming_Ajax_Data = $.ajax({	data: Ajax_Data	}).responseText;
+	function Grab_Selected_State_ID() {
+		State_ID = document.getElementById("Select_States").value;
+		return State_ID;
+	}
+
+	function Grab_Selected_District_ID() {
+		District_ID = document.getElementById("Select_Districts").value;
+		return District_ID;
+	}
+
+	function Grab_Selected_School_ID() {
+		School_ID = document.getElementById("Select_Schools").value;
+		return School_ID;
+	}
+
+	function Grab_Selected_Bus_Stop_ID() {}
+
+	function Outgoing_Ajax(Ajax_Data) {
+		Incoming_Ajax_Data = $.ajax({
+			data: Ajax_Data
+		}).responseText;
 		return Incoming_Ajax_Data;
 	}
-	function Disable_Or_Enable_Button(Button_ID, Button_Decision){
+
+	function Disable_Or_Enable_Button(Button_ID, Button_Decision) {
 		document.getElementById(Button_ID).disabled = Button_Decision;
 	}
-	function Change_Button_Class(Button_ID, Button_Class){
+
+	function Change_Button_Class(Button_ID, Button_Class) {
 		document.getElementById(Button_ID).className = Button_Class;
 	}
-	function Blur_Button(Old_Value, New_Value, Button_ID, Button_Class){
-		if(Old_Value != New_Value){
+
+	function Blur_Button(Old_Value, New_Value, Button_ID, Button_Class) {
+		if (Old_Value != New_Value) {
 			Button_Decision = false;
 			Button_Class = "btn btn-success"
 			Disable_Or_Enable_Button(Button_ID, Button_Decision);
 			Change_Button_Class(Button_ID, Button_Class);
 		}
-		else{
+		else {
 			Button_Decision = true;
 			Button_Class = "btn btn-default";
 			Disable_Or_Enable_Button(Button_ID, Button_Decision);
 			Change_Button_Class(Button_ID, Button_Class);
 		}
 	}
+
 	function Check_Create_Response(Create_Response_Data) {
 		if (Create_Response_Data !== false) {
 			window.location.href = 'dashboard.html';
@@ -163,6 +226,7 @@ $(document).ready(function() {
 			alert('Create failed, please try again');
 		}
 	}
+
 	function Check_Update_Response(Update_Response_Data) {
 		if (Update_Response_Data !== false) {
 			window.location.href = 'dashboard.html';
@@ -171,6 +235,7 @@ $(document).ready(function() {
 			alert("Cannot update, contact your system administrator");
 		}
 	}
+
 	function Check_Delete_Response(Delete_Response_Data) {
 		if (Delete_Response_Data !== false) {
 			window.location.href = 'dashboard.html';
@@ -180,183 +245,170 @@ $(document).ready(function() {
 			window.location.href = 'dashboard.html';
 		}
 	}
-	function Index_Or_Dashboard_For_State(){
+
+	function Index_Or_Dashboard_For_State() {
 		URL = document.URL;
-		if (URL !== "http://alibkaba.com/cs604/Ali/Unit%20Testing/Find%20My%20Route/index1.html"){
+		if (URL !== "http://alibkaba.com/cs604/Ali/Unit%20Testing/Find%20My%20Route/index1.html") {
 			State_UDC_Buttons();
 			Reset_District_UDC_Buttons();
 			Reset_School_UDC_Buttons();
 			Reset_Bus_Number_UDC_Buttons();
 		}
 	}
-	function Index_Or_Dashboard_For_District(){
+
+	function Index_Or_Dashboard_For_District() {
 		URL = document.URL;
-		if (URL !== "http://alibkaba.com/cs604/Ali/Unit%20Testing/Find%20My%20Route/index1.html"){
+		if (URL !== "http://alibkaba.com/cs604/Ali/Unit%20Testing/Find%20My%20Route/index1.html") {
 			District_UDC_Buttons();
 			Reset_School_UDC_Buttons();
 			Reset_Bus_Number_UDC_Buttons();
 		}
 	}
-	function Index_Or_Dashboard_For_School(){
-		URL = document.URL;
-		if (URL !== "http://alibkaba.com/cs604/Ali/Unit%20Testing/Find%20My%20Route/index1.html"){
-			School_UDC_Buttons();
-			Reset_Bus_Number_UDC_Buttons();
+
+	function Index_Or_Dashboard_For_School() {
+			URL = document.URL;
+			if (URL !== "http://alibkaba.com/cs604/Ali/Unit%20Testing/Find%20My%20Route/index1.html") {
+				School_UDC_Buttons();
+				Reset_Bus_Number_UDC_Buttons();
+			}
 		}
-	}
-	//End Reused
-	
-	function State_UDC_Buttons(){
+		//End Reused
+	function State_UDC_Buttons() {
 		Button_Decision = false;
 		Button_Class = "btn btn-info";
 		Button_ID = "Update_State_Modal_Button";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
-		
 		Button_ID = "Delete_State_Modal_Button";
 		Button_Class = "btn btn-danger";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
-		
 		Button_ID = "Create_District_Modal_Button";
 		Button_Class = "btn btn-success";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
-	
-	function District_UDC_Buttons(){
+
+	function District_UDC_Buttons() {
 		Button_Decision = false;
 		Button_Class = "btn btn-info";
 		Button_ID = "Update_District_Modal_Button";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
-		
 		Button_ID = "Delete_District_Modal_Button";
 		Button_Class = "btn btn-danger";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
-		
 		Button_ID = "Create_School_Modal_Button";
 		Button_Class = "btn btn-success";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
-	
-	function Reset_District_UDC_Buttons(){
+
+	function Reset_District_UDC_Buttons() {
 		Button_Decision = true;
 		Button_Class = "btn btn-default";
 		Button_ID = "Update_District_Modal_Button";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
-		
 		Button_ID = "Delete_District_Modal_Button";
 		Button_Class = "btn btn-default";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
-		
 		Button_ID = "Create_School_Modal_Button";
 		Button_Class = "btn btn-default";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
-	
-	function School_UDC_Buttons(){
+
+	function School_UDC_Buttons() {
 		Button_Decision = false;
 		Button_Class = "btn btn-info";
 		Button_ID = "Update_School_Modal_Button";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
-		
 		Button_ID = "Delete_School_Modal_Button";
 		Button_Class = "btn btn-danger";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
-		
 		Button_ID = "Create_Bus_Number_Modal_Button";
 		Button_Class = "btn btn-success";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
-	
-	function Reset_School_UDC_Buttons(){
+
+	function Reset_School_UDC_Buttons() {
 		Button_Decision = true;
 		Button_Class = "btn btn-default";
 		Button_ID = "Update_School_Modal_Button";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
-		
 		Button_ID = "Delete_School_Modal_Button";
 		Button_Class = "btn btn-default";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
-		
 		Button_ID = "Create_Bus_Number_Modal_Button";
 		Button_Class = "btn btn-default";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
-	
-	function Bus_Number_UDC_Buttons(){
+
+	function Bus_Number_UDC_Buttons() {
 		Button_Decision = false;
 		Button_Class = "btn btn-info";
 		Button_ID = "Update_Bus_Number_Modal_Button";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
-		
 		Button_ID = "Delete_Bus_Number_Modal_Button";
 		Button_Class = "btn btn-danger";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
-	
-	function Reset_Bus_Number_UDC_Buttons(){
+
+	function Reset_Bus_Number_UDC_Buttons() {
 		Button_Decision = true;
 		Button_Class = "btn btn-default";
 		Button_ID = "Update_Bus_Number_Modal_Button";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
-		
 		Button_ID = "Delete_Bus_Number_Modal_Button";
 		Button_Class = "btn btn-default";
 		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
-	
-	function VAB_Button(){
+
+	function VAB_Button() {
 		Button_Decision = false;
 		Button_ID = "View_All_Buses_Button";
 		Button_Class = "btn btn-success";
-		Disable_Or_Enable_Button (Button_ID, Button_Decision);
+		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 	}
-	
-	function Reset_VAB_Button(){
+
+	function Reset_VAB_Button() {
 		Button_Decision = true;
 		Button_Class = "btn btn-default";
 		Button_ID = "View_All_Buses_Button";
-		Disable_Or_Enable_Button (Button_ID, Button_Decision);
+		Disable_Or_Enable_Button(Button_ID, Button_Decision);
 		Change_Button_Class(Button_ID, Button_Class);
 		Reset_Bus_Stops();
-	}
-	
-	function Enable_Bus_Modal() {
-		document.getElementById("View_All_Buses_Button").disabled = false;
-		document.getElementById("View_All_Buses_Button").className = "btn btn-success";
 	}
 
 	function Reset_Bus_Stops() {
 		Bus_Stops_Table = '<thead><tr><th>Bus #</th><th>Stop Time</th><th>Stop Address</th></tr></thead>';
 		//document.getElementById("Bus_Stops_Table").innerHTML = Bus_Stops_Table;
 	}
-	
+
 	function Read_States() {
 		action = "Read_States";
-		Ajax_Data = {action: action};
+		Ajax_Data = {
+			action: action
+		};
 		Outgoing_Ajax(Ajax_Data);
 		States_Data = jQuery.parseJSON(Incoming_Ajax_Data);
 		Select_States(States_Data);
 	}
-	
+
 	function Select_States(States_Data) {
 		select = document.getElementById("Select_States");
 		for (i = 0; i < States_Data.length; i++) {
@@ -365,7 +417,7 @@ $(document).ready(function() {
 	}
 
 	function Read_Districts() {
-		State_ID = document.getElementById("Select_States").value;
+		Grab_Selected_State_ID();
 		action = "Read_Districts";
 		Ajax_Data = {
 			State_ID: State_ID,
@@ -388,7 +440,7 @@ $(document).ready(function() {
 	}
 
 	function Read_Schools() {
-		District_ID = document.getElementById("Select_States").value;
+		Grab_Selected_District_ID();
 		action = "Read_Schools";
 		Ajax_Data = {
 			District_ID: District_ID,
@@ -398,7 +450,6 @@ $(document).ready(function() {
 		Schools_Data = jQuery.parseJSON(Incoming_Ajax_Data);
 		return Schools_Data;
 	}
-
 
 	function Select_Schools(Schools_Data) {
 		select = document.getElementById("Select_Schools");
@@ -412,7 +463,7 @@ $(document).ready(function() {
 	}
 
 	function Read_Bus_Stops() {
-		School_ID = document.getElementById("Select_States").value;
+		Grab_Selected_School_ID();
 		action = "Read_Bus_Stops";
 		Ajax_Data = {
 			School_ID: School_ID,
@@ -511,11 +562,10 @@ $(document).ready(function() {
 		localStorage.removeItem("email");
 	}
 
-	function Logged_In(){
+	function Logged_In() {
 		Navigation_Right_Logged_In();
-		
 	}
-	
+
 	function Navigation_Right_Logged_In() {
 		document.getElementById("navbar_right_placeholder").innerHTML = '<li> <a data-target="#AccountModal" data-toggle="modal" href="#"><span class="glyphicon glyphicon-user"></span>Account</a> </li><li> <a data-target="#LogoutModal" data-toggle="modal" href="#" id="Logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a> </li>';
 	}
@@ -523,9 +573,9 @@ $(document).ready(function() {
 	function Navigation_Right_Logged_Out() {
 		document.getElementById("navbar_right_placeholder").innerHTML = '<li><a data-target="#LoginModal" data-toggle="modal" href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a> </li>';
 	}
-	
+
 	function Create_State() {
-		State_Name = document.getElementById("Create_State_Data").value;
+		State_Name = document.getElementById("Create_State_Name").value;
 		action = "Create_State";
 		Ajax_Data = {
 			State_Name: State_Name,
@@ -535,21 +585,81 @@ $(document).ready(function() {
 		Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
 		Check_Create_Response(Create_Response_Data);
 	}
-	
+
+	function Create_District() {
+		Grab_Selected_State_ID();
+		District_Name = document.getElementById("Create_District_Name").value;
+		action = "Create_District";
+		Ajax_Data = {
+			State_ID: State_ID,
+			District_Name: District_Name,
+			action: action
+		};
+		Outgoing_Ajax(Ajax_Data);
+		Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+		Check_Create_Response(Create_Response_Data);
+	}
+
+	function Create_School() {
+		Grab_Selected_District_ID();
+		School_Name = document.getElementById("Create_School_Name").value;
+		School_Address = document.getElementById("Create_School_Address").value;
+		action = "Create_School";
+		Ajax_Data = {
+			District_ID: District_ID,
+			School_Name: School_Name,
+			School_Address: School_Address,
+			action: action
+		};
+		Outgoing_Ajax(Ajax_Data);
+		Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+		Check_Create_Response(Create_Response_Data);
+	}
+
+	function Create_Bus_Stop() {
+		Grab_Selected_School_ID();
+		Bus_Number = document.getElementById("Create_Bus_Number").value;
+		Bus_Stop_Time = document.getElementById("Create_Bus_Stop_Time").value;
+		Bus_Stop_Address = document.getElementById("Create_Bus_Stop_Address").value;
+		action = "Create_Bus_Stop";
+		Ajax_Data = {
+			School_ID: School_ID,
+			Bus_Number: Bus_Number,
+			Bus_Stop_Time: Bus_Stop_Time,
+			Bus_Stop_Address: Bus_Stop_Address,
+			Bus_Stop_Latitude: Bus_Stop_Latitude,
+			Bus_Stop_Longitude: Bus_Stop_Longitude,
+			action: action
+		};
+		Outgoing_Ajax(Ajax_Data);
+		Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+		Check_Create_Response(Create_Response_Data);
+	}
+
 	function Display_Update_State(State_ID) {
 		action = "Get_State_Data";
 		Ajax_Data = {
 			State_ID: State_ID,
-			State_Name: State_Name,
 			action: action
 		};
-		//document.forms["Update_State_Form"]["State_Name"].value = State_Name;
 		Outgoing_Ajax(Ajax_Data);
-		State_Name_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-		document.getElementById("Update_State_Name").value = State_Name_Data[0].STATE_NAME;
+		State_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+		document.getElementById("Update_State_Name").value = State_Data[0].STATE_NAME;
 		return State_ID;
 	}
 	
+	function Display_Update_District(District_ID) {
+		action = "Get_District_Data";
+		Ajax_Data = {
+			District_ID: District_ID,
+			action: action
+		};
+		Outgoing_Ajax(Ajax_Data);
+		State_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+		document.getElementById("Update_District_Name").value = District_Data[0].DISTRICT_NAME;
+		return District_ID;
+	}
+
 	function Update_State(State_ID, New_State_Name) {
 		action = "Update_State";
 		Ajax_Data = {
@@ -562,6 +672,18 @@ $(document).ready(function() {
 		Check_Update_Response(Update_Response_Data);
 	}
 	
+	function Update_District(District_ID, New_District_Name) {
+		action = "Update_District";
+		Ajax_Data = {
+			District_ID: District_ID,
+			New_District_Name: New_District_Name,
+			action: action
+		};
+		Outgoing_Ajax(Ajax_Data);
+		Update_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+		Check_Update_Response(Update_Response_Data);
+	}
+
 	function Delete_State(State_ID) {
 		action = "Delete_State";
 		Ajax_Data = {
@@ -572,8 +694,6 @@ $(document).ready(function() {
 		Delete_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
 		Check_Delete_Response(Delete_Response_Data);
 	}
-	
-
 });
 // ------------------------------------------Ali coded items ABOVE --------------------------------//
 // ------------------------------------------Marlon coded items BELOW --------------------------------//
