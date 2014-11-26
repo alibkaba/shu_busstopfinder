@@ -48,23 +48,31 @@ function DB_Operation($action){
 		break;
 		case "Create_School": Create_School();
 		break;
+		case "Create_Bus_Stop": Create_Bus_Stop();
+		break;
 		case "Get_State_Data": Get_State_Data();
 		break;
 		case "Get_District_Data": Get_District_Data();
 		break;
-		case "Update_State": Update_State();
+		case "Get_School_Data": Get_School_Data();
 		break;
-		case "Delete_State": Delete_State();
+		case "Get_Bus_Stop_Data": Get_Bus_Stop_Data();
+		break;
+		case "Update_State": Update_State();
 		break;
 		case "Update_District": Update_District();
 		break;
-		case "Delete_District": Delete_District();
-		break;
-		case "Get_School_Data": Get_School_Data();
-		break;
 		case "Update_School": Update_School();
 		break;
+		case "Update_Bus_Stop": Update_Bus_Stop();
+		break;
+		case "Delete_State": Delete_State();
+		break;
+		case "Delete_District": Delete_District();
+		break;
 		case "Delete_School": Delete_School();
+		break;
+		case "Delete_Bus_Stop": Delete_Bus_Stop();
 		break;
 	}
 }
@@ -209,6 +217,42 @@ function Get_State_Data(){
 	echo json_encode($Response);
 }
 
+function Get_District_Data(){
+	global $PDOconn;
+	$District_ID = stripslashes($_POST["District_ID"]);
+
+	$Query = 'CALL GET_DISTRICT_DATA (?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $District_ID, PDO::PARAM_INT);
+	$Statement->execute();
+	$Response = $Statement->fetchAll();
+	echo json_encode($Response);
+}
+
+function Get_School_Data(){
+	global $PDOconn;
+	$School_ID = stripslashes($_POST["School_ID"]);
+
+	$Query = 'CALL GET_SCHOOL_DATA (?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
+	$Statement->execute();
+	$Response = $Statement->fetchAll();
+	echo json_encode($Response);
+}
+
+function Get_Bus_Stop_Data(){
+	global $PDOconn;
+	$Bus_Stop_ID = stripslashes($_POST["Bus_Stop_ID"]);
+
+	$Query = 'CALL GET_BUS_STOP_DATA (?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $Bus_Stop_ID, PDO::PARAM_INT);
+	$Statement->execute();
+	$Response = $Statement->fetchAll();
+	echo json_encode($Response);
+}
+
 function Update_State(){
 	global $PDOconn;
 	$State_ID = stripslashes($_POST["State_ID"]);
@@ -218,6 +262,58 @@ function Update_State(){
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
 	$Statement->bindParam(2, $New_State_Name, PDO::PARAM_STR, 50);
+	$Statement->execute();
+	$Response = $Statement->fetchAll();
+	echo json_encode($Response);
+}
+
+function Update_District(){
+	global $PDOconn;
+	$District_ID = stripslashes($_POST["District_ID"]);
+	$New_District_Name = stripslashes($_POST["New_District_Name"]);
+
+	$Query = 'CALL UPDATE_DISTRICT (?,?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $District_ID, PDO::PARAM_INT);
+	$Statement->bindParam(2, $New_District_Name, PDO::PARAM_STR, 50);
+	$Statement->execute();
+	$Response = $Statement->fetchAll();
+	echo json_encode($Response);
+}
+
+function Update_School(){
+	global $PDOconn;
+	$School_ID = stripslashes($_POST["School_ID"]);
+	$New_School_Name = stripslashes($_POST["New_School_Name"]);
+	$New_School_Address = stripslashes($_POST["New_School_Address"]);
+
+	$Query = 'CALL UPDATE_SCHOOL (?,?,?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
+	$Statement->bindParam(2, $New_School_Name, PDO::PARAM_STR, 50);
+	$Statement->bindParam(3, $New_School_Address, PDO::PARAM_STR, 100);
+	$Statement->execute();
+	$Response = $Statement->fetchAll();
+	echo json_encode($Response);
+}
+
+function Update_Bus_Stop(){
+	global $PDOconn;
+	$Bus_Stop_ID = stripslashes($_POST["Bus_Stop_ID"]);
+	$New_Bus_Stop_Number = stripslashes($_POST["New_Bus_Stop_Number"]);
+	$New_Bus_Stop_Time = stripslashes($_POST["New_Bus_Stop_Time"]);
+	$New_Bus_Stop_Address = stripslashes($_POST["New_Bus_Stop_Address"]);
+	$New_Bus_Stop_Latitude = stripslashes($_POST["New_Bus_Stop_Latitude"]);
+	$New_Bus_Stop_Longitude = stripslashes($_POST["New_Bus_Stop_Longitude"]);
+
+	$Query = 'CALL UPDATE_BUS_STOP (?,?,?,?,?,?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $Bus_Stop_ID, PDO::PARAM_INT);
+	$Statement->bindParam(2, $New_Bus_Stop_Number, PDO::PARAM_INT);
+	$Statement->bindParam(3, $New_Bus_Stop_Time, PDO::PARAM_STR, 50);
+	$Statement->bindParam(4, $New_Bus_Stop_Address, PDO::PARAM_STR, 100);
+	$Statement->bindParam(5, $New_Bus_Stop_Latitude, PDO::PARAM_STR, 100);
+	$Statement->bindParam(6, $New_Bus_Stop_Longitude, PDO::PARAM_STR, 100);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);
@@ -235,11 +331,11 @@ function Delete_State(){
 	echo json_encode($Response);
 }
 
-function Get_District_Data(){
+function Delete_District(){
 	global $PDOconn;
 	$District_ID = stripslashes($_POST["District_ID"]);
 
-	$Query = 'CALL GET_DISTRICT_DATA (?)';
+	$Query = 'CALL DELETE_DISTRICT (?)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $District_ID, PDO::PARAM_INT);
 	$Statement->execute();
@@ -247,65 +343,25 @@ function Get_District_Data(){
 	echo json_encode($Response);
 }
 
-function Update_District(){
-	global $PDOconn;
-	$State_ID = stripslashes($_POST["District_ID"]);
-	$New_State_Name = stripslashes($_POST["New_District_Name"]);
-
-	$Query = 'CALL DISTRICT_STATE (?,?)';
-	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
-	$Statement->bindParam(2, $New_State_Name, PDO::PARAM_STR, 50);
-	$Statement->execute();
-	$Response = $Statement->fetchAll();
-	echo json_encode($Response);
-}
-
-function Delete_District(){
-	global $PDOconn;
-	$State_ID = stripslashes($_POST["State_ID"]);
-
-	$Query = 'CALL DELETE_STATE (?)';
-	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
-	$Statement->execute();
-	$Response = $Statement->fetchAll();
-	echo json_encode($Response);
-}
-
-function Get_School_Data(){
-	global $PDOconn;
-	$State_ID = stripslashes($_POST["School_ID"]);
-
-	$Query = 'CALL GET_SCHOOL_DATA (?)';
-	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
-	$Statement->execute();
-	$Response = $Statement->fetchAll();
-	echo json_encode($Response);
-}
-
-function Update_School(){
-	global $PDOconn;
-	$State_ID = stripslashes($_POST["School_ID"]);
-	$New_State_Name = stripslashes($_POST["New_State_Name"]);
-
-	$Query = 'CALL UPDATE_SCHOOL (?,?)';
-	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
-	$Statement->bindParam(2, $New_State_Name, PDO::PARAM_STR, 50);
-	$Statement->execute();
-	$Response = $Statement->fetchAll();
-	echo json_encode($Response);
-}
-
 function Delete_School(){
 	global $PDOconn;
-	$State_ID = stripslashes($_POST["State_ID"]);
+	$School_ID = stripslashes($_POST["School_ID"]);
 
-	$Query = 'CALL DELETE_STATE (?)';
+	$Query = 'CALL DELETE_SCHOOL (?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
+	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
+	$Statement->execute();
+	$Response = $Statement->fetchAll();
+	echo json_encode($Response);
+}
+
+function Delete_Bus_Stop(){
+	global $PDOconn;
+	$Bus_Stop_ID = stripslashes($_POST["Bus_Stop_ID"]);
+
+	$Query = 'CALL DELETE_BUS_STOP (?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $Bus_Stop_ID, PDO::PARAM_INT);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);

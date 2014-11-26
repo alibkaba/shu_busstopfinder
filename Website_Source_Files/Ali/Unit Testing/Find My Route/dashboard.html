@@ -20,8 +20,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-				</button> <a class="navbar-brand" href="index.html">Bus Stops</a> </div>
+				<button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="index.html">Bus Stops</a> </div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li> <a href="index.html">Home</a> </li>
@@ -37,8 +36,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Account</h4> </div>
 				<div class="modal-body">
 					<div class="form-group">
@@ -67,21 +65,20 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Account - Change Password</h4> </div>
 				<h4>Change Password</h4>
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
 							<label for="Old_Password">Old</label>
-							<input class="form-control" id="Old_Password" placeholder="Old Password" type="password"> </div>
+							<input class="form-control" id="Old_Password" placeholder="Enter your Old Password" type="password"> </div>
 						<div class="form-group">
 							<label for="New_PasswordA">New</label>
-							<input class="form-control" id="New_PasswordA" placeholder="New Password" type="password"> </div>
+							<input class="form-control" id="New_PasswordA" placeholder="Enter your New Password" type="password"> </div>
 						<div class="form-group">
 							<label for="New_PasswordB">Confirm</label>
-							<input class="form-control" id="New_PasswordB" placeholder="Confirm New Password" type="password"> </div>
+							<input class="form-control" id="New_PasswordB" placeholder="Confirm your New Password" type="password"> </div>
 						<div class="form-group">
 							<button class="btn btn-primary" type="submit">Update</button>
 						</div>
@@ -98,17 +95,16 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Login</h4> </div>
 				<div class="modal-body">
-					<form action="#" id="Create_Account_Form" method="post" name="Create_Account_Form">
+					<form action="#" id="Create_Account_Form" method="post">
 						<div class="form-group">
 							<label for="Email">Email</label>
-							<input class="form-control" id="Email" placeholder="Email" type="email"> </div>
+							<input class="form-control" id="Email" placeholder="Enter an Email" type="email"> </div>
 						<div class="form-group">
 							<label for="Password">Password</label>
-							<input class="form-control" id="Password" placeholder="Password" type="password"> </div>
+							<input class="form-control" id="Password" placeholder="Enter aPassword" type="password"> </div>
 						<div class="form-group"></div>
 						<div class="form-group">
 							<button class="btn btn-default" type="submit">Create</button>
@@ -126,8 +122,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Account - Delete Account</h4> </div>
 				<div class="modal-body">
 					<form>
@@ -183,15 +178,15 @@
 		</div>
 		<div class="col-md-3">
 			<div class="text-center">
-				<select class="selectpicker" id="Select_Schools">
+				<select class="selectpicker" id="Select_Bus_Stop">
 					<option value=""> Select your Bus # </option>
 				</select>
 				<br>
 				<button class="btn btn-default" data-target="#BusModal" data-toggle="modal" disabled="disabled" id="View_All_Buses_Button" type="button">View All Buses</button>
 				<br>
-				<button class="btn btn-default" data-target="#" data-toggle="modal" disabled="disabled" id="Create_Bus_Number_Modal_Button" type="button">Create</button>
-				<button class="btn btn-default" data-target="#" data-toggle="modal" disabled="disabled" id="Update_Bus_Number_Modal_Button" type="button">Update</button>
-				<button class="btn btn-default" data-target="#" data-toggle="modal" disabled="disabled" id="Delete_Bus_Number_Modal_Button" type="button">Delete</button>
+				<button class="btn btn-default" data-target="#CreateBusStopModal" data-toggle="modal" disabled="disabled" id="Create_Bus_Stop_Modal_Button" type="button">Create</button>
+				<button class="btn btn-default" data-target="#UpdateBusStopModal" data-toggle="modal" disabled="disabled" id="Update_Bus_Stop_Modal_Button" type="button">Update</button>
+				<button class="btn btn-default" data-target="#DeleteBusStopModal" data-toggle="modal" disabled="disabled" id="Delete_Bus_Stop_Modal_Button" type="button">Delete</button>
 			</div>
 		</div>
 	</div>
@@ -199,8 +194,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Bus Stops</h4> </div>
 				<div class="modal-body">
 					<table class="table table-bordered" id="Bus_Stops_Table">
@@ -223,11 +217,10 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Create a State</h4> </div>
 				<div class="modal-body">
-					<form action="#" id="Create_State_Form" method="post" name="Create_State_Form">
+					<form action="#" id="Create_State_Form" method="post">
 						<div class="form-group">
 							<label for="State_Name">State Name</label>
 							<input class="form-control" id="Create_State_Name" placeholder="Enter a State Name" type="text"> </div>
@@ -246,11 +239,10 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Create a District</h4> </div>
 				<div class="modal-body">
-					<form action="#" id="Create_District_Form" method="post" name="Create_District_Form">
+					<form action="#" id="Create_District_Form" method="post">
 						<div class="form-group">
 							<label for="District_Name">District Name</label>
 							<input class="form-control" id="Create_District_Name" placeholder="Enter a District Name" type="text"> </div>
@@ -269,21 +261,18 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Create a School</h4> </div>
 				<div class="modal-body">
-					<form action="#" id="Create_School_Form" method="post" name="Create_School_Form">
+					<form action="#" id="Create_School_Form" method="post">
 						<div class="form-group">
 							<label for="School_Name">School Name</label>
 							<input class="form-control" id="Create_School_Name" placeholder="Enter a School Name" type="text"> </div>
 						<div class="form-group">
-							<div class="form-group">
-								<label for="School_Address">School Address</label>
-								<input class="form-control" id="Create_School_Address" placeholder="School Address" type="text"> </div>
-							<div class="form-group">
-								<button class="btn btn-default" id="Create_School" type="submit" disabled="disabled">Create</button>
-							</div>
+							<label for="School_Address">School Address</label>
+							<input class="form-control" id="Create_School_Address" placeholder="Enter a School Address" type="text"> </div>
+						<div class="form-group">
+							<button class="btn btn-default" id="Create_School" type="submit" disabled="disabled">Create</button>
 						</div>
 					</form>
 				</div>
@@ -297,26 +286,21 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
-					<h4 class="modal-title">Create a School</h4> </div>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Create a Bus Stop</h4> </div>
 				<div class="modal-body">
-					<form action="#" id="Create_Bus_Stop_Form" method="post" name="Create_Bus_Stop_Form">
+					<form action="#" id="Create_Bus_Stop_Form" method="post">
 						<div class="form-group">
 							<label for="Bus_Stop_Number">Bus Stop Number</label>
-							<input class="form-control" id="Create_Bus_Number" placeholder="Enter a Bus Stop Number" type="text"> </div>
+							<input class="form-control" id="Create_Bus_Stop_Number" placeholder="Enter a Bus Stop Number" type="text"> </div>
 						<div class="form-group">
-							<div class="form-group">
-								<label for="Bus_Stop_Number">Bus Stop Time</label>
-								<input class="form-control" id="Create_Bus_Stop_Time" placeholder="Enter a Bus Stop Time" type="text"> </div>
-							<div class="form-group">
-								<div class="form-group">
-									<label for="Bus_Stop_Number">Bus Stop Address</label>
-									<input class="form-control" id="Create_Bus_Stop_Address" placeholder="Enter a Bus Stop Address" type="text"> </div>
-								<div class="form-group">
-									<button class="btn btn-default" id="Create_Bus_Stop" type="submit" disabled="disabled">Create</button>
-								</div>
-							</div>
+							<label for="Bus_Stop_Number">Bus Stop Time</label>
+							<input class="form-control" id="Create_Bus_Stop_Time" placeholder="Enter a Bus Stop Time" type="text"> </div>
+						<div class="form-group">
+							<label for="Bus_Stop_Number">Bus Stop Address</label>
+							<input class="form-control" id="Create_Bus_Stop_Address" placeholder="Enter a Bus Stop Address" type="text"> </div>
+						<div class="form-group">
+							<button class="btn btn-default" id="Create_Bus_Stop" type="submit" disabled="disabled">Create</button>
 						</div>
 					</form>
 				</div>
@@ -330,38 +314,15 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Update a State</h4> </div>
 				<div class="modal-body">
-					<form action="#" id="Create_State_Form" method="post" name="Create_State_Form">
+					<form action="#" id="Update_State_Form" method="post">
 						<div class="form-group">
 							<label for="State_Name">State Name</label>
-							<input class="form-control" id="Update_State_Name" placeholder="State Name" type="text"> </div>
+							<input class="form-control" id="Update_State_Name" placeholder="Enter a State Name" type="text"> </div>
 						<div class="form-group">
 							<button class="btn btn-default" disabled="disabled" id="Update_State" type="submit">Update</button>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="DeleteStateModal" tabindex="-1">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
-					<h4 class="modal-title">Delete a State</h4> </div>
-				<div class="modal-body">
-					<form action="#" id="Create_State_Form" method="post" name="Create_State_Form">
-						<div class="alert alert-danger" id="Delete_State_Place_Holder"></div>
-						<div class="form-group">
-							<button class="btn btn-danger" id="Delete_State" type="button">Yes</button>
-							<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
 						</div>
 					</form>
 				</div>
@@ -375,16 +336,89 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Update a District</h4> </div>
 				<div class="modal-body">
-					<form action="#" id="Create_District_Form" method="post" name="Create_District_Form">
+					<form action="#" id="Update_District_Form" method="post">
 						<div class="form-group">
 							<label for="State_Name">District Name</label>
-							<input class="form-control" id="Update_District_Name" placeholder="District Name" type="text"> </div>
+							<input class="form-control" id="Update_District_Name" placeholder="Enter a District Name" type="text"> </div>
 						<div class="form-group">
 							<button class="btn btn-default" id="Update_District" type="submit" disabled="disabled">Update</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="UpdateSchoolModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Update a School</h4> </div>
+				<div class="modal-body">
+					<form action="#" id="Update_School_Form" method="post">
+						<div class="form-group">
+							<label for="State_Name">School Name</label>
+							<input class="form-control" id="Update_School_Name" placeholder="Enter a School Name" type="text"> </div>
+						<div class="form-group">
+							<label for="State_Name">School Address</label>
+							<input class="form-control" id="Update_School_Address" placeholder="Enter a School Address" type="text"> </div>
+						<div class="form-group">
+							<button class="btn btn-default" id="Update_School" type="submit" disabled="disabled">Update</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="UpdateBusStopModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Update a Bus Stop</h4> </div>
+				<div class="modal-body">
+					<form action="#" id="Update_Bus_Stop_Form" method="post">
+						<div class="form-group">
+							<label for="Bus_Stop_Number">Bus Stop Number</label>
+							<input class="form-control" id="Update_Bus_Stop_Number" placeholder="Enter a Bus Stop Number" type="text"> </div>
+						<div class="form-group">
+							<label for="Bus_Stop_Number">Bus Stop Time</label>
+							<input class="form-control" id="Update_Bus_Stop_Time" placeholder="Enter a Bus Stop Time" type="text"> </div>
+						<div class="form-group">
+							<label for="Bus_Stop_Number">Bus Stop Address</label>
+							<input class="form-control" id="Update_Bus_Stop_Address" placeholder="Enter a Bus Stop Address" type="text"> </div>
+						<div class="form-group">
+							<button class="btn btn-default" id="Update_Bus_Stop" type="submit" disabled="disabled">Update</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="DeleteStateModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Delete a State</h4> </div>
+				<div class="modal-body">
+					<form action="#" id="Delete_State_Form" method="post">
+						<div class="alert alert-danger" id="Delete_State_Place_Holder"></div>
+						<div class="form-group">
+							<button class="btn btn-danger" id="Delete_State" type="button">Yes</button>
+							<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
 						</div>
 					</form>
 				</div>
@@ -398,14 +432,55 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span>
-					</button>
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
 					<h4 class="modal-title">Delete a District</h4> </div>
 				<div class="modal-body">
-					<form action="#" id="Create_District_Form" method="post" name="Create_District_Form">
+					<form action="#" id="Delete_District_Form" method="post">
 						<div class="alert alert-danger" id="Delete_District_Place_Holder"></div>
 						<div class="form-group">
 							<button class="btn btn-danger" id="Delete_District" type="button">Yes</button>
+							<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="DeleteSchoolModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Delete a School</h4> </div>
+				<div class="modal-body">
+					<form action="#" id="Delete_School_Form" method="post">
+						<div class="alert alert-danger" id="Delete_School_Place_Holder"></div>
+						<div class="form-group">
+							<button class="btn btn-danger" id="Delete_School" type="button">Yes</button>
+							<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="DeleteBusStopModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Delete a Bus Stop</h4> </div>
+				<div class="modal-body">
+					<form action="#" id="Delete_District_Form" method="post">
+						<div class="alert alert-danger" id="Delete_Bus_Stop_Place_Holder"></div>
+						<div class="form-group">
+							<button class="btn btn-danger" id="Delete_Bus_Stop" type="button">Yes</button>
 							<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
 						</div>
 					</form>
