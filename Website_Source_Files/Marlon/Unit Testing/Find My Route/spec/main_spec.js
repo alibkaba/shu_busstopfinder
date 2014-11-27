@@ -4,6 +4,30 @@
 describe("Create new Bus object test", function() {
     var Bus_Stop;
     beforeEach(function() {  Bus_Stop = new Parada; });
+    it("validates time input", function() {
+        var Time = "12:45am";
+        expect(isTimeValid(Time)).toBeTruthy();
+        var Time = "12:45Am";
+        expect(isTimeValid(Time)).toBeTruthy();
+        var Time = "02:45pm";
+        expect(isTimeValid(Time)).toBeTruthy();
+        var Time = "05:45Pm";
+        expect(isTimeValid(Time)).toBeTruthy();
+        var Time = "12:61am";
+        expect(isTimeValid(Time)).toBeFalsy();
+        var Time = "13:45am";
+        expect(isTimeValid(Time)).toBeFalsy();
+        var Time = "03:45bm";
+        expect(isTimeValid(Time)).toBeFalsy();
+        var Time = "02:40";
+        expect(isTimeValid(Time)).toBeFalsy();
+        var Time = "asdf";
+        expect(isTimeValid(Time)).toBeFalsy();
+        var Time = "";
+        expect(isTimeValid(Time)).toBeFalsy();
+    });
+
+
     it("creates a new object when passed parameters", function() {
         spyOn(Bus_Stop, "Create_New");
         Bus_Stop.Create_New("9:20", "20 scofield place norwalk ct");
@@ -14,14 +38,28 @@ describe("Create new Bus object test", function() {
         expect(Bus_Stop.Stop_Time).toBe("9:10");
     });
     it("can update data on object", function() {
-        spyOn(Bus_Stop, "Set_Stop_Time");
-        Bus_Stop.Create_New("9:20", "20 scofield place norwalk ct");
-        expect(Bus_Stop.Stop_Time).toBe("9:20");
-        Bus_Stop.Set_Stop_Time("11:00");
-        expect(Bus_Stop.Set_Stop_Time).toHaveBeenCalled();
-        alert(Bus_Stop.Stop_Time);/////Doesn't pass
+        Bus_Stop.Create_New("8:00", "30 main st norwalk ct");
+        expect(Bus_Stop.Stop_Time).toBe("8:00");
+        expect(Bus_Stop.Stop_Address).toBe("30 main st norwalk ct");
+        Bus_Stop.Set_Stop_Time("8:15");
+        Bus_Stop.Set_Stop_Address("60 main st norwalk ct");
+        expect(Bus_Stop.Stop_Time).toBe("8:15");
+        expect(Bus_Stop.Stop_Address).toBe("60 main st norwalk ct");
+    });
+    it("fails to create an object unless time and address are both defined", function() {
+        Bus_Stop.Create_New();
+        expect(Bus_Stop.Stop_Time).toBeUndefined();
+        expect(Bus_Stop.Stop_Address).toBeUndefined();
+        Bus_Stop.Create_New("8:00");
+        expect(Bus_Stop.Stop_Time).toBeUndefined();
+        expect(Bus_Stop.Stop_Address).toBeUndefined();
+        Bus_Stop.Create_New(undefined, "30 main st norwalk ct");
+        expect(Bus_Stop.Stop_Time).toBeUndefined();
+        expect(Bus_Stop.Stop_Address).toBeUndefined();
+
 
     });
+
 
 });
 

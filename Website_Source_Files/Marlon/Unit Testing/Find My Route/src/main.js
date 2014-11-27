@@ -236,8 +236,15 @@ function Initialize_Google_Maps_API() {
 
 }
 
+function isTimeValid(Time){
+    var regex = /^([0]\d|[1][0-2]):([0-5]\d)\s?(?:AM|PM)$/i;
+    regex.test(Time);
+    alert(Time + " is " + regex.test(Time));
+    return regex.test(Time);
+}
 
-function Parada (Stop_Time, Stop_Address){
+
+function Parada (){
 
     this.Stop_Time;
     this.Stop_Address;
@@ -254,12 +261,14 @@ function Parada (Stop_Time, Stop_Address){
         }
         else {
             console.log("Cannot create Bus Stop Object because it is missing data");
+            alert("Cannot create Bus Stop Object because it is missing data");
         }
     };
 
 
     this.Set_Stop_ID = function (Stop_ID) { this.Stop_ID = Stop_ID};
-    this.Set_Stop_Time = function (Stop_Time) { this.Stop_Time = Stop_Time};
+    this.Set_Stop_Time2 = function (Stop_Time) {this.Stop_Time = Stop_Time};
+    this.Set_Stop_Time = function (Stop_Time) {this.Stop_Time = Stop_Time};
     this.Set_Stop_Address = function (Stop_Address) {this.Stop_Address = Stop_Address};
     this.Set_Distance_to_User = function (Distance_to_User) {this.Distance_to_User = Distance_to_User};
     this.Set_Latitude = function (Latitude) {this.Latitude = Latitude};
