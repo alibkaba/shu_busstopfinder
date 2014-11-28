@@ -1,10 +1,8 @@
 
 // ------------------------------------------Marlon coded items BELOW --------------------------------//
 
-describe("Create new Bus object test", function() {
-    var Bus_Stop;
-    beforeEach(function() {  Bus_Stop = new Parada; });
-    it("validates time input", function() {
+describe("Test time input", function(){
+    it("validates Bus Stop time", function() {
         var Time = "12:45am";
         expect(isTimeValid(Time)).toBeTruthy();
         var Time = "12:45Am";
@@ -26,15 +24,19 @@ describe("Create new Bus object test", function() {
         var Time = "";
         expect(isTimeValid(Time)).toBeFalsy();
     });
+});
 
 
+describe("Test creating new Bus objects", function() {
+    var Bus_Stop;
+    beforeEach(function() {  Bus_Stop = new Parada; });
     it("creates a new object when passed parameters", function() {
         spyOn(Bus_Stop, "Create_New");
-        Bus_Stop.Create_New("9:20", "20 scofield place norwalk ct");
+        Bus_Stop.Create_New("9:20", "2 scofield place norwalk ct");
         expect(Bus_Stop.Create_New).toHaveBeenCalled();
     });
     it("can read data from object", function() {
-        Bus_Stop.Create_New("9:10", "20 scofield place norwalk ct");
+        Bus_Stop.Create_New("9:10", "2 scofield place norwalk ct");
         expect(Bus_Stop.Stop_Time).toBe("9:10");
     });
     it("can update data on object", function() {
@@ -59,11 +61,122 @@ describe("Create new Bus object test", function() {
 
 
     });
+});
 
+describe("Test isBusStopValid", function(){
+    var Bus_Stop;
+    beforeEach(function() {  Bus_Stop = new Parada; });
+    it("can test a valid Bus_Stop_Object", function(){
+        Bus_Stop.Create_New("8:00", "30 main st norwalk ct");
+        var Validated_Bus_Stop = isBusStopValid(Bus_Stop);
+        expect(Validated_Bus_Stop).toBeTruthy();
+    });
+    it("can test an Invalid Bus_Stop_Object", function(){
+        Bus_Stop.Create_New();
+        var Validated_Bus_Stop = isBusStopValid(Bus_Stop);
+        expect(Validated_Bus_Stop).toBeFalsy();
+    });
 
 });
 
 
+
+describe("Test Create Array of Bus Stops Objects", function(){
+    var Bus_Stop;
+    var New_Bus_Array = [];
+    beforeEach(function() {  Bus_Stop = new Parada; });
+    it("can validate a Bus_Stop_Object", function(){
+        Bus_Stop.Create_New("9:00", "20 Main St Norwalk CT");
+        expect(isBusStopValid(Bus_Stop)).toBeTruthy();
+    });
+    it("can add Bus Objects to Array", function(){
+        Bus_Stop.Create_New("9:00", "20 Main St Norwalk CT");
+        expect(isBusStopValid(Bus_Stop)).toBeTruthy();
+        New_Bus_Array.push(Bus_Stop);
+        expect(New_Bus_Array.length).toBe(1);
+        Bus_Stop.Create_New("9:10", "60 Main St Norwalk CT");
+        New_Bus_Array.push(Bus_Stop);
+        expect(New_Bus_Array.length).toBe(2);
+    });
+});
+
+
+describe("Test Get Bus Stops for School ID", function(){
+    var School_ID = '1';
+    it("should return array with valid data", function () {
+        var New_Bus_Array = Get_Bus_Stops_for_School(School_ID);
+        expect(New_Bus_Array[0].Stop_Time).toContain('9:00');
+        expect(New_Bus_Array[0].Stop_Address).toContain('RIVERSIDE AV & HILL ST norwalk ct');
+        // expect(New_Bus_Array[0].Distance_to_Stop).toBeNull();
+        expect(New_Bus_Array[0].Latitude).not.toBeNull();
+        expect(New_Bus_Array[0].Longitude).not.toBeNull();
+        expect(isBusStopValid(New_Bus_Array[0])).toBeTruthy();
+    });
+    it("returns an array of objects from Get Bus Stops", function (){
+        var Bus_Stops = Get_Bus_Stops();
+        expect(typeof Bus_Stops).toBe('object');
+        expect(typeof Bus_Stops[0]).toBe('object');
+    });
+});
+
+
+
+describe("Test Address object and Geocoding", function(){
+    var User_Address;
+    beforeEach(function() {  User_Address = new Address; });
+    it("creates a new address", function () {
+        User_Address.Set_Location("20 main st norwalk ct");
+        expect(User_Address.Location).toBe("20 main st norwalk ct");
+    });
+    it("calls Get_LatLong to get Geolocation for Address", function () {
+        spyOn(User_Address, "Get_LatLong");
+        User_Address.Get_LatLong("20 main st norwalk ct");
+        expect(User_Address.Get_LatLong).toHaveBeenCalled();
+     });
+    it("creates Lat_Long_Location from Latitude and Longitude", function () {
+        User_Address.Latitude = 40.25;
+        User_Address.Longitude = 41.001;
+        User_Address.Set_Lat_Long_Location();
+        expect(User_Address.Lat_Long_Location).toBe("40.25,41.001");
+        expect(User_Address.Set_Lat_Long_Location).toBeTruthy();
+    });
+    it("alerts user if cannot set Lat_Long_Location from Latitude and Longitude", function () {
+        User_Address.Latitude;
+        User_Address.Longitude = 41.001;
+        User_Address.Set_Lat_Long_Location();
+        expect(User_Address.Set_Lat_Long_Location()).toBeFalsy();
+        expect(User_Address.Lat_Long_Location).toBeUndefined();
+    });
+});
+
+
+describe("Test Convert Coordinates to String", function(){
+    var User_Address = "20 main st norwalk ct";
+    // var User_Coordinates  = Convert_Coordinates_to_String(User_Address);
+    //alert(typeof Coordinates);
+    it("Find the lowest Distance To Stop", function () {
+        //expect(Coordinates.Latitude).toContain(41.11912100000001);
+        // expect(Coordinates.Latitude).toBeFalsy(); //Async issue
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 describe("Test Creating New Bus Stop Objects", function(){
     it("creates a new Bus Stop Object by passing Stop Time and Stop Address", function () {
         var New_Bus_Stop = Create_Bus_Stop_Object( "9:00", "20 Main St Norwalk CT")
@@ -79,90 +192,12 @@ describe("Test Creating New Bus Stop Objects", function(){
         expect(New_Bus_Stop).toBeFalsy();
     });
 });
-
-
-describe("Test Validate Bus Stops Objects", function(){
-    var New_Bus_Stop = Create_Bus_Stop_Object( "9:00", "20 Main St Norwalk CT")
-    it("can test a valid Bus_Stop_Object", function(){
-        var Validated_Bus_Stop = Validate_Bus_Stop_Object(New_Bus_Stop);
-        expect(Validated_Bus_Stop).toBeTruthy();
-    });
-    it("can test an Invalid Bus_Stop_Object", function(){
-        var New_Bus_Stop;
-        var Validated_Bus_Stop = Validate_Bus_Stop_Object(New_Bus_Stop);
-        expect(Validated_Bus_Stop).toBeFalsy();
-    });
-
-});
+*/
 
 
 
-describe("Test Create Array of Bus Stops Objects", function(){
-    var New_Bus_Array = [];
-    it("can validate a Bus_Stop_Object", function(){
-        var New_Bus_Stop = Create_Bus_Stop_Object("9:00", "20 Main St Norwalk CT");
-        expect(Validate_Bus_Stop_Object(New_Bus_Stop)).toBeTruthy();
-    });
-    it("can add Bus Objects to Array", function(){
-        var New_Bus_Stop = Create_Bus_Stop_Object("9:00", "20 Main St Norwalk CT");
-        expect(Validate_Bus_Stop_Object(New_Bus_Stop)).toBeTruthy();
-        New_Bus_Array.push(New_Bus_Stop);
-        expect(New_Bus_Array.length).toBe(1);
-        New_Bus_Stop = Create_Bus_Stop_Object("9:20", "30 Main St Norwalk CT");
-        New_Bus_Array.push(New_Bus_Stop);
-        expect(New_Bus_Array.length).toBe(2);
-    });
-});
-
-describe("Test Get Bus Stops for School ID", function(){
-    var School_ID = '1';
-    it("should return array with valid data", function () {
-        var New_Bus_Array = Get_Bus_Stops_for_School(School_ID);
-        expect(New_Bus_Array[0].Stop_Time).toContain('9:00');
-        expect(New_Bus_Array[0].Stop_Address).toContain('RIVERSIDE AV & HILL ST norwalk ct');
-       // expect(New_Bus_Array[0].Distance_to_Stop).toBeNull();
-        expect(New_Bus_Array[0].Latitude).not.toBeNull();
-        expect(New_Bus_Array[0].Longitude).not.toBeNull();
-        expect(Validate_Bus_Stop_Object(New_Bus_Array[0])).toBeTruthy();
-        //expect(New_Bus_Array.length).toBeGreaterThan(0);
-    });
-    it("returns an array of objects from Get Bus Stops", function (){
-        var Bus_Stops = Get_Bus_Stops();
-        expect(typeof Bus_Stops).toBe('object');
-        expect(typeof Bus_Stops[0]).toBe('object');
-    });
-});
-
-describe("Test Process Bus Stops", function() {
-    it("calls the Get_Bus_Stops() function", function() {
-        var Bus_Stops = new Get_Bus_Stops();
-        expect(typeof Bus_Stops).toBe('object');
-        expect(Bus_Stops.length).toBeGreaterThan(0);
-    });
-});
 
 
-describe("Test Get Coordinates Function", function(){
-    var User_Address = "20 main st norwalk ct";
-   // var User_Coordinates  = Get_Coordinates(User_Address);
-    //alert(typeof Coordinates);
-    it("should return coordinates", function () {
-        //expect(User_Coordinates).not.toBeNull();
-        //expect(Coordinates.Latitude).toContain(41.119121);
-       // expect(Coordinates.Longitude).toContain(-73.412004);
-    });
-});
-
-
-describe("Test Convert Coordinates to String", function(){
-    var User_Address = "20 main st norwalk ct";
-   // var User_Coordinates  = Convert_Coordinates_to_String(User_Address);
-    //alert(typeof Coordinates);
-    it("Find the lowest Distance To Stop", function () {
-        //expect(Coordinates.Latitude).toContain(41.11912100000001);
-        // expect(Coordinates.Latitude).toBeFalsy(); //Async issue
-    });
-});
 
 
 describe("Calculate Distance to Stops", function(){

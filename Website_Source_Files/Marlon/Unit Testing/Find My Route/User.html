@@ -96,12 +96,9 @@
     <div class="col-md-12">
         <div>
             <label for="address">Enter your address:</label> <input id="User_Address" type="text">
-            <button onclick= "Process_Bus_Stops(User_Address.value)">Find Closest Bus Stop </button>
-            <button onclick= "Process_Bus_Stops_Haversine(User_Address.value)">Find Closest Bus Stop Haversine </button>
-            <button onclick= "Get_Coordinates(User_Address.value)"> Get Address Coordinates </button>
+            <button onclick= "Validate_User_Address(User_Address.value)">Find Closest Bus Stop </button>
             <button onclick= "Use_My_Location()"> Use My Location </button>
-            <button onclick= "Map_Bus_Stops()"> Map Bus Stops </button>
-            <button onclick= "Test_Object()"> Test Object </button>
+            <button id="Map_Closest_5_Stops" style="visibility:hidden;" > Map 5 closest Bus Stops </button>
         </div>
     </div>
 </div>
