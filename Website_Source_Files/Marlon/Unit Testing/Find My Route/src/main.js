@@ -96,7 +96,7 @@ function Read_Bus_Stops(School_ID){
    Table_Bus_Stops(Bus_Stops_Data);
 
     //Bus_Stops_Data[i].BUS_ID;
-    //Bus_Stops_Data[i].BUS_NUMBER;
+    //Bus_Stops_Data[i].BUS_STOP_NUMBER;
     //Bus_Stops_Data[i].BUS_STOP_TIME;
     //Bus_Stops_Data[i].BUS_STOP_ADDRESS;
     //Bus_Stops_Data[i].BUS_STOP_LATITUDE;
