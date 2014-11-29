@@ -186,7 +186,7 @@ function Create_School(){
 function Create_Bus_Stop(){
 	global $PDOconn;
 	$School_ID = stripslashes($_POST["School_ID"]);
-	$Bus_Number = stripslashes($_POST["Bus_Number"]);
+	$Bus_Stop_Number = stripslashes($_POST["Bus_Stop_Number"]);
 	$Bus_Stop_Time = stripslashes($_POST["Bus_Stop_Time"]);
 	$Bus_Stop_Address = stripslashes($_POST["Bus_Stop_Address"]);
 	$Bus_Stop_Latitude = stripslashes($_POST["Bus_Stop_Latitude"]);
@@ -195,7 +195,7 @@ function Create_Bus_Stop(){
 	$Query = 'CALL CREATE_BUS_STOP (?,?,?,?,?,?)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
-	$Statement->bindParam(2, $Bus_Number, PDO::PARAM_INT);
+	$Statement->bindParam(2, $Bus_Stop_Number, PDO::PARAM_INT);
 	$Statement->bindParam(3, $Bus_Stop_Time, PDO::PARAM_STR, 50);
 	$Statement->bindParam(4, $Bus_Stop_Address, PDO::PARAM_STR, 100);
 	$Statement->bindParam(5, $Bus_Stop_Latitude, PDO::PARAM_STR, 100);
