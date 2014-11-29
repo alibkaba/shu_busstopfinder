@@ -27,6 +27,19 @@ describe("Test time input", function(){
 });
 
 
+describe("Test Process User Address", function() {
+
+    it("creates a new object when passed parameters", function () {
+        spyOn(Bus_Stop, "New");
+        Bus_Stop.New("9:20", "2 scofield place norwalk ct");
+        expect(Bus_Stop.New).toHaveBeenCalled();
+    });
+}
+
+
+
+
+
 describe("Test creating new Bus objects", function() {
     var Bus_Stop;
     beforeEach(function() {  Bus_Stop = new Bus_Stop_Object; });

@@ -92,7 +92,6 @@ function Read_Bus_Stops(School_ID){
     var Read_Bus_Stops_Data = {School_ID: School_ID, action: action};
     Bus_Stops_Data = $.ajax({data: Read_Bus_Stops_Data}).responseText;
     Bus_Stops_Data = jQuery.parseJSON(Bus_Stops_Data);
-    //return Bus_Stop_Data;
    Table_Bus_Stops(Bus_Stops_Data);
 
     //Bus_Stops_Data[i].BUS_ID;
@@ -240,27 +239,87 @@ window.onload = function(){
 
 };
 
-function Main(){
-
-
-
-
-
+function Find_Closest_Bus_Stop(User_Address, School_ID){
+    var Bus_Stops = Get_Bus_Stops();
+    Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
+    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
+    Bus_Stops =  Calculate_Walking_Distance_To_Stops(User_Address, Bus_Stops);
+    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
+    Map_Shortest_Bus_Stop(User_Address.Lat_Long_Location, Bus_Stops[0]);
+    var Map_Closest_5_Stops_Btn = document.getElementById("Map_Closest_5_Stops");
+    //Map_Closest_5_Stops_Btn.addEventListener("click", Map_Bus_Stops(Bus_Stops));
+    Map_Closest_5_Stops_Btn.style.visibility="visible";
 }
 
 function Process_User_Address(User_Address){
-    var Number_of_Stops = 5;
-    if((User_Address.length >= Number_of_Stops)&& typeof User_Address == 'string' ){
-        var Validated_User_Address = new Address_Object();
-        Validated_User_Address.Set_Location(User_Address);
-        Validated_User_Address.Get_LatLong();
-        Validated_User_Address.Set_Lat_Long_Location();
-        Process_Bus_Stops(Validated_User_Address)
+    var School_ID = Get_School_ID();
+    var Attention_Field_Color = "#FF0000";
+    var Valid_Field_Color = "#FFFFFF";
+    var User_Address_Field = document.getElementById("User_Address");
+    var School_Drop_Down = document.getElementById("Select_Schools");
+
+    if(isUserAddressValid(User_Address) == true && Get_School_ID() != false){
+        var Validated_User_Address = Format_User_Address(User_Address);
+        var School_ID = Get_School_ID();
+        User_Address_Field.style.backgroundColor= Valid_Field_Color;
+        School_Drop_Down.style.backgroundColor= Valid_Field_Color;
+
+        Find_Closest_Bus_Stop(Validated_User_Address, School_ID);
+    }
+    else if (isUserAddressValid(User_Address) == false){
+        alert("Please Enter a valid address!");
+        User_Address_Field.focus();
+        //User_Address_Field.style.backgroundColor= Attention_Field_Color;
+        return false;
+    }
+    else if (Get_School_ID() == false){
+        alert("Please Select your School");
+        School_Drop_Down.focus;
+        //School_Drop_Down.style.backgroundColor= Attention_Field_Color;
+        return false;
+    }
+    else{
+        alert("Unknown error");
+    }
+}
+
+
+function isUserAddressValid(User_Address){
+    var Valid_Field_Color = "#FFFFFF";
+    var Attention_Field_Color = "#FF0000";
+    var User_Address_Field = document.getElementById("User_Address");
+    var elements = 5;
+    if((User_Address.length >= elements)&& typeof User_Address == 'string' ){
+        User_Address_Field.style.backgroundColor= Valid_Field_Color;
+        return true;
+    }
+    else{
+        User_Address_Field.style.backgroundColor= Attention_Field_Color;
+        return false;
+    }
+}
+
+function Format_User_Address(User_Address){
+    var Validated_User_Address = new Address_Object();
+    Validated_User_Address.Set_Location(User_Address);
+    Validated_User_Address.Get_LatLong();
+    Validated_User_Address.Set_Lat_Long_Location();
+    return Validated_User_Address;
+}
+
+
+function Get_School_ID() {
+    var Attention_Field_Color = "#FF0000";
+    var Valid_Field_Color = "#FFFFFF";
+    var School_Drop_Down = document.getElementById("Select_Schools");
+    var School_ID = School_Drop_Down.options[School_Drop_Down.selectedIndex].value;
+    if (School_ID == "") {
+        School_Drop_Down.style.backgroundColor= Attention_Field_Color;
+        return false;
     }
     else {
-        alert("Please Enter a valid address!");
-        document.getElementById("User_Address").focus();
-        document.getElementById("User_Address").style.backgroundColor="#FFFF85";
+        School_Drop_Down.style.backgroundColor= Valid_Field_Color;
+        return School_ID;
     }
 }
 
@@ -273,7 +332,7 @@ function Process_User_Location(){
             Validated_User_Address.Set_Latitude(Latitude);
             Validated_User_Address.Set_Longitude(Longitude);
             Validated_User_Address.Set_Lat_Long_Location();
-            Process_Bus_Stops(Validated_User_Address);
+            Find_Closest_Bus_Stop(Validated_User_Address);
         }, function() {
             alert('Error: The Geolocation service failed. Please enter an address to find the closest Bus Stop');
             document.getElementById("User_Address").focus();
@@ -337,6 +396,13 @@ function isBusStopValid(Bus_Stop_Object){
     }
 }
 
+function Bus_Stops_Array () {
+    this.Bus_Stops;
+    this.Save = function(Bus_Stops) {this.Bus_Stops = Bus_Stops};
+    this.Get = function () {return this.Bus_Stops};
+
+}
+
 function Convert_JSON_to_Bus_Stops(){
 
 
@@ -346,17 +412,7 @@ function Convert_JSON_to_Bus_Stops(){
 }
 
 
-function Process_Bus_Stops(User_Address){
-    var Bus_Stops = Get_Bus_Stops();
-    Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
-    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
-    Bus_Stops =  Calculate_Walking_Distance_To_Stops(User_Address, Bus_Stops);
-    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
-    Map_Shortest_Bus_Stop(User_Address.Lat_Long_Location, Bus_Stops[0]);
-    var Map_Closest_5_Stops_Btn = document.getElementById("Map_Closest_5_Stops");
-    //Map_Closest_5_Stops_Btn.addEventListener("click", Map_Bus_Stops(Bus_Stops));
-    Map_Closest_5_Stops_Btn.style.visibility="visible";
-}
+
 
 
 function Get_Bus_Stops_for_School(School_ID){
