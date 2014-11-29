@@ -252,49 +252,62 @@ function Find_Closest_Bus_Stop(User_Address, School_ID){
 }
 
 function Process_User_Address(User_Address){
-    var School_ID = Get_School_ID();
     var Attention_Field_Color = "#FF0000";
     var Valid_Field_Color = "#FFFFFF";
-    var User_Address_Field = document.getElementById("User_Address");
-    var School_Drop_Down = document.getElementById("Select_Schools");
+    var User_Address_Field = new Change_Element("User_Address");
+    var School_Drop_Down = new Change_Element("Select_Schools");
+    var School_ID = Get_School_ID();
 
-    if(isUserAddressValid(User_Address) == true && Get_School_ID() != false){
-        var Validated_User_Address = Format_User_Address(User_Address);
-        var School_ID = Get_School_ID();
-        User_Address_Field.style.backgroundColor= Valid_Field_Color;
-        School_Drop_Down.style.backgroundColor= Valid_Field_Color;
-
-        Find_Closest_Bus_Stop(Validated_User_Address, School_ID);
-    }
-    else if (isUserAddressValid(User_Address) == false){
+    if (isUserAddressValid(User_Address) == false){
         alert("Please Enter a valid address!");
-        User_Address_Field.focus();
-        //User_Address_Field.style.backgroundColor= Attention_Field_Color;
-        return false;
+        User_Address_Field.SetColor(Attention_Field_Color);
+        User_Address_Field.Select();
     }
-    else if (Get_School_ID() == false){
+    if (isUserAddressValid(User_Address) == true){
+        User_Address_Field.SetColor(Valid_Field_Color);
+    }
+    if (isSchoolIDValid(School_ID) == false){
         alert("Please Select your School");
-        School_Drop_Down.focus;
-        //School_Drop_Down.style.backgroundColor= Attention_Field_Color;
-        return false;
+        School_Drop_Down.SetColor(Attention_Field_Color);
+        School_Drop_Down.Select();
     }
-    else{
-        alert("Unknown error");
+    if (isSchoolIDValid(School_ID) == true){
+        School_Drop_Down.SetColor(Valid_Field_Color);
+    }
+    if(isUserAddressValid(User_Address) == true && isSchoolIDValid(School_ID) == true){
+        var Validated_User_Address = Format_User_Address(User_Address);
+        User_Address_Field.SetColor(Valid_Field_Color);
+        School_Drop_Down.SetColor(Valid_Field_Color);
+        Find_Closest_Bus_Stop(Validated_User_Address, School_ID);
     }
 }
 
 
+
+function Change_Element(Element_ID){
+    this.Element = document.getElementById(Element_ID);
+    this.SetColor = function(Color){
+        this.Element.style.backgroundColor = Color;
+    }
+    this.Select = function() {this.Element.focus();}
+
+}
+
+function isSchoolIDValid(School_ID){
+    if (School_ID == "") {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
 function isUserAddressValid(User_Address){
-    var Valid_Field_Color = "#FFFFFF";
-    var Attention_Field_Color = "#FF0000";
-    var User_Address_Field = document.getElementById("User_Address");
     var elements = 5;
     if((User_Address.length >= elements)&& typeof User_Address == 'string' ){
-        User_Address_Field.style.backgroundColor= Valid_Field_Color;
         return true;
     }
     else{
-        User_Address_Field.style.backgroundColor= Attention_Field_Color;
         return false;
     }
 }
@@ -309,18 +322,9 @@ function Format_User_Address(User_Address){
 
 
 function Get_School_ID() {
-    var Attention_Field_Color = "#FF0000";
-    var Valid_Field_Color = "#FFFFFF";
     var School_Drop_Down = document.getElementById("Select_Schools");
     var School_ID = School_Drop_Down.options[School_Drop_Down.selectedIndex].value;
-    if (School_ID == "") {
-        School_Drop_Down.style.backgroundColor= Attention_Field_Color;
-        return false;
-    }
-    else {
-        School_Drop_Down.style.backgroundColor= Valid_Field_Color;
-        return School_ID;
-    }
+    return School_ID;
 }
 
 function Process_User_Location(){
