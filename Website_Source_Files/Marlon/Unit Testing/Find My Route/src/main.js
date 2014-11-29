@@ -18,24 +18,29 @@ $( document ).ready(function() {
         }
     });
 
-    Read_States();
+
 });
+
+
+
 
 function Read_States(){
     var action = "Read_States";
     var Read_States_Data = {action: action};
     States_Data = $.ajax({data: Read_States_Data}).responseText;
     States_Data = jQuery.parseJSON(States_Data);
-    Select_States(States_Data);
+    Update_States(States_Data);
+
 }
 
-function Select_States(States_Data){
+function Update_States(States_Data){
     var select = document.getElementById("Select_States");
     var i;
     for(i = 0; i < States_Data.length; i++) {
         select.options[select.options.length] = new Option(States_Data[i].STATE_NAME, States_Data[i].STATE_ID);
     }
 }
+
 
 function Read_Districts(State_ID){
     Reset_Districts();
@@ -45,10 +50,10 @@ function Read_Districts(State_ID){
     var Read_Districts_Data = {State_ID: State_ID, action: action};
     Districts_Data = $.ajax({data: Read_Districts_Data}).responseText;
     Districts_Data = jQuery.parseJSON(Districts_Data);
-    Select_Districts(Districts_Data);
+    Update_Districts(Districts_Data);
 }
 
-function Select_Districts(Districts_Data){
+function Update_Districts(Districts_Data){
     var select = document.getElementById("Select_Districts");
     var i;
     for(i = 0; i < Districts_Data.length; i++) {
@@ -67,10 +72,10 @@ function Read_Schools(District_ID){
     var Read_Schools_Data = {District_ID: District_ID, action: action};
     Schools_Data = $.ajax({data: Read_Schools_Data}).responseText;
     Schools_Data = jQuery.parseJSON(Schools_Data);
-    Select_Schools(Schools_Data);
+    Update_Schools(Schools_Data);
 }
 
-function Select_Schools(Schools_Data){
+function Update_Schools(Schools_Data){
     var select = document.getElementById("Select_Schools");
     var i;
     for(i = 0; i < Schools_Data.length; i++) {
@@ -87,7 +92,9 @@ function Read_Bus_Stops(School_ID){
     var Read_Bus_Stops_Data = {School_ID: School_ID, action: action};
     Bus_Stops_Data = $.ajax({data: Read_Bus_Stops_Data}).responseText;
     Bus_Stops_Data = jQuery.parseJSON(Bus_Stops_Data);
-    Table_Bus_Stops(Bus_Stops_Data);
+    //return Bus_Stop_Data;
+   Table_Bus_Stops(Bus_Stops_Data);
+
     //Bus_Stops_Data[i].BUS_ID;
     //Bus_Stops_Data[i].BUS_NUMBER;
     //Bus_Stops_Data[i].BUS_STOP_TIME;
@@ -222,45 +229,80 @@ function Delete_Distances(Distances_ID){
 
 // ------------------------------------------Marlon coded items BELOW --------------------------------//
 
+window.onload = function(){
+    /*   Call PHP DB Unit test
+     DB_Unit_Test_Read_From_DB()
+     DB_Unit_Test_Write_To_DB()
+     DB_Unit_Test_Update_DB()
+     DB_Unit_Test_Delete_From_DB()
+     */
+    Read_States()
 
-function Initialize_Google_Maps_API() {
+};
 
-    //-----------load SQL values here--------------
-    var School_District_Lat= 41.117744;
-    var School_District_Lng = -73.4081575;
-    var Bus_Stops = Get_Bus_Stops();
-    //Map_Address(School_District_Lat, School_District_Lng, null);
-   // Display_Stops_Pannel(Bus_Stops);
+function Main(){
+
+
+
+
 
 }
 
-function Validate_User_Address(User_Address){
-    if(User_Address.length >= 5){
-        alert("Yes!");
-        Process_Bus_Stops(User_Address)
+function Process_User_Address(User_Address){
+    var Number_of_Stops = 5;
+    if((User_Address.length >= Number_of_Stops)&& typeof User_Address == 'string' ){
+        var Validated_User_Address = new Address_Object();
+        Validated_User_Address.Set_Location(User_Address);
+        Validated_User_Address.Get_LatLong();
+        Validated_User_Address.Set_Lat_Long_Location();
+        Process_Bus_Stops(Validated_User_Address)
     }
     else {
-        alert("Please Enter a valid address!")
+        alert("Please Enter a valid address!");
         document.getElementById("User_Address").focus();
+        document.getElementById("User_Address").style.backgroundColor="#FFFF85";
     }
 }
 
-function isTimeValid(Time){
-    var regex = /^([0]\d|[1][0-2]):([0-5]\d)\s?(?:AM|PM)$/i;
-    regex.test(Time);
-    //alert(Time + " is " + regex.test(Time));
-    return regex.test(Time);
+function Process_User_Location(){
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var Validated_User_Address = new Address_Object();
+            var Latitude = position.coords.latitude;
+            var Longitude = position.coords.longitude;
+            Validated_User_Address.Set_Latitude(Latitude);
+            Validated_User_Address.Set_Longitude(Longitude);
+            Validated_User_Address.Set_Lat_Long_Location();
+            Process_Bus_Stops(Validated_User_Address);
+        }, function() {
+            alert('Error: The Geolocation service failed. Please enter an address to find the closest Bus Stop');
+            document.getElementById("User_Address").focus();
+            document.getElementById("User_Address").style.backgroundColor="#FFFF85";
+        });
+    } else {
+        alert('Error: Your browser doesn\'t support geolocation. Please enter an address to find the closest Bus Stop');
+        document.getElementById("User_Address").focus();
+        document.getElementById("User_Address").style.backgroundColor="#FFFF85";
+    }
 }
 
 
-function Parada (){
+//UT
+function isTimeValid(Time){
+    var regex = /^([0]\d|[1][0-2]):([0-5]\d)\s?(?:AM|PM)$/i;
+    var valid_flag = regex.test(Time);
+    return valid_flag;
+}
+
+//UT
+function Bus_Stop_Object (){
     this.Stop_Time;
     this.Stop_Address;
     this.Distance_to_Stop;
     this.Latitude;
     this.Longitude;
     this.Stop_ID;
-    this.Create_New = function(Stop_Time, Stop_Address) {
+    this.New = function(Stop_Time, Stop_Address) {
         if(typeof Stop_Time != 'undefined' && typeof Stop_Address != 'undefined'){
             this.Stop_Time = Stop_Time;
             this.Stop_Address = Stop_Address;
@@ -271,7 +313,6 @@ function Parada (){
         }
     };
     this.Set_Stop_ID = function (Stop_ID) { this.Stop_ID = Stop_ID};
-    this.Set_Stop_Time2 = function (Stop_Time) {this.Stop_Time = Stop_Time};
     this.Set_Stop_Time = function (Stop_Time) {this.Stop_Time = Stop_Time};
     this.Set_Stop_Address = function (Stop_Address) {this.Stop_Address = Stop_Address};
     this.Set_Distance_to_User = function (Distance_to_User) {this.Distance_to_User = Distance_to_User};
@@ -285,26 +326,36 @@ function Parada (){
     this.Get_Longitude = function (){return this.Longitude};
 }
 
+//UT
+function isBusStopValid(Bus_Stop_Object){
+    if(typeof Bus_Stop_Object != 'undefined' && Bus_Stop_Object.Stop_Time != null && Bus_Stop_Object.Stop_Address != null){
+        return true;
+    }
+    else {
+        console.log("Bus Stop Object is invalid");
+        return false;
+    }
+}
 
-function Process_Bus_Stops(Validated_User_Address){
+function Convert_JSON_to_Bus_Stops(){
 
-     var Bus_Stops = Get_Bus_Stops();
-    var User_Address = new Address;
-    User_Address.Set_Location(Validated_User_Address);
-    User_Address.Get_LatLong();
-    User_Address.Set_Lat_Long_Location();
+
+
+
+
+}
+
+
+function Process_Bus_Stops(User_Address){
+    var Bus_Stops = Get_Bus_Stops();
     Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
-    //Bus_Stops = Calculate_Distance_To_Stops(User_Address.Lat_Long_Location, Bus_Stops);
-    Bus_Stops = Get_Shortest_Distance_To_Stops(Bus_Stops);
-    alert("The Closest Bus_Stop is " + Bus_Stops[0].Stop_Address + " which is " + Bus_Stops[0].Distance_to_Stop +" miles away");
-    Map_Shortest_Bus_Stop(User_Address.Lat_Long_Location, Bus_Stops[0].Stop_Address);
-
-
+    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
+    Bus_Stops =  Calculate_Walking_Distance_To_Stops(User_Address, Bus_Stops);
+    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
+    Map_Shortest_Bus_Stop(User_Address.Lat_Long_Location, Bus_Stops[0]);
     var Map_Closest_5_Stops_Btn = document.getElementById("Map_Closest_5_Stops");
     //Map_Closest_5_Stops_Btn.addEventListener("click", Map_Bus_Stops(Bus_Stops));
     Map_Closest_5_Stops_Btn.style.visibility="visible";
-
-
 }
 
 
@@ -328,24 +379,14 @@ function Get_Bus_Stops(){
     Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: 6, Latitude: 41.1249925, Longitude: -73.4469242};
     Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: 1.2, Latitude: 41.120276, Longitude: -73.438289};
     return Bus_Stops;
-
-}
-
-
-function isBusStopValid(Bus_Stop_Object){
-    if(typeof Bus_Stop_Object != 'undefined' && Bus_Stop_Object.Stop_Time != null && Bus_Stop_Object.Stop_Address != null){
-        return true;
-    }
-    else {
-        console.log("Bus Stop Object is invalid");
-        return false;
-    }
 }
 
 
 
-function Address (){
 
+
+
+function Address_Object (){
     this.Latitude;
     this.Longitude;
     this.Location;
@@ -381,6 +422,8 @@ function Address (){
             return false;
         }
     };
+    this.Set_Latitude = function (Latitude) {this.Latitude = Latitude};
+    this.Set_Longitude = function (Longitude){this.Longitude = Longitude};
 }
 
 
@@ -414,10 +457,11 @@ function Degrees_to_Radians(deg) {
 }
 
 
-function Calculate_Distance_To_Stops(User_Address, Bus_Stops) {
-    for (var Bus_Stop = 0; Bus_Stop < Bus_Stops.length; Bus_Stop++) {
+function Calculate_Walking_Distance_To_Stops(User_Address, Bus_Stops) {
+    var Number_of_Stops = 5;
+    for (var Bus_Stop = 0; Bus_Stop < Number_of_Stops; Bus_Stop++) {
         var action = "Cal_Distance_PHP";
-        var Read_Bus_Stops_Data = {User_Address: User_Address, Bus_Stop_Address: Bus_Stops[Bus_Stop].Stop_Address, action: action};
+        var Read_Bus_Stops_Data = {User_Address: User_Address.Lat_Long_Location, Bus_Stop_Address: Bus_Stops[Bus_Stop].Stop_Address, action: action};
         var Distance = $.ajax({data: Read_Bus_Stops_Data}).responseText;
         console.log("Distance to Bus Stop " + Bus_Stops[Bus_Stop].Stop_Address + " is " + Distance);
         Bus_Stops[Bus_Stop].Distance_to_Stop = Distance;
@@ -425,7 +469,7 @@ function Calculate_Distance_To_Stops(User_Address, Bus_Stops) {
     return Bus_Stops;
 }
 
-function Get_Shortest_Distance_To_Stops(Bus_Stops){
+function Sort_Distance_To_Stops(Bus_Stops){
     var swapped;
     var n = Bus_Stops.length-1;
     do {
@@ -447,8 +491,6 @@ function Map_Bus_Stops(Bus_Stops) {
     var map = new google.maps.Map(document.getElementById('map-canvas'));
     var bounds = new google.maps.LatLngBounds();
     var infowindow = new google.maps.InfoWindow();
-    //Bus_Stops = Get_Bus_Stops();
-
     for (var Bus_Stop = 0; Bus_Stop < 5; Bus_Stop++) {
         var latlng = new google.maps.LatLng(Bus_Stops[Bus_Stop].Latitude, Bus_Stops[Bus_Stop].Longitude);
         bounds.extend(latlng);
@@ -466,7 +508,9 @@ function Map_Bus_Stops(Bus_Stops) {
     }
 }
 
-function Map_Shortest_Bus_Stop(User_Address, Stop_Address){
+function Map_Shortest_Bus_Stop(User_Address, Bus_Stop){
+    alert("The Closest Bus_Stop is " + Bus_Stop.Stop_Address + " which is " + Bus_Stop.Distance_to_Stop +" miles away");
+
     var latitude= 41.117744;
     var longitude = -73.4081575;
     var directionsDisplay;
@@ -481,17 +525,15 @@ function Map_Shortest_Bus_Stop(User_Address, Stop_Address){
         scrollwheel: false,
         disableDoubleClickZoom: true
     };
-    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-    directionsDisplay.setMap(map);
-    var start = User_Address;
-    var end = Stop_Address;
     var request = {
-        origin:start,
-        destination:end,
+        origin: User_Address,
+        destination: Bus_Stop.Stop_Address,
         travelMode: google.maps.TravelMode.DRIVING
     };
     directionsService.route(request, function(response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
+            map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+            directionsDisplay.setMap(map);
             directionsDisplay.setDirections(response);
         }
         else{
@@ -499,6 +541,10 @@ function Map_Shortest_Bus_Stop(User_Address, Stop_Address){
         }
     });
 }
+
+
+
+
 
 
 /*
@@ -649,12 +695,7 @@ function Convert_Address_to_LatLng(Address, Return_callback){
 //----------Remove--------------*/
 
 
-function Process_Location(){
-   Find_My_Location();
-   //console.log("Gelocation results: " + Location.Latitude);
-}
-
-
+/*
 function Find_My_Location(){
 
     if (!navigator.geolocation){
@@ -677,24 +718,10 @@ function Find_My_Location(){
     console.log(Coordinates);
 }
 
-
-function Use_My_Location(){
-
-    if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var User_Coordinates = { Latitude:position.coords.latitude, Longitude:position.coords.longitude };
-            //alert(typeof  User_Coordinates);
-            Process_Bus_Stops(User_Coordinates);
-
-        }, function() {
-            alert('Error: The Geolocation service failed.')
-        });
-    } else {
-        alert('Error: Your browser doesn\'t support geolocation.')
-    }
-}
+*/
 
 
+/*
 function Add_Marker(latitude, longitude){
     var myLatlng = new google.maps.LatLng(latitude,longitude);
     var mapOptions = {
@@ -715,11 +742,11 @@ function Add_Marker(latitude, longitude){
         infowindow.open(map,marker);
     });
 }
+*/
 
 
 
 
 
-
-google.maps.event.addDomListener(window, 'load', Initialize_Google_Maps_API);
+//google.maps.event.addDomListener(window, 'load', Initialize_Google_Maps_API);
 // ------------------------------------------Marlon coded items ABOVE--------------------------------//

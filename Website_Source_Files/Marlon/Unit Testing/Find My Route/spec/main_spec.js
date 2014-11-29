@@ -29,18 +29,18 @@ describe("Test time input", function(){
 
 describe("Test creating new Bus objects", function() {
     var Bus_Stop;
-    beforeEach(function() {  Bus_Stop = new Parada; });
+    beforeEach(function() {  Bus_Stop = new Bus_Stop_Object; });
     it("creates a new object when passed parameters", function() {
-        spyOn(Bus_Stop, "Create_New");
-        Bus_Stop.Create_New("9:20", "2 scofield place norwalk ct");
-        expect(Bus_Stop.Create_New).toHaveBeenCalled();
+        spyOn(Bus_Stop, "New");
+        Bus_Stop.New("9:20", "2 scofield place norwalk ct");
+        expect(Bus_Stop.New).toHaveBeenCalled();
     });
     it("can read data from object", function() {
-        Bus_Stop.Create_New("9:10", "2 scofield place norwalk ct");
+        Bus_Stop.New("9:10", "2 scofield place norwalk ct");
         expect(Bus_Stop.Stop_Time).toBe("9:10");
     });
     it("can update data on object", function() {
-        Bus_Stop.Create_New("8:00", "30 main st norwalk ct");
+        Bus_Stop.New("8:00", "30 main st norwalk ct");
         expect(Bus_Stop.Stop_Time).toBe("8:00");
         expect(Bus_Stop.Stop_Address).toBe("30 main st norwalk ct");
         Bus_Stop.Set_Stop_Time("8:15");
@@ -49,13 +49,13 @@ describe("Test creating new Bus objects", function() {
         expect(Bus_Stop.Stop_Address).toBe("60 main st norwalk ct");
     });
     it("fails to create an object unless time and address are both defined", function() {
-        Bus_Stop.Create_New();
+        Bus_Stop.New();
         expect(Bus_Stop.Stop_Time).toBeUndefined();
         expect(Bus_Stop.Stop_Address).toBeUndefined();
-        Bus_Stop.Create_New("8:00");
+        Bus_Stop.New("8:00");
         expect(Bus_Stop.Stop_Time).toBeUndefined();
         expect(Bus_Stop.Stop_Address).toBeUndefined();
-        Bus_Stop.Create_New(undefined, "30 main st norwalk ct");
+        Bus_Stop.New(undefined, "30 main st norwalk ct");
         expect(Bus_Stop.Stop_Time).toBeUndefined();
         expect(Bus_Stop.Stop_Address).toBeUndefined();
 
@@ -65,14 +65,14 @@ describe("Test creating new Bus objects", function() {
 
 describe("Test isBusStopValid", function(){
     var Bus_Stop;
-    beforeEach(function() {  Bus_Stop = new Parada; });
+    beforeEach(function() {  Bus_Stop = new Bus_Stop_Object; });
     it("can test a valid Bus_Stop_Object", function(){
-        Bus_Stop.Create_New("8:00", "30 main st norwalk ct");
+        Bus_Stop.New("8:00", "30 main st norwalk ct");
         var Validated_Bus_Stop = isBusStopValid(Bus_Stop);
         expect(Validated_Bus_Stop).toBeTruthy();
     });
     it("can test an Invalid Bus_Stop_Object", function(){
-        Bus_Stop.Create_New();
+        Bus_Stop.New();
         var Validated_Bus_Stop = isBusStopValid(Bus_Stop);
         expect(Validated_Bus_Stop).toBeFalsy();
     });
@@ -84,17 +84,17 @@ describe("Test isBusStopValid", function(){
 describe("Test Create Array of Bus Stops Objects", function(){
     var Bus_Stop;
     var New_Bus_Array = [];
-    beforeEach(function() {  Bus_Stop = new Parada; });
+    beforeEach(function() {  Bus_Stop = new Bus_Stop_Object; });
     it("can validate a Bus_Stop_Object", function(){
-        Bus_Stop.Create_New("9:00", "20 Main St Norwalk CT");
+        Bus_Stop.New("9:00", "20 Main St Norwalk CT");
         expect(isBusStopValid(Bus_Stop)).toBeTruthy();
     });
     it("can add Bus Objects to Array", function(){
-        Bus_Stop.Create_New("9:00", "20 Main St Norwalk CT");
+        Bus_Stop.New("9:00", "20 Main St Norwalk CT");
         expect(isBusStopValid(Bus_Stop)).toBeTruthy();
         New_Bus_Array.push(Bus_Stop);
         expect(New_Bus_Array.length).toBe(1);
-        Bus_Stop.Create_New("9:10", "60 Main St Norwalk CT");
+        Bus_Stop.New("9:10", "60 Main St Norwalk CT");
         New_Bus_Array.push(Bus_Stop);
         expect(New_Bus_Array.length).toBe(2);
     });
@@ -123,7 +123,7 @@ describe("Test Get Bus Stops for School ID", function(){
 
 describe("Test Address object and Geocoding", function(){
     var User_Address;
-    beforeEach(function() {  User_Address = new Address; });
+    beforeEach(function() {  User_Address = new Address_Object(); });
     it("creates a new address", function () {
         User_Address.Set_Location("20 main st norwalk ct");
         expect(User_Address.Location).toBe("20 main st norwalk ct");
@@ -314,7 +314,7 @@ describe("Test Get Shortest Distance between User Address and all Bus Stops", fu
     Bus_Stops[7]= {Stop_Time: "9:40", Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: 1.2, Latitude: 0, Longitude: 0};
 
     var User_Address = "20 main st norwalk ct"
-    var Bus_Stop = Get_Shortest_Distance_To_Stops(User_Address,Bus_Stops);
+    var Bus_Stop = Sort_Distance_To_Stops(User_Address,Bus_Stops);
     it("Find the lowest Distance To Stop", function () {
         // expect(Bus_Stop.Distance).toBe(0.5);
         //expect(Bus_Stop.Address).toContain('GLEN AV & SHORT ST norwalk ct');
@@ -336,7 +336,7 @@ describe("Test Calculate Shortest Distance to Stops", function(){
     Bus_Stops[7]= {Stop_Time: "9:40", Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: 1.2, Latitude: 0, Longitude: 0};
 
     var User_Address = "20 main st norwalk ct"
-    var Bus_Stop = Get_Shortest_Distance_To_Stops(User_Address,Bus_Stops);
+    var Bus_Stop = Sort_Distance_To_Stops(User_Address,Bus_Stops);
     it("Find the lowest Distance To Stop", function () {
        // expect(Bus_Stop.Distance).toBe(0.5);
         //expect(Bus_Stop.Address).toContain('GLEN AV & SHORT ST norwalk ct');
