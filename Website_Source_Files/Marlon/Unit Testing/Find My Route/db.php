@@ -30,21 +30,21 @@ function Validate_action(){
 
 function DB_Operation($action){
 	switch($action) {
-		case "Read_States": Read_States();
+		case "Get_States": Get_States();
 		break;
-		case "Read_Districts": Read_Districts();
+		case "Get_Districts": Get_Districts();
 		break;
-		case "Read_Schools": Read_Schools();
+		case "Get_Schools": Get_Schools();
 		break;
-		case "Read_Bus_Stops": Read_Bus_Stops();
+		case "Get_Bus_Stops": Get_Bus_Stops();
 		break;
-		case "Read_Coordinates": Read_Coordinates();
+		case "Get_Coordinates": Get_Coordinates();
 		break;
 		case "Write_Coordinates": Write_Coordinates();
 		break;
 		case "Delete_Coordinates": Delete_Coordinates();
 		break;
-		case "Read_Distances": Read_Distances();
+		case "Get_Distances": Get_Distances();
 		break;
 		case "Write_Distances": Write_Distances();
 		break;
@@ -61,21 +61,21 @@ function DB_Operation($action){
 //classes instead of cases.
 
 
-function Read_States(){
+function Get_States(){
 	global $PDOconn;
 
-	$Query = 'CALL READ_STATES';
+	$Query = 'CALL GET_STATES';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->execute();
 	$States_Data = $Statement->fetchAll();
 	echo json_encode($States_Data);
 }
 
-function Read_Districts(){
+function Get_Districts(){
 	global $PDOconn;
 	$State_ID = stripslashes($_POST["State_ID"]);
 
-	$Query = 'CALL READ_DISTRICTS (:State_ID)';
+	$Query = 'CALL GET_DISTRICTS (:State_ID)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(':State_ID', $State_ID, PDO::PARAM_INT);
 	$Statement->execute();
@@ -83,11 +83,11 @@ function Read_Districts(){
 	echo json_encode($Districts_Data);
 }
 
-function Read_Schools(){
+function Get_Schools(){
 	global $PDOconn;
 	$District_ID = stripslashes($_POST["District_ID"]);
 
-	$Query = 'CALL READ_SCHOOLS (:District_ID)';
+	$Query = 'CALL GET_SCHOOLS (:District_ID)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(':District_ID', $District_ID, PDO::PARAM_INT);
 	$Statement->execute();
@@ -95,11 +95,11 @@ function Read_Schools(){
 	echo json_encode($Schools_Data);
 }
 
-function Read_Bus_Stops(){
+function Get_Bus_Stops(){
 	global $PDOconn;
 	$School_ID = stripslashes($_POST["School_ID"]);
 
-	$Query = 'CALL READ_BUS_STOPS (:School_ID)';
+	$Query = 'CALL GET_BUS_STOPS (:School_ID)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(':School_ID', $School_ID, PDO::PARAM_INT);
 	$Statement->execute();
@@ -107,11 +107,11 @@ function Read_Bus_Stops(){
 	echo json_encode($Bus_Stops_Data);
 }
 
-function Read_Coordinates(){
+function Get_Coordinates(){
 	global $PDOconn;
 	$Address = stripslashes($_POST["Address"]);
 
-	$Query = 'CALL READ_COORDINATES (:Address)';
+	$Query = 'CALL GET_COORDINATES (:Address)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(':Address', $Address, PDO::PARAM_STR, 100);
 	$Statement->execute();
@@ -143,11 +143,11 @@ function Delete_Coordinates(){
 	$Statement->execute();
 }
 
-function Read_Distances(){
+function Get_Distances(){
 	global $PDOconn;
 	$User_Address = stripslashes($_POST["User_Address"]);
 
-	$Query = 'CALL READ_DISTANCES (:User_Address)';
+	$Query = 'CALL GET_DISTANCES (:User_Address)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(':User_Address', $User_Address, PDO::PARAM_STR, 100);
 	$Statement->execute();
@@ -231,7 +231,7 @@ function Cal_Distance_PHP(){
     $response = json_decode($resp_json, true);
 
     if($response['status']='OK'){
-		$distance = floatval($response['rows'][0]['elements'][0]['distance']['text']);
+		$distance = $response['rows'][0]['elements'][0]['distance']['text'];
         echo json_encode($distance);
         /*if($distance){
 

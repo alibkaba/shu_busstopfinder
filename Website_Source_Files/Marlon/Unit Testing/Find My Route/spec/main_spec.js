@@ -19,7 +19,6 @@ describe("Validate School ID", function() {
     });
 });
 
-
 describe("Validate user Address", function() {
     it("test for User address to be more than 5 elements", function () {
         expect(isUserAddressValid("06855")).toBeFalsy();
@@ -49,31 +48,39 @@ describe("Test Change Element", function() {
     });
 });
 
-describe("Test Address Object", function() {
-    var Validated_User_Address;
-    beforeEach(function() {  Validated_User_Address = new Address_Object});
-    it("creates a new object when passed parameters", function() {
-        var User_Address = "20 main st Norwalk ct";
-        Validated_User_Address.Set_Location(User_Address);
-        expect(Validated_User_Address.Location).toBe("20 main st Norwalk ct");
+describe("Test Address object and Geocoding", function(){
+    var User_Address;
+    beforeEach(function() {  User_Address = new Address_Object(); });
+    it("creates a new address", function () {
+        User_Address.Set_Location("20 main st norwalk ct");
+        expect(User_Address.Location).toBe("20 main st norwalk ct");
     });
-    it("calls Get_LatLong to get Geolocation of Address", function() {
-        spyOn(Validated_User_Address, "Get_LatLong");
-        Validated_User_Address.Get_LatLong();
-        expect(Validated_User_Address.Get_LatLong).toHaveBeenCalled();
+    it("calls Get_LatLong to get Geolocation for Address", function () {
+        spyOn(User_Address, "Get_LatLong");
+        User_Address.Get_LatLong("20 main st norwalk ct");
+        expect(User_Address.Get_LatLong).toHaveBeenCalled();
     });
-    it("sets Lat Long Location with Valid Lat and Long", function() {
-        Validated_User_Address.Set_Latitude(40.123);
-        expect(Validated_User_Address.Latitude).toBe(40.123);
-        Validated_User_Address.Set_Longitude(40.00123);
-        expect(Validated_User_Address.Longitude).toBe(40.00123);
-        Validated_User_Address.Set_Lat_Long_Location();
-        expect(Validated_User_Address.Lat_Long_Location).toBe("40.123,40.00123");
-        expect(Validated_User_Address.Set_Lat_Long_Location()).toBeTruthy();
-        Validated_User_Address.Set_Latitude();
-        expect(Validated_User_Address.Set_Lat_Long_Location()).toBeFalsy();
-        Validated_User_Address.Set_Latitude("asdf");
-        expect(Validated_User_Address.Set_Lat_Long_Location()).toBeFalsy();
+    it("creates Lat_Long_Location from Latitude and Longitude", function () {
+        User_Address.Set_Latitude(40.123);
+        expect(User_Address.Latitude).toBe(40.123);
+        User_Address.Set_Longitude(40.00123);
+        expect(User_Address.Longitude).toBe(40.00123);
+        User_Address.Set_Lat_Long_Location();
+        expect(User_Address.Lat_Long_Location).toBe("40.123,40.00123");
+        expect(User_Address.Set_Lat_Long_Location).toBeTruthy();
+    });
+    it("alerts user if cannot set Lat_Long_Location from Latitude and Longitude", function () {
+        User_Address.Latitude;
+        User_Address.Longitude = 41.001;
+        User_Address.Set_Lat_Long_Location();
+        expect(User_Address.Set_Lat_Long_Location()).toBeFalsy();
+        expect(User_Address.Lat_Long_Location).toBeUndefined();
+    });
+    it("fails to set Lat Long Location with Invalid Lat and Long", function() {
+        User_Address.Set_Latitude();
+        expect(User_Address.Set_Lat_Long_Location()).toBeFalsy();
+        User_Address.Set_Latitude("asdf");
+        expect(User_Address.Set_Lat_Long_Location()).toBeFalsy();
     });
 });
 
@@ -102,50 +109,6 @@ describe("Test Format User Address with Mock Object", function() {
         expect(Format_User_Address.Set_Location).toHaveBeenCalledWith("20 main St Norwalk ct");
     });
 });
-
-
-
-
-
-
-
-
-describe("------Test Process User Address", function() {
-
-    it("creates a new object when passed parameters", function () {
-        //spyOn(Bus_Stop, "New");
-       // Bus_Stop.New("9:20", "2 scofield place norwalk ct");
-       // expect(Bus_Stop.New).toHaveBeenCalled();
-    });
-});
-
-
-describe("Test time input", function(){
-    it("validates Bus Stop time", function() {
-        var Time = "12:45am";
-        expect(isTimeValid(Time)).toBeTruthy();
-        var Time = "12:45Am";
-        expect(isTimeValid(Time)).toBeTruthy();
-        var Time = "02:45pm";
-        expect(isTimeValid(Time)).toBeTruthy();
-        var Time = "05:45Pm";
-        expect(isTimeValid(Time)).toBeTruthy();
-        var Time = "12:61am";
-        expect(isTimeValid(Time)).toBeFalsy();
-        var Time = "13:45am";
-        expect(isTimeValid(Time)).toBeFalsy();
-        var Time = "03:45bm";
-        expect(isTimeValid(Time)).toBeFalsy();
-        var Time = "02:40";
-        expect(isTimeValid(Time)).toBeFalsy();
-        var Time = "asdf";
-        expect(isTimeValid(Time)).toBeFalsy();
-        var Time = "";
-        expect(isTimeValid(Time)).toBeFalsy();
-    });
-});
-
-
 
 describe("Test creating new Bus objects", function() {
     var Bus_Stop;
@@ -199,8 +162,150 @@ describe("Test isBusStopValid", function(){
 
 });
 
+describe("Test Get Distance Haversine", function(){
+    var Bus_Stops =[];
+    Bus_Stops[0]= {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1215386, Longitude: -73.4238011};
+    Bus_Stops[1]= {Stop_Time:null, Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1257694, Longitude: -73.4373563};
+    Bus_Stops[2]= {Stop_Time:null, Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: null, Latitude: 41.1258702, Longitude: -73.44233};
+    Bus_Stops[3]= {Stop_Time:null, Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1305955, Longitude: -73.449364};
+    Bus_Stops[4]= {Stop_Time:null, Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: null, Latitude: 41.1277236, Longitude: -73.4464775};
+    Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: null, Latitude: 41.126766, Longitude: -73.4504417};
+    Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: null, Latitude: 41.1249925, Longitude: -73.4469242};
+    Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: null, Latitude: 41.120276, Longitude: -73.438289};
+    var User_Address = new Address_Object();
+    User_Address.Set_Location("2 June St Norwalk ct");
+    User_Address.Set_Latitude(41.123113);
+    User_Address.Set_Longitude(-73.431174);
+    it("calculates the distance from the Bus Stops to User Coordinates", function () {
+        Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
+        expect(Bus_Stops[0].Distance_to_Stop).toBe(0.39889301256398413);
+        expect(Bus_Stops[1].Distance_to_Stop).toBe(0.37045782368034125);
+        expect(Bus_Stops[2].Distance_to_Stop).toBe(0.611124841388092);
+    });
+
+});
+
+describe("Test Convert Degrees to Radians", function(){
+    it("converts Degrees to Radians", function () {
+        expect(Degrees_to_Radians(90)).toBe(1.5707963267948966);
+        expect(Degrees_to_Radians(35)).toBe(0.6108652381980153);
+        expect(Degrees_to_Radians(44)).toBe(0.767944870877505);
+        expect(Degrees_to_Radians(120)).toBe(2.0943951023931953);
+        expect(Degrees_to_Radians(0)).toBe(0);
+    });
+});
+
+describe("Test Calculate Walking Distance to Stops", function() {
+    var Distance;
+    var User_Address = "20 main st norwalk ct";
+    var Bus_Stops = {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1215386, Longitude: -73.4238011};
+    beforeEach(function() {Distance = new Walking_Distance_To_Stops()});
+    it("calls Calculate Distance", function() {
+        spyOn(Distance, "Calculate");
+        Distance.Calculate(User_Address, Bus_Stops);
+        expect(Distance.Calculate).toHaveBeenCalled();
+    });
+    it("keeps track of what parameters where used for the call", function() {
+        spyOn(Distance, "Calculate");
+        Distance.Calculate(User_Address, Bus_Stops);
+        expect(Distance.Calculate).toHaveBeenCalledWith(User_Address, Bus_Stops);
+    });
+});
+
+describe("Test Sorting Distance to Stop", function(){
+    var Bus_Stops =[];
+    Bus_Stops[0]= {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1215386, Longitude: -73.4238011};
+    Bus_Stops[1]= {Stop_Time:null, Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1257694, Longitude: -73.4373563};
+    Bus_Stops[2]= {Stop_Time:null, Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: null, Latitude: 41.1258702, Longitude: -73.44233};
+    Bus_Stops[3]= {Stop_Time:null, Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1305955, Longitude: -73.449364};
+    Bus_Stops[4]= {Stop_Time:null, Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: null, Latitude: 41.1277236, Longitude: -73.4464775};
+    Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: null, Latitude: 41.126766, Longitude: -73.4504417};
+    Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: null, Latitude: 41.1249925, Longitude: -73.4469242};
+    Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: null, Latitude: 41.120276, Longitude: -73.438289};
+    var User_Address = new Address_Object();
+    User_Address.Set_Location("2 June St Norwalk ct");
+    User_Address.Set_Latitude(41.123113);
+    User_Address.Set_Longitude(-73.431174);
+    it("sorts the array by Distance to Stop starting by lowest distance", function () {
+        Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
+        Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
+        expect(Bus_Stops[0].Distance_to_Stop <= Bus_Stops[1].Distance_to_Stop).toBeTruthy();
+        expect(Bus_Stops[1].Distance_to_Stop <= Bus_Stops[2].Distance_to_Stop).toBeTruthy();
+        expect(Bus_Stops[2].Distance_to_Stop <= Bus_Stops[3].Distance_to_Stop).toBeTruthy();
+        expect(Bus_Stops[3].Distance_to_Stop <= Bus_Stops[4].Distance_to_Stop).toBeTruthy();
+        expect(Bus_Stops[4].Distance_to_Stop <= Bus_Stops[5].Distance_to_Stop).toBeTruthy();
+        expect(Bus_Stops[5].Distance_to_Stop <= Bus_Stops[6].Distance_to_Stop).toBeTruthy();
+        expect(Bus_Stops[6].Distance_to_Stop <= Bus_Stops[7].Distance_to_Stop).toBeTruthy();
+        expect(Bus_Stops[1].Distance_to_Stop <= Bus_Stops[7].Distance_to_Stop).toBeTruthy();
+        expect(Bus_Stops[0].Distance_to_Stop).toBe(0.37045782368034125);
+        expect(Bus_Stops[0].Stop_Address).toBe('PONUS AV & ELLS ST norwalk ct');
+        expect(Bus_Stops[7].Distance_to_Stop).toBe(1.0787297565138665);
+        expect(Bus_Stops[7].Stop_Address).toBe('GLEN AV & SHORT ST norwalk ct');
+    });
+});
+
+describe("Test calling Bus Stops Map function", function() {
+    var New_Bus_Stops_Group;
+    var User_Address = "20 main st norwalk ct";
+    var Bus_Stops = {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1215386, Longitude: -73.4238011};
+    beforeEach(function() {New_Bus_Stops_Group = new Bus_Stops_Group()});
+    it("calls Calculate Distance", function() {
+        spyOn(New_Bus_Stops_Group, "Map");
+        New_Bus_Stops_Group.Map(User_Address, Bus_Stops);
+        expect(New_Bus_Stops_Group.Map).toHaveBeenCalled();
+    });
+    it("keeps track of what parameters where used for the call", function() {
+        spyOn(New_Bus_Stops_Group, "Map");
+        New_Bus_Stops_Group.Map(User_Address, Bus_Stops);
+        expect(New_Bus_Stops_Group.Map).toHaveBeenCalledWith(User_Address, Bus_Stops);
+    });
+});
+
+describe("Test Adding Marker", function() {
+    var New_Marker;
+    var icon = "http://maps.google.com/mapfiles/kml/pal2/icon2.png";
+    var map = document.getElementById('map-canvas');
+    var Bus_Stops = {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1215386, Longitude: -73.4238011};
+    beforeEach(function() {New_Marker = new Marker()});
+    it("calls Marker.Add to add new marker", function() {
+        spyOn(New_Marker, "Add");
+        New_Marker.Add(Bus_Stops, icon, map);
+        expect(New_Marker.Add).toHaveBeenCalled();
+    });
+    it("keeps track of what parameters where used for the call", function() {
+        spyOn(New_Marker, "Add");
+        New_Marker.Add(Bus_Stops, icon, map);
+        expect(New_Marker.Add).toHaveBeenCalledWith(Bus_Stops, icon, map);
+    });
+});
+
+describe("Test calling Map Shortest Bus Stop function", function() {
+    var New_Shortest_Bus_Stop;
+    var User_Address = "20 main st norwalk ct";
+    var Bus_Stops = {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1215386, Longitude: -73.4238011};
+    beforeEach(function() {New_Shortest_Bus_Stop = new Shortest_Bus_Stop()});
+    it("calls Calculate Distance", function() {
+        spyOn(New_Shortest_Bus_Stop, "Map");
+        New_Shortest_Bus_Stop.Map(User_Address, Bus_Stops);
+        expect(New_Shortest_Bus_Stop.Map).toHaveBeenCalled();
+    });
+    it("keeps track of what parameters where used for the call", function() {
+        spyOn(New_Shortest_Bus_Stop, "Map");
+        New_Shortest_Bus_Stop.Map(User_Address, Bus_Stops);
+        expect(New_Shortest_Bus_Stop.Map).toHaveBeenCalledWith(User_Address, Bus_Stops);
+    });
+});
 
 
+
+describe("------Boundary for Marlon's Good Unit tests above------------", function() {
+
+    it("creates a new object when passed parameters", function () {
+
+    });
+});
+
+//Create_Bus_Stops_Array(JSON_Array)
 describe("Test Create Array of Bus Stops Objects", function(){
     var Bus_Stop;
     var New_Bus_Array = [];
@@ -221,162 +326,33 @@ describe("Test Create Array of Bus Stops Objects", function(){
 });
 
 
-describe("Test Get Bus Stops for School ID", function(){
-    var School_ID = '1';
-    it("should return array with valid data", function () {
-        var New_Bus_Array = Get_Bus_Stops_for_School(School_ID);
-        expect(New_Bus_Array[0].Stop_Time).toContain('9:00');
-        expect(New_Bus_Array[0].Stop_Address).toContain('RIVERSIDE AV & HILL ST norwalk ct');
-        // expect(New_Bus_Array[0].Distance_to_Stop).toBeNull();
-        expect(New_Bus_Array[0].Latitude).not.toBeNull();
-        expect(New_Bus_Array[0].Longitude).not.toBeNull();
-        expect(isBusStopValid(New_Bus_Array[0])).toBeTruthy();
-    });
-    it("returns an array of objects from Get Bus Stops", function (){
-        var Bus_Stops = Get_Bus_Stops();
-        expect(typeof Bus_Stops).toBe('object');
-        expect(typeof Bus_Stops[0]).toBe('object');
-    });
-});
 
 
-
-describe("Test Address object and Geocoding", function(){
-    var User_Address;
-    beforeEach(function() {  User_Address = new Address_Object(); });
-    it("creates a new address", function () {
-        User_Address.Set_Location("20 main st norwalk ct");
-        expect(User_Address.Location).toBe("20 main st norwalk ct");
-    });
-    it("calls Get_LatLong to get Geolocation for Address", function () {
-        spyOn(User_Address, "Get_LatLong");
-        User_Address.Get_LatLong("20 main st norwalk ct");
-        expect(User_Address.Get_LatLong).toHaveBeenCalled();
-     });
-    it("creates Lat_Long_Location from Latitude and Longitude", function () {
-        User_Address.Latitude = 40.25;
-        User_Address.Longitude = 41.001;
-        User_Address.Set_Lat_Long_Location();
-        expect(User_Address.Lat_Long_Location).toBe("40.25,41.001");
-        expect(User_Address.Set_Lat_Long_Location).toBeTruthy();
-    });
-    it("alerts user if cannot set Lat_Long_Location from Latitude and Longitude", function () {
-        User_Address.Latitude;
-        User_Address.Longitude = 41.001;
-        User_Address.Set_Lat_Long_Location();
-        expect(User_Address.Set_Lat_Long_Location()).toBeFalsy();
-        expect(User_Address.Lat_Long_Location).toBeUndefined();
+describe("Test time input", function(){
+    it("validates Bus Stop time", function() {
+        var Time = "12:45am";
+        expect(isTimeValid(Time)).toBeTruthy();
+        var Time = "12:45Am";
+        expect(isTimeValid(Time)).toBeTruthy();
+        var Time = "02:45pm";
+        expect(isTimeValid(Time)).toBeTruthy();
+        var Time = "05:45Pm";
+        expect(isTimeValid(Time)).toBeTruthy();
+        var Time = "12:61am";
+        expect(isTimeValid(Time)).toBeFalsy();
+        var Time = "13:45am";
+        expect(isTimeValid(Time)).toBeFalsy();
+        var Time = "03:45bm";
+        expect(isTimeValid(Time)).toBeFalsy();
+        var Time = "02:40";
+        expect(isTimeValid(Time)).toBeFalsy();
+        var Time = "asdf";
+        expect(isTimeValid(Time)).toBeFalsy();
+        var Time = "";
+        expect(isTimeValid(Time)).toBeFalsy();
     });
 });
 
-
-describe("Test Convert Coordinates to String", function(){
-    var User_Address = "20 main st norwalk ct";
-    // var User_Coordinates  = Convert_Coordinates_to_String(User_Address);
-    //alert(typeof Coordinates);
-    it("Find the lowest Distance To Stop", function () {
-        //expect(Coordinates.Latitude).toContain(41.11912100000001);
-        // expect(Coordinates.Latitude).toBeFalsy(); //Async issue
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-describe("Test Creating New Bus Stop Objects", function(){
-    it("creates a new Bus Stop Object by passing Stop Time and Stop Address", function () {
-        var New_Bus_Stop = Create_Bus_Stop_Object( "9:00", "20 Main St Norwalk CT")
-        expect(New_Bus_Stop.Stop_Address).toContain('20 Main St Norwalk CT');
-        expect(New_Bus_Stop.Distance_to_Stop).toBe(0);
-    });
-    it("a new Bus Stop Object will not be created if missing Stop time and address parameters", function () {
-        var New_Bus_Stop = Create_Bus_Stop_Object();
-        expect(New_Bus_Stop).toBeFalsy();
-    });
-    it("a new Bus Stop Object will not be created if missing address parameter", function () {
-        var New_Bus_Stop = Create_Bus_Stop_Object("9:00");
-        expect(New_Bus_Stop).toBeFalsy();
-    });
-});
-*/
-
-
-
-
-
-
-
-describe("Calculate Distance to Stops", function(){
-    var User_Address = "20 main st norwalk ct";
-    // var User_Coordinates  = Convert_Coordinates_to_String(User_Address);
-    //alert(typeof Coordinates);
-    it("should find the distance from User address to Bus Stop", function () {
-        //expect(Coordinates.Latitude).toContain(41.11912100000001);
-        // expect(Coordinates.Latitude).toBeFalsy(); //Async issue
-    });
-});
-
-
-describe("Get Shortest Distance to Stops", function(){
-    var User_Address = "20 main st norwalk ct";
-    // var User_Coordinates  = Convert_Coordinates_to_String(User_Address);
-    //alert(typeof Coordinates);
-    it("should find the shortest distance from User address to Bus Stops", function () {
-        //expect(Coordinates.Latitude).toContain(41.11912100000001);
-        // expect(Coordinates.Latitude).toBeFalsy(); //Async issue
-    });
-});
-
-describe("Calculate Distance to Stops using Haversine Formula", function(){
-    var User_Address = "20 main st norwalk ct";
-    // var User_Coordinates  = Convert_Coordinates_to_String(User_Address);
-    //alert(typeof Coordinates);
-    it("should calclualte the Distance between 2 Coordinate points", function () {
-        //expect(Coordinates.Latitude).toContain(41.11912100000001);
-        // expect(Coordinates.Latitude).toBeFalsy(); //Async issue
-    });
-    it("return the distance between the 2 coordinate points", function () {
-        //expect(Coordinates.Latitude).toContain(41.11912100000001);
-        // expect(Coordinates.Latitude).toBeFalsy(); //Async issue
-    });
-});
-
-
-describe("Test Convert Degrees to Radians", function(){
-    var User_Address = "20 main st norwalk ct";
-    // var User_Coordinates  = Convert_Coordinates_to_String(User_Address);
-    //alert(typeof Coordinates);
-    it("should convert Degrees to Radians", function () {
-        //expect(Coordinates.Latitude).toContain(41.11912100000001);
-        // expect(Coordinates.Latitude).toBeFalsy(); //Async issue
-    });
-});
-
-
-
-describe("TestFind My location", function(){
-    var User_Address = "20 main st norwalk ct";
-    // var User_Coordinates  = Convert_Coordinates_to_String(User_Address);
-    //alert(typeof Coordinates);
-    it("should find my location", function () {
-        //expect(Coordinates.Latitude).toContain(41.11912100000001);
-        // expect(Coordinates.Latitude).toBeFalsy(); //Async issue
-    });
-});
 
 
 
@@ -404,142 +380,9 @@ describe("Spy on Map Address to ensure it is called with parameters", function()
 });
 
 
-describe("Test Map Bus Stops", function(){
-    var User_Address = "20 main st norwalk ct";
-    // var User_Coordinates  = Convert_Coordinates_to_String(User_Address);
-    //alert(typeof Coordinates);
-    it("should Map Bus Stops on a Map", function(){
-
-
-    });
-
-});
 
 
 
-
-
-
-
-describe("Test Get Shortest Distance between User Address and all Bus Stops", function(){
-    //var Bus_Stops = [];
-    var Bus_Stops =[];
-    Bus_Stops[0]= {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: 1, Latitude: 41.117744, Longitude: 41.117744};
-    Bus_Stops[1]= {Stop_Time: "9:10", Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: 1.5, Latitude: 0, Longitude: 0};
-    Bus_Stops[2]= {Stop_Time: "9:15", Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: 2.5, Latitude: 0, Longitude: 0};
-    Bus_Stops[3]= {Stop_Time: "9:20", Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: 0.5, Latitude: 0, Longitude: 0};
-    Bus_Stops[4]= {Stop_Time: "9:24", Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: 2.5, Latitude: 0, Longitude: 0};
-    Bus_Stops[5]= {Stop_Time: "9:30", Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: 0.65, Latitude: 0, Longitude: 0};
-    Bus_Stops[6]= {Stop_Time: "9:35", Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: 6, Latitude: 0, Longitude: 0};
-    Bus_Stops[7]= {Stop_Time: "9:40", Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: 1.2, Latitude: 0, Longitude: 0};
-
-    var User_Address = "20 main st norwalk ct"
-    var Bus_Stop = Sort_Distance_To_Stops(User_Address,Bus_Stops);
-    it("Find the lowest Distance To Stop", function () {
-        // expect(Bus_Stop.Distance).toBe(0.5);
-        //expect(Bus_Stop.Address).toContain('GLEN AV & SHORT ST norwalk ct');
-    });
-});
-
-
-
-describe("Test Calculate Shortest Distance to Stops", function(){
-    //var Bus_Stops = [];
-    var Bus_Stops =[];
-    Bus_Stops[0]= {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: 1, Latitude: 41.117744, Longitude: 41.117744};
-    Bus_Stops[1]= {Stop_Time: "9:10", Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: 1.5, Latitude: 0, Longitude: 0};
-    Bus_Stops[2]= {Stop_Time: "9:15", Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: 2.5, Latitude: 0, Longitude: 0};
-    Bus_Stops[3]= {Stop_Time: "9:20", Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: 0.5, Latitude: 0, Longitude: 0};
-    Bus_Stops[4]= {Stop_Time: "9:24", Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: 2.5, Latitude: 0, Longitude: 0};
-    Bus_Stops[5]= {Stop_Time: "9:30", Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: 0.65, Latitude: 0, Longitude: 0};
-    Bus_Stops[6]= {Stop_Time: "9:35", Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: 6, Latitude: 0, Longitude: 0};
-    Bus_Stops[7]= {Stop_Time: "9:40", Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: 1.2, Latitude: 0, Longitude: 0};
-
-    var User_Address = "20 main st norwalk ct"
-    var Bus_Stop = Sort_Distance_To_Stops(User_Address,Bus_Stops);
-    it("Find the lowest Distance To Stop", function () {
-       // expect(Bus_Stop.Distance).toBe(0.5);
-        //expect(Bus_Stop.Address).toContain('GLEN AV & SHORT ST norwalk ct');
-    });
-});
-
-describe("Test Get Coordinates Function on GeoCoder", function(){
-    var googleMapMock = {
-        geoCode: function(code, fn) {
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({
-                'address': code
-            }, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    fn(results[0].geometry.location);
-                } else {
-                    alert("Error with Geocoder");
-                }
-            })
-        },
-        render: function(LatLng) {
-            var mapOptions = {
-                zoom: 8,
-                center: LatLng
-            }
-            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-            var marker = new google.maps.Marker({
-                map: map,
-                position: LatLng
-            });
-        }
-    };
-
-    window.google = {
-        maps: {
-            Geocoder: function() {
-                this.geocode = function(input, fn) {
-                    setTimeout(function() {
-                        fn([{geometry: {location: 1}}], window.google.maps.GeocoderStatus.OK);
-                    }, 1000);
-                }
-            },
-            GeocoderStatus: {OK: 1             }
-        }
-    };
-
-    it("Test GeoCode Mock object by calling function", function(done) {
-        var address = "20 main st norwalk ct";
-        googleMapMock.geoCode(address, function() { done(); });
-    });
-    it("Test GeoCode Mock function by using spy", function(done) {
-        var address = "20 main st norwalk ct";
-        var callbackSpy = jasmine.createSpy("callback").and.callFake(function() { done(); });
-        googleMapMock.geoCode(address, callbackSpy);
-    });
-});
-
-
-
-
-
-describe("Test Add Marker function by using spy on mock", function() {
-    var Add_Marker, map = null;
-    var latitude =  -42.32;
-    var longitude = 42.245;
-
-    beforeEach(function() {
-        Add_Marker = {
-            setAddress: function(value) {
-                map = value;
-            }
-        };
-        spyOn(Add_Marker, 'setAddress');
-        Add_Marker.setAddress(latitude, longitude);
-    });
-
-    it("tracks that the Map Address spy was called and address set", function() {
-        expect(Add_Marker.setAddress).toHaveBeenCalled();
-    });
-    it("tracks latitude and longitude parameters were passed", function() {
-        expect(Add_Marker.setAddress).toHaveBeenCalledWith(latitude, longitude);
-    });
-});
 
 
 // ------------------------------------------Marlon coded items ABOVE--------------------------------//

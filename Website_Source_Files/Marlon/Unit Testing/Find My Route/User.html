@@ -61,7 +61,7 @@
     <div class="col-md-4">
         <div class="text-center">
             <select id="Select_States" onchange=
-                    "Read_Districts(this.value)">
+                    "Get_Districts(this.value)">
                 <option value=''>
                     Select your State
                 </option>
@@ -72,7 +72,7 @@
     <div class="col-md-4">
         <div class="text-center">
             <select id="Select_Districts" onchange=
-                    "Read_Schools(this.value)">
+                    "Get_Schools(this.value)">
                 <option value=''>
                     Select your District
                 </option>
@@ -83,7 +83,7 @@
     <div class="col-md-4">
         <div class="text-center">
             <select id="Select_Schools" onchange=
-                    "Read_Bus_Stops(this.value)">
+                    "Get_Bus_Stops(this.value)">
                 <option value=''>
                     Select your School
                 </option>
@@ -98,7 +98,7 @@
             <label for="address">Enter your address:</label> <input id="User_Address" type="text">
             <button onclick= "Process_User_Address(User_Address.value)">Find Closest Bus Stop </button>
             <button onclick= "Process_User_Location()"> Use My Location </button>
-            <button id="Map_Closest_5_Stops" style="visibility:hidden;" > Map 5 closest Bus Stops </button>
+            <button id="Map_Closest_5_Stops" style="visibility:hidden;" > Map Closest 5 Bus Stops </button>
         </div>
     </div>
 </div>
