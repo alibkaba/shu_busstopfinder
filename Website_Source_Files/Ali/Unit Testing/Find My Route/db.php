@@ -40,7 +40,7 @@ function DB_Operation($action){
 		break;
 		case "Geocode_PHP": Geocode_PHP();
 		break;
-		case "Validate_Login": Validate_Login();
+		case "Read_Login": Read_Login();
 		break;
 		case "Create_State": Create_State();
 		break;
@@ -127,12 +127,12 @@ function Read_Bus_Stops(){
 	echo json_encode($Response);
 }
 
-function Validate_Login(){
+function Read_Login(){
 	global $PDOconn;
 	$Email = stripslashes($_POST["Email"]);
 	$Encrypted_Password = stripslashes($_POST["Encrypted_Password"]);
 	
-	$Query = 'CALL VALIDATE_LOGIN (?, ?)';
+	$Query = 'CALL READ_LOGIN (?, ?)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $Email, PDO::PARAM_STR, 50);
 	$Statement->bindParam(2, $Encrypted_Password, PDO::PARAM_STR, 50);
