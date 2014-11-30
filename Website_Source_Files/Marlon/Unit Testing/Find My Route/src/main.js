@@ -239,25 +239,19 @@ window.onload = function(){
 
 };
 
-function Find_Closest_Bus_Stop(User_Address, School_ID){
-    var Bus_Stops = Get_Bus_Stops();
-    Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
-    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
-    Bus_Stops =  Calculate_Walking_Distance_To_Stops(User_Address, Bus_Stops);
-    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
-    Map_Shortest_Bus_Stop(User_Address.Lat_Long_Location, Bus_Stops[0]);
-    var Map_Closest_5_Stops_Btn = document.getElementById("Map_Closest_5_Stops");
-    //Map_Closest_5_Stops_Btn.addEventListener("click", Map_Bus_Stops(Bus_Stops));
-    Map_Closest_5_Stops_Btn.style.visibility="visible";
-}
 
 function Process_User_Address(User_Address){
+    var School_ID = Get_School_ID();
+    var Validated_User_Address = Validate_User_Address_and_School_ID(User_Address, School_ID);
+    if(Validated_User_Address != false)
+        Find_Closest_Bus_Stop(Validated_User_Address, School_ID);
+}
+
+function Validate_User_Address_and_School_ID(User_Address, School_ID){ //UT
     var Attention_Field_Color = "#FF0000";
     var Valid_Field_Color = "#FFFFFF";
     var User_Address_Field = new Change_Element("User_Address");
     var School_Drop_Down = new Change_Element("Select_Schools");
-    var School_ID = Get_School_ID();
-
     if (isUserAddressValid(User_Address) == false){
         alert("Please Enter a valid address!");
         User_Address_Field.SetColor(Attention_Field_Color);
@@ -274,26 +268,20 @@ function Process_User_Address(User_Address){
     if (isSchoolIDValid(School_ID) == true){
         School_Drop_Down.SetColor(Valid_Field_Color);
     }
-    if(isUserAddressValid(User_Address) == true && isSchoolIDValid(School_ID) == true){
+    if(isUserAddressValid(User_Address) == true && isSchoolIDValid(School_ID) == true && User_Address_Field.Element != null){
         var Validated_User_Address = Format_User_Address(User_Address);
         User_Address_Field.SetColor(Valid_Field_Color);
         School_Drop_Down.SetColor(Valid_Field_Color);
-        Find_Closest_Bus_Stop(Validated_User_Address, School_ID);
+        return Validated_User_Address;
     }
+    if(isUserAddressValid(User_Address) == true && isSchoolIDValid(School_ID) == true && User_Address_Field.Element == null){
+        return "Element is null only during Jasmine Testing";
+    }
+    else
+        return false;
 }
 
-
-
-function Change_Element(Element_ID){
-    this.Element = document.getElementById(Element_ID);
-    this.SetColor = function(Color){
-        this.Element.style.backgroundColor = Color;
-    }
-    this.Select = function() {this.Element.focus();}
-
-}
-
-function isSchoolIDValid(School_ID){
+function isSchoolIDValid(School_ID){ //UT
     if (School_ID == "") {
         return false;
     }
@@ -301,18 +289,71 @@ function isSchoolIDValid(School_ID){
         return true;
     }
 }
-
-function isUserAddressValid(User_Address){
-    var elements = 5;
+//UT
+function isUserAddressValid(User_Address){ //UT
+    var elements = 10;
     if((User_Address.length >= elements)&& typeof User_Address == 'string' ){
-        return true;
+        var regex = /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/;
+        var valid_flag = regex.test(User_Address);
+        return valid_flag;
     }
     else{
         return false;
     }
 }
+function Change_Element(Element_ID){ //UT
+    this.Element = document.getElementById(Element_ID);
+    this.SetColor = function(Color){
+        if(this.Element != null)
+            this.Element.style.backgroundColor = Color;
+    };
+    this.Select = function() {
+        if(this.Element != null)
+            this.Element.focus();}
 
-function Format_User_Address(User_Address){
+}
+
+function Address_Object (){ //UT
+    this.Latitude;
+    this.Longitude;
+    this.Location;
+    this.Lat_Long_Location;
+    this.Set_Location = function(User_Address) {
+        if(typeof User_Address != 'undefined' && User_Address != ""){
+            this.Location = User_Address;
+        }
+        else {
+            console.log("Cannot create Address location due to invalid input");
+            alert("Cannot create Address location due to invalid input");
+        }
+    };
+    this.Get_LatLong = function () {
+        var action = "Geocode_PHP";
+        var Read_Geocode_Data = {Address: this.Location, action: action};
+        var Address_Coordinates = $.ajax({data: Read_Geocode_Data}).responseText;
+        Address_Coordinates = jQuery.parseJSON(Address_Coordinates);
+        console.log(Address_Coordinates);
+        this.Latitude = Address_Coordinates.Latitude;
+        this.Longitude = Address_Coordinates.Longitude;
+    };
+    this.Set_Lat_Long_Location = function(){
+        if (typeof this.Latitude != 'number')
+            alert("Error: Latitude is invalid, it is of type " + typeof this.Latitude);
+        if (typeof this.Longitude != 'number')
+            alert("Error: Longitude is invalid, it is of type " + typeof this.Longitude);
+        if ( typeof this.Latitude == 'number' && typeof this.Longitude == 'number'){
+            this.Lat_Long_Location = this.Latitude + "," + this.Longitude;
+            return true;
+        }
+        else{
+            return false;
+        }
+    };
+    this.Set_Latitude = function (Latitude) {this.Latitude = Latitude};
+    this.Set_Longitude = function (Longitude){this.Longitude = Longitude};
+}
+
+function Format_User_Address(User_Address){//UT
     var Validated_User_Address = new Address_Object();
     Validated_User_Address.Set_Location(User_Address);
     Validated_User_Address.Get_LatLong();
@@ -325,6 +366,24 @@ function Get_School_ID() {
     var School_Drop_Down = document.getElementById("Select_Schools");
     var School_ID = School_Drop_Down.options[School_Drop_Down.selectedIndex].value;
     return School_ID;
+}
+
+
+function Find_Closest_Bus_Stop(User_Address, School_ID){
+    alert("Will Call DB for School_ID " +School_ID);
+    var Bus_Stops = Get_Bus_Stops();
+    Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
+    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
+    Bus_Stops =  Calculate_Walking_Distance_To_Stops(User_Address, Bus_Stops);
+    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
+    Map_Shortest_Bus_Stop(User_Address.Lat_Long_Location, Bus_Stops[0]);
+    Show_Button_Map_5_Closest_Stops(Bus_Stops);
+}
+
+function Show_Button_Map_5_Closest_Stops(Bus_Stops){
+    var Map_Closest_5_Stops_Btn = document.getElementById("Map_Closest_5_Stops");
+    Map_Closest_5_Stops_Btn.style.visibility="visible";
+    Map_Closest_5_Stops_Btn.addEventListener("click", function () {Map_Bus_Stops(User_Address, Bus_Stops)});
 }
 
 function Process_User_Location(){
@@ -446,45 +505,7 @@ function Get_Bus_Stops(){
 
 
 
-function Address_Object (){
-    this.Latitude;
-    this.Longitude;
-    this.Location;
-    this.Lat_Long_Location;
-    this.Set_Location = function(User_Address) {
-        if(typeof User_Address != 'undefined' && User_Address != ""){
-            this.Location = User_Address;
-        }
-        else {
-            console.log("Cannot create Address location due to invalid input");
-            alert("Cannot create Address location due to invalid input");
-        }
-    };
-    this.Get_LatLong = function () {
-        var action = "Geocode_PHP";
-        var Read_Geocode_Data = {Address: this.Location, action: action};
-        var Address_Coordinates = $.ajax({data: Read_Geocode_Data}).responseText;
-        Address_Coordinates = jQuery.parseJSON(Address_Coordinates);
-        console.log(Address_Coordinates);
-        this.Latitude = Address_Coordinates.Latitude;
-        this.Longitude = Address_Coordinates.Longitude;
-    };
-    this.Set_Lat_Long_Location = function(){
-        if ( typeof this.Latitude == 'number' && typeof this.Longitude == 'number'){
-            this.Lat_Long_Location = this.Latitude + "," + this.Longitude;
-            return true;
-        }
-        else{
-            if (typeof this.Latitude != 'number')
-                alert("Error: Latitude is invalid, it is of type " + typeof this.Latitude);
-            if (typeof this.Longitude != 'number')
-                alert("Error: Longitude is invalid, it is of type " + typeof this.Longitude);
-            return false;
-        }
-    };
-    this.Set_Latitude = function (Latitude) {this.Latitude = Latitude};
-    this.Set_Longitude = function (Longitude){this.Longitude = Longitude};
-}
+
 
 
 
@@ -547,17 +568,41 @@ function Sort_Distance_To_Stops(Bus_Stops){
     return Bus_Stops;
 }
 
-function Map_Bus_Stops(Bus_Stops) {
+function Map_Bus_Stops(User_Address, Bus_Stops) {
+    alert(Bus_Stops.length);
     var map = new google.maps.Map(document.getElementById('map-canvas'));
     var bounds = new google.maps.LatLngBounds();
     var infowindow = new google.maps.InfoWindow();
+
+/*
+    var latlng = new google.maps.LatLng(User_Address.Latitude, User_Address.Longitude);
+    var icon = "http://maps.google.com/mapfiles/kml/pal2/icon2.png";
+
+    bounds.extend(latlng);
+    var marker = new google.maps.Marker({
+        position: latlng,
+        map: map,
+        title: User_Address.Location,
+        icon: new google.maps.MarkerImage(icon)
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(this.title);
+        infowindow.open(map, this);
+    });
+    map.fitBounds(bounds);
+
+*/
+
     for (var Bus_Stop = 0; Bus_Stop < 5; Bus_Stop++) {
         var latlng = new google.maps.LatLng(Bus_Stops[Bus_Stop].Latitude, Bus_Stops[Bus_Stop].Longitude);
+        var icon_number = Bus_Stop+1;
+        var icon = "http://maps.google.com/mapfiles/kml/paddle/" + icon_number + ".png";
         bounds.extend(latlng);
         var marker = new google.maps.Marker({
             position: latlng,
             map: map,
-            title: Bus_Stops[Bus_Stop].Stop_Address
+            title: Bus_Stops[Bus_Stop].Stop_Address,
+            icon: new google.maps.MarkerImage(icon)
         });
         google.maps.event.addListener(marker, 'click', function() {
             infowindow.setContent(this.title);

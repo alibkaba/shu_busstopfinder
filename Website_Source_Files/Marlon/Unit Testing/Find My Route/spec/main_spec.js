@@ -1,6 +1,125 @@
 
 // ------------------------------------------Marlon coded items BELOW --------------------------------//
 
+describe("Validate User Address and School ID combination", function() {
+    it("fails unless both User Address and School ID are both Valid", function () {
+        expect(Validate_User_Address_and_School_ID("", "")).toBeFalsy();
+        expect(Validate_User_Address_and_School_ID("2 main st norwalk ct", "")).toBeFalsy();
+        expect(Validate_User_Address_and_School_ID("", "5")).toBeFalsy();
+        expect(Validate_User_Address_and_School_ID("2 main st norwalk", "5")).toBe("Element is null only during Jasmine Testing");
+    });
+});
+
+describe("Validate School ID", function() {
+    it("checks for School ID value not to be empty", function () {
+        expect(isSchoolIDValid("0")).toBeTruthy();
+        expect(isSchoolIDValid("1")).toBeTruthy();
+        expect(isSchoolIDValid("20")).toBeTruthy();
+        expect(isSchoolIDValid("")).toBeFalsy();
+    });
+});
+
+
+describe("Validate user Address", function() {
+    it("test for User address to be more than 5 elements", function () {
+        expect(isUserAddressValid("06855")).toBeFalsy();
+        expect(isUserAddressValid("2 main st")).toBeFalsy();
+        expect(isUserAddressValid("norwalk ct")).toBeFalsy();
+        expect(isUserAddressValid("@#@#$%")).toBeFalsy();
+        expect(isUserAddressValid("")).toBeFalsy();
+        expect(isUserAddressValid("2 ma")).toBeFalsy();
+        expect(isUserAddressValid("main")).toBeFalsy();
+        expect(isUserAddressValid("2 main st norwalk ct")).toBeTruthy();
+        expect(isUserAddressValid("2 main st 06855")).toBeTruthy();
+    });
+});
+
+describe("Test Change Element", function() {
+    var User_Address_Field;
+    beforeEach(function() {  User_Address_Field = new Change_Element("User_Address")});
+    it("calls SetColor", function() {
+        spyOn(User_Address_Field, "SetColor");
+        User_Address_Field.SetColor("#FF0000");
+        expect(User_Address_Field.SetColor).toHaveBeenCalled();
+    });
+    it("calls Select", function() {
+        spyOn(User_Address_Field, "Select");
+        User_Address_Field.Select();
+        expect(User_Address_Field.Select).toHaveBeenCalled();
+    });
+});
+
+describe("Test Address Object", function() {
+    var Validated_User_Address;
+    beforeEach(function() {  Validated_User_Address = new Address_Object});
+    it("creates a new object when passed parameters", function() {
+        var User_Address = "20 main st Norwalk ct";
+        Validated_User_Address.Set_Location(User_Address);
+        expect(Validated_User_Address.Location).toBe("20 main st Norwalk ct");
+    });
+    it("calls Get_LatLong to get Geolocation of Address", function() {
+        spyOn(Validated_User_Address, "Get_LatLong");
+        Validated_User_Address.Get_LatLong();
+        expect(Validated_User_Address.Get_LatLong).toHaveBeenCalled();
+    });
+    it("sets Lat Long Location with Valid Lat and Long", function() {
+        Validated_User_Address.Set_Latitude(40.123);
+        expect(Validated_User_Address.Latitude).toBe(40.123);
+        Validated_User_Address.Set_Longitude(40.00123);
+        expect(Validated_User_Address.Longitude).toBe(40.00123);
+        Validated_User_Address.Set_Lat_Long_Location();
+        expect(Validated_User_Address.Lat_Long_Location).toBe("40.123,40.00123");
+        expect(Validated_User_Address.Set_Lat_Long_Location()).toBeTruthy();
+        Validated_User_Address.Set_Latitude();
+        expect(Validated_User_Address.Set_Lat_Long_Location()).toBeFalsy();
+        Validated_User_Address.Set_Latitude("asdf");
+        expect(Validated_User_Address.Set_Lat_Long_Location()).toBeFalsy();
+    });
+});
+
+describe("Test Format User Address with Mock Object", function() {
+    var Format_User_Address;
+    var User_Address = "20 main St Norwalk ct";
+    beforeEach(function() {
+        Format_User_Address = jasmine.createSpyObj('Format_User_Address', ['Set_Location', 'Get_LatLong','Set_Lat_Long_Location']);
+        Format_User_Address.Set_Location(User_Address );
+        Format_User_Address.Get_LatLong();
+        Format_User_Address.Set_Lat_Long_Location();
+    });
+    it("creates spies for each requested function", function() {
+        expect(Format_User_Address.Set_Location).toBeDefined();
+        expect(Format_User_Address.Get_LatLong).toBeDefined();
+        expect(Format_User_Address.Set_Lat_Long_Location).toBeDefined();
+    });
+
+    it("tracks that the spies were called", function() {
+        expect(Format_User_Address.Set_Location).toHaveBeenCalled();
+        expect(Format_User_Address.Get_LatLong).toHaveBeenCalled();
+        expect(Format_User_Address.Set_Lat_Long_Location).toHaveBeenCalled();
+    });
+
+    it("tracks all the arguments of its calls", function() {
+        expect(Format_User_Address.Set_Location).toHaveBeenCalledWith("20 main St Norwalk ct");
+    });
+});
+
+
+
+
+
+
+
+
+describe("------Test Process User Address", function() {
+
+    it("creates a new object when passed parameters", function () {
+        //spyOn(Bus_Stop, "New");
+       // Bus_Stop.New("9:20", "2 scofield place norwalk ct");
+       // expect(Bus_Stop.New).toHaveBeenCalled();
+    });
+});
+
+
 describe("Test time input", function(){
     it("validates Bus Stop time", function() {
         var Time = "12:45am";
@@ -25,44 +144,6 @@ describe("Test time input", function(){
         expect(isTimeValid(Time)).toBeFalsy();
     });
 });
-
-describe("Validate user Address", function() {
-    it("test for User address to be more than 5 elements", function () {
-        expect(isUserAddressValid("06855")).toBeTruthy();
-        expect(isUserAddressValid("2 main st norwalk ct")).toBeTruthy();
-        expect(isUserAddressValid("2 main st")).toBeTruthy();
-        expect(isUserAddressValid("norwalk ct")).toBeTruthy();
-        expect(isUserAddressValid("@#@#$%")).toBeTruthy();
-        expect(isUserAddressValid("")).toBeFalsy();
-        expect(isUserAddressValid("2 ma")).toBeFalsy();
-        expect(isUserAddressValid("main")).toBeFalsy();
-    });
-});
-
-describe("Validate School ID", function() {
-    it("checks for School ID value not to be empty", function () {
-        expect(isSchoolIDValid("0")).toBeTruthy();
-        expect(isSchoolIDValid("1")).toBeTruthy();
-        expect(isSchoolIDValid("20")).toBeTruthy();
-        expect(isSchoolIDValid("")).toBeFalsy();
-    });
-});
-
-
-
-
-
-describe("------Test Process User Address", function() {
-
-    it("creates a new object when passed parameters", function () {
-        //spyOn(Bus_Stop, "New");
-       // Bus_Stop.New("9:20", "2 scofield place norwalk ct");
-       // expect(Bus_Stop.New).toHaveBeenCalled();
-    });
-});
-
-
-
 
 
 
