@@ -5,7 +5,7 @@
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<meta charset="utf-8" content="text/html" http-equiv="Content-Type">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/main.css" rel="stylesheet" type="text/css">
+	<!-- <link href="css/main.css" rel="stylesheet" type="text/css"> -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -42,21 +42,21 @@
 	<div class="row">
 		<div class="col-md-4">
 			<div class="text-center">
-				<select id="Select_States" onchange="Read_Districts(this.value)">
+				<select id="Select_States" onchange="Get_Districts(this.value)">
 					<option value=""> Select your State </option>
 				</select>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="text-center">
-				<select id="Select_Districts" onchange="Read_Schools(this.value)">
+				<select id="Select_Districts" onchange="Get_Schools(this.value)">
 					<option value=""> Select your District </option>
 				</select>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="text-center">
-				<select id="Select_Schools" onchange="Read_Bus_Stops(this.value)">
+				<select id="Select_Schools" onchange="Get_Bus_Stops(this.value)">
 					<option value=""> Select your School </option>
 				</select>
 				</br>
@@ -69,9 +69,9 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
-					<h4 class="modal-title">Bus Stops</h4> </div>
+					<h4 class="modal-title">All Bus Stops</h4> </div>
 				<div class="modal-body">
-					<table class="table table-bordered" id="Bus_Stops_Table">
+					<table class="table table-bordered" id="View_All_Bus_Stops">
 						<thead>
 							<tr>
 								<th>Bus #</th>

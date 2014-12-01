@@ -30,17 +30,19 @@ function Validate_action(){
 
 function DB_Operation($action){
 	switch($action) {
-		case "Read_States": Read_States();
+		case "Get_States": Get_States();
 		break;
-		case "Read_Districts": Read_Districts();
+		case "Get_Districts": Get_Districts();
 		break;
-		case "Read_Schools": Read_Schools();
+		case "Get_Schools": Get_Schools();
 		break;
-		case "Read_Bus_Stops": Read_Bus_Stops();
+		case "Get_Bus_Stop_Numbers": Get_Bus_Stop_Numbers();
+		break;
+		case "Get_Bus_Stop_Details": Get_Bus_Stop_Details();
 		break;
 		case "Geocode_PHP": Geocode_PHP();
 		break;
-		case "Read_Login": Read_Login();
+		case "Get_Login": Get_Login();
 		break;
 		case "Create_State": Create_State();
 		break;
@@ -48,7 +50,9 @@ function DB_Operation($action){
 		break;
 		case "Create_School": Create_School();
 		break;
-		case "Create_Bus_Stop": Create_Bus_Stop();
+		case "Create_Bus_Stop_Number": Create_Bus_Stop_Number();
+		break;
+		case "Create_Bus_Stop_Detail": Create_Bus_Stop_Detail();
 		break;
 		case "Get_State_Data": Get_State_Data();
 		break;
@@ -56,7 +60,9 @@ function DB_Operation($action){
 		break;
 		case "Get_School_Data": Get_School_Data();
 		break;
-		case "Get_Bus_Stop_Data": Get_Bus_Stop_Data();
+		case "Display_Update_Bus_Stop_Number": Display_Update_Bus_Stop_Number();
+		break;
+		case "Display_Update_Bus_Stop_Details": Display_Update_Bus_Stop_Details();
 		break;
 		case "Update_State": Update_State();
 		break;
@@ -64,7 +70,9 @@ function DB_Operation($action){
 		break;
 		case "Update_School": Update_School();
 		break;
-		case "Update_Bus_Stop": Update_Bus_Stop();
+		case "Update_Bus_Stop_Number": Update_Bus_Stop_Number();
+		break;
+		case "Update_Bus_Stop_Details": Update_Bus_Stop_Details();
 		break;
 		case "Delete_State": Delete_State();
 		break;
@@ -81,21 +89,21 @@ function DB_Operation($action){
 //classes instead of cases.
 
 
-function Read_States(){
+function Get_States(){
 	global $PDOconn;
 
-	$Query = 'CALL READ_STATES';
+	$Query = 'CALL GET_STATES';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);
 }
 
-function Read_Districts(){
+function Get_Districts(){
 	global $PDOconn;
 	$State_ID = stripslashes($_POST["State_ID"]);
 
-	$Query = 'CALL READ_DISTRICTS (?)';
+	$Query = 'CALL GET_DISTRICTS (?)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
 	$Statement->execute();
@@ -103,11 +111,11 @@ function Read_Districts(){
 	echo json_encode($Response);
 }
 
-function Read_Schools(){
+function Get_Schools(){
 	global $PDOconn;
 	$District_ID = stripslashes($_POST["District_ID"]);
 
-	$Query = 'CALL READ_SCHOOLS (?)';
+	$Query = 'CALL GET_SCHOOLS (?)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $District_ID, PDO::PARAM_INT);
 	$Statement->execute();
@@ -115,11 +123,11 @@ function Read_Schools(){
 	echo json_encode($Response);
 }
 
-function Read_Bus_Stops(){
+function Get_Bus_Stop_Numbers(){
 	global $PDOconn;
 	$School_ID = stripslashes($_POST["School_ID"]);
 
-	$Query = 'CALL READ_BUS_STOPS (?)';
+	$Query = 'CALL GET_BUS_STOP_NUMBERS (?)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
 	$Statement->execute();
@@ -127,12 +135,24 @@ function Read_Bus_Stops(){
 	echo json_encode($Response);
 }
 
-function Read_Login(){
+function Get_Bus_Stop_Details(){
+	global $PDOconn;
+	$Bus_Stop_Number_ID = stripslashes($_POST["Bus_Stop_Number_ID"]);
+
+	$Query = 'CALL GET_BUS_STOP_DETAILS (?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $Bus_Stop_Number_ID, PDO::PARAM_INT);
+	$Statement->execute();
+	$Response = $Statement->fetchAll();
+	echo json_encode($Response);
+}
+
+function Get_Login(){
 	global $PDOconn;
 	$Email = stripslashes($_POST["Email"]);
 	$Encrypted_Password = stripslashes($_POST["Encrypted_Password"]);
 	
-	$Query = 'CALL READ_LOGIN (?, ?)';
+	$Query = 'CALL GET_LOGIN (?, ?)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $Email, PDO::PARAM_STR, 50);
 	$Statement->bindParam(2, $Encrypted_Password, PDO::PARAM_STR, 50);
@@ -183,23 +203,35 @@ function Create_School(){
 	echo json_encode($Response);
 }
 
-function Create_Bus_Stop(){
+function Create_Bus_Stop_Number(){
 	global $PDOconn;
 	$School_ID = stripslashes($_POST["School_ID"]);
 	$Bus_Stop_Number = stripslashes($_POST["Bus_Stop_Number"]);
+	
+	$Query = 'CALL CREATE_BUS_STOP_NUMBER (?,?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
+	$Statement->bindParam(2, $Bus_Stop_Number, PDO::PARAM_INT);
+	$Statement->execute();
+	$Response = $Statement->fetchAll();
+	echo json_encode($Response);
+}
+
+function Create_Bus_Stop_Detail(){
+	global $PDOconn;
+	$Bus_Stop_Number_ID = stripslashes($_POST["Bus_Stop_Number_ID"]);
 	$Bus_Stop_Time = stripslashes($_POST["Bus_Stop_Time"]);
 	$Bus_Stop_Address = stripslashes($_POST["Bus_Stop_Address"]);
 	$Bus_Stop_Latitude = stripslashes($_POST["Bus_Stop_Latitude"]);
 	$Bus_Stop_Longitude = stripslashes($_POST["Bus_Stop_Longitude"]);
 	
-	$Query = 'CALL CREATE_BUS_STOP (?,?,?,?,?,?)';
+	$Query = 'CALL CREATE_BUS_STOP_DETAIL (?,?,?,?,?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
-	$Statement->bindParam(2, $Bus_Stop_Number, PDO::PARAM_INT);
-	$Statement->bindParam(3, $Bus_Stop_Time, PDO::PARAM_STR, 50);
-	$Statement->bindParam(4, $Bus_Stop_Address, PDO::PARAM_STR, 100);
-	$Statement->bindParam(5, $Bus_Stop_Latitude, PDO::PARAM_STR, 100);
-	$Statement->bindParam(6, $Bus_Stop_Longitude, PDO::PARAM_STR, 100);
+	$Statement->bindParam(1, $Bus_Stop_Number_ID, PDO::PARAM_INT);
+	$Statement->bindParam(2, $Bus_Stop_Time, PDO::PARAM_STR, 50);
+	$Statement->bindParam(3, $Bus_Stop_Address, PDO::PARAM_STR, 100);
+	$Statement->bindParam(4, $Bus_Stop_Latitude, PDO::PARAM_STR, 100);
+	$Statement->bindParam(5, $Bus_Stop_Longitude, PDO::PARAM_STR, 100);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);
@@ -241,13 +273,25 @@ function Get_School_Data(){
 	echo json_encode($Response);
 }
 
-function Get_Bus_Stop_Data(){
+function Display_Update_Bus_Stop_Number(){
 	global $PDOconn;
-	$Bus_Stop_ID = stripslashes($_POST["Bus_Stop_ID"]);
+	$Bus_Stop_Number_ID = stripslashes($_POST["Bus_Stop_Number_ID"]);
 
-	$Query = 'CALL GET_BUS_STOP_DATA (?)';
+	$Query = 'CALL DISPLAY_UPDATE_BUS_STOP_NUMBER (?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(1, $Bus_Stop_ID, PDO::PARAM_INT);
+	$Statement->bindParam(1, $Bus_Stop_Number_ID, PDO::PARAM_INT);
+	$Statement->execute();
+	$Response = $Statement->fetchAll();
+	echo json_encode($Response);
+}
+
+function Display_Update_Bus_Stop_Details(){
+	global $PDOconn;
+	$Bus_Stop_Number_ID = stripslashes($_POST["Bus_Stop_Number_ID"]);
+
+	$Query = 'CALL DISPLAY_UPDATE_BUS_STOP_DETAILS (?)';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->bindParam(1, $Bus_Stop_Number_ID, PDO::PARAM_INT);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);
@@ -297,71 +341,37 @@ function Update_School(){
 	echo json_encode($Response);
 }
 
-function Update_Bus_Stop(){
+function Update_Bus_Stop_Number(){
 	global $PDOconn;
-	$Bus_Stop_ID = stripslashes($_POST["Bus_Stop_ID"]);
+	$Bus_Stop_Number_ID = stripslashes($_POST["Bus_Stop_Number_ID"]);
 	$New_Bus_Stop_Number = stripslashes($_POST["New_Bus_Stop_Number"]);
-	$New_Bus_Stop_Time = stripslashes($_POST["New_Bus_Stop_Time"]);
-	$New_Bus_Stop_Address = stripslashes($_POST["New_Bus_Stop_Address"]);
-	$New_Bus_Stop_Latitude = stripslashes($_POST["New_Bus_Stop_Latitude"]);
-	$New_Bus_Stop_Longitude = stripslashes($_POST["New_Bus_Stop_Longitude"]);
 
-	$Query = 'CALL UPDATE_BUS_STOP (?,?,?,?,?,?)';
+	$Query = 'CALL UPDATE_BUS_STOP_NUMBER (?,?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(1, $Bus_Stop_ID, PDO::PARAM_INT);
+	$Statement->bindParam(1, $Bus_Stop_Number_ID, PDO::PARAM_INT);
 	$Statement->bindParam(2, $New_Bus_Stop_Number, PDO::PARAM_INT);
-	$Statement->bindParam(3, $New_Bus_Stop_Time, PDO::PARAM_STR, 50);
-	$Statement->bindParam(4, $New_Bus_Stop_Address, PDO::PARAM_STR, 100);
-	$Statement->bindParam(5, $New_Bus_Stop_Latitude, PDO::PARAM_STR, 100);
-	$Statement->bindParam(6, $New_Bus_Stop_Longitude, PDO::PARAM_STR, 100);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);
 }
 
-function Delete_State(){
-	global $PDOconn;
-	$State_ID = stripslashes($_POST["State_ID"]);
-
-	$Query = 'CALL DELETE_STATE (?)';
-	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
-	$Statement->execute();
-	$Response = $Statement->fetchAll();
-	echo json_encode($Response);
-}
-
-function Delete_District(){
-	global $PDOconn;
-	$District_ID = stripslashes($_POST["District_ID"]);
-
-	$Query = 'CALL DELETE_DISTRICT (?)';
-	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(1, $District_ID, PDO::PARAM_INT);
-	$Statement->execute();
-	$Response = $Statement->fetchAll();
-	echo json_encode($Response);
-}
-
-function Delete_School(){
+function Update_Bus_Stop_Details(){
 	global $PDOconn;
 	$School_ID = stripslashes($_POST["School_ID"]);
-
-	$Query = 'CALL DELETE_SCHOOL (?)';
+	$Bus_Stop_Number = stripslashes($_POST["Bus_Stop_Number"]);
+	$Bus_Stop_Time = stripslashes($_POST["Bus_Stop_Time"]);
+	$Bus_Stop_Address = stripslashes($_POST["Bus_Stop_Address"]);
+	$Bus_Stop_Latitude = stripslashes($_POST["Bus_Stop_Latitude"]);
+	$Bus_Stop_Longitude = stripslashes($_POST["Bus_Stop_Longitude"]);
+	
+	$Query = 'CALL UPDATE_BUS_STOP_DETAILS (?,?,?,?,?,?)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
-	$Statement->execute();
-	$Response = $Statement->fetchAll();
-	echo json_encode($Response);
-}
-
-function Delete_Bus_Stop(){
-	global $PDOconn;
-	$Bus_Stop_ID = stripslashes($_POST["Bus_Stop_ID"]);
-
-	$Query = 'CALL DELETE_BUS_STOP (?)';
-	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(1, $Bus_Stop_ID, PDO::PARAM_INT);
+	$Statement->bindParam(2, $Bus_Stop_Number, PDO::PARAM_INT);
+	$Statement->bindParam(3, $Bus_Stop_Time, PDO::PARAM_STR, 50);
+	$Statement->bindParam(4, $Bus_Stop_Address, PDO::PARAM_STR, 100);
+	$Statement->bindParam(5, $Bus_Stop_Latitude, PDO::PARAM_STR, 100);
+	$Statement->bindParam(6, $Bus_Stop_Longitude, PDO::PARAM_STR, 100);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);
@@ -404,10 +414,10 @@ function Geocode_PHP(){
 function Geocode_PHP1(){
 	$Address1 = stripslashes($_POST["Address"]);
    $string = str_replace (" ", "+", urlencode($Address1));
-   $details_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$string."&sensor=false";
+   $DETAILSs_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$string."&sensor=false";
  
    $ch = curl_init();
-   curl_setopt($ch, CURLOPT_URL, $details_url);
+   curl_setopt($ch, CURLOPT_URL, $DETAILSs_url);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
    $response = json_decode(curl_exec($ch), true);
  
