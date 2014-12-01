@@ -50,7 +50,7 @@ function DB_Operation($action){
 		break;
 		case "Create_School": Create_School();
 		break;
-		case "Create_Bus_Stop_Number": Create_Bus_Stop_Number();
+		case "Create_Bus_Number": Create_Bus_Number();
 		break;
 		case "Create_Bus_Stop_Detail": Create_Bus_Stop_Detail();
 		break;
@@ -203,15 +203,15 @@ function Create_School(){
 	echo json_encode($Response);
 }
 
-function Create_Bus_Stop_Number(){
+function Create_Bus_Number(){
 	global $PDOconn;
 	$School_ID = stripslashes($_POST["School_ID"]);
-	$Bus_Stop_Number = stripslashes($_POST["Bus_Stop_Number"]);
+	$Bus_Number = stripslashes($_POST["Bus_Number"]);
 	
-	$Query = 'CALL CREATE_BUS_STOP_NUMBER (?,?)';
+	$Query = 'CALL CREATE_BUS_NUMBER (?,?)';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
-	$Statement->bindParam(2, $Bus_Stop_Number, PDO::PARAM_INT);
+	$Statement->bindParam(2, $Bus_Number, PDO::PARAM_INT);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);

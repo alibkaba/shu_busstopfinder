@@ -24,18 +24,42 @@ $(document).ready(function() {
 	Get_States();
 });
 
-function Clear() {
-	document.getElementById("Create_State_Name").value = "";
-	document.getElementById("Create_District_Name").value = "";
-	document.getElementById("Create_School_Name").value = "";
-	document.getElementById("Create_School_Address").value = "";
-	document.getElementById("Create_Bus_Stop_Number").value = "";
-	document.getElementById("Create_Bus_Stop_Time").value = "";
-	document.getElementById("Create_Bus_Stop_Address").value = "";
-	document.getElementById("Update_State_Name").value = "";
-	document.getElementById("Update_District_Name").value = "";
-	document.getElementById("Update_School_Name").value = "";
-	document.getElementById("Update_School_Address").value = "";
+/*
+function Process_States(){
+
+
+}
+
+function State_Object(){
+this.Clear = function(){}
+this.Add = function() {}
+this.Delete = function(){}
+this.Update = function() {}
+this.Close_Form = function () {}
+
+}*/
+
+
+function Clear_Create_State_Form(){
+document.getElementById("Create_State_Name").value = "";
+}
+
+function Clear_Display_Create_District_Form(){
+document.getElementById("Create_District_Name").value = "";
+}
+
+function Clear_Display_Create_School_Form(){
+document.getElementById("Create_School_Name").value = "";
+document.getElementById("Create_School_Address").value = "";
+}
+
+function Clear_Display_Create_Bus_Number_Form(){
+document.getElementById("Create_Bus_Number").value = "";
+}
+
+function Clear_Display_Create_Bus_Stop_Details_Form(){
+document.getElementById("Create_Bus_Stop_Time").value = "";
+document.getElementById("Create_Bus_Stop_Address").value = "";
 }
 
 function Grab_Selected_State_ID() {
@@ -248,8 +272,7 @@ function View_All_Bus_Stops(Bus_Stops_Number_And_Detail_Data) {
 	document.getElementById("View_All_Bus_Stops").innerHTML = View_All_Bus_Stops;
 }
 
-function Create_State() {
-	var State_Name = document.getElementById("Create_State_Name").value;
+function Create_State(State_Name) {
 	var Names = ["State Name"];
 	var Values = [State_Name];
 	if (Validate_Text_Fields(Names, Values) != false) {
@@ -260,7 +283,7 @@ function Create_State() {
 		};
 		Outgoing_Ajax(Ajax_Data);
 		Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-		var Modal = '#CreateStateModal';
+		var Modal = '#Create_State_Form';
 		State_Response(Create_Response_Data, Modal);
 	}
 }
@@ -275,9 +298,8 @@ function State_Response(Create_Response_Data, Modal) {
 	}
 }
 
-function Create_District() {
+function Create_District(District_Name) {
 	var State_ID = Grab_Selected_State_ID();
-	District_Name = document.getElementById("Create_District_Name").value;
 	var Names = ["District Name"];
 	var Values = [District_Name];
 	if (Validate_Text_Fields(Names, Values) != false) {
@@ -289,7 +311,7 @@ function Create_District() {
 		};
 		Outgoing_Ajax(Ajax_Data);
 		Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-		var Modal = '#CreateDistrictModal';
+		var Modal = '#Display_Create_District_Form';
 		District_Response(Create_Response_Data, Modal, State_ID);
 	}
 }
@@ -304,10 +326,8 @@ function District_Response(Create_Response_Data, Modal, State_ID) {
 	}
 }
 
-function Create_School() {
+function Create_School(School_Name, School_Address) {
 	var District_ID = Grab_Selected_District_ID();
-	School_Name = document.getElementById("Create_School_Name").value;
-	School_Address = document.getElementById("Create_School_Address").value;
 	var Names = ["School Name", "School Address"];
 	var Values = [School_Name, School_Address];
 	if (Validate_Text_Fields(Names, Values) != false) {
@@ -320,7 +340,7 @@ function Create_School() {
 		};
 		Outgoing_Ajax(Ajax_Data);
 		Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-		var Modal = '#CreateSchoolModal';
+		var Modal = '#Display_Create_School_Form';
 		School_Response(Create_Response_Data, Modal, District_ID);
 	}
 }
@@ -335,21 +355,21 @@ function School_Response(Create_Response_Data, Modal, District_ID) {
 	}
 }
 
-function Create_Bus_Stop_Number() {
+function Create_Bus_Number(Bus_Number) {
 	var School_ID = Grab_Selected_School_ID();
-	Bus_Stop_Number = document.getElementById("Create_Bus_Stop_Number").value;
-	var Names = ["Bus Stop Number"];
-	var Values = [Bus_Stop_Number];
+	alert(Bus_Number);
+	var Names = ["Bus Number"];
+	var Values = [Bus_Number];
 	if (Validate_Text_Fields(Names, Values) != false) {
-		var action = "Create_Bus_Stop_Number";
+		var action = "Create_Bus_Number";
 		var Ajax_Data = {
 			School_ID: School_ID,
-			Bus_Stop_Number: Bus_Stop_Number,
+			Bus_Number: Bus_Number,
 			action: action
 		};
 		Outgoing_Ajax(Ajax_Data);
 		Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-		var Modal = '#CreateBusStopNumberModal';
+		var Modal = '#Display_Create_Bus_Number_Form';
 		Bus_Stop_Number_Response(Create_Response_Data, Modal, School_ID);
 	}
 }
@@ -364,10 +384,8 @@ function Bus_Stop_Number_Response(Create_Response_Data, Modal, School_ID) {
 	}
 }
 
-function Create_Bus_Stop_Detail() {
+function Create_Bus_Stop_Detail(Bus_Stop_Time, Bus_Stop_Address) {
 	var Bus_Stop_Number_ID = Grab_Selected_Bus_Stop_Number_ID();
-	Bus_Stop_Time = document.getElementById("Create_Bus_Stop_Time").value;
-	Bus_Stop_Address = document.getElementById("Create_Bus_Stop_Address").value;
 	Bus_Stop_Latitude = "22"; //temp
 	Bus_Stop_Longitude = "11"; //temp
 	var Names = ["Bus Stop Time", "Bus Stop Address", "Bus Stop Latitude", "Bus Stop Longitude"];
@@ -384,7 +402,7 @@ function Create_Bus_Stop_Detail() {
 		};
 		Outgoing_Ajax(Ajax_Data);
 		Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-		var Modal = '#CreateBusStopDetailsModal';
+		var Modal = '#Display_Create_Bus_Stop_Details_Form';
 		Bus_Stop_Stop_Details_Response(Create_Response_Data, Modal, Bus_Stop_Number_ID);
 	}
 }
