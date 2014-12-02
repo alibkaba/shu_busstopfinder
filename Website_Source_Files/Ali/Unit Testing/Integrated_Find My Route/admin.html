@@ -43,7 +43,7 @@
 				<br>
 				<button class="btn btn-success" data-target="#Display_Create_State_Form" data-toggle="modal" id="Create_State_Form_Button" onclick="Clear_Display_Create_State_Form()" type="button">Create</button>
 				<button class="btn btn-info" data-target="#Display_Update_State_Form" data-toggle="modal" id="Update_State_Form_Button" onclick="Populate_Display_Update_State_Form()" type="button">Update</button>
-				<button class="btn btn-danger" data-target="#Display_Delete_State_Form" data-toggle="modal" id="Delete_State_Form_Button" type="button">Delete</button>
+				<button class="btn btn-danger" data-target="#Display_Delete_State_Form" data-toggle="modal" id="Delete_State_Form_Button" onclick="Display_Delete_State_Form()" type="button">Delete</button>
 			</div>
 		</div>
 		<div class="col-md-2">
@@ -52,9 +52,9 @@
 					<option value=""> Select your District </option>
 				</select>
 				<br>
-				<button class="btn btn-success" data-target="#Display_Create_District_Form" data-toggle="modal" id="Create_District_Modal_Button" onclick="Clear_Display_Create_District_Form()" type="button">Create</button>
+				<button class="btn btn-success" data-target="#Display_Create_District_Form" data-toggle="modal" id="Create_District_Form_Button" onclick="Clear_Display_Create_District_Form()" type="button">Create</button>
 				<button class="btn btn-info" data-target="#Display_Update_District_Form" data-toggle="modal" id="Update_District_Form_Button" onclick="Populate_Display_Update_District_Form()" type="button">Update</button>
-				<button class="btn btn-danger" data-target="#Display_Delete_District_Form" data-toggle="modal" id="Delete_District_Form_Button"  type="button">Delete</button>
+				<button class="btn btn-danger" data-target="#Display_Delete_District_Form" data-toggle="modal" id="Delete_District_Form_Button"  onclick="Display_Delete_District_Form()" type="button">Delete</button>
 			</div>
 		</div>
 		<div class="col-md-2">
@@ -65,7 +65,7 @@
 				<br>
 				<button class="btn btn-success" data-target="#Display_Create_School_Form" data-toggle="modal" id="Create_School_Form_Button" onclick="Clear_Display_Create_School_Form()" type="button">Create</button>
 				<button class="btn btn-info" data-target="#Display_Update_School_Form" data-toggle="modal" id="Update_School_Form_Button" onclick="Populate_Display_Update_School_Form()" type="button">Update</button>
-				<button class="btn btn-danger" data-target="#Display_Delete_School_Form" data-toggle="modal" id="Delete_School_Form_Button" type="button">Delete</button>
+				<button class="btn btn-danger" data-target="#Display_Delete_School_Form" data-toggle="modal" id="Delete_School_Form_Button" onclick="Display_Delete_School_Form()" type="button">Delete</button>
 			</div>
 		</div>
 		<div class="col-md-2">
@@ -78,7 +78,7 @@
 				<br>
 				<button class="btn btn-success" data-target="#Display_Create_Bus_Stop_Number_Form" data-toggle="modal" id="Create_Bus_Stop_Number_Form_Button" onclick="Clear_Display_Create_Bus_Number_Form()" type="button">Create</button>
 				<button class="btn btn-info" data-target="#Display_Update_Bus_Stop_Number_Form" data-toggle="modal" id="Update_Bus_Stop_Number_Form_Button" onclick="Populate_Display_Update_Bus_Number_Form()" type="button">Update</button>
-				<button class="btn btn-danger" data-target="#Display_Delete_Bus_Stop_Number_Form" data-toggle="modal" id="Delete_Bus_Stop_Number_Form_Button" type="button">Delete</button>
+				<button class="btn btn-danger" data-target="#Display_Delete_Bus_Stop_Number_Form" data-toggle="modal" id="Delete_Bus_Stop_Number_Form_Button" onclick="Display_Delete_Bus_Number_Form()" type="button">Delete</button>
 			</div>
 		</div>
 		<div class="col-md-2">
@@ -87,9 +87,9 @@
 					<option value=""> Select your Bus Stop Address </option>
 				</select>
 				<br>
-				<button class="btn btn-success" data-target="#Display_Create_Bus_Stop_Details_Form" data-toggle="modal" id="Create_Create_Bus_Stop_Details_Form_Button" onclick="Clear_Display_Create_Bus_Stop_Details_Form()" type="button">Create</button>
-				<button class="btn btn-info" data-target="#Display_Update_Create_Bus_Stop_Details_Form" data-toggle="modal" id="Update_Create_Bus_Stop_Details_Form_Button" onclick="Populate_Display_Update_Bus_Stop_Details_Form()" type="button">Update</button>
-				<button class="btn btn-danger" data-target="#Display_Delete_Create_Bus_Stop_Details_Form" data-toggle="modal" id="Delete_Create_Bus_Stop_Details_Form_Button" type="button">Delete</button>
+				<button class="btn btn-success" data-target="#Display_Create_Bus_Stop_Details_Form" data-toggle="modal" id="Create_Bus_Stop_Details_Form_Button" onclick="Clear_Display_Create_Bus_Stop_Details_Form()" type="button">Create</button>
+				<button class="btn btn-info" data-target="#Display_Update_Bus_Stop_Details_Form" data-toggle="modal" id="Update_Bus_Stop_Details_Form_Button" onclick="Populate_Display_Update_Bus_Stop_Details_Form()" type="button">Update</button>
+				<button class="btn btn-danger" data-target="#Display_Delete_Bus_Stop_Details_Form" data-toggle="modal" id="Delete_Bus_Stop_Details_Form_Button" onclick="Display_Delete_Bus_Stop_Details_Form()" type="button">Delete</button>
 			</div>
 		</div>
 		<div class="col-md-2">
@@ -236,7 +236,7 @@
 						<label for="State_Name">State Name</label>
 						<input class="form-control" id="Update_State_Name" placeholder="Enter a State Name" type="text"> </div>
 					<div class="form-group">
-						<button class="btn btn-default" type="button" onclick="Update_State();">Update</button>
+						<button class="btn btn-default" type="button" id="Update_State">Update</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -256,7 +256,7 @@
 						<label for="State_Name">District Name</label>
 						<input class="form-control" id="Update_District_Name" placeholder="Enter a District Name" type="text"> </div>
 					<div class="form-group">
-						<button class="btn btn-default" type="button" onclick="Update_District();">Update</button>
+						<button class="btn btn-default" type="button" id="Update_District">Update</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -279,7 +279,7 @@
 						<label for="State_Name">School Address</label>
 						<input class="form-control" id="Update_School_Address" placeholder="Enter a School Address" type="text"> </div>
 					<div class="form-group">
-						<button class="btn btn-default" type="button" onclick="Update_School();">Update</button>
+						<button class="btn btn-default" type="button" id="Update_School">Update</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -299,7 +299,7 @@
 						<label for="State_Name">Bus Number Name</label>
 						<input class="form-control" id="Update_Bus_Number" placeholder="Enter a Bus Number" type="text"> </div>
 					<div class="form-group">
-						<button class="btn btn-default" type="button" onclick="Update_Bus_Number();">Update</button>
+						<button class="btn btn-default" type="button" id="Update_Bus_Stop_Number">Update</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -308,7 +308,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="Display_Update_Create_Bus_Stop_Details_Form" tabindex="-1">
+	<div class="modal fade" id="Display_Update_Bus_Stop_Details_Form" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -331,7 +331,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="DeleteStateModal" tabindex="-1">
+	<div class="modal fade" id="Display_Delete_State_Form" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -350,7 +350,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="DeleteDistrictModal" tabindex="-1">
+	<div class="modal fade" id="Display_Delete_District_Form" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -369,7 +369,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="DeleteSchoolModal" tabindex="-1">
+	<div class="modal fade" id="Display_Delete_School_Form" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -379,6 +379,44 @@
 					<div class="alert alert-danger" id="Delete_School_Place_Holder"></div>
 					<div class="form-group">
 						<button class="btn btn-danger" id="Delete_School" type="button">Yes</button>
+						<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="Display_Delete_Bus_Stop_Number_Form" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Delete a School</h4> </div>
+				<div class="modal-body">
+					<div class="alert alert-danger" id="Delete_Bus_Stop_Number_Place_Holder"></div>
+					<div class="form-group">
+						<button class="btn btn-danger" id="Delete_Bus_Stop_Number" type="button">Yes</button>
+						<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="Display_Delete_Bus_Stop_Details_Form" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Delete a School</h4> </div>
+				<div class="modal-body">
+					<div class="alert alert-danger" id="Delete_Bus_Stop_Detail_Place_Holder"></div>
+					<div class="form-group">
+						<button class="btn btn-danger" id="Delete_Bus_Stop_Detail" type="button">Yes</button>
 						<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
 					</div>
 				</div>
