@@ -354,9 +354,6 @@ describe("Test time input", function(){
 });
 
 
-
-
-
 describe("Spy on Map Address to ensure it is called with parameters", function() {
     var Map_Address, map = null;
     var latitude =  -42.32;
@@ -378,10 +375,6 @@ describe("Spy on Map Address to ensure it is called with parameters", function()
         expect(Map_Address.setAddress).toHaveBeenCalledWith(latitude, longitude);
     });
 });
-
-
-
-
 
 
 
