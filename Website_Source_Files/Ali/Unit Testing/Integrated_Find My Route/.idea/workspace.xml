@@ -32,7 +32,7 @@
     <favorites_list name="Find My Route" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.43649372">
+    <splitter split-orientation="horizontal" split-proportion="0.5539654">
       <split-first>
         <leaf>
           <file leaf-file-name="main_spec.js" pinned="false" current-in-tab="false">
@@ -48,8 +48,8 @@
           <file leaf-file-name="admin.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/admin.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.5129717" vertical-offset="4648" max-vertical-offset="8670">
-                  <caret line="299" column="73" selection-start-line="299" selection-start-column="56" selection-end-line="299" selection-end-column="73" />
+                <state vertical-scroll-proportion="0.22051887" vertical-offset="0" max-vertical-offset="8670">
+                  <caret line="11" column="25" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="25" />
                   <folding />
                 </state>
               </provider>
@@ -59,11 +59,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="user.html" pinned="false" current-in-tab="false">
+          <file leaf-file-name="user.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/user.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="31.384615" vertical-offset="918" max-vertical-offset="2771">
-                  <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+                <state vertical-scroll-proportion="0.19450802" vertical-offset="0" max-vertical-offset="2771">
+                  <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
                   <folding>
                     <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#button#2;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -75,31 +75,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/user.js">
+          <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-21.0" vertical-offset="2378" max-vertical-offset="13311">
-                  <caret line="172" column="8" selection-start-line="172" selection-start-column="8" selection-end-line="172" selection-end-column="63" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15062">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="admin.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/admin.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-7.923077" vertical-offset="7971" max-vertical-offset="14518">
-                  <caret line="481" column="50" selection-start-line="481" selection-start-column="32" selection-end-line="481" selection-end-column="50" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="db.php" pinned="false" current-in-tab="true">
+          <file leaf-file-name="db.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/db.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.41273585" vertical-offset="5736" max-vertical-offset="9605">
-                  <caret line="358" column="14" selection-start-line="358" selection-start-column="14" selection-end-line="358" selection-end-column="47" />
+                <state vertical-scroll-proportion="-1.1730769" vertical-offset="5736" max-vertical-offset="9605">
+                  <caret line="341" column="27" selection-start-line="341" selection-start-column="27" selection-end-line="341" selection-end-column="27" />
                   <folding />
                 </state>
               </provider>
@@ -121,11 +111,11 @@
         <option value="$PROJECT_DIR$/dashboard3.html" />
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/dashboard.html" />
-        <option value="$PROJECT_DIR$/user.html" />
-        <option value="$PROJECT_DIR$/src/user.js" />
-        <option value="$PROJECT_DIR$/admin.html" />
         <option value="$PROJECT_DIR$/src/admin.js" />
         <option value="$PROJECT_DIR$/db.php" />
+        <option value="$PROJECT_DIR$/src/user.js" />
+        <option value="$PROJECT_DIR$/admin.html" />
+        <option value="$PROJECT_DIR$/user.html" />
       </list>
     </option>
   </component>
@@ -473,12 +463,12 @@
       <workItem from="1415845210824" duration="33524000" />
       <workItem from="1416150719297" duration="55326000" />
       <workItem from="1416544239132" duration="109227000" />
-      <workItem from="1417439225487" duration="29710000" />
+      <workItem from="1417439225487" duration="31345000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="227787000" />
+    <option name="totallyTimeSpent" value="229422000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1928" height="1060" extended-state="6" />
@@ -601,14 +591,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/admin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="19907">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/main_spec.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1836" max-vertical-offset="3009">
@@ -635,26 +617,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/user.js">
+    <entry file="file://$PROJECT_DIR$/db.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.0" vertical-offset="2378" max-vertical-offset="13311">
-          <caret line="172" column="8" selection-start-line="172" selection-start-column="8" selection-end-line="172" selection-end-column="63" />
+        <state vertical-scroll-proportion="-1.1730769" vertical-offset="5736" max-vertical-offset="9605">
+          <caret line="341" column="27" selection-start-line="341" selection-start-column="27" selection-end-line="341" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15062">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5129717" vertical-offset="4648" max-vertical-offset="8670">
-          <caret line="299" column="73" selection-start-line="299" selection-start-column="56" selection-end-line="299" selection-end-column="73" />
+        <state vertical-scroll-proportion="0.22051887" vertical-offset="0" max-vertical-offset="8670">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="31.384615" vertical-offset="918" max-vertical-offset="2771">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.19450802" vertical-offset="0" max-vertical-offset="2771">
+          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#2;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -662,22 +652,6 @@
             <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/admin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.923077" vertical-offset="7971" max-vertical-offset="14518">
-          <caret line="481" column="50" selection-start-line="481" selection-start-column="32" selection-end-line="481" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41273585" vertical-offset="5736" max-vertical-offset="9605">
-          <caret line="358" column="14" selection-start-line="358" selection-start-column="14" selection-end-line="358" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>

@@ -133,10 +133,14 @@ function States_Manager(){
         };
         Outgoing_Ajax(Ajax_Data);
         var States_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Clear_Form();
+        if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html"){
+            this.Clear_Form();
+            this.Create_Listener();
+            this.Update_Listener();
+            this.Delete_Listener();
+        }
         this.Update_Drop_Down(States_Data);
         this.Select_Listener();
-        this.Create_Listener();
     };
     this.Get_Update_Data = function(){
         var State_ID = Grab_Selected_State_ID();
@@ -173,8 +177,6 @@ function States_Manager(){
                 var District_Handler = new District_Manager();
                 District_Handler.Get_Drop_Down_Data(State_ID);
                 Display_State_GUI();
-                this.Update_Listener();
-                this.Delete_Listener();
             }
             else{
                 Hide_State_GUI();
@@ -232,12 +234,14 @@ function District_Manager(){
         };
         Outgoing_Ajax(Ajax_Data);
         var Districts_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Clear_Form();
+        if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html"){
+            this.Clear_Form();
+            this.Create_Listener();
+            this.Update_Listener();
+            this.Delete_Listener();
+        }
         this.Update_Drop_Down(Districts_Data);
         this.Select_Listener();
-        this.Create_Listener();
-        this.Update_Listener();
-        this.Delete_Listener();
     };
     this.Get_Update_Data = function(){
         var District_ID = Grab_Selected_District_ID();
@@ -332,12 +336,14 @@ function School_Manager(){
         };
         Outgoing_Ajax(Ajax_Data);
         var Schools_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Clear_Form();
+        if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html"){
+            this.Clear_Form();
+            this.Create_Listener();
+            this.Update_Listener();
+            this.Delete_Listener();
+        }
         this.Update_Drop_Down(Schools_Data);
         this.Select_Listener();
-        this.Create_Listener();
-        this.Update_Listener();
-        this.Delete_Listener();
     };
     this.Get_Update_Data = function(){
         var School_ID = Grab_Selected_School_ID();
@@ -372,9 +378,11 @@ function School_Manager(){
             var School_ID = Select_Drop_Down.options[Select_Drop_Down.selectedIndex].value;
             if (School_ID != ""){
                 var View_All_Buses_Handler = new View_All_Buses_Manager();
-                var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
                 View_All_Buses_Handler.Get_Drop_Down_Data(School_ID);
-                Bus_Stop_Number_Handler.Get_Drop_Down_Data(School_ID);
+                if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
+                    var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
+                    Bus_Stop_Number_Handler.Get_Drop_Down_Data(School_ID);
+                }
                 Display_School_GUI();
             }
             else{
@@ -468,12 +476,14 @@ function Bus_Stop_Number_Manager(){
         };
         Outgoing_Ajax(Ajax_Data);
         var Bus_Stops_Number_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Clear_Form();
+        if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html"){
+            this.Clear_Form();
+            this.Create_Listener();
+            this.Update_Listener();
+            this.Delete_Listener();
+        }
         this.Update_Drop_Down(Bus_Stops_Number_Data);
         this.Select_Listener();
-        this.Create_Listener();
-        this.Update_Listener();
-        this.Delete_Listener();
     };
     this.Get_Update_Data = function(){
         var Bus_Stop_Number_ID = Grab_Selected_Bus_Stop_Number_ID();
@@ -565,12 +575,14 @@ function Bus_Stop_Detail_Manager(){
         };
         Outgoing_Ajax(Ajax_Data);
         var Bus_Stop_Details_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Clear_Form();
+        if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html"){
+            this.Clear_Form();
+            this.Create_Listener();
+            this.Update_Listener();
+            this.Delete_Listener();
+        }
         this.Update_Drop_Down(Bus_Stop_Details_Data);
         this.Select_Listener();
-        this.Create_Listener();
-        this.Update_Listener();
-        this.Delete_Listener();
     };
     this.Get_Update_Data = function(){
         var Bus_Stop_Number_ID = Grab_Selected_Bus_Stop_Number_ID();
@@ -725,70 +737,90 @@ function Populate_Display_Update_Bus_Stop_Details_Form(){
 
 function Display_State_GUI(){
     document.getElementById("Select_Districts").style.visibility="visible";
-    document.getElementById("Update_State_Form_Button").style.visibility="visible";
-    document.getElementById("Delete_State_Form_Button").style.visibility="visible";
-    document.getElementById("Create_District_Modal_Button").style.visibility="visible";
+    if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
+        document.getElementById("Update_State_Form_Button").style.visibility="visible";
+        document.getElementById("Delete_State_Form_Button").style.visibility="visible";
+        document.getElementById("Create_District_Modal_Button").style.visibility="visible";
+    }
 }
 
 function Display_District_GUI(){
     document.getElementById("Select_Schools").style.visibility="visible";
-    document.getElementById("Update_District_Form_Button").style.visibility="visible";
-    document.getElementById("Delete_District_Form_Button").style.visibility="visible";
-    document.getElementById("Create_School_Form_Button").style.visibility="visible";
+    if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
+        document.getElementById("Update_District_Form_Button").style.visibility="visible";
+        document.getElementById("Delete_District_Form_Button").style.visibility="visible";
+        document.getElementById("Create_School_Form_Button").style.visibility="visible";
+    }
 }
 
 function Display_School_GUI(){
     document.getElementById("View_All_Buses_Button").style.visibility="visible";
-    document.getElementById("Select_Bus_Stop_Numbers").style.visibility="visible";
-    document.getElementById("Update_School_Form_Button").style.visibility="visible";
-    document.getElementById("Delete_School_Form_Button").style.visibility="visible";
-    document.getElementById("Create_Bus_Stop_Number_Form_Button").style.visibility="visible";
+    if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
+        document.getElementById("Select_Bus_Stop_Numbers").style.visibility="visible";
+        document.getElementById("Update_School_Form_Button").style.visibility="visible";
+        document.getElementById("Delete_School_Form_Button").style.visibility="visible";
+        document.getElementById("Create_Bus_Stop_Number_Form_Button").style.visibility="visible";
+    }
 }
 
 function Display_Bus_Stop_Number_GUI(){
-    document.getElementById("Select_Bus_Stops_Details").style.visibility="visible";
-    document.getElementById("Update_Bus_Stop_Number_Form_Button").style.visibility="visible";
-    document.getElementById("Delete_Bus_Stop_Number_Form_Button").style.visibility="visible";
-    document.getElementById("Create_Create_Bus_Stop_Details_Form_Button").style.visibility="visible";
+    if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
+        document.getElementById("Select_Bus_Stops_Details").style.visibility="visible";
+        document.getElementById("Update_Bus_Stop_Number_Form_Button").style.visibility="visible";
+        document.getElementById("Delete_Bus_Stop_Number_Form_Button").style.visibility="visible";
+        document.getElementById("Create_Create_Bus_Stop_Details_Form_Button").style.visibility="visible";
+    }
 }
 
 function Display_Bus_Stop_Detail_GUI(){
-    document.getElementById("Update_Create_Bus_Stop_Details_Form_Button").style.visibility="visible";
-    document.getElementById("Delete_Create_Bus_Stop_Details_Form_Button").style.visibility="visible";
+    if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
+        document.getElementById("Update_Create_Bus_Stop_Details_Form_Button").style.visibility="visible";
+        document.getElementById("Delete_Create_Bus_Stop_Details_Form_Button").style.visibility="visible";
+    }
 }
 
 function Hide_State_GUI(){
     document.getElementById("Select_Districts").style.visibility="hidden";
-    document.getElementById("Update_State_Form_Button").style.visibility="hidden";
-    document.getElementById("Delete_State_Form_Button").style.visibility="hidden";
-    document.getElementById("Create_District_Modal_Button").style.visibility="hidden";
+    if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
+        document.getElementById("Update_State_Form_Button").style.visibility="hidden";
+        document.getElementById("Delete_State_Form_Button").style.visibility="hidden";
+        document.getElementById("Create_District_Modal_Button").style.visibility="hidden";
+    }
 }
 
 function Hide_District_GUI(){
     document.getElementById("Select_Schools").style.visibility="hidden";
-    document.getElementById("Update_District_Form_Button").style.visibility="hidden";
-    document.getElementById("Delete_District_Form_Button").style.visibility="hidden";
-    document.getElementById("Create_School_Form_Button").style.visibility="hidden";
+    if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
+        document.getElementById("Update_District_Form_Button").style.visibility="hidden";
+        document.getElementById("Delete_District_Form_Button").style.visibility="hidden";
+        document.getElementById("Create_School_Form_Button").style.visibility="hidden";
+    }
 }
 
 function Hide_School_GUI(){
     document.getElementById("View_All_Buses_Button").style.visibility="hidden";
-    document.getElementById("Select_Bus_Stop_Numbers").style.visibility="hidden";
-    document.getElementById("Update_School_Form_Button").style.visibility="hidden";
-    document.getElementById("Delete_School_Form_Button").style.visibility="hidden";
-    document.getElementById("Create_Bus_Stop_Number_Form_Button").style.visibility="hidden";
+    if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
+        document.getElementById("Select_Bus_Stop_Numbers").style.visibility="hidden";
+        document.getElementById("Update_School_Form_Button").style.visibility="hidden";
+        document.getElementById("Delete_School_Form_Button").style.visibility="hidden";
+        document.getElementById("Create_Bus_Stop_Number_Form_Button").style.visibility="hidden";
+    }
 }
 
 function Hide_Bus_Stop_Number_GUI(){
-    document.getElementById("Select_Bus_Stops_Details").style.visibility="hidden";
-    document.getElementById("Update_Bus_Stop_Number_Form_Button").style.visibility="hidden";
-    document.getElementById("Delete_Bus_Stop_Number_Form_Button").style.visibility="hidden";
-    document.getElementById("Create_Create_Bus_Stop_Details_Form_Button").style.visibility="hidden";
+    if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
+        document.getElementById("Select_Bus_Stops_Details").style.visibility="hidden";
+        document.getElementById("Update_Bus_Stop_Number_Form_Button").style.visibility="hidden";
+        document.getElementById("Delete_Bus_Stop_Number_Form_Button").style.visibility="hidden";
+        document.getElementById("Create_Create_Bus_Stop_Details_Form_Button").style.visibility="hidden";
+    }
 }
 
 function Hide_Bus_Stop_Detail_GUI(){
-    document.getElementById("Update_Create_Bus_Stop_Details_Form_Button").style.visibility="hidden";
-    document.getElementById("Delete_Create_Bus_Stop_Details_Form_Button").style.visibility="hidden";
+    if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
+        document.getElementById("Update_Create_Bus_Stop_Details_Form_Button").style.visibility = "hidden";
+        document.getElementById("Delete_Create_Bus_Stop_Details_Form_Button").style.visibility = "hidden";
+    }
 }
 
 //Below codes need to be refactored.
