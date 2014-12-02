@@ -126,6 +126,10 @@ function Main(){
 }
 
 function States_Manager(){
+    this.Grab_Selected_State_ID = function (){
+        var State_ID = document.getElementById("Select_States").value;
+        return State_ID;
+    };
     this.Get_Drop_Down_Data = function(){
         var action = "Get_States";
         var Ajax_Data = {
@@ -143,7 +147,7 @@ function States_Manager(){
         this.Select_Listener();
     };
     this.Get_Update_Data = function(){
-        var State_ID = Grab_Selected_State_ID();
+        var State_ID = this.Grab_Selected_State_ID();
         var action = "Get_State_Data";
         var Ajax_Data = {
             State_ID: State_ID,
@@ -200,32 +204,73 @@ function States_Manager(){
                     action: action
                 };
                 Outgoing_Ajax(Ajax_Data);
-                var Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
                 var Modal = '#Display_Create_State_Form';
-                State_Response(Create_Response_Data, Modal);
+                var Message = 'state creation failed, please try again';
+                var State_Handler = new States_Manager();
+                State_Handler.Validate_Response(Response_Data, Modal, Message);
             }
         });
     };
     this.Update_Listener = function(){
-
+        var Update_Button = document.getElementById("Update_State");
+        Update_Button.addEventListener("click", function () {
+            var New_State_Name = document.getElementById("Update_State_Name").value;
+            var action = "Update_State";
+            var Names = ["State Name"];
+            var Values = [New_State_Name];
+            if (Validate_Text_Fields(Names, Values) != false) {
+                var State_Handler = new States_Manager();
+                State_Handler.Grab_Selected_State_ID();
+                var State_ID = State_Handler.Grab_Selected_State_ID();
+                var Ajax_Data = {
+                    State_ID: State_ID,
+                    New_State_Name: New_State_Name,
+                    action: action
+                };
+                Outgoing_Ajax(Ajax_Data);
+                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+                var Modal = '#Display_Update_State_Form';
+                var Message = 'state update failed, please try again';
+                State_Handler.Validate_Response(Response_Data, Modal, Message);
+            }
+        });
     };
     this.Delete_Listener = function(){
-
+        var Delete_Button = document.getElementById("Delete_State");
+        Delete_Button.addEventListener("click", function () {
+            var State_Handler = new States_Manager();
+            State_Handler.Grab_Selected_State_ID();
+            var State_ID = State_Handler.Grab_Selected_State_ID();
+            var action = "Delete_State";
+            var Ajax_Data = {
+                State_ID: State_ID,
+                action: action
+            };
+            Outgoing_Ajax(Ajax_Data);
+            var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+            var Modal = '#Display_Delete_State_Form';
+            var Message = 'delete failed because this state has districts';
+            State_Handler.Validate_Response(Response_Data, Modal, Message);
+        });
     };
-}
-
-function State_Response(Create_Response_Data, Modal) {
-    if (Create_Response_Data !== false) {
-        $(Modal).modal('hide');
-        var State_Handler = new States_Manager();
-        State_Handler.Get_Drop_Down_Data();
-    }
-    else {
-        alert('state creation failed, please try again');
-    }
+    this.Validate_Response = function(Response_Data, Modal, Message){
+        if (Response_Data !== false) {
+            $(Modal).modal('hide');
+            var State_Handler = new States_Manager();
+            State_Handler.Get_Drop_Down_Data();
+        }
+        else {
+            alert(Message);
+        }
+    };
 }
 
 function District_Manager(){
+    this.Grab_Selected_District_ID = function (){
+        var District_ID = document.getElementById("Select_Districts").value;
+        return District_ID;
+    };
     this.Get_Drop_Down_Data = function(State_ID){
         var action = "Get_Districts";
         var Ajax_Data = {
@@ -244,7 +289,8 @@ function District_Manager(){
         this.Select_Listener();
     };
     this.Get_Update_Data = function(){
-        var District_ID = Grab_Selected_District_ID();
+        var District_Handler = new District_Manager();
+        var District_ID = District_Handler.Grab_Selected_District_ID;
         var action = "Get_District_Data";
         var Ajax_Data = {
             District_ID: District_ID,
@@ -290,7 +336,9 @@ function District_Manager(){
     this.Create_Listener = function(){
         var Create_Button = document.getElementById("Create_District");
         Create_Button.addEventListener("click", function () {
-            var State_ID = Grab_Selected_State_ID();
+            var State_Handler = new States_Manager();
+            State_Handler.Grab_Selected_State_ID();
+            var State_ID = State_Handler.Grab_Selected_State_ID();
             var District_Name = document.getElementById("Create_District_Name").value;
             var Names = ["District Name"];
             var Values = [District_Name];
@@ -302,32 +350,74 @@ function District_Manager(){
                     action: action
                 };
                 Outgoing_Ajax(Ajax_Data);
-                var Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
                 var Modal = '#Display_Create_District_Form';
-                District_Response(Create_Response_Data, Modal, State_ID);
+                var Message = 'district creation failed, please try again';
+                var District_Handler = new District_Manager();
+                District_Handler.Validate_Response(Response_Data, Modal, Message);
             }
         });
     };
     this.Update_Listener = function(){
-
+        var Update_Button = document.getElementById("Update_District");
+        Update_Button.addEventListener("click", function () {
+            var New_District_Name = document.getElementById("Update_District_Name").value;
+            var Names = ["District Name"];
+            var Values = [New_District_Name];
+            if (Validate_Text_Fields(Names, Values) != false) {
+                var District_Handler = new District_Manager();
+                var District_ID = District_Handler.Grab_Selected_District_ID;
+                var action = "Update_District";
+                var Ajax_Data = {
+                    District_ID: District_ID,
+                    New_District_Name: New_District_Name,
+                    action: action
+                };
+                Outgoing_Ajax(Ajax_Data);
+                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+                var Modal = '#Display_Update_District_Form';
+                var Message = 'district update failed, please try again';
+                District_Handler.Validate_Response(Response_Data, Modal, Message);
+            }
+        });
     };
     this.Delete_Listener = function(){
-
+        var Delete_Button = document.getElementById("Delete_District");
+        Delete_Button.addEventListener("click", function () {
+            var District_Handler = new District_Manager();
+            var District_ID = District_Handler.Grab_Selected_District_ID;
+            var action = "Delete_District";
+            var Ajax_Data = {
+                District_ID: District_ID,
+                action: action
+            };
+            Outgoing_Ajax(Ajax_Data);
+            var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+            var Modal = '#Display_Delete_District_Form';
+            var Message = 'delete failed because this district has schools';
+            District_Handler.Validate_Response(Response_Data, Modal, Message);
+        });
     };
-}
-
-function District_Response(Create_Response_Data, Modal, State_ID) {
-    if (Create_Response_Data !== false) {
-        $(Modal).modal('hide');
-        var District_Handler = new District_Manager();
-        District_Handler.Get_Drop_Down_Data(State_ID);
-    }
-    else {
-        alert('district creation failed, please try again');
-    }
+    this.Validate_Response = function(Response_Data, Modal, Message){
+        var State_Handler = new States_Manager();
+        State_Handler.Grab_Selected_State_ID();
+        var State_ID = State_Handler.Grab_Selected_State_ID();
+        if (Response_Data !== false) {
+            $(Modal).modal('hide');
+            var District_Handler = new District_Manager();
+            District_Handler.Get_Drop_Down_Data(State_ID);
+        }
+        else {
+            alert(Message);
+        }
+    };
 }
 
 function School_Manager(){
+    this.Grab_Selected_School_ID = function (){
+        var School_ID = document.getElementById("Select_Schools").value;
+        return School_ID;
+    };
     this.Get_Drop_Down_Data = function(District_ID){
         var action = "Get_Schools";
         var Ajax_Data = {
@@ -346,7 +436,7 @@ function School_Manager(){
         this.Select_Listener();
     };
     this.Get_Update_Data = function(){
-        var School_ID = Grab_Selected_School_ID();
+        var School_ID = this.Grab_Selected_School_ID();
         var action = "Get_School_Data";
         var Ajax_Data = {
             School_ID: School_ID,
@@ -395,7 +485,7 @@ function School_Manager(){
     this.Create_Listener = function(){
         var Create_Button = document.getElementById("Create_School");
         Create_Button.addEventListener("click", function () {
-            var District_ID = Grab_Selected_District_ID();
+            var District_ID = this.Grab_Selected_District_ID();
             var School_Name = document.getElementById("Create_School_Name").value;
             var School_Address = document.getElementById("Create_School_Address").value;
             var Names = ["School Name", "School Address"];
@@ -409,29 +499,68 @@ function School_Manager(){
                     action: action
                 };
                 Outgoing_Ajax(Ajax_Data);
-                var Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
                 var Modal = '#Display_Create_School_Form';
-                School_Response(Create_Response_Data, Modal, District_ID);
+                var Message = 'district creation failed, please try again';
+                var School_Handler = new School_Manager();
+                School_Handler.Validate_Response(Response_Data, Modal, Message);
             }
         });
     };
     this.Update_Listener = function(){
-
+        var Update_Button = document.getElementById("Update_School");
+        Update_Button.addEventListener("click", function () {
+            var New_School_Name = document.getElementById("Update_School_Name").value;
+            var New_School_Address = document.getElementById("Update_School_Address").value;
+            var Names = ["School Name", "School Address"];
+            var Values = [New_School_Name, New_School_Address];
+            if (Validate_Text_Fields(Names, Values) != false) {
+                var District_Handler = new District_Manager();
+                var School_ID = District_Handler.Grab_Selected_District_ID;
+                var action = "Update_School";
+                var Ajax_Data = {
+                    School_ID: School_ID,
+                    New_School_Name: New_School_Name,
+                    New_School_Address: New_School_Address,
+                    action: action
+                };
+                Outgoing_Ajax(Ajax_Data);
+                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+                var Modal = '#Display_Update_School_Form';
+                var Message = 'district update failed, please try again';
+                var School_Handler = new School_Manager();
+                School_Handler.Validate_Response(Response_Data, Modal, Message);
+            }
+        });
     };
     this.Delete_Listener = function(){
-
+        var Delete_Button = document.getElementById("Delete_School");
+        Delete_Button.addEventListener("click", function () {
+            var School_Handler = new School_Manager();
+            var School_ID = School_Handler.Grab_Selected_School_ID();
+            var action = "Delete_School";
+            var Ajax_Data = {
+                School_ID: School_ID,
+                action: action
+            };
+            Outgoing_Ajax(Ajax_Data);
+            var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+            var Modal = '#Display_Delete_School_Form';
+            var Message = 'delete failed because this school has bus numbers';
+            School_Handler.Validate_Response(Response_Data, Modal, Message);
+        });
     };
-}
-
-function School_Response(Create_Response_Data, Modal, District_ID) {
-    if (Create_Response_Data !== false) {
-        $(Modal).modal('hide');
-        var School_Handler = new School_Manager();
-        School_Handler.Get_Drop_Down_Data(District_ID);
-    }
-    else {
-        alert('district creation failed, please try again');
-    }
+    this.Validate_Response = function(Response_Data, Modal, Message){
+        var District_ID = this.Grab_Selected_District_ID();
+        if (Response_Data !== false) {
+            $(Modal).modal('hide');
+            var School_Handler = new School_Manager();
+            School_Handler.Get_Drop_Down_Data(District_ID);
+        }
+        else {
+            alert(Message);
+        }
+    };
 }
 
 function View_All_Buses_Manager(){
@@ -468,6 +597,10 @@ function View_All_Buses_Manager(){
 }
 
 function Bus_Stop_Number_Manager(){
+    this.Grab_Selected_Bus_Stop_Number_ID = function (){
+        var Bus_Stop_Number_ID = document.getElementById("Select_Bus_Stop_Numbers").value;
+        return Bus_Stop_Number_ID;
+    };
     this.Get_Drop_Down_Data = function(School_ID){
         var action = "Get_Bus_Stop_Numbers";
         var Ajax_Data = {
@@ -486,7 +619,7 @@ function Bus_Stop_Number_Manager(){
         this.Select_Listener();
     };
     this.Get_Update_Data = function(){
-        var Bus_Stop_Number_ID = Grab_Selected_Bus_Stop_Number_ID();
+        var Bus_Stop_Number_ID = this.Grab_Selected_Bus_Stop_Number_ID();
         var action = "Get_Bus_Stop_Number_Data";
         var Ajax_Data = {
             Bus_Stop_Number_ID: Bus_Stop_Number_ID,
@@ -527,7 +660,8 @@ function Bus_Stop_Number_Manager(){
     this.Create_Listener = function(){
         var Create_Button = document.getElementById("Create_Bus_Stop_Number");
         Create_Button.addEventListener("click", function () {
-            var School_ID = Grab_Selected_School_ID();
+            var School_Handler = new School_Manager();
+            var School_ID = School_Handler.Grab_Selected_School_ID();
             var Bus_Stop_Number = document.getElementById("Create_Bus_Number").value;
             var Names = ["Bus Stop Number"];
             var Values = [Bus_Stop_Number];
@@ -539,38 +673,79 @@ function Bus_Stop_Number_Manager(){
                     action: action
                 };
                 Outgoing_Ajax(Ajax_Data);
-                var Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
                 var Modal = '#Display_Create_Bus_Stop_Number_Form';
-                Bus_Stop_Number_Response(Create_Response_Data, Modal, School_ID);
+                var Message = 'bus number creation failed, please try again';
+                var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
+                Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
             }
         });
     };
     this.Update_Listener = function(){
-
+        var Update_Button = document.getElementById("Update_Bus_Stop_Number");
+        Update_Button.addEventListener("click", function () {
+            var New_Bus_Stop_Number= document.getElementById("Update_Bus_Number").value;
+            var Names = ["Bus Stop Number"];
+            var Values = [New_Bus_Stop_Number];
+            if (Validate_Text_Fields(Names, Values) != false) {
+                var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
+                var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Grab_Selected_Bus_Stop_Number_ID();
+                var action = "Update_Bus_Stop_Number";
+                var Ajax_Data = {
+                    Bus_Stop_Number_ID: Bus_Stop_Number_ID,
+                    New_Bus_Stop_Number: New_Bus_Stop_Number,
+                    action: action
+                };
+                Outgoing_Ajax(Ajax_Data);
+                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+                var Modal = '#Display_Update_Bus_Stop_Number_Form';
+                var Message = 'bus number update failed, please try again';
+                Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
+            }
+        });
     };
     this.Delete_Listener = function(){
-
+        var Delete_Button = document.getElementById("Delete_Bus_Stop_Number");
+        Delete_Button.addEventListener("click", function () {
+            var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
+            var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Grab_Selected_Bus_Stop_Number_ID();
+            var action = "Delete_Bus_Stop_Number";
+            var Ajax_Data = {
+                Bus_Stop_Number_ID: Bus_Stop_Number_ID,
+                action: action
+            };
+            Outgoing_Ajax(Ajax_Data);
+            var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+            var Modal = '#Display_Delete_Bus_Stop_Number_Form';
+            var Message = 'delete failed because this bus number has bus addresses';
+            Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
+        });
     };
-}
-
-function Bus_Stop_Number_Response(Create_Response_Data, Modal, School_ID) {
-    if (Create_Response_Data !== false) {
-        $(Modal).modal('hide');
-        var View_All_Buses_Handler = new View_All_Buses_Manager();
-        var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
-        View_All_Buses_Handler.Get_Drop_Down_Data(School_ID);
-        Bus_Stop_Number_Handler.Get_Drop_Down_Data(School_ID);
-    }
-    else {
-        alert('bus stop number creation failed, please try again');
-    }
+    this.Validate_Response = function(Response_Data, Modal, Message){
+        var School_Handler = new School_Manager();
+        var School_ID = School_Handler.Grab_Selected_School_ID();
+        if (Response_Data !== false) {
+            $(Modal).modal('hide');
+            var View_All_Buses_Handler = new View_All_Buses_Manager();
+            var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
+            View_All_Buses_Handler.Get_Drop_Down_Data(School_ID);
+            Bus_Stop_Number_Handler.Get_Drop_Down_Data(School_ID);
+        }
+        else {
+            alert(Message);
+        }
+    };
 }
 
 function Bus_Stop_Detail_Manager(){
+    this.Grab_Selected_Bus_Stop_Detail_ID = function (){
+        var Bus_Stop_Detail_ID = document.getElementById("Select_Bus_Stops_Details").value;
+        return Bus_Stop_Detail_ID;
+    };
     this.Get_Drop_Down_Data = function(Bus_Stop_Number_ID){
         var action = "Get_Bus_Stop_Details";
         var Ajax_Data = {
-            Bus_Stop_Number_ID: Bus_Stop_Number_ID,
+            Bus_Stop_Detail_ID: Bus_Stop_Detail_ID,
             action: action
         };
         Outgoing_Ajax(Ajax_Data);
@@ -585,10 +760,10 @@ function Bus_Stop_Detail_Manager(){
         this.Select_Listener();
     };
     this.Get_Update_Data = function(){
-        var Bus_Stop_Number_ID = Grab_Selected_Bus_Stop_Number_ID();
+        var Bus_Stop_Detail_ID = this.Grab_Selected_Bus_Stop_Detail_ID();
         var action = "Get_Bus_Stop_Detail_Data";
         var Ajax_Data = {
-            Bus_Stop_Number_ID: Bus_Stop_Number_ID,
+            Bus_Stop_Detail_ID: Bus_Stop_Detail_ID,
             action: action
         };
         Outgoing_Ajax(Ajax_Data);
@@ -625,7 +800,6 @@ function Bus_Stop_Detail_Manager(){
     this.Create_Listener = function(){
         var Create_Button = document.getElementById("Create_Bus_Stop_Details");
         Create_Button.addEventListener("click", function () {
-            var Bus_Stop_Number_ID = Grab_Selected_Bus_Stop_Number_ID();
             var Bus_Stop_Time = document.getElementById("Create_Bus_Stop_Time").value;
             var Bus_Stop_Address = document.getElementById("Create_Bus_Stop_Address").value;
             var Bus_Stop_Latitude = "22"; //temp
@@ -633,9 +807,10 @@ function Bus_Stop_Detail_Manager(){
             var Names = ["Bus Stop Time", "Bus Stop Address", "Bus Stop Latitude", "Bus Stop Longitude"];
             var Values = [Bus_Stop_Time, Bus_Stop_Address, Bus_Stop_Latitude, Bus_Stop_Longitude];
             if (Validate_Text_Fields(Names, Values) != false) {
+                var Bus_Stop_Detail_ID = this.Grab_Selected_Bus_Stop_Detail_ID();
                 var action = "Create_Bus_Stop_Detail";
                 var Ajax_Data = {
-                    Bus_Stop_Number_ID: Bus_Stop_Number_ID,
+                    Bus_Stop_Detail_ID: Bus_Stop_Detail_ID,
                     Bus_Stop_Time: Bus_Stop_Time,
                     Bus_Stop_Address: Bus_Stop_Address,
                     Bus_Stop_Latitude: Bus_Stop_Latitude,
@@ -643,49 +818,75 @@ function Bus_Stop_Detail_Manager(){
                     action: action
                 };
                 Outgoing_Ajax(Ajax_Data);
-                var Create_Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
                 var Modal = '#Display_Create_Bus_Stop_Details_Form';
-                Bus_Stop_Stop_Details_Response(Create_Response_Data, Modal, Bus_Stop_Number_ID);
+                var Message = 'bus stop time and address creation failed, please try again';
+                var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
+                Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
             }
         });
     };
     this.Update_Listener = function(){
-
+        var Update_Button = document.getElementById("Update_Bus_Stop_Details");
+        Update_Button.addEventListener("click", function () {
+            var Update_Button = document.getElementById("Update_Bus_Stop_Number");
+            Update_Button.addEventListener("click", function () {
+                var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
+                var Bus_Stop_Detail_ID = Bus_Stop_Detail_Handler.Grab_Selected_Bus_Stop_Detail_ID();
+                var New_Bus_Stop_Time = document.getElementById("Update_Bus_Stop_Time").value;
+                var New_Bus_Stop_Address = document.getElementById("Update_Bus_Stop_Address").value;
+                var New_Bus_Stop_Latitude = "22"; //temp
+                var New_Bus_Stop_Longitude = "11"; //temp
+                var Names = ["Bus Stop Time", "Bus Stop Address", "Bus Stop Latitude", "Bus Stop Longitude"];
+                var Values = [New_Bus_Stop_Time, New_Bus_Stop_Address, New_Bus_Stop_Latitude, New_Bus_Stop_Longitude];
+                if (Validate_Text_Fields(Names, Values) != false) {
+                    var action = "Update_Bus_Stop_Detail";
+                    var Ajax_Data = {
+                        Bus_Stop_Detail_ID: Bus_Stop_Detail_ID,
+                        New_Bus_Stop_Time: New_Bus_Stop_Time,
+                        New_Bus_Stop_Address: New_Bus_Stop_Address,
+                        New_Bus_Stop_Latitude: New_Bus_Stop_Latitude,
+                        New_Bus_Stop_Longitude: New_Bus_Stop_Longitude,
+                        action: action
+                    };
+                    Outgoing_Ajax(Ajax_Data);
+                    var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+                    var Modal = '#Display_Update_Bus_Stop_Details_Form';
+                    var Message = 'bus number update failed, please try again';
+                    Bus_Stop_Detail_Handler.Validate_Response(Response_Data, Modal, Message);
+                }
+            });
+        });
     };
     this.Delete_Listener = function(){
-
+        var Delete_Button = document.getElementById("Delete_Bus_Stop_Detail");
+        Delete_Button.addEventListener("click", function () {
+            var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
+            var Bus_Stop_Detail_ID = Bus_Stop_Detail_Handler.Grab_Selected_Bus_Stop_Detail_ID();
+            var action = "Delete_Bus_Stop_Detail";
+            var Ajax_Data = {
+                Bus_Stop_Detail_ID: Bus_Stop_Detail_ID,
+                action: action
+            };
+            Outgoing_Ajax(Ajax_Data);
+            var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+            var Modal = '#Display_Delete_Bus_Stop_Details_Form';
+            var Message = 'delete failed';
+            var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
+            Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
+        });
     };
-}
-
-function Bus_Stop_Stop_Details_Response(Create_Response_Data, Modal, Bus_Stop_Number_ID) {
-    if (Create_Response_Data !== false) {
-        $(Modal).modal('hide');
-        var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
-        Bus_Stop_Detail_Handler.Get_Drop_Down_Data(Bus_Stop_Number_ID);
-    }
-    else {
-        alert('bus stop time and address creation failed, please try again');
-    }
-}
-
-function Grab_Selected_State_ID() {
-    var State_ID = document.getElementById("Select_States").value;
-    return State_ID;
-}
-
-function Grab_Selected_District_ID() {
-    var District_ID = document.getElementById("Select_Districts").value;
-    return District_ID;
-}
-
-function Grab_Selected_School_ID() {
-    var School_ID = document.getElementById("Select_Schools").value;
-    return School_ID;
-}
-
-function Grab_Selected_Bus_Stop_Number_ID() {
-    var Bus_Stop_Number_ID = document.getElementById("Select_Bus_Stop_Numbers").value;
-    return Bus_Stop_Number_ID;
+    this.Validate_Response = function(Response_Data, Modal, Message){
+        var Bus_Stop_Detail_ID = this.Grab_Selected_Bus_Stop_Detail_ID();
+        if (Response_Data !== false) {
+            $(Modal).modal('hide');
+            var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
+            Bus_Stop_Detail_Handler.Get_Drop_Down_Data(Bus_Stop_Detail_ID);
+        }
+        else {
+            alert(Message);
+        }
+    };
 }
 
 function Clear_Display_Create_State_Form(){
@@ -735,12 +936,52 @@ function Populate_Display_Update_Bus_Stop_Details_Form(){
     Bus_Stop_Detail_Handler.Get_Update_Data();
 }
 
+function Display_Delete_State_Form(){
+    x = document.getElementById("Select_States").selectedIndex;
+    y = document.getElementById("Select_States").options;
+    State_Name = y[x].text;
+    message = "Are you sure you want to delete <b>" + State_Name + "</b> state?";
+    document.getElementById("Delete_State_Place_Holder").innerHTML = message;
+}
+
+function Display_Delete_District_Form(){
+    x = document.getElementById("Select_Districts").selectedIndex;
+    y = document.getElementById("Select_Districts").options;
+    State_Name = y[x].text;
+    message = "Are you sure you want to delete <b>" + State_Name + "</b> state?";
+    document.getElementById("Delete_District_Place_Holder").innerHTML = message;
+}
+
+function Display_Delete_School_Form(){
+    x = document.getElementById("Select_Schools").selectedIndex;
+    y = document.getElementById("Select_Schools").options;
+    State_Name = y[x].text;
+    message = "Are you sure you want to delete <b>" + State_Name + "</b> state?";
+    document.getElementById("Delete_School_Place_Holder").innerHTML = message;
+}
+
+function Display_Delete_Bus_Number_Form(){
+    x = document.getElementById("Select_Bus_Stop_Numbers").selectedIndex;
+    y = document.getElementById("Select_Bus_Stop_Numbers").options;
+    State_Name = y[x].text;
+    message = "Are you sure you want to delete <b>" + State_Name + "</b> state?";
+    document.getElementById("Delete_Bus_Stop_Number_Place_Holder").innerHTML = message;
+}
+
+function Display_Delete_Bus_Stop_Details_Form(){
+    x = document.getElementById("Select_Bus_Stops_Details").selectedIndex;
+    y = document.getElementById("Select_Bus_Stops_Details").options;
+    State_Name = y[x].text;
+    message = "Are you sure you want to delete <b>" + State_Name + "</b> state?";
+    document.getElementById("Delete_Bus_Stop_Detail_Place_Holder").innerHTML = message;
+}
+
 function Display_State_GUI(){
     document.getElementById("Select_Districts").style.visibility="visible";
     if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
         document.getElementById("Update_State_Form_Button").style.visibility="visible";
         document.getElementById("Delete_State_Form_Button").style.visibility="visible";
-        document.getElementById("Create_District_Modal_Button").style.visibility="visible";
+        document.getElementById("Create_District_Form_Button").style.visibility="visible";
     }
 }
 
@@ -768,14 +1009,14 @@ function Display_Bus_Stop_Number_GUI(){
         document.getElementById("Select_Bus_Stops_Details").style.visibility="visible";
         document.getElementById("Update_Bus_Stop_Number_Form_Button").style.visibility="visible";
         document.getElementById("Delete_Bus_Stop_Number_Form_Button").style.visibility="visible";
-        document.getElementById("Create_Create_Bus_Stop_Details_Form_Button").style.visibility="visible";
+        document.getElementById("Create_Bus_Stop_Details_Form_Button").style.visibility="visible";
     }
 }
 
 function Display_Bus_Stop_Detail_GUI(){
     if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
-        document.getElementById("Update_Create_Bus_Stop_Details_Form_Button").style.visibility="visible";
-        document.getElementById("Delete_Create_Bus_Stop_Details_Form_Button").style.visibility="visible";
+        document.getElementById("Update_Bus_Stop_Details_Form_Button").style.visibility="visible";
+        document.getElementById("Delete_Bus_Stop_Details_Form_Button").style.visibility="visible";
     }
 }
 
@@ -784,7 +1025,7 @@ function Hide_State_GUI(){
     if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
         document.getElementById("Update_State_Form_Button").style.visibility="hidden";
         document.getElementById("Delete_State_Form_Button").style.visibility="hidden";
-        document.getElementById("Create_District_Modal_Button").style.visibility="hidden";
+        document.getElementById("Create_District_Form_Button").style.visibility="hidden";
     }
 }
 
@@ -812,14 +1053,14 @@ function Hide_Bus_Stop_Number_GUI(){
         document.getElementById("Select_Bus_Stops_Details").style.visibility="hidden";
         document.getElementById("Update_Bus_Stop_Number_Form_Button").style.visibility="hidden";
         document.getElementById("Delete_Bus_Stop_Number_Form_Button").style.visibility="hidden";
-        document.getElementById("Create_Create_Bus_Stop_Details_Form_Button").style.visibility="hidden";
+        document.getElementById("Create_Bus_Stop_Details_Form_Button").style.visibility="hidden";
     }
 }
 
 function Hide_Bus_Stop_Detail_GUI(){
     if (document.location.pathname != "/cs604/Ali/Unit%20Testing/Integrated_Find%20My%20Route/user.html") {
-        document.getElementById("Update_Create_Bus_Stop_Details_Form_Button").style.visibility = "hidden";
-        document.getElementById("Delete_Create_Bus_Stop_Details_Form_Button").style.visibility = "hidden";
+        document.getElementById("Update_Bus_Stop_Details_Form_Button").style.visibility = "hidden";
+        document.getElementById("Delete_Bus_Stop_Details_Form_Button").style.visibility = "hidden";
     }
 }
 
