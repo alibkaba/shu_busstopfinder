@@ -745,7 +745,7 @@ function Bus_Stop_Detail_Manager(){
     this.Get_Drop_Down_Data = function(Bus_Stop_Number_ID){
         var action = "Get_Bus_Stop_Details";
         var Ajax_Data = {
-            Bus_Stop_Detail_ID: Bus_Stop_Detail_ID,
+            Bus_Stop_Number_ID: Bus_Stop_Number_ID,
             action: action
         };
         Outgoing_Ajax(Ajax_Data);
