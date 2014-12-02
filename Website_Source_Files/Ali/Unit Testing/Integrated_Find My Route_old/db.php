@@ -400,8 +400,8 @@ function Update_State(){
 
 	$Query = 'UPDATE STATES SET STATE_NAME = (?) WHERE STATE_ID = (?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(2, $State_ID, PDO::PARAM_INT);
-	$Statement->bindParam(1, $New_State_Name, PDO::PARAM_STR, 50);
+	$Statement->bindParam(1, $State_ID, PDO::PARAM_INT);
+	$Statement->bindParam(2, $New_State_Name, PDO::PARAM_STR, 50);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);
@@ -415,8 +415,8 @@ function Update_District(){
 
 	$Query = 'UPDATE DISTRICTS SET DISTRICT_NAME = (?) WHERE DISTRICT_ID = (?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(2, $District_ID, PDO::PARAM_INT);
-	$Statement->bindParam(1, $New_District_Name, PDO::PARAM_STR, 50);
+	$Statement->bindParam(1, $District_ID, PDO::PARAM_INT);
+	$Statement->bindParam(2, $New_District_Name, PDO::PARAM_STR, 50);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);
@@ -431,9 +431,9 @@ function Update_School(){
 
 	$Query = 'UPDATE SCHOOLS SET SCHOOL_NAME = (?), SCHOOL_ADDRESS = (?) WHERE SCHOOL_ID = (?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(3, $School_ID, PDO::PARAM_INT);
-	$Statement->bindParam(1, $New_School_Name, PDO::PARAM_STR, 50);
-	$Statement->bindParam(2, $New_School_Address, PDO::PARAM_STR, 100);
+	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
+	$Statement->bindParam(2, $New_School_Name, PDO::PARAM_STR, 50);
+	$Statement->bindParam(3, $New_School_Address, PDO::PARAM_STR, 100);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);
@@ -445,10 +445,10 @@ function Update_Bus_Stop_Number(){
 	$Bus_Stop_Number_ID = stripslashes($_POST["Bus_Stop_Number_ID"]);
 	$New_Bus_Stop_Number = stripslashes($_POST["New_Bus_Stop_Number"]);
 
-	$Query = 'UPDATE BUS_STOPS_NUMBERS SET BUS_STOP_NUMBER = (?) WHERE BUS_STOP_NUMBER_ID = (?);';
+	$Query = 'UPDATE BUS_STOPS SET BUS_STOP_NUMBER = (?) WHERE BUS_STOP_ID = (?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(2, $Bus_Stop_Number_ID, PDO::PARAM_INT);
-	$Statement->bindParam(1, $New_Bus_Stop_Number, PDO::PARAM_INT);
+	$Statement->bindParam(1, $Bus_Stop_Number_ID, PDO::PARAM_INT);
+	$Statement->bindParam(2, $New_Bus_Stop_Number, PDO::PARAM_INT);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);
@@ -457,19 +457,21 @@ function Update_Bus_Stop_Number(){
 
 function Update_Bus_Stop_Detail(){
 	global $PDOconn;
-	$Bus_Stop_Detail_ID = stripslashes($_POST["Bus_Stop_Detail_ID"]);
-	$New_Bus_Stop_Time = stripslashes($_POST["New_Bus_Stop_Time"]);
-	$New_Bus_Stop_Address = stripslashes($_POST["New_Bus_Stop_Address"]);
-	$New_Bus_Stop_Latitude = stripslashes($_POST["New_Bus_Stop_Latitude"]);
-	$New_Bus_Stop_Longitude = stripslashes($_POST["New_Bus_Stop_Longitude"]);
+	$School_ID = stripslashes($_POST["School_ID"]);
+	$Bus_Stop_Number = stripslashes($_POST["Bus_Stop_Number"]);
+	$Bus_Stop_Time = stripslashes($_POST["Bus_Stop_Time"]);
+	$Bus_Stop_Address = stripslashes($_POST["Bus_Stop_Address"]);
+	$Bus_Stop_Latitude = stripslashes($_POST["Bus_Stop_Latitude"]);
+	$Bus_Stop_Longitude = stripslashes($_POST["Bus_Stop_Longitude"]);
 
-	$Query = 'UPDATE BUS_STOPS_DETAILS SET BUS_STOP_TIME = (?), BUS_STOP_ADDRESS = (?), BUS_STOP_LATITUDE = (?), BUS_STOP_LONGITUDE = (?) WHERE BUS_STOP_DETAIL_ID = (?)';
+	$Query = 'CALL UPDATE_BUS_STOP_DETAIL (?,?,?,?,?,?)';
 	$Statement = $PDOconn->prepare($Query);
-	$Statement->bindParam(5, $Bus_Stop_Detail_ID, PDO::PARAM_INT);
-	$Statement->bindParam(1, $New_Bus_Stop_Time, PDO::PARAM_STR, 50);
-	$Statement->bindParam(2, $New_Bus_Stop_Address, PDO::PARAM_STR, 100);
-	$Statement->bindParam(3, $New_Bus_Stop_Latitude, PDO::PARAM_STR, 100);
-	$Statement->bindParam(4, $New_Bus_Stop_Longitude, PDO::PARAM_STR, 100);
+	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
+	$Statement->bindParam(2, $Bus_Stop_Number, PDO::PARAM_INT);
+	$Statement->bindParam(3, $Bus_Stop_Time, PDO::PARAM_STR, 50);
+	$Statement->bindParam(4, $Bus_Stop_Address, PDO::PARAM_STR, 100);
+	$Statement->bindParam(5, $Bus_Stop_Latitude, PDO::PARAM_STR, 100);
+	$Statement->bindParam(6, $Bus_Stop_Longitude, PDO::PARAM_STR, 100);
 	$Statement->execute();
 	$Response = $Statement->fetchAll();
 	echo json_encode($Response);
