@@ -9,5 +9,7 @@
     <orderEntry type="library" name="google.geolocation-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="jQuery-2.0.0" level="application" />
     <orderEntry type="library" name="jQuery UI-1.10.2" level="application" />
+    <orderEntry type="library" name="jasmine-jquery-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="jasmine-matchers-DefinitelyTyped" level="application" />
   </component>
 </module>
