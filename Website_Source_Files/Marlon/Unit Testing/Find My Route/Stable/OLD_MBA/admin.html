@@ -37,7 +37,7 @@
 	<div class="row">
 		<div class="col-md-2">
 			<div class="text-center">
-				<select id="Select_States" onchange="Get_Districts(Select_States.value)">
+				<select id="Select_States">
 					<option value=""> Select your State </option>
 				</select>
 				<br>
@@ -48,7 +48,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="text-center">
-				<select id="Select_Districts" onchange="Get_Schools(Select_Districts.value)">
+				<select id="Select_Districts">
 					<option value=""> Select your District </option>
 				</select>
 				<br>
@@ -59,7 +59,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="text-center">
-				<select id="Select_Schools" onchange="Manage_Buses(Select_Schools.value)">
+				<select id="Select_Schools">
 					<option value=""> Select your School </option>
 				</select>
 				<br>
@@ -130,7 +130,7 @@
 						<label for="State_Name">State Name</label>
 						<input class="form-control" id="Create_State_Name" placeholder="Enter a State Name" type="text"> </div>
 					<div class="form-group">
-						<button class="btn btn-default" type="button" id="Create_State" onclick="Add_State(Create_State_Name.value)">Create</button>
+						<button class="btn btn-default" type="button" id="Create_State">Create</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -150,7 +150,7 @@
 						<label for="District_Name">District Name</label>
 						<input class="form-control" id="Create_District_Name" placeholder="Enter a District Name" type="text"> </div>
 					<div class="form-group">
-						<button class="btn btn-default" type="button" id="Create_District" onclick="Add_District(Create_District_Name.value)">Create</button>
+						<button class="btn btn-default" type="button" id="Create_District">Create</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -173,7 +173,7 @@
 						<label for="School_Address">School Address</label>
 						<input class="form-control" id="Create_School_Address" placeholder="Enter a School Address" type="text"> </div>
 					<div class="form-group">
-						<button class="btn btn-default" type="button" id="Create_School" onclick="Add_School(Create_School_Name.value)">Create</button>
+						<button class="btn btn-default" type="button" id="Create_School">Create</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -193,7 +193,7 @@
 						<label for="Bus_Stop_Number">Bus Number</label>
 						<input class="form-control" id="Create_Bus_Number" placeholder="Enter a Bus Number" type="text"> </div>
 					<div class="form-group">
-						<button class="btn btn-default" type="button" id="Create_Bus_Stop_Number" onclick="Create_Bus_Stop_Number(Create_Bus_Number.value)">Create</button>
+						<button class="btn btn-default" type="button" id="Create_Bus_Stop_Number">Create</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -236,7 +236,7 @@
 						<label for="State_Name">State Name</label>
 						<input class="form-control" id="Update_State_Name" placeholder="Enter a State Name" type="text"> </div>
 					<div class="form-group">
-						<button class="btn btn-default" type="button" id="Update_State" onclick="Update_State(Update_State_Name.value)">Update</button>
+						<button class="btn btn-default" type="button" id="Update_State">Update</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -256,7 +256,7 @@
 						<label for="State_Name">District Name</label>
 						<input class="form-control" id="Update_District_Name" placeholder="Enter a District Name" type="text"> </div>
 					<div class="form-group">
-						<button class="btn btn-default" type="button" id="Update_District" onclick="Update_District(Update_District_Name.value)">Update</button>
+						<button class="btn btn-default" type="button" id="Update_District">Update</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -279,7 +279,7 @@
 						<label for="State_Name">School Address</label>
 						<input class="form-control" id="Update_School_Address" placeholder="Enter a School Address" type="text"> </div>
 					<div class="form-group">
-						<button class="btn btn-default" type="button" id="Update_School" onclick="Update_School_Name(Update_School_Name.value,Update_School_Address.value )">Update</button>
+						<button class="btn btn-default" type="button" id="Update_School">Update</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -340,7 +340,7 @@
 				<div class="modal-body">
 					<div class="alert alert-danger" id="Delete_State_Place_Holder"></div>
 					<div class="form-group">
-						<button class="btn btn-danger" id="Delete_State" type="button" onclick="Delete_State()">Yes</button>
+						<button class="btn btn-danger" id="Delete_State" type="button">Yes</button>
 						<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
 					</div>
 				</div>
@@ -359,7 +359,7 @@
 				<div class="modal-body">
 					<div class="alert alert-danger" id="Delete_District_Place_Holder"></div>
 					<div class="form-group">
-						<button class="btn btn-danger" id="Delete_District" type="button" onclick="Delete_District()">Yes</button>
+						<button class="btn btn-danger" id="Delete_District" type="button">Yes</button>
 						<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
 					</div>
 				</div>
@@ -378,7 +378,7 @@
 				<div class="modal-body">
 					<div class="alert alert-danger" id="Delete_School_Place_Holder"></div>
 					<div class="form-group">
-						<button class="btn btn-danger" id="Delete_School" type="button" onclick="Delete_School()">Yes</button>
+						<button class="btn btn-danger" id="Delete_School" type="button">Yes</button>
 						<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
 					</div>
 				</div>

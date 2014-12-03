@@ -1,0 +1,45 @@
+[02-Dec-2014 11:11:06 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Time in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 461
+[02-Dec-2014 11:11:06 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Address in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 462
+[02-Dec-2014 11:11:06 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Latitude in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 463
+[02-Dec-2014 11:11:06 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Longitude in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 464
+[02-Dec-2014 11:15:40 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Time in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 461
+[02-Dec-2014 11:15:40 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Address in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 462
+[02-Dec-2014 11:15:40 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Latitude in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 463
+[02-Dec-2014 11:15:40 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Longitude in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 464
+[02-Dec-2014 11:16:02 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Time in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 461
+[02-Dec-2014 11:16:02 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Address in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 462
+[02-Dec-2014 11:16:02 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Latitude in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 463
+[02-Dec-2014 11:16:02 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Longitude in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 464
+[02-Dec-2014 11:16:59 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Time in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 461
+[02-Dec-2014 11:16:59 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Address in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 462
+[02-Dec-2014 11:16:59 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Latitude in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 463
+[02-Dec-2014 11:16:59 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Longitude in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 464
+[02-Dec-2014 11:21:38 America/Denver] PHP Notice:  Array to string conversion in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 488
+[02-Dec-2014 11:22:22 America/Denver] PHP Notice:  Array to string conversion in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 488
+[02-Dec-2014 12:17:24 America/Denver] PHP Notice:  Undefined index: District_ID in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 185
+[02-Dec-2014 12:17:24 America/Denver] PHP Notice:  Undefined index: District_ID in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 494
+[02-Dec-2014 12:17:49 America/Denver] PHP Notice:  Undefined index: District_ID in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 185
+[02-Dec-2014 12:17:50 America/Denver] PHP Notice:  Undefined index: District_ID in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 494
+[02-Dec-2014 12:20:49 America/Denver] PHP Notice:  Undefined index: District_ID in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 185
+[02-Dec-2014 12:20:49 America/Denver] PHP Notice:  Undefined index: District_ID in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 494
+[02-Dec-2014 12:50:32 America/Denver] PHP Notice:  Undefined offset: 0 in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 557
+[02-Dec-2014 12:50:35 America/Denver] PHP Notice:  Undefined offset: 0 in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 557
+[02-Dec-2014 12:51:10 America/Denver] PHP Notice:  Undefined offset: 0 in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 557
+[02-Dec-2014 12:52:15 America/Denver] PHP Notice:  Undefined offset: 0 in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 557
+[02-Dec-2014 12:52:20 America/Denver] PHP Notice:  Undefined offset: 0 in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 557
+[02-Dec-2014 12:55:53 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Detail_ID in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 533
+[02-Dec-2014 12:56:05 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Detail_ID in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 533
+[02-Dec-2014 12:58:04 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Detail_ID in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 533
+[02-Dec-2014 12:58:13 America/Denver] PHP Notice:  Undefined index: Bus_Stop_Detail_ID in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 533
+[02-Dec-2014 15:49:45 America/Denver] PHP Notice:  Undefined offset: 0 in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 557
+[02-Dec-2014 15:50:41 America/Denver] PHP Notice:  Undefined offset: 0 in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 557
+[02-Dec-2014 18:19:39 America/Denver] PHP Notice:  Use of undefined constant AIzaSyBHummubX5vjuFy_QwzcXfDHzuOtmk3xUU - assumed 'AIzaSyBHummubX5vjuFy_QwzcXfDHzuOtmk3xUU' in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 579
+[02-Dec-2014 18:19:39 America/Denver] PHP Notice:  Use of undefined constant walking - assumed 'walking' in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 580
+[02-Dec-2014 18:19:40 America/Denver] PHP Notice:  Use of undefined constant AIzaSyBHummubX5vjuFy_QwzcXfDHzuOtmk3xUU - assumed 'AIzaSyBHummubX5vjuFy_QwzcXfDHzuOtmk3xUU' in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 579
+[02-Dec-2014 18:19:40 America/Denver] PHP Notice:  Use of undefined constant walking - assumed 'walking' in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 580
+[02-Dec-2014 18:19:40 America/Denver] PHP Notice:  Use of undefined constant AIzaSyBHummubX5vjuFy_QwzcXfDHzuOtmk3xUU - assumed 'AIzaSyBHummubX5vjuFy_QwzcXfDHzuOtmk3xUU' in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 579
+[02-Dec-2014 18:19:40 America/Denver] PHP Notice:  Use of undefined constant walking - assumed 'walking' in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 580
+[02-Dec-2014 18:19:41 America/Denver] PHP Notice:  Use of undefined constant AIzaSyBHummubX5vjuFy_QwzcXfDHzuOtmk3xUU - assumed 'AIzaSyBHummubX5vjuFy_QwzcXfDHzuOtmk3xUU' in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 579
+[02-Dec-2014 18:19:41 America/Denver] PHP Notice:  Use of undefined constant walking - assumed 'walking' in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 580
+[02-Dec-2014 18:19:44 America/Denver] PHP Notice:  Use of undefined constant AIzaSyBHummubX5vjuFy_QwzcXfDHzuOtmk3xUU - assumed 'AIzaSyBHummubX5vjuFy_QwzcXfDHzuOtmk3xUU' in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 579
+[02-Dec-2014 18:19:44 America/Denver] PHP Notice:  Use of undefined constant walking - assumed 'walking' in /home2/djkabau1/public_html/cs604/Ali/Unit Testing/Integrated_Find My Route/db.php on line 580
