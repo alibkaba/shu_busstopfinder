@@ -1,5 +1,4 @@
 // ------------------------------------------Ali coded items BELOW --------------------------------//
-
 $(document).ready(function() {
     console.log("ready!");
     $.ajaxSetup({
@@ -8,94 +7,68 @@ $(document).ready(function() {
         cache: 'false',
         async: false,
         success: function(data) {
-            //alert('Ajax sent');
             console.log(data);
         },
-        complete: function() {},
         error: function() {
             alert('Ajax failed');
         }
     });
-    var Test = new DB_Unit_Test();
-    Test.Create();
-
+    var Unit_Test_Handler = new Unit_Test();
 });
 
-function DB_Unit_Test(){
-    this.Create = function(){
-        var action = "Create";
+function Unit_Test(){
+    var DB_Unit_Test_Handler = new DB_Unit_Test_Manager();
+    var action = "Create_Seasons_Table";
+    var Response = DB_Unit_Test_Handler.Create_Seasons_Table(action);
+    Validate_Unit_Test_Response(Response);
+    var action = "Write_In_Seasons_Table";
+    var New_Season = "Summer";
+    Response = DB_Unit_Test_Handler.Write_In_Seasons_Table(action, New_Season);
+    Validate_Unit_Test_Response(Response);
+    var action = "Update_In_Seasons_Table";
+    var Old_Season = "Summer";
+    var New_Season = "Winter";
+    Response = DB_Unit_Test_Handler.Write_In_Seasons_Table(action, Old_Season, New_Season);
+    Validate_Unit_Test_Response(Response);
+    var action = "Delete_In_Seasons_Table";
+    Response = DB_Unit_Test_Handler.Write_In_Seasons_Table(action);
+    Validate_Unit_Test_Response(Response);
+    Main();
+}
+
+function Validate_Unit_Test_Response(Response){
+    if (!Response){
+        alert("Database Unit Test Failed");
+    }
+}
+
+function DB_Unit_Test_Manager(){
+    this.Create_Seasons_Table = function(action){
         var Ajax_Data = {
             action: action
         };
-        Outgoing_Ajax(Ajax_Data);
-        var Districts_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Validate_Create(Districts_Data);
+        return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
     };
-    this.Validate_Create = function(Districts_Data){
-        if (Districts_Data !== false){
-            this.Write();
-        }
-        else{
-            alert("Create failed");
-        }
-    };
-    this.Write = function(){
-        var action = "Write";
-        var New_Season = "Summer";
+    this.Write_In_Seasons_Table = function(action, New_Season){
         var Ajax_Data = {
             New_Season: New_Season,
             action: action
         };
-        Outgoing_Ajax(Ajax_Data);
-        var Districts_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Validate_Write(Districts_Data);
+        return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
     };
-    this.Validate_Write = function(Districts_Data){
-        if (Districts_Data !== false){
-            this.Update();
-        }
-        else{
-            alert("Write failed");
-        }
-    };
-    this.Update = function(){
-        var action = "Update";
-        var Old_Season = "Summer";
-        var New_Season = "Winter";
+    this.Update_In_Seasons_Table = function(){
         var Ajax_Data = {
             Old_Season: Old_Season,
             New_Season: New_Season,
             action: action
         };
-        Outgoing_Ajax(Ajax_Data);
-        var Districts_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Validate_Update(Districts_Data);
+        return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
     };
-    this.Validate_Update = function(Districts_Data){
-        if (Districts_Data !== false){
-            this.Delete();
-        }
-        else{
-            alert("Update failed");
-        }
-    };
-    this.Delete = function(){
-        var action = "Delete";
+    this.Delete_In_Seasons_Table = function(){
         var Ajax_Data = {
             action: action
         };
-        Outgoing_Ajax(Ajax_Data);
-        var Districts_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Validate_Delete(Districts_Data);
-    };
-    this.Validate_Delete = function(Districts_Data){
-        if (Districts_Data !== false){
-            Check_Web_Storage();
-            Main();
-        }
-        else{
-            alert("Delete failed");
-        }
+        return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
     };
 }
 
@@ -458,26 +431,31 @@ function District_Manager(){
 function Create_Bus_Stops_Array(){
     var School = new School_Manager();
     var School_ID = School.Grab_Selected_School_ID();
-    var Bus_Stops_Objects = new View_All_Buses_Manager();
-    var Bus_Stops_JSON = Bus_Stops_Objects.Get_Drop_Down_Data(School_ID);
+    var Bus = new Bus_Stop_Number_Manager();
+    var Bus_Numbers = Bus.Get_Drop_Down_Data(School_ID);
+
+
     //console.log(Bus_Stops_JSON);
     var Bus_Stops = [];
 
-    for (var Bus_Stop = 0; Bus_Stop < Bus_Stops_JSON.length ; Bus_Stop++) {
-        var New_Bus_Stop = new Bus_Stop_Object();
-        New_Bus_Stop.Set_Stop_ID(Bus_Stops_JSON[Bus_Stop].Bus_Stop_Number_ID);
-        New_Bus_Stop.Set_Bus_Stop_Number(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER);
-        New_Bus_Stop.Set_Stop_Time(Bus_Stops_JSON[Bus_Stop].BUS_STOP_TIME);
-        New_Bus_Stop.Set_Stop_Address(Bus_Stops_JSON[Bus_Stop].BUS_STOP_ADDRESS);
-        New_Bus_Stop.Set_Latitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LATITUDES);
-        New_Bus_Stop.Set_Longitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LONGITUDE);
-        alert(Bus_Stops_JSON[Bus_Stop].Latitude + " , " + Bus_Stops_JSON[Bus_Stop].Longitude);
+    for (var Bus_Stop_Number = 0; Bus_Stop_Number < Bus_Numbers.length ; Bus_Stop_Number++) {
+        var Bus_Stops_Objects = new Bus_Stop_Detail_Manager();
+        var Bus_Stops_JSON = Bus_Stops_Objects.Get_Drop_Down_Data(Bus_Numbers[Bus_Stop_Number]);
+        for (var Bus_Stop = 0; Bus_Stop < Bus_Stops_JSON.length ; Bus_Stop++) {
+            var New_Bus_Stop = new Bus_Stop_Object();
+            New_Bus_Stop.Set_Stop_ID(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER_ID);
+            New_Bus_Stop.Set_Bus_Stop_Number(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER);
+            New_Bus_Stop.Set_Stop_Time(Bus_Stops_JSON[Bus_Stop].BUS_STOP_TIME);
+            New_Bus_Stop.Set_Stop_Address(Bus_Stops_JSON[Bus_Stop].BUS_STOP_ADDRESS);
+            New_Bus_Stop.Set_Latitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LATITUDES);
+            New_Bus_Stop.Set_Longitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LONGITUDE);
+            Bus_Stops.push(New_Bus_Stop);
+        }
 
-        Bus_Stops.push(New_Bus_Stop);
     }
-    console.log(Bus_Stops);
-    alert(Bus_Stops[0].Latitude + " , " + Bus_Stops[0].Longitude);
 
+    console.log(Bus_Stops.length);
+    alert(Bus_Stops[0].Stop_Address + " , " + Bus_Stops[0].Latitude + " , " + Bus_Stops[0].Longitude);
 
 
 }
@@ -709,9 +687,14 @@ function Bus_Stop_Number_Manager(){
         };
         Outgoing_Ajax(Ajax_Data);
         var Bus_Stops_Number_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Clear_Form();
-        this.Update_Drop_Down(Bus_Stops_Number_Data);
-        this.Select_Listener();
+
+        if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html'){
+            this.Clear_Form();
+            this.Update_Drop_Down(Bus_Stops_Number_Data);
+            this.Select_Listener();
+        }
+        return Bus_Stops_Number_Data;
+
     };
     this.Get_Update_Data = function(){
         var Bus_Stop_Number_ID = this.Grab_Selected_Bus_Stop_Number_ID();
@@ -846,9 +829,13 @@ function Bus_Stop_Detail_Manager(){
         };
         Outgoing_Ajax(Ajax_Data);
         var Bus_Stop_Details_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Clear_Form();
-        this.Update_Drop_Down(Bus_Stop_Details_Data);
-        this.Select_Listener();
+        if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html'){
+            this.Clear_Form();
+            this.Update_Drop_Down(Bus_Stop_Details_Data);
+            this.Select_Listener();
+        }
+        return Bus_Stop_Details_Data;
+
     };
     this.Get_Update_Data = function(){
         var Bus_Stop_Detail_ID = this.Grab_Selected_Bus_Stop_Detail_ID();
