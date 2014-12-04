@@ -18,31 +18,41 @@ $(document).ready(function() {
 
 function Unit_Test(){
     var DB_Unit_Test_Handler = new DB_Unit_Test_Manager();
-    var action = "Create_Seasons_Table";
-    var Response = DB_Unit_Test_Handler.Create_Seasons_Table(action);
+    var action = "Select_Seasons_Table";
+    var Response = DB_Unit_Test_Handler.Select_Seasons_Table(action);
     Validate_Unit_Test_Response(Response);
-    var action = "Write_In_Seasons_Table";
+    action = "Create_Seasons_Table";
+    Response = DB_Unit_Test_Handler.Create_Seasons_Table(action);
+    Validate_Unit_Test_Response(Response);
+    action = "Write_In_Seasons_Table";
     var New_Season = "Summer";
     Response = DB_Unit_Test_Handler.Write_In_Seasons_Table(action, New_Season);
     Validate_Unit_Test_Response(Response);
-    var action = "Update_In_Seasons_Table";
+    action = "Update_In_Seasons_Table";
     var Old_Season = "Summer";
     var New_Season = "Winter";
     Response = DB_Unit_Test_Handler.Write_In_Seasons_Table(action, Old_Season, New_Season);
     Validate_Unit_Test_Response(Response);
-    var action = "Delete_In_Seasons_Table";
+    action = "Delete_In_Seasons_Table";
     Response = DB_Unit_Test_Handler.Write_In_Seasons_Table(action);
     Validate_Unit_Test_Response(Response);
     Main();
 }
 
 function Validate_Unit_Test_Response(Response){
-    if (!Response){
+    if ($.trim(Response)){
         alert("Database Unit Test Failed");
     }
 }
 
+
 function DB_Unit_Test_Manager(){
+    this.Select_Seasons_Table = function(action){
+        var Ajax_Data = {
+            action: action
+        };
+        return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
+    };
     this.Create_Seasons_Table = function(action){
         var Ajax_Data = {
             action: action

@@ -30,6 +30,8 @@ function Validate_action(){
 
 function DB_Operation($action){
 	switch($action) {
+		case "Select_Seasons_Table": Select_Seasons_Table();
+			break;
 		case "Create_Seasons_Table": Create_Seasons_Table();
 			break;
 		case "Write_In_Seasons_Table": Write_In_Seasons_Table();
@@ -101,6 +103,17 @@ function DB_Operation($action){
 
 //create object for each. name the class what the strings are.
 //classes instead of cases.
+function Select_Seasons_Table(){
+	global $PDOconn;
+
+	$Query = 'SELECT * FROM SEASONS;';
+	$Statement = $PDOconn->prepare($Query);
+	$Statement->execute();
+	$Response = $Statement->fetchAll();
+	echo json_encode($Response);
+	$PDOconn = null;
+}
+
 function Create_Seasons_Table(){
 	global $PDOconn;
 

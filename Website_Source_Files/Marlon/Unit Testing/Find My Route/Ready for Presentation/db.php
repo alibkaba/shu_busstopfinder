@@ -197,7 +197,7 @@ function Get_View_All_Buses(){
 	global $PDOconn;
 	$School_ID = stripslashes($_POST["School_ID"]);
 
-	$Query = 'SELECT x.BUS_STOP_NUMBER, y.BUS_STOP_TIME, y.BUS_STOP_ADDRESS FROM BUS_STOPS_NUMBERS x INNER JOIN BUS_STOPS_DETAILS y on y.BUS_STOP_NUMBER_ID = x.BUS_STOP_NUMBER_ID and x.SCHOOL_ID = (?) ORDER BY x.BUS_STOP_NUMBER';
+	$Query = 'SELECT x.BUS_STOP_NUMBER, y.BUS_STOP_TIME, y.BUS_STOP_ADDRESS, y.BUS_STOP_LATITUDE, y.BUS_STOP_LONGITUDE FROM BUS_STOPS_NUMBERS x INNER JOIN BUS_STOPS_DETAILS y on y.BUS_STOP_NUMBER_ID = x.BUS_STOP_NUMBER_ID and x.SCHOOL_ID = (?) ORDER BY x.BUS_STOP_NUMBER';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
 	$Statement->execute();

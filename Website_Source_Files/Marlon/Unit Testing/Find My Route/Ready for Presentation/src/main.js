@@ -431,8 +431,11 @@ function District_Manager(){
 function Create_Bus_Stops_Array(){
     var School = new School_Manager();
     var School_ID = School.Grab_Selected_School_ID();
-    var Bus = new Bus_Stop_Number_Manager();
-    var Bus_Numbers = Bus.Get_Drop_Down_Data(School_ID);
+	var Bus = new View_All_Buses_Manager();
+    var Bus_Numbers = View_All_Buses.Get_Drop_Down_Data(School_ID);
+	
+    /* var Bus = new Bus_Stop_Number_Manager();
+    var Bus_Numbers = Bus.Get_Drop_Down_Data(School_ID); */
 
 
     //console.log(Bus_Stops_JSON);
