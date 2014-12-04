@@ -52,7 +52,16 @@ function Get_Page_Name(){
 function Main(){
 
     //UT DB
-    Get_States();
+    var States = new Manage_States();
+    var Districts = new Manage_Districts();
+    var Schools = new Manage_Schools();
+    var List_of_States = States.Read_From_DB();
+    States.Set_GUI("hidden");
+    Districts.Set_GUI("hidden");
+    Schools.Set_GUI("hidden");
+    //UT List of States
+    States.Update_Drop_Down(List_of_States);
+    States.Set_List("visible");
 
 
 
@@ -137,7 +146,7 @@ function Get_Schools(District_ID){
     var List_of_Schools = Schools.Read_From_DB(District_ID);
     //Validate list of schools
     Schools.Update_Drop_Down(List_of_Schools);
-    Schools.Set_List("visible");
+    Schools.Set_GUI("visible");
 
 }
 
@@ -161,15 +170,31 @@ function Delete_School(){
 
 
 
-function Handle_Schools(District_ID){
-    var Schools = new Manage_Schools();
-    var List_of_Schools = Schools.Read_From_DB(District_ID);
-    Schools.Update_Drop_Down(List_of_Schools);
-    Schools.Set_List("visible");
+function Manage_Buses(School_ID){
+    var Bus_Manager = new Manage_Bus_Stops();
+    var List_of_Buses = Bus_Manager.Read_From_DB(School_ID);
+    Bus_Manager.Update_Drop_Down(List_of_Buses);
+    Bus_Manager.Set_List("visible");
 
 }
 
+function Add_Bus_Number(Bus_Numbere){
+    var Bus_Number = new Manage_Bus_Stops();
+    //validate here
+    Bus_Number.Add(Bus_Number);
+}
+function Update_Bus_Number(Bus_Number){
+    var Bus_Number = new Manage_Bus_Stops();
+    //validate here
+    Bus_Number.Update(Bus_Number);
+}
 
+function Delete_Bus_Number(){
+    var Bus_Number = new Manage_Bus_Stops();
+    var Bus_Number_ID = Bus_Number.Get_ID();
+    //validate here
+    Bus_Number.Delete(Bus_Number_ID);
+}
 
 
 
@@ -191,9 +216,10 @@ function Manage_States(){
         document.getElementById('Select_States').options.length = 1;
         var select = document.getElementById("Select_States");
         var i;
-        for (i = 0; i < States_Data.length; i++) {
-            select.options[select.options.length] = new Option(States_Data[i].STATE_NAME, States_Data[i].STATE_ID);
-        }
+        if (typeof States_Data != 'undefined')
+            for (i = 0; i < States_Data.length; i++) {
+                select.options[select.options.length] = new Option(States_Data[i].STATE_NAME, States_Data[i].STATE_ID);
+            }
     };
     this.Set_GUI = function(action){
         document.getElementById("Select_Districts").style.visibility=action;
@@ -232,7 +258,7 @@ function Manage_States(){
             var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
             var Modal = '#Display_Create_State_Form';
             var Message = 'state creation failed, please try again';
-            var State_Handler = new States_Manager();
+            var State_Handler = new Manage_States();
             State_Handler.Validate_Response(Response_Data, Modal, Message);
         }
 
@@ -242,9 +268,9 @@ function Manage_States(){
         var Names = ["State Name"];
         var Values = [New_State_Name];
         if (Validate_Text_Fields(Names, Values) != false) {
-            var State_Handler = new States_Manager();
-            State_Handler.Grab_Selected_State_ID();
-            var State_ID = State_Handler.Grab_Selected_State_ID();
+            var State_Handler = new Manage_States();
+            State_Handler.Get_ID();
+            var State_ID = State_Handler.Get_ID();
             var Ajax_Data = {
                 State_ID: State_ID,
                 New_State_Name: New_State_Name,
@@ -285,7 +311,7 @@ function Manage_States(){
         var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
         var Modal = '#Display_Delete_State_Form';
         var Message = 'delete failed because this state has districts';
-        var State_Handler = new States_Manager();
+        var State_Handler = new Manage_States();
         State_Handler.Validate_Response(Response_Data, Modal, Message);
     };
     this.Validate_Response = function(Response_Data, Modal, Message){
@@ -320,9 +346,9 @@ function Manage_Districts(){
         return Districts_Data;
 
     };
-    this.Get_Update_Data = function(){
-        var District_Handler = new District_Manager();
-        var District_ID = District_Handler.Grab_Selected_District_ID;
+    this.Read_From_DB = function(){
+        var District_Handler = new Manage_Districts();
+        var District_ID = District_Handler.Get_ID;
         var action = "Get_District_Data";
         var Ajax_Data = {
             District_ID: District_ID,
@@ -364,9 +390,9 @@ function Manage_Districts(){
     };
 
     this.Add = function(){
-        var State_Handler = new States_Manager();
-        State_Handler.Grab_Selected_State_ID();
-        var State_ID = State_Handler.Grab_Selected_State_ID();
+        var State_Handler = new Manage_States();
+        State_Handler.Get_ID();
+        var State_ID = State_Handler.Get_ID();
         var District_Name = document.getElementById("Create_District_Name").value;
         var Names = ["District Name"];
         var Values = [District_Name];
@@ -381,7 +407,7 @@ function Manage_Districts(){
             var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
             var Modal = '#Display_Create_District_Form';
             var Message = 'district creation failed, please try again';
-            var District_Handler = new District_Manager();
+            var District_Handler = new Manage_Districts();
             District_Handler.Validate_Response(Response_Data, Modal, Message);
         }
 
@@ -391,8 +417,8 @@ function Manage_Districts(){
         var Names = ["District Name"];
         var Values = [New_District_Name];
         if (Validate_Text_Fields(Names, Values) != false) {
-            var District_Handler = new District_Manager();
-            var District_ID = District_Handler.Grab_Selected_District_ID;
+            var District_Handler = new Manage_Districts();
+            var District_ID = District_Handler.Get_ID;
             var action = "Update_District";
             var Ajax_Data = {
                 District_ID: District_ID,
@@ -407,8 +433,8 @@ function Manage_Districts(){
         }
     };
     this.Delete = function(District_ID){
-        var District_Handler = new District_Manager();
-        //var District_ID = District_Handler.Grab_Selected_District_ID();
+        var District_Handler = new Manage_Districts();
+        //var District_ID = District_Handler.Get_ID();
         var action = "Get_Schools";
         var Ajax_Data = {
             District_ID: District_ID,
@@ -432,16 +458,16 @@ function Manage_Districts(){
         var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
         var Modal = '#Display_Delete_District_Form';
         var Message = 'delete failed because this district has schools';
-        var District_Handler = new District_Manager();
+        var District_Handler = new Manage_Districts();
         District_Handler.Validate_Response(Response_Data, Modal, Message);
     };
     this.Validate_Response = function(Response_Data, Modal, Message){
-        var State_Handler = new States_Manager();
-        var State_ID = State_Handler.Grab_Selected_State_ID();
+        var State_Handler = new Manage_States();
+        var State_ID = State_Handler.Get_ID();
         if (Response_Data !== false) {
             $(Modal).modal('hide');
-            var District_Handler = new District_Manager();
-            District_Handler.Get_Drop_Down_Data(State_ID);
+            var District_Handler = new Manage_Districts();
+            District_Handler.Read_From_DB(State_ID);
         }
         else {
             alert(Message);
@@ -469,8 +495,8 @@ function Manage_Schools(){
         var Schools_Data = jQuery.parseJSON(Incoming_Ajax_Data);
         return Schools_Data;
     };
-    this.Get_Update_Data = function(){
-        var School_ID = this.Grab_Selected_School_ID();
+    this.Read_From_DB = function(){
+        var School_ID = this.Get_ID();
         var action = "Get_School_Data";
         var Ajax_Data = {
             School_ID: School_ID,
@@ -520,8 +546,8 @@ function Manage_Schools(){
     };
 
     this.Add = function(){
-        var District_Handler = new District_Manager();
-        var District_ID = District_Handler.Grab_Selected_District_ID();
+        var District_Handler = new Manage_Districts();
+        var District_ID = District_Handler.Get_ID();
         var School_Name = document.getElementById("Create_School_Name").value;
         var School_Address = document.getElementById("Create_School_Address").value;
         var Names = ["School Name", "School Address"];
@@ -538,7 +564,7 @@ function Manage_Schools(){
             var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
             var Modal = '#Display_Create_School_Form';
             var Message = 'district creation failed, please try again';
-            var School_Handler = new School_Manager();
+            var School_Handler = new Manage_Schools();
             School_Handler.Validate_Response(Response_Data, Modal, Message);
         }
 
@@ -549,8 +575,8 @@ function Manage_Schools(){
         var Names = ["School Name", "School Address"];
         var Values = [New_School_Name, New_School_Address];
         if (Validate_Text_Fields(Names, Values) != false) {
-            var School_Handler = new School_Manager();
-            var School_ID = School_Handler.Grab_Selected_School_ID;
+            var School_Handler = new Manage_Schools();
+            var School_ID = School_Handler.Get_ID;
             var action = "Update_School";
             var Ajax_Data = {
                 School_ID: School_ID,
@@ -567,8 +593,8 @@ function Manage_Schools(){
 
     };
     this.Delete = function(){
-        var School_Handler = new School_Manager();
-        var School_ID = School_Handler.Grab_Selected_School_ID();
+        var School_Handler = new Manage_Schools();
+        var School_ID = School_Handler.Get_ID();
         var action = "Get_Bus_Stop_Numbers";
         var Ajax_Data = {
             School_ID: School_ID,
@@ -593,16 +619,16 @@ function Manage_Schools(){
         var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
         var Modal = '#Display_Delete_School_Form';
         var Message = 'delete failed because this school has bus numbers';
-        var School_Handler = new School_Manager();
+        var School_Handler = new Manage_Schools();
         School_Handler.Validate_Response(Response_Data, Modal, Message);
     };
     this.Validate_Response = function(Response_Data, Modal, Message){
-        var District_Handler = new District_Manager();
-        var District_ID = District_Handler.Grab_Selected_District_ID();
+        var District_Handler = new Manage_Districts();
+        var District_ID = District_Handler.Get_ID();
         if (Response_Data !== false) {
             $(Modal).modal('hide');
-            var School_Handler = new School_Manager();
-            School_Handler.Get_Drop_Down_Data(District_ID);
+            var School_Handler = new Manage_Schools();
+            School_Handler.Read_From_DB(District_ID);
         }
         else {
             alert(Message);
@@ -630,7 +656,7 @@ function Manage_Schools(){
 
 
 function View_All_Buses_Manager(){
-    this.Get_Drop_Down_Data = function(School_ID){
+    this.Read_From_DB = function(School_ID){
         var action = "Get_View_All_Buses";
         var Ajax_Data = {
             School_ID: School_ID,
@@ -662,12 +688,12 @@ function View_All_Buses_Manager(){
     };
 }
 
-function Bus_Stop_Number_Manager(){
-    this.Grab_Selected_Bus_Stop_Number_ID = function (){
+function Manage_Bus_Stops(){
+    this.Get_ID = function (){
         var Bus_Stop_Number_ID = document.getElementById("Select_Bus_Stop_Numbers").value;
         return Bus_Stop_Number_ID;
     };
-    this.Get_Drop_Down_Data = function(School_ID){
+    this.Read_From_DB = function(School_ID){
         var action = "Get_Bus_Stop_Numbers";
         var Ajax_Data = {
             School_ID: School_ID,
@@ -679,8 +705,8 @@ function Bus_Stop_Number_Manager(){
         this.Update_Drop_Down(Bus_Stops_Number_Data);
         this.Select_Listener();
     };
-    this.Get_Update_Data = function(){
-        var Bus_Stop_Number_ID = this.Grab_Selected_Bus_Stop_Number_ID();
+    this.Read_From_DB = function(){
+        var Bus_Stop_Number_ID = this.Get_ID();
         var action = "Get_Bus_Stop_Number_Data";
         var Ajax_Data = {
             Bus_Stop_Number_ID: Bus_Stop_Number_ID,
@@ -709,7 +735,7 @@ function Bus_Stop_Number_Manager(){
             var Bus_Stop_Number_ID = Select_Drop_Down.options[Select_Drop_Down.selectedIndex].value;
             if (Bus_Stop_Number_ID != ""){
                 var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
-                Bus_Stop_Detail_Handler.Get_Drop_Down_Data(Bus_Stop_Number_ID);
+                Bus_Stop_Detail_Handler.Read_From_DB(Bus_Stop_Number_ID);
                 Display_Bus_Stop_Number_GUI();
             }
             else{
@@ -721,8 +747,8 @@ function Bus_Stop_Number_Manager(){
     this.Create_Listener = function(){
         var Create_Button = document.getElementById("Create_Bus_Stop_Number");
         Create_Button.addEventListener("click", function () {
-            var School_Handler = new School_Manager();
-            var School_ID = School_Handler.Grab_Selected_School_ID();
+            var School_Handler = new Manage_Schools();
+            var School_ID = School_Handler.Get_ID();
             var Bus_Stop_Number = document.getElementById("Create_Bus_Number").value;
             var Names = ["Bus Stop Number"];
             var Values = [Bus_Stop_Number];
@@ -737,7 +763,7 @@ function Bus_Stop_Number_Manager(){
                 var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
                 var Modal = '#Display_Create_Bus_Stop_Number_Form';
                 var Message = 'bus number creation failed, please try again';
-                var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
+                var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
                 Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
             }
         });
@@ -749,8 +775,8 @@ function Bus_Stop_Number_Manager(){
             var Names = ["Bus Stop Number"];
             var Values = [New_Bus_Stop_Number];
             if (Validate_Text_Fields(Names, Values) != false) {
-                var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
-                var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Grab_Selected_Bus_Stop_Number_ID();
+                var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
+                var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Get_ID();
                 var action = "Update_Bus_Stop_Number";
                 var Ajax_Data = {
                     Bus_Stop_Number_ID: Bus_Stop_Number_ID,
@@ -768,8 +794,8 @@ function Bus_Stop_Number_Manager(){
     this.Delete_Listener = function(){
         var Delete_Button = document.getElementById("Delete_Bus_Stop_Number");
         Delete_Button.addEventListener("click", function () {
-            var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
-            var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Grab_Selected_Bus_Stop_Number_ID();
+            var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
+            var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Get_ID();
             var action = "Delete_Bus_Stop_Number";
             var Ajax_Data = {
                 Bus_Stop_Number_ID: Bus_Stop_Number_ID,
@@ -783,14 +809,14 @@ function Bus_Stop_Number_Manager(){
         });
     };
     this.Validate_Response = function(Response_Data, Modal, Message){
-        var School_Handler = new School_Manager();
-        var School_ID = School_Handler.Grab_Selected_School_ID();
+        var School_Handler = new Manage_Schools();
+        var School_ID = School_Handler.Get_ID();
         if (Response_Data !== false) {
             $(Modal).modal('hide');
             var View_All_Buses_Handler = new View_All_Buses_Manager();
-            var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
-            View_All_Buses_Handler.Get_Drop_Down_Data(School_ID);
-            Bus_Stop_Number_Handler.Get_Drop_Down_Data(School_ID);
+            var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
+            View_All_Buses_Handler.Read_From_DB(School_ID);
+            Bus_Stop_Number_Handler.Read_From_DB(School_ID);
         }
         else {
             alert(Message);
@@ -803,7 +829,7 @@ function Bus_Stop_Detail_Manager(){
         var Bus_Stop_Detail_ID = document.getElementById("Select_Bus_Stops_Details").value;
         return Bus_Stop_Detail_ID;
     };
-    this.Get_Drop_Down_Data = function(Bus_Stop_Number_ID){
+    this.Read_From_DB = function(Bus_Stop_Number_ID){
         var action = "Get_Bus_Stop_Details";
         var Ajax_Data = {
             Bus_Stop_Number_ID: Bus_Stop_Number_ID,
@@ -815,7 +841,7 @@ function Bus_Stop_Detail_Manager(){
         this.Update_Drop_Down(Bus_Stop_Details_Data);
         this.Select_Listener();
     };
-    this.Get_Update_Data = function(){
+    this.Read_From_DB = function(){
         var Bus_Stop_Detail_ID = this.Grab_Selected_Bus_Stop_Detail_ID();
         var action = "Get_Bus_Stop_Detail_Data";
         var Ajax_Data = {
@@ -867,8 +893,8 @@ function Bus_Stop_Detail_Manager(){
             var Names = ["Bus Stop Time", "Bus Stop Address", "Bus Stop Latitude", "Bus Stop Longitude"];
             var Values = [Bus_Stop_Time, Bus_Stop_Address, New_Bus_Stop_Latitude, New_Bus_Stop_Longitude];
             if (Validate_Text_Fields(Names, Values) != false) {
-                var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
-                var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Grab_Selected_Bus_Stop_Number_ID();
+                var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
+                var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Get_ID();
                 var action = "Create_Bus_Stop_Detail";
                 var Ajax_Data = {
                     Bus_Stop_Number_ID: Bus_Stop_Number_ID,
@@ -935,17 +961,17 @@ function Bus_Stop_Detail_Manager(){
             var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
             var Modal = '#Display_Delete_Bus_Stop_Details_Form';
             var Message = 'delete failed';
-            var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
+            var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
             Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
         });
     };
     this.Validate_Response = function(Response_Data, Modal, Message){
-        var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
-        var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Grab_Selected_Bus_Stop_Number_ID();
+        var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
+        var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Get_ID();
         if (Response_Data !== false) {
             $(Modal).modal('hide');
             var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
-            Bus_Stop_Detail_Handler.Get_Drop_Down_Data(Bus_Stop_Number_ID);
+            Bus_Stop_Detail_Handler.Read_From_DB(Bus_Stop_Number_ID);
         }
         else {
             alert(Message);
@@ -975,29 +1001,30 @@ function Clear_Display_Create_Bus_Stop_Details_Form(){
     document.getElementById("Create_Bus_Stop_Address").value = "";
 }
 
+
 function Populate_Display_Update_State_Form(){
-    var State_Handler = new States_Manager();
-    State_Handler.Get_Update_Data();
+    var State_Handler = new Manage_States();
+    State_Handler.Read_From_DB();
 }
 
 function Populate_Display_Update_District_Form(){
-    var District_Handler = new District_Manager();
-    District_Handler.Get_Update_Data();
+    var District_Handler = new Manage_Districts();
+    District_Handler.Read_From_DB();
 }
 
 function Populate_Display_Update_School_Form(){
-    var School_Handler = new School_Manager();
-    School_Handler.Get_Update_Data();
+    var School_Handler = new Manage_Schools();
+    School_Handler.Read_From_DB();
 }
 
 function Populate_Display_Update_Bus_Number_Form(){
-    var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
-    Bus_Stop_Number_Handler.Get_Update_Data();
+    var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
+    Bus_Stop_Number_Handler.Read_From_DB();
 }
 
 function Populate_Display_Update_Bus_Stop_Details_Form(){
     var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
-    Bus_Stop_Detail_Handler.Get_Update_Data();
+    Bus_Stop_Detail_Handler.Read_From_DB();
 }
 
 function Display_Delete_State_Form(){
