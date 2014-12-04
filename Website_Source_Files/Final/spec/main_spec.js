@@ -383,17 +383,6 @@ describe("Spy on Map Address to ensure it is called with parameters", function()
 // ------------------------------------------Ali coded items BELOW--------------------------------//
 
 
-describe("Test Validate_Text_Fields", function() {
-    it("valid data", function () {
-        var State_Name = "Connecticut";
-        var Names = ["State Name"];
-        var Values = [State_Name];
-        var Test_Validate_Text_Fields = new Validate_Text_Fields(Names, Values);
-        spyOn(Test_Validate_Text_Fields(Names, Values), "New");
-        expect(Test_Validate_Text_Fields(Names, Values), "New").toHaveBeenCalled();
-    });
-});
-
 describe("Unit Test Database", function() {
     it("Action name test", function () {
         var action = "1";
@@ -401,12 +390,6 @@ describe("Unit Test Database", function() {
         action = "";
         expect(action).toBe("");
     });
-    it("Response test", function () {
-        var Response = "1";
-        expect(Validate_Unit_Test_Response(Response)).toBeFalsy();
-        var Response = "true";
-        expect(Validate_Unit_Test_Response(Response)).toBeFalsy();
-    });
+
 });
 
-// ------------------------------------------Marlon coded items ABOVE--------------------------------//
