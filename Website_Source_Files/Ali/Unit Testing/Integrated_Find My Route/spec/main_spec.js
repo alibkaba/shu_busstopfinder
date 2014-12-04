@@ -5,16 +5,11 @@ describe("Unit Test Database", function() {
         action = "";
         expect(action).toBe("");
     });
-    it("Response test", function () {
-        var Response = "1";
-        expect(Validate_Unit_Test_Response(Response)).toBeTruthy();
-        var Response = "true";
-        expect(Validate_Unit_Test_Response(Response)).toBeTruthy();
-    });
+
 });
 
 it("should make an AJAX request to the correct URL", function() {
     spyOn($, "ajaxSetup");
-    getProduct(123);
+    Outgoing_Ajax(Ajax_Data);
     expect($.ajax.mostRecentCall.args[0]["url"]).toEqual("db.php");
 });
