@@ -432,7 +432,7 @@ function Create_Bus_Stops_Array(){
     var School = new School_Manager();
     var School_ID = School.Grab_Selected_School_ID();
 	var Bus = new View_All_Buses_Manager();
-    var Bus_Numbers = View_All_Buses.Get_Drop_Down_Data(School_ID);
+    var Bus_Stops_JSON = Bus.Get_Drop_Down_Data(School_ID);
 	
     /* var Bus = new Bus_Stop_Number_Manager();
     var Bus_Numbers = Bus.Get_Drop_Down_Data(School_ID); */
@@ -441,20 +441,15 @@ function Create_Bus_Stops_Array(){
     //console.log(Bus_Stops_JSON);
     var Bus_Stops = [];
 
-    for (var Bus_Stop_Number = 0; Bus_Stop_Number < Bus_Numbers.length ; Bus_Stop_Number++) {
-        var Bus_Stops_Objects = new Bus_Stop_Detail_Manager();
-        var Bus_Stops_JSON = Bus_Stops_Objects.Get_Drop_Down_Data(Bus_Numbers[Bus_Stop_Number]);
-        for (var Bus_Stop = 0; Bus_Stop < Bus_Stops_JSON.length ; Bus_Stop++) {
-            var New_Bus_Stop = new Bus_Stop_Object();
-            New_Bus_Stop.Set_Stop_ID(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER_ID);
-            New_Bus_Stop.Set_Bus_Stop_Number(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER);
-            New_Bus_Stop.Set_Stop_Time(Bus_Stops_JSON[Bus_Stop].BUS_STOP_TIME);
-            New_Bus_Stop.Set_Stop_Address(Bus_Stops_JSON[Bus_Stop].BUS_STOP_ADDRESS);
-            New_Bus_Stop.Set_Latitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LATITUDES);
-            New_Bus_Stop.Set_Longitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LONGITUDE);
-            Bus_Stops.push(New_Bus_Stop);
-        }
-
+    for (var Bus_Stop = 0; Bus_Stop < Bus_Stops_JSON.length ; Bus_Stop++) {
+        var New_Bus_Stop = new Bus_Stop_Object();
+        New_Bus_Stop.Set_Stop_ID(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER_ID);
+        New_Bus_Stop.Set_Bus_Stop_Number(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER);
+        New_Bus_Stop.Set_Stop_Time(Bus_Stops_JSON[Bus_Stop].BUS_STOP_TIME);
+        New_Bus_Stop.Set_Stop_Address(Bus_Stops_JSON[Bus_Stop].BUS_STOP_ADDRESS);
+        New_Bus_Stop.Set_Latitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LATITUDES);
+        New_Bus_Stop.Set_Longitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LONGITUDE);
+        Bus_Stops.push(New_Bus_Stop);
     }
 
     console.log(Bus_Stops.length);
