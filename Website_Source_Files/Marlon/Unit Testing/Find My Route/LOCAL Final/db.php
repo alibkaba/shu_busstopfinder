@@ -30,15 +30,13 @@ function Validate_action(){
 
 function DB_Operation($action){
 	switch($action) {
-		case "Select_Seasons_Table": Select_Seasons_Table();
-			break;
 		case "Create_Seasons_Table": Create_Seasons_Table();
 			break;
-		case "Write_In_Seasons_Table": Write_In_Seasons_Table();
+		case "Write_Seasons_Table": Write_Seasons_Table();
 			break;
-		case "Update_In_Seasons_Table": Update_In_Seasons_Table();
+		case "Update_Seasons_Table": Update_Seasons_Table();
 			break;
-		case "Delete_In_Seasons_Table": Delete_In_Seasons_Table();
+		case "Delete_Seasons_Table": Delete_Seasons_Table();
 			break;
 		case "Get_States": Get_States();
 			break;
@@ -103,17 +101,6 @@ function DB_Operation($action){
 
 //create object for each. name the class what the strings are.
 //classes instead of cases.
-function Select_Seasons_Table(){
-	global $PDOconn;
-
-	$Query = 'SELECT * FROM SEASONS;';
-	$Statement = $PDOconn->prepare($Query);
-	$Statement->execute();
-	$Response = $Statement->fetchAll();
-	echo json_encode($Response);
-	$PDOconn = null;
-}
-
 function Create_Seasons_Table(){
 	global $PDOconn;
 
@@ -130,7 +117,7 @@ ENGINE = InnoDB';
 	$PDOconn = null;
 }
 
-function Write_In_Seasons_Table(){
+function Write_Seasons_Table(){
 	global $PDOconn;
 	$New_Season = stripslashes($_POST["New_Season"]);
 
@@ -143,7 +130,7 @@ function Write_In_Seasons_Table(){
 	$PDOconn = null;
 }
 
-function Update_In_Seasons_Table(){
+function Update_Seasons_Table(){
 	global $PDOconn;
 	$New_Season = stripslashes($_POST["New_Season"]);
 	$Old_Season = stripslashes($_POST["Old_Season"]);
@@ -158,7 +145,7 @@ function Update_In_Seasons_Table(){
 	$PDOconn = null;
 }
 
-function Delete_In_Seasons_Table(){
+function Delete_Seasons_Table(){
 	global $PDOconn;
 
 	$Query = 'DROP TABLE IF EXISTS `djkabau1_BUSTOP`.`SEASONS` ';
@@ -210,7 +197,7 @@ function Get_View_All_Buses(){
 	global $PDOconn;
 	$School_ID = stripslashes($_POST["School_ID"]);
 
-	$Query = 'SELECT x.BUS_STOP_NUMBER, y.BUS_STOP_TIME, y.BUS_STOP_ADDRESS FROM BUS_STOPS_NUMBERS x INNER JOIN BUS_STOPS_DETAILS y on y.BUS_STOP_NUMBER_ID = x.BUS_STOP_NUMBER_ID and x.SCHOOL_ID = (?) ORDER BY x.BUS_STOP_NUMBER';
+	$Query = 'SELECT x.BUS_STOP_NUMBER, y.BUS_STOP_TIME, y.BUS_STOP_ADDRESS, y.BUS_STOP_LATITUDE, y.BUS_STOP_LONGITUDE FROM BUS_STOPS_NUMBERS x INNER JOIN BUS_STOPS_DETAILS y on y.BUS_STOP_NUMBER_ID = x.BUS_STOP_NUMBER_ID and x.SCHOOL_ID = (?) ORDER BY x.BUS_STOP_NUMBER';
 	$Statement = $PDOconn->prepare($Query);
 	$Statement->bindParam(1, $School_ID, PDO::PARAM_INT);
 	$Statement->execute();

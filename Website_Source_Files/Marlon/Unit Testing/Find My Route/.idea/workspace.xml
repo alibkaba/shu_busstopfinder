@@ -32,79 +32,38 @@
     <favorites_list name="Find My Route" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Ready for Presentation/src/main.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.13450292" vertical-offset="11377" max-vertical-offset="27829">
-                  <caret line="676" column="35" selection-start-line="676" selection-start-column="35" selection-end-line="676" selection-end-column="35" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="user.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Ready for Presentation/user.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-5.111111" vertical-offset="710" max-vertical-offset="2771">
-                  <caret line="58" column="24" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="38" />
-                  <folding>
-                    <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="admin.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Ready for Presentation/admin.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-5.111111" vertical-offset="761" max-vertical-offset="9316">
-                  <caret line="61" column="28" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="42" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="db.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Ready for Presentation/db.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-5.207547" vertical-offset="3107" max-vertical-offset="10914">
-                  <caret line="199" column="160" selection-start-line="199" selection-start-column="160" selection-end-line="199" selection-end-column="178" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="main_spec.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Ready for Presentation/spec/main_spec.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="6189" max-vertical-offset="7106">
-                  <caret line="385" column="50" selection-start-line="385" selection-start-column="50" selection-end-line="385" selection-end-column="50" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Ready for Presentation/src/main.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.23895809" vertical-offset="7099" max-vertical-offset="27829">
-                  <caret line="430" column="0" selection-start-line="430" selection-start-column="0" selection-end-line="430" selection-end-column="34" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Ready for Presentation/src/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="7150" max-vertical-offset="27880">
+              <caret line="442" column="0" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LOCAL Final/src/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.321429" vertical-offset="21492" max-vertical-offset="28662">
+              <caret line="1273" column="21" selection-start-line="1273" selection-start-column="21" selection-end-line="1273" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main_spec.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/LOCAL Final/spec/main_spec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.7050691" vertical-offset="1377" max-vertical-offset="7174">
+              <caret line="45" column="63" selection-start-line="45" selection-start-column="63" selection-end-line="45" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -130,6 +89,8 @@
         <option value="$PROJECT_DIR$/Ready for Presentation/db.php" />
         <option value="$PROJECT_DIR$/Ready for Presentation/spec/main_spec.js" />
         <option value="$PROJECT_DIR$/Ready for Presentation/src/main.js" />
+        <option value="$PROJECT_DIR$/LOCAL Final/spec/main_spec.js" />
+        <option value="$PROJECT_DIR$/LOCAL Final/src/main.js" />
       </list>
     </option>
   </component>
@@ -231,6 +192,56 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Ready for Presentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LOCAL Final" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LOCAL Final" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LOCAL Final" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -549,12 +560,12 @@
       <workItem from="1415845210824" duration="33524000" />
       <workItem from="1416150719297" duration="55326000" />
       <workItem from="1416544239132" duration="110193000" />
-      <workItem from="1417486384552" duration="60638000" />
+      <workItem from="1417486384552" duration="72841000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="259681000" />
+    <option name="totallyTimeSpent" value="271884000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -655,17 +666,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ready for Presentation/admin.html">
+    <entry file="file://$PROJECT_DIR$/Ready for Presentation/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.111111" vertical-offset="761" max-vertical-offset="9316">
-          <caret line="61" column="28" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="7150" max-vertical-offset="27880">
+          <caret line="442" column="0" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Ready for Presentation/user.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.111111" vertical-offset="710" max-vertical-offset="2771">
+        <state vertical-scroll-proportion="0.33293125" vertical-offset="710" max-vertical-offset="2771">
           <caret line="58" column="24" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="38" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -674,26 +685,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ready for Presentation/spec/main_spec.js">
+    <entry file="file://$PROJECT_DIR$/Ready for Presentation/admin.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6189" max-vertical-offset="7106">
-          <caret line="385" column="50" selection-start-line="385" selection-start-column="50" selection-end-line="385" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.33293125" vertical-offset="761" max-vertical-offset="9316">
+          <caret line="61" column="28" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Ready for Presentation/db.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.207547" vertical-offset="3107" max-vertical-offset="10914">
-          <caret line="199" column="160" selection-start-line="199" selection-start-column="160" selection-end-line="199" selection-end-column="178" />
+        <state vertical-scroll-proportion="0.3325301" vertical-offset="3124" max-vertical-offset="10914">
+          <caret line="200" column="43" selection-start-line="199" selection-start-column="203" selection-end-line="199" selection-end-column="221" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ready for Presentation/src/main.js">
+    <entry file="file://$PROJECT_DIR$/Ready for Presentation/spec/main_spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23895809" vertical-offset="7099" max-vertical-offset="27829">
-          <caret line="430" column="0" selection-start-line="430" selection-start-column="0" selection-end-line="430" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.403171" vertical-offset="6189" max-vertical-offset="7106">
+          <caret line="385" column="50" selection-start-line="385" selection-start-column="50" selection-end-line="385" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LOCAL Final/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.321429" vertical-offset="21492" max-vertical-offset="28662">
+          <caret line="1273" column="21" selection-start-line="1273" selection-start-column="21" selection-end-line="1273" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LOCAL Final/spec/main_spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.7050691" vertical-offset="1377" max-vertical-offset="7174">
+          <caret line="45" column="63" selection-start-line="45" selection-start-column="63" selection-end-line="45" selection-end-column="63" />
           <folding />
         </state>
       </provider>
