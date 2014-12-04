@@ -1,4 +1,5 @@
-// ------------------------------------------Ali coded items BELOW --------------------------------//
+// -----------Partially refined by Marlon to remove GUI Logic from code  and decouple GUI functions/methods------------------//
+
 
 $(document).ready(function() {
     console.log("ready!");
@@ -30,9 +31,7 @@ function Outgoing_Ajax(Ajax_Data) {
     return Incoming_Ajax_Data;
 }
 
-/**
- * @return {boolean}
- */
+
 function Validate_Text_Fields(Names, Values) {
     var i;
     for (i = 0; i < Values.length; i++) {
@@ -54,9 +53,7 @@ function Main(){
     var Districts = new Manage_Districts();
     var Schools = new Manage_Schools();
     var List_of_States = States.Read_From_DB();
-    States.Set_GUI("hidden");
-    Districts.Set_GUI("hidden");
-    Schools.Set_GUI("hidden");
+
     //UT List of States
     States.Update_Drop_Down(List_of_States);
     States.Set_List("visible");
@@ -66,14 +63,12 @@ function Main(){
 function Get_States(){
     var States = new Manage_States();
     var Districts = new Manage_Districts();
-    var Schools = new Manage_Schools();
     var List_of_States = States.Read_From_DB();
-    States.Set_GUI("hidden");
-    Districts.Set_GUI("hidden");
-    Schools.Set_GUI("hidden");
+
     //UT List of States
     States.Update_Drop_Down(List_of_States);
-    States.Set_List("visible");
+    Districts.Set_GUI("visible");
+    Districts.Set_List("visible");
 }
 
 function Add_State(State_Name){
@@ -95,17 +90,15 @@ function Delete_State(){
 
 
 function Get_Districts(State_ID){
-    var States = new Manage_States();
     var Districts = new Manage_Districts();
     var Schools = new Manage_Schools();
-    States.Set_GUI("hidden");
-    Districts.Set_GUI("hidden");
-    States.Set_GUI("visible");
     var List_of_Districts = Districts.Read_From_DB(State_ID);
     //validate districts
+
     Districts.Update_Drop_Down(List_of_Districts);
     Districts.Set_GUI("visible");
     Schools.Set_List("visible");
+
 }
 
 function Add_District(District_Name){
@@ -135,6 +128,8 @@ function Get_Schools(District_ID){
     //Validate list of schools
     Schools.Update_Drop_Down(List_of_Schools);
     Schools.Set_GUI("visible");
+    Schools.Set_List("visible");
+
 
 }
 
@@ -158,22 +153,25 @@ function Delete_School(){
 
 
 
-function Manage_Buses(School_ID){
-    var Bus_Manager = new Manage_Bus_Stops();
-    var List_of_Buses = Bus_Manager.Read_From_DB(School_ID);
-    Bus_Manager.Update_Drop_Down(List_of_Buses);
-    Bus_Manager.Set_List("visible");
+function Get_Bus_Numbers(School_ID){
+    var Bus_Numbers = new Manage_Bus_Stops();
+    var Bus_Stop_Detail = new Bus_Stop_Detail_Manager();
+    var List_of_Buses = Bus_Numbers.Read_From_DB(School_ID);
+    Bus_Numbers.Update_Drop_Down(List_of_Buses);
+    Bus_Numbers.Set_GUI("visible");
+    Bus_Numbers.Set_List("visible");
+    Bus_Stop_Detail.Set_List("visible");
 }
 
-function Add_Bus_Number(Bus_Numbere){
+function Add_Bus_Number(Bus_Name){
     var Bus_Number = new Manage_Bus_Stops();
     //validate here
-    Bus_Number.Add(Bus_Number);
+    Bus_Number.Add(Bus_Name);
 }
-function Update_Bus_Number(Bus_Number){
+function Update_Bus_Number(Bus_Name){
     var Bus_Number = new Manage_Bus_Stops();
     //validate here
-    Bus_Number.Update(Bus_Number);
+    Bus_Number.Update(Bus_Name);
 }
 
 function Delete_Bus_Number(){
@@ -182,6 +180,88 @@ function Delete_Bus_Number(){
     //validate here
     Bus_Number.Delete(Bus_Number_ID);
 }
+
+
+function Get_Bus_Stops(Bus_ID){
+    var Bus_Stop_Detail = new Bus_Stop_Detail_Manager();
+    var List_of_Buses = Bus_Stop_Detail.Read_From_DB(Bus_ID);
+    Bus_Stop_Detail.Update_Drop_Down(List_of_Buses);
+    Bus_Stop_Detail.Set_List("visible");
+}
+
+function Add_Bus_Stop(Bus_Stop){
+    var Bus_Stop = new Manage_Bus_Stops();
+    //validate here
+    Bus_Stop.Add(Bus_Stop);
+}
+function Update_Bus_Stop(Bus_Stop){
+    var Bus_Stop = new Manage_Bus_Stops();
+    //validate here
+    Bus_Stop.Update(Bus_Stop);
+}
+
+function Delete_Bus_Stop(){
+    var Bus_Stop = new Manage_Bus_Stops();
+    var Bus_Stop_ID = Bus_Stop.Get_ID();
+    //validate here
+    Bus_Stop.Delete(Bus_Stop_ID);
+}
+
+
+function Get_Bus_Stops(Bus_Stop_Number){
+    var Bus_Stop_Detail = new Bus_Stop_Detail_Manager();
+    var List_of_Buses = Bus_Stop_Detail.Read_From_DB(Bus_Stop_Number);
+    Bus_Stop_Detail.Update_Drop_Down(List_of_Buses);
+    Bus_Stop_Detail.Set_List("visible");
+}
+
+function Add_Bus_Stop(Bus_Stop){
+    var Bus_Stop = new Manage_Bus_Stops();
+    //validate here
+    Bus_Stop.Add(Bus_Stop);
+}
+function Update_Bus_Stop(Bus_Stop){
+    var Bus_Stop = new Manage_Bus_Stops();
+    //validate here
+    Bus_Stop.Update(Bus_Stop);
+}
+
+function Delete_Bus_Stop(){
+    var Bus_Stop = new Manage_Bus_Stops();
+    var Bus_Stop_ID = Bus_Stop.Get_ID();
+    //validate here
+    Bus_Stop.Delete(Bus_Stop_ID);
+}
+
+
+
+
+function Manage_Bus_Stops_Details(Stop_ID){
+    var Bus_Stop_Detail = new Bus_Stop_Detail_Manager();
+    var Bus_Stop_list = new View_All_Buses_Manager();
+    Bus_Stop_Detail.Set_GUI("visible");
+    Bus_Stop_list.Set_List("visible");
+
+}
+
+function Add_Bus_Stop_Details(Bus_Stop_Details_ID){
+    var Bus_Stop_Details = new Bus_Stop_Detail_Manager();
+    //validate here
+    Bus_Stop_Details.Add(Bus_Stop_Details_ID);
+}
+function Update_Bus_Stop_Details(Bus_Stop_Details_ID){
+    var Bus_Stop_Details = Bus_Stop_Detail_Manager();
+    //validate here
+    Bus_Stop_Details.Update(Bus_Stop_Details_ID);
+}
+
+function Delete_Bus_Stop_Details(){
+    var Bus_Stop_Details = new Bus_Stop_Detail_Manager();
+    var Bus_Stop_Details_ID = Bus_Stop_Details.Get_ID();
+    //validate here
+    Bus_Stop_Details.Delete(Bus_Stop_Details_ID);
+}
+
 
 
 
@@ -213,7 +293,7 @@ function Manage_States(){
         if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html') {
             document.getElementById("Update_State_Form_Button").style.visibility=action;
             document.getElementById("Delete_State_Form_Button").style.visibility=action;
-            document.getElementById("Create_District_Form_Button").style.visibility=action;
+            document.getElementById("Create_State_Form_Button").style.visibility=action;
         }
     };
     this.Set_List = function(action){
@@ -333,18 +413,6 @@ function Manage_Districts(){
         return Districts_Data;
 
     };
-    this.Read_From_DB = function(){
-        var District_Handler = new Manage_Districts();
-        var District_ID = District_Handler.Get_ID;
-        var action = "Get_District_Data";
-        var Ajax_Data = {
-            District_ID: District_ID,
-            action: action
-        };
-        Outgoing_Ajax(Ajax_Data);
-        var District_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        document.getElementById("Update_District_Name").value = District_Data[0].DISTRICT_NAME;
-    };
     this.Update_Drop_Down = function(Districts_Data){
         var select = document.getElementById("Select_Districts");
         var i;
@@ -355,7 +423,7 @@ function Manage_Districts(){
 
     };
     this.Set_GUI = function(action){
-        document.getElementById("Select_Schools").style.visibility=action;
+        document.getElementById("Select_Districts").style.visibility=action;
         if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html') {
             document.getElementById("Update_District_Form_Button").style.visibility=action;
             document.getElementById("Delete_District_Form_Button").style.visibility=action;
@@ -482,18 +550,6 @@ function Manage_Schools(){
         var Schools_Data = jQuery.parseJSON(Incoming_Ajax_Data);
         return Schools_Data;
     };
-    this.Read_From_DB = function(){
-        var School_ID = this.Get_ID();
-        var action = "Get_School_Data";
-        var Ajax_Data = {
-            School_ID: School_ID,
-            action: action
-        };
-        Outgoing_Ajax(Ajax_Data);
-        var School_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        document.getElementById("Update_School_Name").value = School_Data[0].SCHOOL_NAME;
-        document.getElementById("Update_School_Address").value = School_Data[0].SCHOOL_ADDRESS;
-    };
     this.Update_Drop_Down = function(Schools_Data){
         document.getElementById('Select_Schools').options.length = 1;
         var select = document.getElementById("Select_Schools");
@@ -504,7 +560,7 @@ function Manage_Schools(){
             }
     };
     this.Set_GUI = function (action){
-        document.getElementById("View_All_Buses_Button").style.visibility=action;
+        document.getElementById("Select_Schools").style.visibility=action;
         if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html') {
             document.getElementById("Select_Bus_Stop_Numbers").style.visibility=action;
             document.getElementById("Update_School_Form_Button").style.visibility=action;
@@ -624,24 +680,6 @@ function Manage_Schools(){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function View_All_Buses_Manager(){
     this.Read_From_DB = function(School_ID){
         var action = "Get_View_All_Buses";
@@ -673,6 +711,9 @@ function View_All_Buses_Manager(){
         View_All_Bus_Stops += '</tbody>';
         document.getElementById("View_All_Bus_Stops").innerHTML = View_All_Bus_Stops;
     };
+    this.Set_List = function(action){
+        document.getElementById("View_All_Buses_Button").style.visibility=action;
+    };
 }
 
 function Manage_Bus_Stops(){
@@ -688,20 +729,7 @@ function Manage_Bus_Stops(){
         };
         Outgoing_Ajax(Ajax_Data);
         var Bus_Stops_Number_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Clear_Form();
-        this.Update_Drop_Down(Bus_Stops_Number_Data);
-        this.Select_Listener();
-    };
-    this.Read_From_DB = function(){
-        var Bus_Stop_Number_ID = this.Get_ID();
-        var action = "Get_Bus_Stop_Number_Data";
-        var Ajax_Data = {
-            Bus_Stop_Number_ID: Bus_Stop_Number_ID,
-            action: action
-        };
-        Outgoing_Ajax(Ajax_Data);
-        var Bus_Stop_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        document.getElementById("Update_Bus_Number").value = Bus_Stop_Data[0].BUS_STOP_NUMBER;
+        return Bus_Stops_Number_Data;
     };
     this.Update_Drop_Down = function(Bus_Stops_Number_Data){
         document.getElementById('Select_Bus_Stop_Numbers').options.length = 1;
@@ -716,84 +744,61 @@ function Manage_Bus_Stops(){
         Hide_Bus_Stop_Number_GUI();
         Hide_Bus_Stop_Detail_GUI();
     };
-    this.Select_Listener = function(){
-        var Select_Drop_Down = document.getElementById("Select_Bus_Stop_Numbers");
-        Select_Drop_Down.addEventListener("change", function () {
-            var Bus_Stop_Number_ID = Select_Drop_Down.options[Select_Drop_Down.selectedIndex].value;
-            if (Bus_Stop_Number_ID != ""){
-                var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
-                Bus_Stop_Detail_Handler.Read_From_DB(Bus_Stop_Number_ID);
-                Display_Bus_Stop_Number_GUI();
-            }
-            else{
-                Hide_Bus_Stop_Number_GUI();
-                Hide_Bus_Stop_Detail_GUI();
-            }
-        });
-    };
-    this.Create_Listener = function(){
-        var Create_Button = document.getElementById("Create_Bus_Stop_Number");
-        Create_Button.addEventListener("click", function () {
-            var School_Handler = new Manage_Schools();
-            var School_ID = School_Handler.Get_ID();
-            var Bus_Stop_Number = document.getElementById("Create_Bus_Number").value;
-            var Names = ["Bus Stop Number"];
-            var Values = [Bus_Stop_Number];
-            if (Validate_Text_Fields(Names, Values) != false) {
-                var action = "Create_Bus_Stop_Number";
-                var Ajax_Data = {
-                    School_ID: School_ID,
-                    Bus_Stop_Number: Bus_Stop_Number,
-                    action: action
-                };
-                Outgoing_Ajax(Ajax_Data);
-                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-                var Modal = '#Display_Create_Bus_Stop_Number_Form';
-                var Message = 'bus number creation failed, please try again';
-                var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
-                Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
-            }
-        });
-    };
-    this.Update_Listener = function(){
-        var Update_Button = document.getElementById("Update_Bus_Stop_Number");
-        Update_Button.addEventListener("click", function () {
-            var New_Bus_Stop_Number= document.getElementById("Update_Bus_Number").value;
-            var Names = ["Bus Stop Number"];
-            var Values = [New_Bus_Stop_Number];
-            if (Validate_Text_Fields(Names, Values) != false) {
-                var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
-                var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Get_ID();
-                var action = "Update_Bus_Stop_Number";
-                var Ajax_Data = {
-                    Bus_Stop_Number_ID: Bus_Stop_Number_ID,
-                    New_Bus_Stop_Number: New_Bus_Stop_Number,
-                    action: action
-                };
-                Outgoing_Ajax(Ajax_Data);
-                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-                var Modal = '#Display_Update_Bus_Stop_Number_Form';
-                var Message = 'bus number update failed, please try again';
-                Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
-            }
-        });
-    };
-    this.Delete_Listener = function(){
-        var Delete_Button = document.getElementById("Delete_Bus_Stop_Number");
-        Delete_Button.addEventListener("click", function () {
-            var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
-            var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Get_ID();
-            var action = "Delete_Bus_Stop_Number";
+    this.Add = function(){
+        var School_Handler = new Manage_Schools();
+        var School_ID = School_Handler.Get_ID();
+        var Bus_Stop_Number = document.getElementById("Create_Bus_Number").value;
+        var Names = ["Bus Stop Number"];
+        var Values = [Bus_Stop_Number];
+        if (Validate_Text_Fields(Names, Values) != false) {
+            var action = "Create_Bus_Stop_Number";
             var Ajax_Data = {
-                Bus_Stop_Number_ID: Bus_Stop_Number_ID,
+                School_ID: School_ID,
+                Bus_Stop_Number: Bus_Stop_Number,
                 action: action
             };
             Outgoing_Ajax(Ajax_Data);
             var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-            var Modal = '#Display_Delete_Bus_Stop_Number_Form';
-            var Message = 'delete failed because this bus number has bus addresses';
+            var Modal = '#Display_Create_Bus_Stop_Number_Form';
+            var Message = 'bus number creation failed, please try again';
+            var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
             Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
-        });
+        }
+    };
+    this.Update = function(){
+        var New_Bus_Stop_Number= document.getElementById("Update_Bus_Number").value;
+        var Names = ["Bus Stop Number"];
+        var Values = [New_Bus_Stop_Number];
+        if (Validate_Text_Fields(Names, Values) != false) {
+            var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
+            var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Get_ID();
+            var action = "Update_Bus_Stop_Number";
+            var Ajax_Data = {
+                Bus_Stop_Number_ID: Bus_Stop_Number_ID,
+                New_Bus_Stop_Number: New_Bus_Stop_Number,
+                action: action
+            };
+            Outgoing_Ajax(Ajax_Data);
+            var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+            var Modal = '#Display_Update_Bus_Stop_Number_Form';
+            var Message = 'bus number update failed, please try again';
+            Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
+        }
+    };
+    this.Delete = function(){
+        var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
+        var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Get_ID();
+        var action = "Delete_Bus_Stop_Number";
+        var Ajax_Data = {
+            Bus_Stop_Number_ID: Bus_Stop_Number_ID,
+            action: action
+        };
+        Outgoing_Ajax(Ajax_Data);
+        var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+        var Modal = '#Display_Delete_Bus_Stop_Number_Form';
+        var Message = 'delete failed because this bus number has bus addresses';
+        Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
+
     };
     this.Validate_Response = function(Response_Data, Modal, Message){
         var School_Handler = new Manage_Schools();
@@ -824,21 +829,7 @@ function Bus_Stop_Detail_Manager(){
         };
         Outgoing_Ajax(Ajax_Data);
         var Bus_Stop_Details_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        this.Clear_Form();
-        this.Update_Drop_Down(Bus_Stop_Details_Data);
-        this.Select_Listener();
-    };
-    this.Read_From_DB = function(){
-        var Bus_Stop_Detail_ID = this.Grab_Selected_Bus_Stop_Detail_ID();
-        var action = "Get_Bus_Stop_Detail_Data";
-        var Ajax_Data = {
-            Bus_Stop_Detail_ID: Bus_Stop_Detail_ID,
-            action: action
-        };
-        Outgoing_Ajax(Ajax_Data);
-        var Bus_Stop_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-        document.getElementById("Update_Bus_Stop_Time").value = Bus_Stop_Data[0].BUS_STOP_TIME;
-        document.getElementById("Update_Bus_Stop_Address").value = Bus_Stop_Data[0].BUS_STOP_ADDRESS;
+        return Bus_Stop_Details_Data;
     };
     this.Update_Drop_Down = function(Bus_Stop_Details_Data){
         document.getElementById('Select_Bus_Stops_Details').options.length = 1;
@@ -853,104 +844,104 @@ function Bus_Stop_Detail_Manager(){
         document.getElementById("Create_Bus_Stop_Address").value = "";
         Hide_Bus_Stop_Detail_GUI();
     };
-    this.Select_Listener = function(){
-        var Select_Drop_Down = document.getElementById("Select_Bus_Stops_Details");
-        Select_Drop_Down.addEventListener("change", function () {
-            var Bus_Stop_Number_ID = Select_Drop_Down.options[Select_Drop_Down.selectedIndex].value;
-            if (Bus_Stop_Number_ID != ""){
-                Display_Bus_Stop_Detail_GUI();
-            }
-            else{
-                Hide_Bus_Stop_Detail_GUI();
-            }
-        });
+    this.Set_GUI = function (action){
+        document.getElementById("Select_Bus_Stops_Details").style.visibility=action;
+        if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html') {
+            document.getElementById("Update_Bus_Stop_Details_Form_Button").style.visibility=action;
+            document.getElementById("Create_Bus_Stop_Details_Form_Button").style.visibility=action;
+            document.getElementById("Create_Bus_Stop_Details_Form_Button").style.visibility=action;
+        }
+        if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'user.html') {
+            document.getElementById("User_Address_Label").style.visibility=action;
+            document.getElementById("User_Address").style.visibility=action;
+            document.getElementById("Find_Closest_Bus_Stop").style.visibility=action;
+            document.getElementById("Use_My_Location").style.visibility=action;
+        }
     };
-    this.Create_Listener = function(){
-        var Create_Button = document.getElementById("Create_Bus_Stop_Details");
-        Create_Button.addEventListener("click", function () {
-            var Bus_Stop_Time = document.getElementById("Create_Bus_Stop_Time").value;
-            var Bus_Stop_Address = document.getElementById("Create_Bus_Stop_Address").value;
-            var action = "Geocode_PHP";
-            var Read_Geocode_Data = {Address: Bus_Stop_Address, action: action};
-            var Address_Coordinates = $.ajax({data: Read_Geocode_Data}).responseText;
-            Address_Coordinates = jQuery.parseJSON(Address_Coordinates);
-            console.log(Address_Coordinates);
-            var New_Bus_Stop_Latitude = Address_Coordinates.Latitude;
-            var New_Bus_Stop_Longitude = Address_Coordinates.Longitude;
-            var Names = ["Bus Stop Time", "Bus Stop Address", "Bus Stop Latitude", "Bus Stop Longitude"];
-            var Values = [Bus_Stop_Time, Bus_Stop_Address, New_Bus_Stop_Latitude, New_Bus_Stop_Longitude];
-            if (Validate_Text_Fields(Names, Values) != false) {
-                var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
-                var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Get_ID();
-                var action = "Create_Bus_Stop_Detail";
-                var Ajax_Data = {
-                    Bus_Stop_Number_ID: Bus_Stop_Number_ID,
-                    Bus_Stop_Time: Bus_Stop_Time,
-                    Bus_Stop_Address: Bus_Stop_Address,
-                    Bus_Stop_Latitude: New_Bus_Stop_Latitude,
-                    Bus_Stop_Longitude: New_Bus_Stop_Longitude,
-                    action: action
-                };
-                Outgoing_Ajax(Ajax_Data);
-                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-                var Modal = '#Display_Create_Bus_Stop_Details_Form';
-                var Message = 'bus stop time and address creation failed, please try again';
-                Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
-            }
-        });
+    this.Set_List = function(action){
+        document.getElementById("Select_Bus_Stops_Details").style.visibility=action;
     };
-    this.Update_Listener = function(){
-        var Update_Button = document.getElementById("Update_Bus_Stop_Details");
-        Update_Button.addEventListener("click", function () {
-            var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
-            var New_Bus_Stop_Time = document.getElementById("Update_Bus_Stop_Time").value;
-            var New_Bus_Stop_Address = document.getElementById("Update_Bus_Stop_Address").value;
-            var action = "Geocode_PHP";
-            var Read_Geocode_Data = {Address: New_Bus_Stop_Address, action: action};
-            var Address_Coordinates = $.ajax({data: Read_Geocode_Data}).responseText;
-            Address_Coordinates = jQuery.parseJSON(Address_Coordinates);
-            console.log(Address_Coordinates);
-            var New_Bus_Stop_Latitude = Address_Coordinates.Latitude;
-            var New_Bus_Stop_Longitude = Address_Coordinates.Longitude;
-            var Names = ["Bus Stop Time", "Bus Stop Address", "Bus Stop Latitude", "Bus Stop Longitude"];
-            var Values = [New_Bus_Stop_Time, New_Bus_Stop_Address, New_Bus_Stop_Latitude, New_Bus_Stop_Longitude];
-            if (Validate_Text_Fields(Names, Values) != false) {
-                var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
-                var Bus_Stop_Detail_ID = Bus_Stop_Detail_Handler.Grab_Selected_Bus_Stop_Detail_ID();
-                var action = "Update_Bus_Stop_Detail";
-                var Ajax_Data = {
-                    Bus_Stop_Detail_ID: Bus_Stop_Detail_ID,
-                    New_Bus_Stop_Time: New_Bus_Stop_Time,
-                    New_Bus_Stop_Address: New_Bus_Stop_Address,
-                    New_Bus_Stop_Latitude: New_Bus_Stop_Latitude,
-                    New_Bus_Stop_Longitude: New_Bus_Stop_Longitude,
-                    action: action
-                };
-                Outgoing_Ajax(Ajax_Data);
-                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-                var Modal = '#Display_Update_Bus_Stop_Details_Form';
-                var Message = 'bus number update failed, please try again';
-                Bus_Stop_Detail_Handler.Validate_Response(Response_Data, Modal, Message);
-            }
-        });
-    };
-    this.Delete_Listener = function(){
-        var Delete_Button = document.getElementById("Delete_Bus_Stop_Detail");
-        Delete_Button.addEventListener("click", function () {
-            var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
-            var Bus_Stop_Detail_ID = Bus_Stop_Detail_Handler.Grab_Selected_Bus_Stop_Detail_ID();
-            var action = "Delete_Bus_Stop_Detail";
+
+    this.Add = function(){
+        var Bus_Stop_Time = document.getElementById("Create_Bus_Stop_Time").value;
+        var Bus_Stop_Address = document.getElementById("Create_Bus_Stop_Address").value;
+        var action = "Geocode_PHP";
+        var Read_Geocode_Data = {Address: Bus_Stop_Address, action: action};
+        var Address_Coordinates = $.ajax({data: Read_Geocode_Data}).responseText;
+        Address_Coordinates = jQuery.parseJSON(Address_Coordinates);
+        console.log(Address_Coordinates);
+        var New_Bus_Stop_Latitude = Address_Coordinates.Latitude;
+        var New_Bus_Stop_Longitude = Address_Coordinates.Longitude;
+        var Names = ["Bus Stop Time", "Bus Stop Address", "Bus Stop Latitude", "Bus Stop Longitude"];
+        var Values = [Bus_Stop_Time, Bus_Stop_Address, New_Bus_Stop_Latitude, New_Bus_Stop_Longitude];
+        if (Validate_Text_Fields(Names, Values) != false) {
+            var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
+            var Bus_Stop_Number_ID = Bus_Stop_Number_Handler.Get_ID();
+            var action = "Create_Bus_Stop_Detail";
             var Ajax_Data = {
-                Bus_Stop_Detail_ID: Bus_Stop_Detail_ID,
+                Bus_Stop_Number_ID: Bus_Stop_Number_ID,
+                Bus_Stop_Time: Bus_Stop_Time,
+                Bus_Stop_Address: Bus_Stop_Address,
+                Bus_Stop_Latitude: New_Bus_Stop_Latitude,
+                Bus_Stop_Longitude: New_Bus_Stop_Longitude,
                 action: action
             };
             Outgoing_Ajax(Ajax_Data);
             var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-            var Modal = '#Display_Delete_Bus_Stop_Details_Form';
-            var Message = 'delete failed';
-            var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
+            var Modal = '#Display_Create_Bus_Stop_Details_Form';
+            var Message = 'bus stop time and address creation failed, please try again';
             Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
-        });
+        }
+
+    };
+    this.Update = function(){
+        var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
+        var New_Bus_Stop_Time = document.getElementById("Update_Bus_Stop_Time").value;
+        var New_Bus_Stop_Address = document.getElementById("Update_Bus_Stop_Address").value;
+        var action = "Geocode_PHP";
+        var Read_Geocode_Data = {Address: New_Bus_Stop_Address, action: action};
+        var Address_Coordinates = $.ajax({data: Read_Geocode_Data}).responseText;
+        Address_Coordinates = jQuery.parseJSON(Address_Coordinates);
+        console.log(Address_Coordinates);
+        var New_Bus_Stop_Latitude = Address_Coordinates.Latitude;
+        var New_Bus_Stop_Longitude = Address_Coordinates.Longitude;
+        var Names = ["Bus Stop Time", "Bus Stop Address", "Bus Stop Latitude", "Bus Stop Longitude"];
+        var Values = [New_Bus_Stop_Time, New_Bus_Stop_Address, New_Bus_Stop_Latitude, New_Bus_Stop_Longitude];
+        if (Validate_Text_Fields(Names, Values) != false) {
+            var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
+            var Bus_Stop_Detail_ID = Bus_Stop_Detail_Handler.Grab_Selected_Bus_Stop_Detail_ID();
+            var action = "Update_Bus_Stop_Detail";
+            var Ajax_Data = {
+                Bus_Stop_Detail_ID: Bus_Stop_Detail_ID,
+                New_Bus_Stop_Time: New_Bus_Stop_Time,
+                New_Bus_Stop_Address: New_Bus_Stop_Address,
+                New_Bus_Stop_Latitude: New_Bus_Stop_Latitude,
+                New_Bus_Stop_Longitude: New_Bus_Stop_Longitude,
+                action: action
+            };
+            Outgoing_Ajax(Ajax_Data);
+            var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+            var Modal = '#Display_Update_Bus_Stop_Details_Form';
+            var Message = 'bus number update failed, please try again';
+            Bus_Stop_Detail_Handler.Validate_Response(Response_Data, Modal, Message);
+        }
+
+    };
+    this.Delete = function(){
+        var Bus_Stop_Detail_Handler = new Bus_Stop_Detail_Manager();
+        var Bus_Stop_Detail_ID = Bus_Stop_Detail_Handler.Grab_Selected_Bus_Stop_Detail_ID();
+        var action = "Delete_Bus_Stop_Detail";
+        var Ajax_Data = {
+            Bus_Stop_Detail_ID: Bus_Stop_Detail_ID,
+            action: action
+        };
+        Outgoing_Ajax(Ajax_Data);
+        var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+        var Modal = '#Display_Delete_Bus_Stop_Details_Form';
+        var Message = 'delete failed';
+        var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
+        Bus_Stop_Number_Handler.Validate_Response(Response_Data, Modal, Message);
+
     };
     this.Validate_Response = function(Response_Data, Modal, Message){
         var Bus_Stop_Number_Handler = new Manage_Bus_Stops();
@@ -1209,15 +1200,46 @@ function Logout() {
     window.location.href = "user.html";
     localStorage.removeItem("email");
 }
-//Above code needs to be refactored
+// ------------------------------------------Ali coded items ABOVE --------------------------------//
+// ------------------------------------------Marlon coded items BELOW --------------------------------//
 
 
-
-function Process_User_Address(User_Address){
+function Process_User_Address(Raw_User_Address){
+    var Attention_Field_Color = "#FF0000";
+    var Valid_Field_Color = "#FFFFFF";
+    var User_Address_Field = new Change_Element("User_Address");
+    var School_Drop_Down = new Change_Element("Select_Schools");
     var School_ID = Get_School_ID();
-    var Validated_User_Address = Validate_User_Address_and_School_ID(User_Address, School_ID);
-    if(Validated_User_Address != false)
-        Find_Closest_Bus_Stop(Validated_User_Address, School_ID);
+    var User_Address = new Address_Object();
+
+    if(isUserAddressValid(Raw_User_Address) == true){
+        User_Address_Field.SetColor(Valid_Field_Color);
+        User_Address.Set_Location(Raw_User_Address);
+        User_Address.Get_LatLong();
+        User_Address.Set_Lat_Long_Location();
+    }
+    else {
+        alert("Please Enter a valid address!");
+        User_Address_Field.SetColor(Attention_Field_Color);
+        User_Address_Field.Select();
+    }
+
+    var isUser_Address_School_ID_Valid = Validate_User_Address_and_School_ID(User_Address, School_ID);
+
+    if (isSchoolIDValid(School_ID) == false){
+        alert("Please Select your School");
+        School_Drop_Down.SetColor(Attention_Field_Color);
+        School_Drop_Down.Select();
+    }
+    if (isSchoolIDValid(School_ID) == true){
+        School_Drop_Down.SetColor(Valid_Field_Color);
+    }
+
+    if(isUser_Address_School_ID_Valid == true){
+        User_Address_Field.SetColor(Valid_Field_Color);
+        School_Drop_Down.SetColor(Valid_Field_Color);
+        Find_Closest_Bus_Stop(User_Address, School_ID);
+    }
 }
 
 function Process_User_Location(){
@@ -1245,34 +1267,8 @@ function Process_User_Location(){
 }
 
 function Validate_User_Address_and_School_ID(User_Address, School_ID){ //UT
-    var Attention_Field_Color = "#FF0000";
-    var Valid_Field_Color = "#FFFFFF";
-    var User_Address_Field = new Change_Element("User_Address");
-    var School_Drop_Down = new Change_Element("Select_Schools");
-    if (isUserAddressValid(User_Address) == false){
-        alert("Please Enter a valid address!");
-        User_Address_Field.SetColor(Attention_Field_Color);
-        User_Address_Field.Select();
-    }
-    if (isUserAddressValid(User_Address) == true){
-        User_Address_Field.SetColor(Valid_Field_Color);
-    }
-    if (isSchoolIDValid(School_ID) == false){
-        alert("Please Select your School");
-        School_Drop_Down.SetColor(Attention_Field_Color);
-        School_Drop_Down.Select();
-    }
-    if (isSchoolIDValid(School_ID) == true){
-        School_Drop_Down.SetColor(Valid_Field_Color);
-    }
-    if(isUserAddressValid(User_Address) == true && isSchoolIDValid(School_ID) == true && User_Address_Field.Element != null){
-        var Validated_User_Address = Format_User_Address(User_Address);
-        User_Address_Field.SetColor(Valid_Field_Color);
-        School_Drop_Down.SetColor(Valid_Field_Color);
-        return Validated_User_Address;
-    }
-    if(isUserAddressValid(User_Address) == true && isSchoolIDValid(School_ID) == true && User_Address_Field.Element == null){
-        return "Element is null only during Jasmine Testing";
+    if(isUserAddressLatLongValid(User_Address) == true && isSchoolIDValid(School_ID) == true){
+        return true;
     }
     else
         return false;
@@ -1291,6 +1287,16 @@ function isUserAddressValid(User_Address){ //UT
         var regex = /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/;
         var valid_flag = regex.test(User_Address);
         return valid_flag;
+    }
+    else{
+        return false;
+    }
+}
+
+function isUserAddressLatLongValid(User_Address){
+    if((typeof User_Address.Latitude != 'undefined' && typeof User_Address.Longitude != 'undefined' )){
+        return true;
+
     }
     else{
         return false;
@@ -1319,7 +1325,6 @@ function Address_Object (){ //UT
         }
         else {
             console.log("Cannot create Address location due to invalid input");
-            alert("Cannot create Address location due to invalid input");
         }
     };
     this.Get_LatLong = function () {
@@ -1333,9 +1338,9 @@ function Address_Object (){ //UT
     };
     this.Set_Lat_Long_Location = function(){
         if (typeof this.Latitude != 'number')
-            alert("Error: Latitude is invalid, it is of type " + typeof this.Latitude);
+            console.log("Error: Latitude is invalid, it is of type " + typeof this.Latitude);
         if (typeof this.Longitude != 'number')
-            alert("Error: Longitude is invalid, it is of type " + typeof this.Longitude);
+            console.log("Error: Longitude is invalid, it is of type " + typeof this.Longitude);
         if ( typeof this.Latitude == 'number' && typeof this.Longitude == 'number'){
             this.Lat_Long_Location = this.Latitude + "," + this.Longitude;
             return true;
@@ -1348,7 +1353,7 @@ function Address_Object (){ //UT
     this.Set_Longitude = function (Longitude){this.Longitude = Longitude};
 }
 
-function Format_User_Address(User_Address){//UT
+function Format_User_Address(User_Address){
     var Validated_User_Address = new Address_Object();
     if (Validated_User_Address.Lat_Long_Location == null ){
         Validated_User_Address.Set_Location(User_Address);
@@ -1360,25 +1365,27 @@ function Format_User_Address(User_Address){//UT
         return User_Address;
 }
 
-
 function Get_School_ID() {
     var School_Drop_Down = document.getElementById("Select_Schools");
     var School_ID = School_Drop_Down.options[School_Drop_Down.selectedIndex].value;
     return School_ID;
 }
 
-
 function Find_Closest_Bus_Stop(User_Address, School_ID){
-    alert("Will Call DB for School_ID " +School_ID);
-    var Bus_Stops = Get_Bus_Stops();
+    var Bus_Stops = Create_Bus_Stops_Array(School_ID);
     var Walking_Distance = new Walking_Distance_To_Stops();
     var New_Shortest_Bus_Stop = new Shortest_Bus_Stop();
-    Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
-    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
-    Bus_Stops =  Walking_Distance.Calculate(User_Address, Bus_Stops);
-    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
-    New_Shortest_Bus_Stop.Map(User_Address, Bus_Stops[0]);
-    Show_Button_Map_5_Closest_Stops(User_Address, Bus_Stops);
+    if (Bus_Stops.length > 0){
+        Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
+        Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
+        Bus_Stops =  Walking_Distance.Calculate(User_Address, Bus_Stops);
+        Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
+        New_Shortest_Bus_Stop.Map(User_Address, Bus_Stops[0]);
+        Show_Button_Map_5_Closest_Stops(User_Address, Bus_Stops);
+    }
+    else
+        alert("Error: no Bus Stops could be processed or there are no Bus Stops for your School in the System")
+
 }
 
 function Show_Button_Map_5_Closest_Stops(User_Address, Bus_Stops){
@@ -1388,7 +1395,7 @@ function Show_Button_Map_5_Closest_Stops(User_Address, Bus_Stops){
     Map_Closest_5_Stops_Btn.addEventListener("click", function () {New_Bus_Stops_Group.Map(User_Address, Bus_Stops)});
 }
 
-function Bus_Stop_Object (){ //UT
+function Bus_Stop_Object (){
     this.Stop_Time;
     this.Stop_Address;
     this.Distance_to_Stop;
@@ -1403,14 +1410,12 @@ function Bus_Stop_Object (){ //UT
         }
         else {
             console.log("Cannot create Bus Stop Object because it is missing data");
-            alert("Cannot create Bus Stop Object because it is missing data");
         }
     };
-    this.Get_Coor = function() {alert("Hi")};
     this.Set_Stop_ID = function (Stop_ID) { this.Stop_ID = Stop_ID};
     this.Set_Stop_Time = function (Stop_Time) {this.Stop_Time = Stop_Time};
     this.Set_Stop_Address = function (Stop_Address) {this.Stop_Address = Stop_Address};
-    this.Set_Distance_to_User = function (Distance_to_User) {this.Distance_to_User = Distance_to_User};
+    this.Set_Distance_to_Stop = function (Distance_to_User) {this.Distance_to_Stop = Distance_to_User};
     this.Set_Latitude = function (Latitude) {this.Latitude = Latitude};
     this.Set_Longitude = function (Longitude){this.Longitude = Longitude};
     this.Set_Bus_Stop_Number = function (Bus_Stop_Number){this.Bus_Stop_Number = Bus_Stop_Number};
@@ -1432,54 +1437,54 @@ function Bus_Stop_Object (){ //UT
     };
 }
 
-function isBusStopValid(Bus_Stop_Object){//UT
-    if(typeof Bus_Stop_Object != 'undefined' && Bus_Stop_Object.Stop_Time != null && Bus_Stop_Object.Stop_Address != null){
-        return true;
+function Create_Bus_Stops_Array(School_ID){
+    var Bus = new View_All_Buses_Manager();
+    var Bus_Stops_JSON = Bus.Get_Drop_Down_Data(School_ID);    var Bus_Stops = [];
+    for (var Bus_Stop = 0; Bus_Stop < Bus_Stops_JSON.length ; Bus_Stop++) {
+        var New_Bus_Stop = new Bus_Stop_Object();
+        New_Bus_Stop.Set_Stop_ID(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER_ID);
+        New_Bus_Stop.Set_Bus_Stop_Number(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER);
+        New_Bus_Stop.Set_Stop_Time(Bus_Stops_JSON[Bus_Stop].BUS_STOP_TIME);
+        New_Bus_Stop.Set_Stop_Address(Bus_Stops_JSON[Bus_Stop].BUS_STOP_ADDRESS);
+        New_Bus_Stop.Set_Latitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LATITUDE);
+        New_Bus_Stop.Set_Longitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LONGITUDE);
+        if (isBusStopValid(New_Bus_Stop) == true){
+            console.log("Bus Stop "+ New_Bus_Stop.Stop_Address + " has " + New_Bus_Stop.Latitude + " and "+ New_Bus_Stop.Longitude);
+            Bus_Stops.push(New_Bus_Stop);
+        }
+        else
+            console.log("Bus Stop "+ Bus_Stops_JSON[Bus_Stop].BUS_STOP_ADDRESS + " has in valid info")
     }
-    else {
-        console.log("Bus Stop Object is invalid");
-        return false;
-    }
-}
-
-function Create_Bus_Stops_Array(JSON_Array){
-
-
-}
-
-function Get_Bus_Stops_for_School(School_ID){ //REPLACE
-    //Bus_Stops = QueryDBfor(School_ID)
-    var Bus_Stop_Objects = [];
-    Bus_Stops = Get_Bus_Stops();
     console.log(Bus_Stops);
     return Bus_Stops;
 }
 
 
-function Get_Bus_Stops(){ //REPLACE
-    var Bus_Stops =[];
-    Bus_Stops[0]= {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: 1, Latitude: 41.1215386, Longitude: -73.4238011};
-    Bus_Stops[1]= {Stop_Time:null, Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: 1.5, Latitude: 41.1257694, Longitude: -73.4373563};
-    Bus_Stops[2]= {Stop_Time:null, Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: 2.5, Latitude: 41.1258702, Longitude: -73.44233};
-    Bus_Stops[3]= {Stop_Time:null, Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: 0.5, Latitude: 41.1305955, Longitude: -73.449364};
-    Bus_Stops[4]= {Stop_Time:null, Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: 2.5, Latitude: 41.1277236, Longitude: -73.4464775};
-    Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: 0.65, Latitude: 41.126766, Longitude: -73.4504417};
-    Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: 6, Latitude: 41.1249925, Longitude: -73.4469242};
-    Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: 1.2, Latitude: 41.120276, Longitude: -73.438289};
-    return Bus_Stops;
+function isBusStopValid(Bus_Stop_Object){
+    if(typeof Bus_Stop_Object != 'undefined' &&
+        Bus_Stop_Object.Stop_Time != null &&
+        Bus_Stop_Object.Stop_Address != null &&
+        typeof Bus_Stop_Object.Latitude != 'undefined' &&
+        typeof Bus_Stop_Object.Longitude != 'undefined'){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 function Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops) {
     for (var Bus_Stop = 0; Bus_Stop < Bus_Stops.length; Bus_Stop++) {
         var Distance = Get_Distance_Haversine(User_Address, Bus_Stops[Bus_Stop]);
         console.log("Distance to Bus Stop " + Bus_Stops[Bus_Stop].Stop_Address + " is " + Distance);
-        Bus_Stops[Bus_Stop].Distance_to_Stop = Distance;
+        Bus_Stops[Bus_Stop].Set_Distance_to_Stop(Distance);
     }
     return Bus_Stops;
 }
 
-function Get_Distance_Haversine(User_Address, Bus_Stop) { //UT
+function Get_Distance_Haversine(User_Address, Bus_Stop) {
     var EarthRadius = 3959;
+    console.log("Bus Latitude: "+  Bus_Stop.Latitude + "   User Latitude: " + User_Address.Latitude);
     var Delta_Lat_Rads = Degrees_to_Radians(Bus_Stop.Latitude-User_Address.Latitude);
     var Delta_Lon_Rads = Degrees_to_Radians(Bus_Stop.Longitude-User_Address.Longitude);
     var a =
@@ -1492,14 +1497,22 @@ function Get_Distance_Haversine(User_Address, Bus_Stop) { //UT
     return Haversine_Distance;
 }
 
-function Degrees_to_Radians(deg) { //UT
+function Degrees_to_Radians(deg) {
     return deg * (Math.PI/180)
 }
 
+function Number_Stops_to_Use(Bus_Stops){
+    var Desired_Max_Number_of_Stops = 5;
+    var Max_Number_of_Stops = Bus_Stops.length;
+    if (Max_Number_of_Stops < Desired_Max_Number_of_Stops)
+        return  Max_Number_of_Stops;
+    else
+        return Desired_Max_Number_of_Stops;
+}
 
-function Walking_Distance_To_Stops() { //UT
+function Walking_Distance_To_Stops() {
     this.Calculate = function (User_Address, Bus_Stops) {
-        var Number_of_Stops = 5;
+        var Number_of_Stops = Number_Stops_to_Use(Bus_Stops);
         for (var Bus_Stop = 0; Bus_Stop < Number_of_Stops; Bus_Stop++) {
             var action = "Cal_Distance_PHP";
             var Read_Bus_Stops_Data = {User_Address: User_Address.Lat_Long_Location, Bus_Stop_Address: Bus_Stops[Bus_Stop].Stop_Address, action: action};
@@ -1508,11 +1521,11 @@ function Walking_Distance_To_Stops() { //UT
             Distance = Raw_Distance.split();
             var Distance_to_User = Distance[0];
             if(Distance[1] == 'mi')
-                Bus_Stops[Bus_Stop].Distance_to_Stop = Distance_to_User;
+                Bus_Stops[Bus_Stop].Set_Distance_to_Stop(Distance_to_User);
             if(Distance[1] == 'ft'){
                 var feet_in_a_mile = 5280;
                 var miles = Distance_to_User * (1/feet_in_a_mile);
-                Bus_Stops[Bus_Stop].Distance_to_Stop = miles;
+                Bus_Stops[Bus_Stop].Set_Distance_to_Stop(miles);
             }
             console.log("Distance to Bus Stop " + Bus_Stops[Bus_Stop].Stop_Address + " is " + Distance);
         }
@@ -1520,7 +1533,7 @@ function Walking_Distance_To_Stops() { //UT
     };
 }
 
-function Sort_Distance_To_Stops(Bus_Stops){ //UT
+function Sort_Distance_To_Stops(Bus_Stops){
     var swapped;
     var n = Bus_Stops.length-1;
     do {
@@ -1538,21 +1551,27 @@ function Sort_Distance_To_Stops(Bus_Stops){ //UT
     return Bus_Stops;
 }
 
-function Bus_Stops_Group() { //UT
+function Bus_Stops_Group() {
     this.Map = function (User_Address, Bus_Stops){
-        var Max_Number_of_Stops = 5;
+        var Max_Number_of_Stops = Number_Stops_to_Use(Bus_Stops);
         var map = new google.maps.Map(document.getElementById('map-canvas'));
         var bounds = new google.maps.LatLngBounds();
         var New_Marker = new Marker();
         var latlng = new google.maps.LatLng(User_Address.Latitude, User_Address.Longitude);
         var icon = "http://maps.google.com/mapfiles/kml/pal2/icon2.png";
-        New_Marker.Add(User_Address, icon, map);
+        var title = "Your Home";
+        New_Marker.Add(User_Address, icon, map, title);
         bounds.extend(latlng);
         map.fitBounds(bounds);
         for (var Bus_Stop = 0; Bus_Stop < Max_Number_of_Stops ; Bus_Stop++) {
             var icon_number = Bus_Stop+1;
             icon = "http://maps.google.com/mapfiles/kml/paddle/" + icon_number + ".png";
-            New_Marker.Add(Bus_Stops[Bus_Stop], icon, map);
+            var title = 'Bus Number: ' + Bus_Stops[Bus_Stop].Bus_Stop_Number + '<br />' +
+                'Bus Stop Address: ' + Bus_Stops[Bus_Stop].Stop_Address + '<br />' +
+                'Bus Stop Time: ' + Bus_Stops[Bus_Stop].Stop_Time + '<br />' +
+                'Distance to your Address/Location: ' + Bus_Stops[Bus_Stop].Distance_to_Stop.toFixed(2) + ' mi';
+
+                New_Marker.Add(Bus_Stops[Bus_Stop], icon, map, title);
             latlng = new google.maps.LatLng(Bus_Stops[Bus_Stop].Latitude, Bus_Stops[Bus_Stop].Longitude);
             bounds.extend(latlng);
             map.fitBounds(bounds);
@@ -1560,9 +1579,8 @@ function Bus_Stops_Group() { //UT
     }
 }
 
-function Marker(){ //UT
-    this.Add = function (Address, icon,  map){
-        var title = Address.Stop_Address;
+function Marker(){
+    this.Add = function (Address, icon,  map, title){
         var infowindow = new google.maps.InfoWindow();
         var latlng = new google.maps.LatLng(Address.Latitude, Address.Longitude);
         var marker = new google.maps.Marker({
@@ -1578,9 +1596,10 @@ function Marker(){ //UT
     };
 }
 
-function Shortest_Bus_Stop(){ //UT
+function Shortest_Bus_Stop(){
     this.Map = function (User_Address, Bus_Stop){
-        alert("The Closest Bus_Stop is " + Bus_Stop.Stop_Address + " which is " + Bus_Stop.Distance_to_Stop +" miles away");
+        alert("The Closest Bus_Stop is " + Bus_Stop.Stop_Address + " which is " + Bus_Stop.Distance_to_Stop.toFixed(2) +" miles away");
+        console.log(Bus_Stop);
         var latitude= 41.117744;
         var longitude = -73.4081575;
         var directionsDisplay;
@@ -1612,407 +1631,9 @@ function Shortest_Bus_Stop(){ //UT
             }
         });
     }
-
 }
 
-function isTimeValid(Time){//UT
-    var regex = /^([0]\d|[1][0-2]):([0-5]\d)\s?(?:AM|PM)$/i;
-    var valid_flag = regex.test(Time);
-    return valid_flag;
-}
-function Process_User_Address(User_Address){
-    var School_ID = Get_School_ID();
-    var Validated_User_Address = Validate_User_Address_and_School_ID(User_Address, School_ID);
-    if(Validated_User_Address != false)
-        Find_Closest_Bus_Stop(Validated_User_Address, School_ID);
-}
-
-function Process_User_Location(){
-    if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var User_Address = new Address_Object();
-            var Latitude = position.coords.latitude;
-            var Longitude = position.coords.longitude;
-            User_Address.Set_Latitude(Latitude);
-            User_Address.Set_Longitude(Longitude);
-            User_Address.Set_Lat_Long_Location();
-            var School_ID = Get_School_ID();
-            if(isSchoolIDValid(School_ID) == true)
-                Find_Closest_Bus_Stop(User_Address, School_ID);
-        }, function() {
-            alert('Error: The Geolocation service failed. Please enter an address to find the closest Bus Stop');
-            document.getElementById("User_Address").focus();
-            document.getElementById("User_Address").style.backgroundColor="#FFFF85";
-        });
-    } else {
-        alert('Error: Your browser doesn\'t support geolocation. Please enter an address to find the closest Bus Stop');
-        document.getElementById("User_Address").focus();
-        document.getElementById("User_Address").style.backgroundColor="#FFFF85";
-    }
-}
-
-function Validate_User_Address_and_School_ID(User_Address, School_ID){ //UT
-    var Attention_Field_Color = "#FF0000";
-    var Valid_Field_Color = "#FFFFFF";
-    var User_Address_Field = new Change_Element("User_Address");
-    var School_Drop_Down = new Change_Element("Select_Schools");
-    if (isUserAddressValid(User_Address) == false){
-        alert("Please Enter a valid address!");
-        User_Address_Field.SetColor(Attention_Field_Color);
-        User_Address_Field.Select();
-    }
-    if (isUserAddressValid(User_Address) == true){
-        User_Address_Field.SetColor(Valid_Field_Color);
-    }
-    if (isSchoolIDValid(School_ID) == false){
-        alert("Please Select your School");
-        School_Drop_Down.SetColor(Attention_Field_Color);
-        School_Drop_Down.Select();
-    }
-    if (isSchoolIDValid(School_ID) == true){
-        School_Drop_Down.SetColor(Valid_Field_Color);
-    }
-    if(isUserAddressValid(User_Address) == true && isSchoolIDValid(School_ID) == true && User_Address_Field.Element != null){
-        var Validated_User_Address = Format_User_Address(User_Address);
-        User_Address_Field.SetColor(Valid_Field_Color);
-        School_Drop_Down.SetColor(Valid_Field_Color);
-        return Validated_User_Address;
-    }
-    if(isUserAddressValid(User_Address) == true && isSchoolIDValid(School_ID) == true && User_Address_Field.Element == null){
-        return "Element is null only during Jasmine Testing";
-    }
-    else
-        return false;
-}
-
-function isSchoolIDValid(School_ID){ //UT
-    if (School_ID == "")
-        return false;
-    else
-        return true;
-}
-
-function isUserAddressValid(User_Address){ //UT
-    var elements = 10;
-    if((User_Address.length >= elements)&& typeof User_Address == 'string' ){
-        var regex = /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/;
-        var valid_flag = regex.test(User_Address);
-        return valid_flag;
-    }
-    else{
-        return false;
-    }
-}
-
-function Change_Element(Element_ID){ //UT
-    this.Element = document.getElementById(Element_ID);
-    this.SetColor = function(Color){
-        if(this.Element != null)
-            this.Element.style.backgroundColor = Color;
-    };
-    this.Select = function() {
-        if(this.Element != null)
-            this.Element.focus();}
-}
-
-function Address_Object (){ //UT
-    this.Latitude;
-    this.Longitude;
-    this.Location;
-    this.Lat_Long_Location;
-    this.Set_Location = function(User_Address) {
-        if(typeof User_Address != 'undefined' && User_Address != ""){
-            this.Location = User_Address;
-        }
-        else {
-            console.log("Cannot create Address location due to invalid input");
-            alert("Cannot create Address location due to invalid input");
-        }
-    };
-    this.Get_LatLong = function () {
-        var action = "Geocode_PHP";
-        var Read_Geocode_Data = {Address: this.Location, action: action};
-        var Address_Coordinates = $.ajax({data: Read_Geocode_Data}).responseText;
-        Address_Coordinates = jQuery.parseJSON(Address_Coordinates);
-        console.log(Address_Coordinates);
-        this.Latitude = Address_Coordinates.Latitude;
-        this.Longitude = Address_Coordinates.Longitude;
-    };
-    this.Set_Lat_Long_Location = function(){
-        if (typeof this.Latitude != 'number')
-            alert("Error: Latitude is invalid, it is of type " + typeof this.Latitude);
-        if (typeof this.Longitude != 'number')
-            alert("Error: Longitude is invalid, it is of type " + typeof this.Longitude);
-        if ( typeof this.Latitude == 'number' && typeof this.Longitude == 'number'){
-            this.Lat_Long_Location = this.Latitude + "," + this.Longitude;
-            return true;
-        }
-        else{
-            return false;
-        }
-    };
-    this.Set_Latitude = function (Latitude) {this.Latitude = Latitude};
-    this.Set_Longitude = function (Longitude){this.Longitude = Longitude};
-}
-
-function Format_User_Address(User_Address){//UT
-    var Validated_User_Address = new Address_Object();
-    if (Validated_User_Address.Lat_Long_Location == null ){
-        Validated_User_Address.Set_Location(User_Address);
-        Validated_User_Address.Get_LatLong();
-        Validated_User_Address.Set_Lat_Long_Location();
-        return Validated_User_Address;
-    }
-    else
-        return User_Address;
-}
-
-
-function Get_School_ID() {
-    var School_Drop_Down = document.getElementById("Select_Schools");
-    var School_ID = School_Drop_Down.options[School_Drop_Down.selectedIndex].value;
-    return School_ID;
-}
-
-
-function Find_Closest_Bus_Stop(User_Address, School_ID){
-    alert("Will Call DB for School_ID " +School_ID);
-    var Bus_Stops = Get_Bus_Stops();
-    var Walking_Distance = new Walking_Distance_To_Stops();
-    var New_Shortest_Bus_Stop = new Shortest_Bus_Stop();
-    Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
-    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
-    Bus_Stops =  Walking_Distance.Calculate(User_Address, Bus_Stops);
-    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
-    New_Shortest_Bus_Stop.Map(User_Address, Bus_Stops[0]);
-    Show_Button_Map_5_Closest_Stops(User_Address, Bus_Stops);
-}
-
-function Show_Button_Map_5_Closest_Stops(User_Address, Bus_Stops){
-    var Map_Closest_5_Stops_Btn = document.getElementById("Map_Closest_5_Stops");
-    var New_Bus_Stops_Group = new Bus_Stops_Group();
-    Map_Closest_5_Stops_Btn.style.visibility="visible";
-    Map_Closest_5_Stops_Btn.addEventListener("click", function () {New_Bus_Stops_Group.Map(User_Address, Bus_Stops)});
-}
-
-function Bus_Stop_Object (){ //UT
-    this.Stop_Time;
-    this.Stop_Address;
-    this.Distance_to_Stop;
-    this.Latitude;
-    this.Longitude;
-    this.Bus_Stop_Number;
-    this.Stop_ID;
-    this.New = function(Stop_Time, Stop_Address) {
-        if(typeof Stop_Time != 'undefined' && typeof Stop_Address != 'undefined'){
-            this.Stop_Time = Stop_Time;
-            this.Stop_Address = Stop_Address;
-        }
-        else {
-            console.log("Cannot create Bus Stop Object because it is missing data");
-            alert("Cannot create Bus Stop Object because it is missing data");
-        }
-    };
-    this.Set_Stop_ID = function (Stop_ID) { this.Stop_ID = Stop_ID};
-    this.Set_Stop_Time = function (Stop_Time) {this.Stop_Time = Stop_Time};
-    this.Set_Stop_Address = function (Stop_Address) {this.Stop_Address = Stop_Address};
-    this.Set_Distance_to_User = function (Distance_to_User) {this.Distance_to_User = Distance_to_User};
-    this.Set_Latitude = function (Latitude) {this.Latitude = Latitude};
-    this.Set_Longitude = function (Longitude){this.Longitude = Longitude};
-    this.Set_Bus_Stop_Number = function (Bus_Stop_Number){this.Bus_Stop_Number = Bus_Stop_Number};
-    this.Get_Stop_ID = function () {return this.Stop_ID};
-    this.Get_Stop_Time = function() {return this.Stop_Time};
-    this.Get_Stop_Address = function () {return this.Stop_Address};
-    this.Get_Distance_to_User = function() {return this.Distance_to_User};
-    this.Get_Latitude = function () {return this.Latitude};
-    this.Get_Longitude = function (){return this.Longitude};
-    this.Get_Bus_Stop_Number = function (){return this.Bus_Stop_Number};
-}
-
-function isBusStopValid(Bus_Stop_Object){//UT
-    if(typeof Bus_Stop_Object != 'undefined' && Bus_Stop_Object.Stop_Time != null && Bus_Stop_Object.Stop_Address != null){
-        return true;
-    }
-    else {
-        console.log("Bus Stop Object is invalid");
-        return false;
-    }
-}
-
-function Create_Bus_Stops_Array(JSON_Array){
-
-
-}
-
-function Get_Bus_Stops_for_School(School_ID){ //REPLACE
-    //Bus_Stops = QueryDBfor(School_ID)
-    var Bus_Stop_Objects = [];
-    Bus_Stops = Get_Bus_Stops();
-    console.log(Bus_Stops);
-    return Bus_Stops;
-}
-
-
-function Get_Bus_Stops(){ //REPLACE
-    var Bus_Stops =[];
-    Bus_Stops[0]= {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: 1, Latitude: 41.1215386, Longitude: -73.4238011};
-    Bus_Stops[1]= {Stop_Time:null, Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: 1.5, Latitude: 41.1257694, Longitude: -73.4373563};
-    Bus_Stops[2]= {Stop_Time:null, Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: 2.5, Latitude: 41.1258702, Longitude: -73.44233};
-    Bus_Stops[3]= {Stop_Time:null, Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: 0.5, Latitude: 41.1305955, Longitude: -73.449364};
-    Bus_Stops[4]= {Stop_Time:null, Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: 2.5, Latitude: 41.1277236, Longitude: -73.4464775};
-    Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: 0.65, Latitude: 41.126766, Longitude: -73.4504417};
-    Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: 6, Latitude: 41.1249925, Longitude: -73.4469242};
-    Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: 1.2, Latitude: 41.120276, Longitude: -73.438289};
-    return Bus_Stops;
-}
-
-function Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops) {
-    for (var Bus_Stop = 0; Bus_Stop < Bus_Stops.length; Bus_Stop++) {
-        var Distance = Get_Distance_Haversine(User_Address, Bus_Stops[Bus_Stop]);
-        console.log("Distance to Bus Stop " + Bus_Stops[Bus_Stop].Stop_Address + " is " + Distance);
-        Bus_Stops[Bus_Stop].Distance_to_Stop = Distance;
-    }
-    return Bus_Stops;
-}
-
-function Get_Distance_Haversine(User_Address, Bus_Stop) { //UT
-    var EarthRadius = 3959;
-    var Delta_Lat_Rads = Degrees_to_Radians(Bus_Stop.Latitude-User_Address.Latitude);
-    var Delta_Lon_Rads = Degrees_to_Radians(Bus_Stop.Longitude-User_Address.Longitude);
-    var a =
-        Math.sin(Delta_Lat_Rads/2) * Math.sin(Delta_Lat_Rads/2) +
-        Math.cos(Degrees_to_Radians(User_Address.Latitude)) *
-        Math.cos(Degrees_to_Radians(Bus_Stop.Latitude)) *
-        Math.sin(Delta_Lon_Rads/2) * Math.sin(Delta_Lon_Rads/2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    var Haversine_Distance = EarthRadius * c;
-    return Haversine_Distance;
-}
-
-function Degrees_to_Radians(deg) { //UT
-    return deg * (Math.PI/180)
-}
-
-
-function Walking_Distance_To_Stops() { //UT
-    this.Calculate = function (User_Address, Bus_Stops) {
-        var Number_of_Stops = 5;
-        for (var Bus_Stop = 0; Bus_Stop < Number_of_Stops; Bus_Stop++) {
-            var action = "Cal_Distance_PHP";
-            var Read_Bus_Stops_Data = {User_Address: User_Address.Lat_Long_Location, Bus_Stop_Address: Bus_Stops[Bus_Stop].Stop_Address, action: action};
-            var Raw_Distance = $.ajax({data: Read_Bus_Stops_Data}).responseText;
-            var Distance =[];
-            Distance = Raw_Distance.split();
-            var Distance_to_User = Distance[0];
-            if(Distance[1] == 'mi')
-                Bus_Stops[Bus_Stop].Distance_to_Stop = Distance_to_User;
-            if(Distance[1] == 'ft'){
-                var feet_in_a_mile = 5280;
-                var miles = Distance_to_User * (1/feet_in_a_mile);
-                Bus_Stops[Bus_Stop].Distance_to_Stop = miles;
-            }
-            console.log("Distance to Bus Stop " + Bus_Stops[Bus_Stop].Stop_Address + " is " + Distance);
-        }
-        return Bus_Stops;
-    };
-}
-
-function Sort_Distance_To_Stops(Bus_Stops){ //UT
-    var swapped;
-    var n = Bus_Stops.length-1;
-    do {
-        swapped = false;
-        for (var Stop=0; Stop < n; Stop++) {
-            if (Bus_Stops[Stop].Distance_to_Stop > Bus_Stops[Stop+1].Distance_to_Stop) {
-                var temp = Bus_Stops[Stop];
-                Bus_Stops[Stop] = Bus_Stops[Stop+1];
-                Bus_Stops[Stop+1] = temp;
-                swapped = true;
-            }
-        }
-        n--;
-    } while (swapped);
-    return Bus_Stops;
-}
-
-function Bus_Stops_Group() { //UT
-    this.Map = function (User_Address, Bus_Stops){
-        var Max_Number_of_Stops = 5;
-        var map = new google.maps.Map(document.getElementById('map-canvas'));
-        var bounds = new google.maps.LatLngBounds();
-        var New_Marker = new Marker();
-        var latlng = new google.maps.LatLng(User_Address.Latitude, User_Address.Longitude);
-        var icon = "http://maps.google.com/mapfiles/kml/pal2/icon2.png";
-        New_Marker.Add(User_Address, icon, map);
-        bounds.extend(latlng);
-        map.fitBounds(bounds);
-        for (var Bus_Stop = 0; Bus_Stop < Max_Number_of_Stops ; Bus_Stop++) {
-            var icon_number = Bus_Stop+1;
-            icon = "http://maps.google.com/mapfiles/kml/paddle/" + icon_number + ".png";
-            New_Marker.Add(Bus_Stops[Bus_Stop], icon, map);
-            latlng = new google.maps.LatLng(Bus_Stops[Bus_Stop].Latitude, Bus_Stops[Bus_Stop].Longitude);
-            bounds.extend(latlng);
-            map.fitBounds(bounds);
-        }
-    }
-}
-
-function Marker(){ //UT
-    this.Add = function (Address, icon,  map){
-        var title = Address.Stop_Address;
-        var infowindow = new google.maps.InfoWindow();
-        var latlng = new google.maps.LatLng(Address.Latitude, Address.Longitude);
-        var marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-            title: title,
-            icon: new google.maps.MarkerImage(icon)
-        });
-        google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent(this.title);
-            infowindow.open(map, this);
-        });
-    };
-}
-
-function Shortest_Bus_Stop(){ //UT
-    this.Map = function (User_Address, Bus_Stop){
-        alert("The Closest Bus_Stop is " + Bus_Stop.Stop_Address + " which is " + Bus_Stop.Distance_to_Stop +" miles away");
-        var latitude= 41.117744;
-        var longitude = -73.4081575;
-        var directionsDisplay;
-        var directionsService = new google.maps.DirectionsService();
-        var map;
-        directionsDisplay = new google.maps.DirectionsRenderer();
-        var New_Map = new google.maps.LatLng(latitude, longitude);
-        var element = document.getElementById("map-canvas");
-        var mapOptions = {
-            center: New_Map,
-            draggable: false,
-            zoomControl: false,
-            scrollwheel: false,
-            disableDoubleClickZoom: true
-        };
-        var request = {
-            origin: User_Address.Lat_Long_Location,
-            destination: Bus_Stop.Stop_Address,
-            travelMode: google.maps.TravelMode.WALKING
-        };
-        directionsService.route(request, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                map = new google.maps.Map(element, mapOptions);
-                directionsDisplay.setMap(map);
-                directionsDisplay.setDirections(response);
-            }
-            else{
-                alert("Something went wrong, could not map the address")
-            }
-        });
-    }
-
-}
-
-function isTimeValid(Time) {//UT
+function isTimeValid(Time) {
     var regex = /^([0]\d|[1][0-2]):([0-5]\d)\s?(?:AM|PM)$/i;
     var valid_flag = regex.test(Time);
     return valid_flag;

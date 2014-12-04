@@ -32,48 +32,28 @@
     <favorites_list name="Find My Route" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/LOCAL Final/src/main.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.8011696" vertical-offset="25393" max-vertical-offset="26248">
-                  <caret line="1548" column="28" selection-start-line="1548" selection-start-column="28" selection-end-line="1548" selection-end-column="28" />
-                  <folding>
-                    <element signature="e#24133#24673#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="main_spec.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/LOCAL Final/spec/main_spec.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="7225">
-                  <caret line="7" column="65" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="main_spec.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/LOCAL Final/spec/main_spec.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.39298245" vertical-offset="837" max-vertical-offset="7225">
-                  <caret line="69" column="60" selection-start-line="69" selection-start-column="60" selection-end-line="69" selection-end-column="60" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/LOCAL Final Refined/src/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.35253456" vertical-offset="2448" max-vertical-offset="27965">
+              <caret line="162" column="40" selection-start-line="162" selection-start-column="40" selection-end-line="162" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LOCAL Final Refined/admin.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.111111" vertical-offset="1016" max-vertical-offset="9316">
+              <caret line="76" column="105" selection-start-line="76" selection-start-column="105" selection-end-line="76" selection-end-column="126" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -101,6 +81,10 @@
         <option value="$PROJECT_DIR$/Ready for Presentation/src/main.js" />
         <option value="$PROJECT_DIR$/LOCAL Final/spec/main_spec.js" />
         <option value="$PROJECT_DIR$/LOCAL Final/src/main.js" />
+        <option value="$PROJECT_DIR$/Refactored/src/main.js" />
+        <option value="$PROJECT_DIR$/Refactored/admin.html" />
+        <option value="$PROJECT_DIR$/LOCAL Final Refined/admin.html" />
+        <option value="$PROJECT_DIR$/LOCAL Final Refined/src/main.js" />
       </list>
     </option>
   </component>
@@ -158,18 +142,8 @@
               <option name="myItemId" value="Find My Route" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Find My Route" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Find My Route" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ready for Presentation" />
+              <option name="myItemId" value="Refactored" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -183,7 +157,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Ready for Presentation" />
+              <option name="myItemId" value="Refactored" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -201,11 +175,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Ready for Presentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spec" />
+              <option name="myItemId" value="LOCAL Final Refined" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -219,21 +189,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LOCAL Final" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Find My Route" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Find My Route" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LOCAL Final" />
+              <option name="myItemId" value="LOCAL Final Refined" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -254,8 +210,50 @@
               <option name="myItemId" value="LOCAL Final" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LOCAL Final" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LOCAL Final" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -570,15 +568,15 @@
       <workItem from="1415845210824" duration="33524000" />
       <workItem from="1416150719297" duration="55326000" />
       <workItem from="1416544239132" duration="110193000" />
-      <workItem from="1417486384552" duration="76935000" />
+      <workItem from="1417486384552" duration="83507000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="275978000" />
+    <option name="totallyTimeSpent" value="282550000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -676,52 +674,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ready for Presentation/user.html">
+    <entry file="file://$PROJECT_DIR$/LOCAL Final/spec/main_spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33293125" vertical-offset="710" max-vertical-offset="2771">
-          <caret line="58" column="24" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="38" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ready for Presentation/admin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33293125" vertical-offset="761" max-vertical-offset="9316">
-          <caret line="61" column="28" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ready for Presentation/db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3325301" vertical-offset="3124" max-vertical-offset="10914">
-          <caret line="200" column="43" selection-start-line="199" selection-start-column="203" selection-end-line="199" selection-end-column="221" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ready for Presentation/spec/main_spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.403171" vertical-offset="6189" max-vertical-offset="7106">
-          <caret line="385" column="50" selection-start-line="385" selection-start-column="50" selection-end-line="385" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ready for Presentation/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41223103" vertical-offset="7150" max-vertical-offset="27880">
-          <caret line="442" column="0" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
+        <state vertical-scroll-proportion="-0.39170507" vertical-offset="4998" max-vertical-offset="7225">
+          <caret line="274" column="3" selection-start-line="274" selection-start-column="3" selection-end-line="282" selection-end-column="69" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LOCAL Final/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8011696" vertical-offset="25393" max-vertical-offset="26248">
+        <state vertical-scroll-proportion="2.1194196" vertical-offset="24179" max-vertical-offset="26248">
           <caret line="1548" column="28" selection-start-line="1548" selection-start-column="28" selection-end-line="1548" selection-end-column="28" />
           <folding>
             <element signature="e#24133#24673#0" expanded="false" />
@@ -729,10 +692,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LOCAL Final/spec/main_spec.js">
+    <entry file="file://$PROJECT_DIR$/Refactored/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39298245" vertical-offset="837" max-vertical-offset="7225">
-          <caret line="69" column="60" selection-start-line="69" selection-start-column="60" selection-end-line="69" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="34408">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1210" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Refactored/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26254377" vertical-offset="812" max-vertical-offset="9316">
+          <caret line="61" column="12" selection-start-line="0" selection-start-column="0" selection-end-line="542" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LOCAL Final Refined/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.111111" vertical-offset="1016" max-vertical-offset="9316">
+          <caret line="76" column="105" selection-start-line="76" selection-start-column="105" selection-end-line="76" selection-end-column="126" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LOCAL Final Refined/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35253456" vertical-offset="2448" max-vertical-offset="27965">
+          <caret line="162" column="40" selection-start-line="162" selection-start-column="40" selection-end-line="162" selection-end-column="40" />
           <folding />
         </state>
       </provider>
