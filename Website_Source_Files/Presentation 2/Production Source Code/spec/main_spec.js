@@ -1,12 +1,21 @@
+// ------------------------------------------Ali coded Unit Tests BELOW--------------------------------//
 
-// ------------------------------------------Marlon coded items BELOW --------------------------------//
+
+
+
+
+// ------------------------------------------Ali coded Unit Tests ABOVE--------------------------------//
+// ------------------------------------------Marlon coded Unit Tests BELOW --------------------------------//
 
 describe("Validate User Address and School ID combination", function() {
+    var User_Address = new Address_Object();
+    User_Address.Set_Latitude(40);
+    User_Address.Set_Longitude(40.23);
     it("fails unless both User Address and School ID are both Valid", function () {
         expect(Validate_User_Address_and_School_ID("", "")).toBeFalsy();
-        expect(Validate_User_Address_and_School_ID("2 main st norwalk ct", "")).toBeFalsy();
+        expect(Validate_User_Address_and_School_ID(User_Address, "")).toBeFalsy();
         expect(Validate_User_Address_and_School_ID("", "5")).toBeFalsy();
-        expect(Validate_User_Address_and_School_ID("2 main st norwalk", "5")).toBe("Element is null only during Jasmine Testing");
+        expect(Validate_User_Address_and_School_ID(User_Address, "5")).toBeTruthy();
     });
 });
 
@@ -67,11 +76,11 @@ describe("Test Address object and Geocoding", function(){
         expect(User_Address.Longitude).toBe(40.00123);
         User_Address.Set_Lat_Long_Location();
         expect(User_Address.Lat_Long_Location).toBe("40.123,40.00123");
-        expect(User_Address.Set_Lat_Long_Location).toBeTruthy();
+        expect(User_Address.Lat_Long_Location).toBeTruthy();
     });
     it("alerts user if cannot set Lat_Long_Location from Latitude and Longitude", function () {
-        User_Address.Latitude;
-        User_Address.Longitude = 41.001;
+        User_Address.Set_Latitude;
+        User_Address.Set_Longitude(41.001);
         User_Address.Set_Lat_Long_Location();
         expect(User_Address.Set_Lat_Long_Location()).toBeFalsy();
         expect(User_Address.Lat_Long_Location).toBeUndefined();
@@ -141,16 +150,19 @@ describe("Test creating new Bus objects", function() {
         Bus_Stop.New(undefined, "30 main st norwalk ct");
         expect(Bus_Stop.Stop_Time).toBeUndefined();
         expect(Bus_Stop.Stop_Address).toBeUndefined();
-
-
     });
 });
 
 describe("Test isBusStopValid", function(){
     var Bus_Stop;
-    beforeEach(function() {  Bus_Stop = new Bus_Stop_Object; });
+    beforeEach(function() {
+        Bus_Stop = new Bus_Stop_Object;
+    });
     it("can test a valid Bus_Stop_Object", function(){
-        Bus_Stop.New("8:00", "30 main st norwalk ct");
+        Bus_Stop.Set_Stop_Address("20 main st norwalk ct");
+        Bus_Stop.Set_Latitude(40);
+        Bus_Stop.Set_Longitude(31.0234);
+        Bus_Stop.Set_Stop_Time("8:00am");
         var Validated_Bus_Stop = isBusStopValid(Bus_Stop);
         expect(Validated_Bus_Stop).toBeTruthy();
     });
@@ -162,27 +174,73 @@ describe("Test isBusStopValid", function(){
 
 });
 
+describe("Test Create Array of Bus Stops Objects", function(){
+    var Bus_Stops = [];
+    var Bus_Stops_JSON =[];
+    Bus_Stops_JSON[0]= {Stop_ID: 1, Bus_Stop_Number: 300, Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1215386, Longitude: -73.4238011};
+    Bus_Stops_JSON[1]= {Stop_ID: 2, Bus_Stop_Number: 300, Stop_Time: "9:10", Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1257694, Longitude: -73.4373563};
+    Bus_Stops_JSON[2]= {Stop_ID: 3, Bus_Stop_Number: 300, Stop_Time: "9:20", Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: null, Latitude: 41.1258702, Longitude: -73.44233};
+    Bus_Stops_JSON[3]= {Stop_ID: 4, Bus_Stop_Number: 300, Stop_Time: "9:30", Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1305955, Longitude: -73.449364};
+    Bus_Stops_JSON[4]= {Stop_ID: 5, Bus_Stop_Number: 300, Stop_Time: "9:40", Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: null, Latitude: 41.1277236, Longitude: -73.4464775};
+    Bus_Stops_JSON[5]= {Stop_ID: 6, Bus_Stop_Number: 300, Stop_Time: "9:50", Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: null, Latitude: 41.126766, Longitude: -73.4504417};
+    Bus_Stops_JSON[6]= {Stop_ID: 7, Bus_Stop_Number: 300, Stop_Time: "9:60", Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: null, Latitude: 41.1249925, Longitude: -73.4469242};
+    Bus_Stops_JSON[7]= {Stop_ID: 8, Bus_Stop_Number: 300, Stop_Time: "9:00", Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: null, Latitude: 41.120276, Longitude: -73.438289};
+    beforeEach(function() {   });
+    it("can parse JSON datab provided from DB and create Array of objects", function(){
+        for (var Bus_Stop = 0; Bus_Stop < Bus_Stops_JSON.length ; Bus_Stop++) {
+            var New_Bus_Stop = new Bus_Stop_Object();
+            New_Bus_Stop.Set_Stop_ID(Bus_Stops_JSON[Bus_Stop].Stop_ID);
+            New_Bus_Stop.Set_Bus_Stop_Number(Bus_Stops_JSON[Bus_Stop].Bus_Stop_Number);
+            New_Bus_Stop.Set_Stop_Time(Bus_Stops_JSON[Bus_Stop].Stop_Time);
+            New_Bus_Stop.Set_Stop_Address(Bus_Stops_JSON[Bus_Stop].Stop_Address);
+            New_Bus_Stop.Set_Latitude(Bus_Stops_JSON[Bus_Stop].Latitude);
+            New_Bus_Stop.Set_Longitude(Bus_Stops_JSON[Bus_Stop].Longitude);
+            if (isBusStopValid(New_Bus_Stop) == true) {
+                console.log("Bus Stop " + New_Bus_Stop.Stop_Address + " has " + New_Bus_Stop.Latitude + " and " + New_Bus_Stop.Longitude);
+                Bus_Stops.push(New_Bus_Stop);
+            }
+        }
+        expect(Bus_Stops.length).toBe(8);
+        expect(Bus_Stops[0].Stop_Address).toBe("RIVERSIDE AV & HILL ST norwalk ct");
+    });
+});
+
+
 describe("Test Get Distance Haversine", function(){
-    var Bus_Stops =[];
-    Bus_Stops[0]= {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1215386, Longitude: -73.4238011};
-    Bus_Stops[1]= {Stop_Time:null, Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1257694, Longitude: -73.4373563};
-    Bus_Stops[2]= {Stop_Time:null, Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: null, Latitude: 41.1258702, Longitude: -73.44233};
-    Bus_Stops[3]= {Stop_Time:null, Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1305955, Longitude: -73.449364};
-    Bus_Stops[4]= {Stop_Time:null, Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: null, Latitude: 41.1277236, Longitude: -73.4464775};
-    Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: null, Latitude: 41.126766, Longitude: -73.4504417};
-    Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: null, Latitude: 41.1249925, Longitude: -73.4469242};
-    Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: null, Latitude: 41.120276, Longitude: -73.438289};
+    var Bus_Stops = [];
+    var Bus_Stops_JSON =[];
+    Bus_Stops_JSON[0]= {Stop_ID: 1, Bus_Stop_Number: 300, Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1215386, Longitude: -73.4238011};
+    Bus_Stops_JSON[1]= {Stop_ID: 2, Bus_Stop_Number: 300, Stop_Time: "9:10", Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1257694, Longitude: -73.4373563};
+    Bus_Stops_JSON[2]= {Stop_ID: 3, Bus_Stop_Number: 300, Stop_Time: "9:20", Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: null, Latitude: 41.1258702, Longitude: -73.44233};
+    Bus_Stops_JSON[3]= {Stop_ID: 4, Bus_Stop_Number: 300, Stop_Time: "9:30", Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1305955, Longitude: -73.449364};
+    Bus_Stops_JSON[4]= {Stop_ID: 5, Bus_Stop_Number: 300, Stop_Time: "9:40", Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: null, Latitude: 41.1277236, Longitude: -73.4464775};
+    Bus_Stops_JSON[5]= {Stop_ID: 6, Bus_Stop_Number: 300, Stop_Time: "9:50", Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: null, Latitude: 41.126766, Longitude: -73.4504417};
+    Bus_Stops_JSON[6]= {Stop_ID: 7, Bus_Stop_Number: 300, Stop_Time: "9:60", Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: null, Latitude: 41.1249925, Longitude: -73.4469242};
+    Bus_Stops_JSON[7]= {Stop_ID: 8, Bus_Stop_Number: 300, Stop_Time: "9:00", Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: null, Latitude: 41.120276, Longitude: -73.438289};
     var User_Address = new Address_Object();
     User_Address.Set_Location("2 June St Norwalk ct");
     User_Address.Set_Latitude(41.123113);
     User_Address.Set_Longitude(-73.431174);
+    beforeEach(function() {
+        for (var Bus_Stop = 0; Bus_Stop < Bus_Stops_JSON.length ; Bus_Stop++) {
+            var New_Bus_Stop = new Bus_Stop_Object();
+            New_Bus_Stop.Set_Stop_ID(Bus_Stops_JSON[Bus_Stop].Stop_ID);
+            New_Bus_Stop.Set_Bus_Stop_Number(Bus_Stops_JSON[Bus_Stop].Bus_Stop_Number);
+            New_Bus_Stop.Set_Stop_Time(Bus_Stops_JSON[Bus_Stop].Stop_Time);
+            New_Bus_Stop.Set_Stop_Address(Bus_Stops_JSON[Bus_Stop].Stop_Address);
+            New_Bus_Stop.Set_Latitude(Bus_Stops_JSON[Bus_Stop].Latitude);
+            New_Bus_Stop.Set_Longitude(Bus_Stops_JSON[Bus_Stop].Longitude);
+            if (isBusStopValid(New_Bus_Stop) == true) {
+                console.log("Bus Stop " + New_Bus_Stop.Stop_Address + " has " + New_Bus_Stop.Latitude + " and " + New_Bus_Stop.Longitude);
+                Bus_Stops.push(New_Bus_Stop);
+            }
+        }});
     it("calculates the distance from the Bus Stops to User Coordinates", function () {
         Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
         expect(Bus_Stops[0].Distance_to_Stop).toBe(0.39889301256398413);
         expect(Bus_Stops[1].Distance_to_Stop).toBe(0.37045782368034125);
         expect(Bus_Stops[2].Distance_to_Stop).toBe(0.611124841388092);
     });
-
 });
 
 describe("Test Convert Degrees to Radians", function(){
@@ -213,19 +271,35 @@ describe("Test Calculate Walking Distance to Stops", function() {
 });
 
 describe("Test Sorting Distance to Stop", function(){
-    var Bus_Stops =[];
-    Bus_Stops[0]= {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1215386, Longitude: -73.4238011};
-    Bus_Stops[1]= {Stop_Time:null, Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1257694, Longitude: -73.4373563};
-    Bus_Stops[2]= {Stop_Time:null, Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: null, Latitude: 41.1258702, Longitude: -73.44233};
-    Bus_Stops[3]= {Stop_Time:null, Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1305955, Longitude: -73.449364};
-    Bus_Stops[4]= {Stop_Time:null, Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: null, Latitude: 41.1277236, Longitude: -73.4464775};
-    Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: null, Latitude: 41.126766, Longitude: -73.4504417};
-    Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: null, Latitude: 41.1249925, Longitude: -73.4469242};
-    Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: null, Latitude: 41.120276, Longitude: -73.438289};
+    var Bus_Stops = [];
+    var Bus_Stops_JSON =[];
+    Bus_Stops_JSON[0]= {Stop_ID: 1, Bus_Stop_Number: 300, Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1215386, Longitude: -73.4238011};
+    Bus_Stops_JSON[1]= {Stop_ID: 2, Bus_Stop_Number: 300, Stop_Time: "9:10", Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1257694, Longitude: -73.4373563};
+    Bus_Stops_JSON[2]= {Stop_ID: 3, Bus_Stop_Number: 300, Stop_Time: "9:20", Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: null, Latitude: 41.1258702, Longitude: -73.44233};
+    Bus_Stops_JSON[3]= {Stop_ID: 4, Bus_Stop_Number: 300, Stop_Time: "9:30", Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: null, Latitude: 41.1305955, Longitude: -73.449364};
+    Bus_Stops_JSON[4]= {Stop_ID: 5, Bus_Stop_Number: 300, Stop_Time: "9:40", Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: null, Latitude: 41.1277236, Longitude: -73.4464775};
+    Bus_Stops_JSON[5]= {Stop_ID: 6, Bus_Stop_Number: 300, Stop_Time: "9:50", Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: null, Latitude: 41.126766, Longitude: -73.4504417};
+    Bus_Stops_JSON[6]= {Stop_ID: 7, Bus_Stop_Number: 300, Stop_Time: "9:60", Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: null, Latitude: 41.1249925, Longitude: -73.4469242};
+    Bus_Stops_JSON[7]= {Stop_ID: 8, Bus_Stop_Number: 300, Stop_Time: "9:00", Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: null, Latitude: 41.120276, Longitude: -73.438289};
     var User_Address = new Address_Object();
     User_Address.Set_Location("2 June St Norwalk ct");
     User_Address.Set_Latitude(41.123113);
     User_Address.Set_Longitude(-73.431174);
+    beforeEach(function() {
+        for (var Bus_Stop = 0; Bus_Stop < Bus_Stops_JSON.length ; Bus_Stop++) {
+            var New_Bus_Stop = new Bus_Stop_Object();
+            New_Bus_Stop.Set_Stop_ID(Bus_Stops_JSON[Bus_Stop].Stop_ID);
+            New_Bus_Stop.Set_Bus_Stop_Number(Bus_Stops_JSON[Bus_Stop].Bus_Stop_Number);
+            New_Bus_Stop.Set_Stop_Time(Bus_Stops_JSON[Bus_Stop].Stop_Time);
+            New_Bus_Stop.Set_Stop_Address(Bus_Stops_JSON[Bus_Stop].Stop_Address);
+            New_Bus_Stop.Set_Latitude(Bus_Stops_JSON[Bus_Stop].Latitude);
+            New_Bus_Stop.Set_Longitude(Bus_Stops_JSON[Bus_Stop].Longitude);
+            if (isBusStopValid(New_Bus_Stop) == true) {
+                console.log("Bus Stop " + New_Bus_Stop.Stop_Address + " has " + New_Bus_Stop.Latitude + " and " + New_Bus_Stop.Longitude);
+                Bus_Stops.push(New_Bus_Stop);
+            }
+        }});
+
     it("sorts the array by Distance to Stop starting by lowest distance", function () {
         Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
         Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
@@ -296,38 +370,6 @@ describe("Test calling Map Shortest Bus Stop function", function() {
     });
 });
 
-
-
-describe("------Boundary for Marlon's Good Unit tests above------------", function() {
-
-    it("creates a new object when passed parameters", function () {
-
-    });
-});
-
-//Create_Bus_Stops_Array(JSON_Array)
-describe("Test Create Array of Bus Stops Objects", function(){
-    var Bus_Stop;
-    var New_Bus_Array = [];
-    beforeEach(function() {  Bus_Stop = new Bus_Stop_Object; });
-    it("can validate a Bus_Stop_Object", function(){
-        Bus_Stop.New("9:00", "20 Main St Norwalk CT");
-        expect(isBusStopValid(Bus_Stop)).toBeTruthy();
-    });
-    it("can add Bus Objects to Array", function(){
-        Bus_Stop.New("9:00", "20 Main St Norwalk CT");
-        expect(isBusStopValid(Bus_Stop)).toBeTruthy();
-        New_Bus_Array.push(Bus_Stop);
-        expect(New_Bus_Array.length).toBe(1);
-        Bus_Stop.New("9:10", "60 Main St Norwalk CT");
-        New_Bus_Array.push(Bus_Stop);
-        expect(New_Bus_Array.length).toBe(2);
-    });
-});
-
-
-
-
 describe("Test time input", function(){
     it("validates Bus Stop time", function() {
         var Time = "12:45am";
@@ -353,7 +395,6 @@ describe("Test time input", function(){
     });
 });
 
-
 describe("Spy on Map Address to ensure it is called with parameters", function() {
     var Map_Address, map = null;
     var latitude =  -42.32;
@@ -375,38 +416,4 @@ describe("Spy on Map Address to ensure it is called with parameters", function()
         expect(Map_Address.setAddress).toHaveBeenCalledWith(latitude, longitude);
     });
 });
-
-
-
-// ------------------------------------------Marlon coded items ABOVE--------------------------------//
-
-// ------------------------------------------Ali coded items BELOW--------------------------------//
-
-
-describe("Test Validate_Text_Fields", function() {
-    it("valid data", function () {
-        var State_Name = "Connecticut";
-        var Names = ["State Name"];
-        var Values = [State_Name];
-        var Test_Validate_Text_Fields = new Validate_Text_Fields(Names, Values);
-        spyOn(Test_Validate_Text_Fields(Names, Values), "New");
-        expect(Test_Validate_Text_Fields(Names, Values), "New").toHaveBeenCalled();
-    });
-});
-
-describe("Unit Test Database", function() {
-    it("Action name test", function () {
-        var action = "1";
-        expect(action).toBe("1");
-        action = "";
-        expect(action).toBe("");
-    });
-    it("Response test", function () {
-        var Response = "1";
-        expect(Validate_Unit_Test_Response(Response)).toBeFalsy();
-        var Response = "true";
-        expect(Validate_Unit_Test_Response(Response)).toBeFalsy();
-    });
-});
-
-// ------------------------------------------Marlon coded items ABOVE--------------------------------//
+// ------------------------------------------Marlon coded Unit Tests ABOVE--------------------------------//

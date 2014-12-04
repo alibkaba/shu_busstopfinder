@@ -14,89 +14,10 @@ $(document).ready(function() {
         }
     });
     Check_Web_Storage();
-    Main();
+    GUI_Handler();
 });
 
-//code below works in Source_Files\Ali\Unit Testing\Integrated_Find My Route but not here
-/* function Unit_Test(){
- var action = "Select_Seasons_Table";
- var Response;
- action = "Create_Seasons_Table";
- Response = Create_Seasons_Table(action);
- Validate_Unit_Test_Response(Response);
- action = "Write_In_Seasons_Table";
- var New_Season = "Summer";
- Response = Write_Seasons_Table(action, New_Season);
- Validate_Unit_Test_Response(Response);
- action = "Update_In_Seasons_Table";
- var Old_Season = "Summer";
- New_Season = "Winter";
- Response = Update_Seasons_Table(action, Old_Season, New_Season);
- Validate_Unit_Test_Response(Response);
- action = "Delete_In_Seasons_Table";
- Response = Delete_Seasons_Table(action);
- Validate_Unit_Test_Response(Response);
- Main();
- }
-
- function Validate_Unit_Test_Response(Response){
- if ($.trim(Response)){
- alert("Database Unit Test Failed");
- }
- }
-
- function Create_Seasons_Table(action){
- var Ajax_Data = {
- action: action
- };
- return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
- }
-
- function Write_Seasons_Table(action, New_Season){
- var Ajax_Data = {
- New_Season: New_Season,
- action: action
- };
- return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
- }
-
- function Update_Seasons_Table(action, New_Season){
- var Ajax_Data = {
- Old_Season: Old_Season,
- New_Season: New_Season,
- action: action
- };
- return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
- }
-
- function Delete_Seasons_Table(){
- var Ajax_Data = {
- action: action
- };
- return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
- } */
-
-function Outgoing_Ajax(Ajax_Data) {
-    Incoming_Ajax_Data = $.ajax({
-        data: Ajax_Data
-    }).responseText;
-    return Incoming_Ajax_Data;
-}
-
-/**
- * @return {boolean}
- */
-function Validate_Text_Fields(Names, Values) {
-    var i;
-    for (i = 0; i < Values.length; i++) {
-        if (Values[i] == null || Values[i] == "") {
-            alert("Invalid " + Names[i]);
-            return false;
-        }
-    }
-}
-
-function Main(){
+function GUI_Handler(){
     var State_Handler = new States_Manager();
     var District_Handler = new District_Manager();
     var School_Handler = new School_Manager();
@@ -122,156 +43,173 @@ function Main(){
     }
 }
 
-    function States_Manager(){
-        this.Grab_Selected_State_ID = function (){
-            var State_ID = document.getElementById("Select_States").value;
-            return State_ID;
+function Outgoing_Ajax(Ajax_Data) {
+    Incoming_Ajax_Data = $.ajax({
+        data: Ajax_Data
+    }).responseText;
+    return Incoming_Ajax_Data;
+}
+
+function Validate_Text_Fields(Names, Values) {
+    var i;
+    for (i = 0; i < Values.length; i++) {
+        if (Values[i] == null || Values[i] == "") {
+            alert("Invalid " + Names[i]);
+            return false;
+        }
+    }
+}
+
+function States_Manager(){
+    this.Grab_Selected_State_ID = function (){
+        var State_ID = document.getElementById("Select_States").value;
+        return State_ID;
+    };
+    this.Get_Drop_Down_Data = function(){
+        var action = "Get_States";
+        var Ajax_Data = {
+            action: action
         };
-        this.Get_Drop_Down_Data = function(){
-            var action = "Get_States";
-            var Ajax_Data = {
-                action: action
-            };
-            Outgoing_Ajax(Ajax_Data);
-            var States_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-            this.Clear_Form();
-            this.Update_Drop_Down(States_Data);
-            this.Select_Listener();
+        Outgoing_Ajax(Ajax_Data);
+        var States_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+        this.Clear_Form();
+        this.Update_Drop_Down(States_Data);
+        this.Select_Listener();
+    };
+    this.Get_Update_Data = function(){
+        var State_ID = this.Grab_Selected_State_ID();
+        var action = "Get_State_Data";
+        var Ajax_Data = {
+            State_ID: State_ID,
+            action: action
         };
-        this.Get_Update_Data = function(){
-            var State_ID = this.Grab_Selected_State_ID();
-            var action = "Get_State_Data";
-            var Ajax_Data = {
-                State_ID: State_ID,
-                action: action
-            };
-            Outgoing_Ajax(Ajax_Data);
-            var State_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-            document.getElementById("Update_State_Name").value = State_Data[0].STATE_NAME;
-        };
-        this.Update_Drop_Down = function(States_Data){
-            document.getElementById('Select_States').options.length = 1;
-            var select = document.getElementById("Select_States");
-            var i;
-            for (i = 0; i < States_Data.length; i++) {
-                select.options[select.options.length] = new Option(States_Data[i].STATE_NAME, States_Data[i].STATE_ID);
+        Outgoing_Ajax(Ajax_Data);
+        var State_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+        document.getElementById("Update_State_Name").value = State_Data[0].STATE_NAME;
+    };
+    this.Update_Drop_Down = function(States_Data){
+        document.getElementById('Select_States').options.length = 1;
+        var select = document.getElementById("Select_States");
+        var i;
+        for (i = 0; i < States_Data.length; i++) {
+            select.options[select.options.length] = new Option(States_Data[i].STATE_NAME, States_Data[i].STATE_ID);
+        }
+    };
+    this.Clear_Form = function(){
+        if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html') {
+            document.getElementById("Create_State_Name").value = "";
+        }
+        Hide_State_GUI();
+        Hide_District_GUI();
+        Hide_School_GUI();
+        Hide_Bus_Stop_Number_GUI();
+        Hide_Bus_Stop_Detail_GUI();
+    };
+    this.Select_Listener = function(){
+        var Select_Drop_Down = document.getElementById("Select_States");
+        Select_Drop_Down.addEventListener("change", function () {
+            var State_ID = Select_Drop_Down.options[Select_Drop_Down.selectedIndex].value;
+            if (State_ID != ""){
+                var District_Handler = new District_Manager();
+                District_Handler.Get_Drop_Down_Data(State_ID);
+                Display_State_GUI();
             }
-        };
-        this.Clear_Form = function(){
-            if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html') {
-                document.getElementById("Create_State_Name").value = "";
+            else{
+                Hide_State_GUI();
+                Hide_District_GUI();
+                Hide_School_GUI();
+                Hide_Bus_Stop_Number_GUI();
+                Hide_Bus_Stop_Detail_GUI();
             }
-            Hide_State_GUI();
-            Hide_District_GUI();
-            Hide_School_GUI();
-            Hide_Bus_Stop_Number_GUI();
-            Hide_Bus_Stop_Detail_GUI();
-        };
-        this.Select_Listener = function(){
-            var Select_Drop_Down = document.getElementById("Select_States");
-            Select_Drop_Down.addEventListener("change", function () {
-                var State_ID = Select_Drop_Down.options[Select_Drop_Down.selectedIndex].value;
-                if (State_ID != ""){
-                    var District_Handler = new District_Manager();
-                    District_Handler.Get_Drop_Down_Data(State_ID);
-                    Display_State_GUI();
-                }
-                else{
-                    Hide_State_GUI();
-                    Hide_District_GUI();
-                    Hide_School_GUI();
-                    Hide_Bus_Stop_Number_GUI();
-                    Hide_Bus_Stop_Detail_GUI();
-                }
-            });
-        };
-        this.Create_Listener = function(){
-            var Create_Button = document.getElementById("Create_State");
-            Create_Button.addEventListener("click", function () {
-                var State_Name = document.getElementById("Create_State_Name").value;
-                var Names = ["State Name"];
-                var Values = [State_Name];
-                if (Validate_Text_Fields(Names, Values) != false) {
-                    var action = "Create_State";
-                    var Ajax_Data = {
-                        State_Name: State_Name,
-                        action: action
-                    };
-                    Outgoing_Ajax(Ajax_Data);
-                    var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-                    var Modal = '#Display_Create_State_Form';
-                    var Message = 'state creation failed, please try again';
-                    var State_Handler = new States_Manager();
-                    State_Handler.Validate_Response(Response_Data, Modal, Message);
-                }
-            });
-        };
-        this.Update_Listener = function(){
-            var Update_Button = document.getElementById("Update_State");
-            Update_Button.addEventListener("click", function () {
-                var New_State_Name = document.getElementById("Update_State_Name").value;
-                var action = "Update_State";
-                var Names = ["State Name"];
-                var Values = [New_State_Name];
-                if (Validate_Text_Fields(Names, Values) != false) {
-                    var State_Handler = new States_Manager();
-                    State_Handler.Grab_Selected_State_ID();
-                    var State_ID = State_Handler.Grab_Selected_State_ID();
-                    var Ajax_Data = {
-                        State_ID: State_ID,
-                        New_State_Name: New_State_Name,
-                        action: action
-                    };
-                    Outgoing_Ajax(Ajax_Data);
-                    var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-                    var Modal = '#Display_Update_State_Form';
-                    var Message = 'state update failed, please try again';
-                    State_Handler.Validate_Response(Response_Data, Modal, Message);
-                }
-            });
-        };
-        this.Delete_Listener = function(){
-            var Delete_Button = document.getElementById("Delete_State");
-            Delete_Button.addEventListener("click", function () {
-                var State_Handler = new States_Manager();
-                var State_ID = State_Handler.Grab_Selected_State_ID();
-                var action = "Get_Districts";
+        });
+    };
+    this.Create_Listener = function(){
+        var Create_Button = document.getElementById("Create_State");
+        Create_Button.addEventListener("click", function () {
+            var State_Name = document.getElementById("Create_State_Name").value;
+            var Names = ["State Name"];
+            var Values = [State_Name];
+            if (Validate_Text_Fields(Names, Values) != false) {
+                var action = "Create_State";
                 var Ajax_Data = {
-                    State_ID: State_ID,
+                    State_Name: State_Name,
                     action: action
                 };
                 Outgoing_Ajax(Ajax_Data);
-                var Districts_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-                if (!$.trim(Districts_Data)){
-                    State_Handler.Delete_Data(State_ID);
-                } else {
-                    alert("This state has districts, please remove them first");
-                }
-            });
-        };
-        this.Delete_Data = function(State_ID){
-            var action = "Delete_State";
+                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+                var Modal = '#Display_Create_State_Form';
+                var Message = 'state creation failed, please try again';
+                var State_Handler = new States_Manager();
+                State_Handler.Validate_Response(Response_Data, Modal, Message);
+            }
+        });
+    };
+    this.Update_Listener = function(){
+        var Update_Button = document.getElementById("Update_State");
+        Update_Button.addEventListener("click", function () {
+            var New_State_Name = document.getElementById("Update_State_Name").value;
+            var action = "Update_State";
+            var Names = ["State Name"];
+            var Values = [New_State_Name];
+            if (Validate_Text_Fields(Names, Values) != false) {
+                var State_Handler = new States_Manager();
+                State_Handler.Grab_Selected_State_ID();
+                var State_ID = State_Handler.Grab_Selected_State_ID();
+                var Ajax_Data = {
+                    State_ID: State_ID,
+                    New_State_Name: New_State_Name,
+                    action: action
+                };
+                Outgoing_Ajax(Ajax_Data);
+                var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+                var Modal = '#Display_Update_State_Form';
+                var Message = 'state update failed, please try again';
+                State_Handler.Validate_Response(Response_Data, Modal, Message);
+            }
+        });
+    };
+    this.Delete_Listener = function(){
+        var Delete_Button = document.getElementById("Delete_State");
+        Delete_Button.addEventListener("click", function () {
+            var State_Handler = new States_Manager();
+            var State_ID = State_Handler.Grab_Selected_State_ID();
+            var action = "Get_Districts";
             var Ajax_Data = {
                 State_ID: State_ID,
                 action: action
             };
             Outgoing_Ajax(Ajax_Data);
-            var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-            var Modal = '#Display_Delete_State_Form';
-            var Message = 'delete failed because this state has districts';
+            var Districts_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+            if (!$.trim(Districts_Data)){
+                State_Handler.Delete_Data(State_ID);
+            } else {
+                alert("This state has districts, please remove them first");
+            }
+        });
+    };
+    this.Delete_Data = function(State_ID){
+        var action = "Delete_State";
+        var Ajax_Data = {
+            State_ID: State_ID,
+            action: action
+        };
+        Outgoing_Ajax(Ajax_Data);
+        var Response_Data = jQuery.parseJSON(Incoming_Ajax_Data);
+        var Modal = '#Display_Delete_State_Form';
+        var Message = 'delete failed because this state has districts';
+        var State_Handler = new States_Manager();
+        State_Handler.Validate_Response(Response_Data, Modal, Message);
+    };
+    this.Validate_Response = function(Response_Data, Modal, Message){
+        if (Response_Data !== false) {
+            $(Modal).modal('hide');
             var State_Handler = new States_Manager();
-            State_Handler.Validate_Response(Response_Data, Modal, Message);
-        };
-        this.Validate_Response = function(Response_Data, Modal, Message){
-            if (Response_Data !== false) {
-                $(Modal).modal('hide');
-                var State_Handler = new States_Manager();
-                State_Handler.Get_Drop_Down_Data();
-            }
-            else {
-                alert(Message);
-            }
-        };
+            State_Handler.Get_Drop_Down_Data();
+        }
+        else {
+            alert(Message);
+        }
+    };
 }
 
 function District_Manager(){
@@ -386,7 +324,7 @@ function District_Manager(){
             }
         });
     };
-    this.Delete_Listener = function(District_ID){
+    this.Delete_Listener = function(){
         var Delete_Button = document.getElementById("Delete_District");
         Delete_Button.addEventListener("click", function () {
             var District_Handler = new District_Manager();
@@ -432,48 +370,7 @@ function District_Manager(){
     };
 }
 
-function Create_Bus_Stops_Array(){
-    var School = new School_Manager();
-    var School_ID = School.Grab_Selected_School_ID();
-	var Bus = new View_All_Buses_Manager();
-    var Bus_Stops_JSON = Bus.Get_Drop_Down_Data(School_ID);
-	
-    /* var Bus = new Bus_Stop_Number_Manager();
-    var Bus_Numbers = Bus.Get_Drop_Down_Data(School_ID); */
-
-
-    //console.log(Bus_Stops_JSON);
-    var Bus_Stops = [];
-
-    for (var Bus_Stop = 0; Bus_Stop < Bus_Stops_JSON.length ; Bus_Stop++) {
-        var New_Bus_Stop = new Bus_Stop_Object();
-        New_Bus_Stop.Set_Stop_ID(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER_ID);
-        New_Bus_Stop.Set_Bus_Stop_Number(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER);
-        New_Bus_Stop.Set_Stop_Time(Bus_Stops_JSON[Bus_Stop].BUS_STOP_TIME);
-        New_Bus_Stop.Set_Stop_Address(Bus_Stops_JSON[Bus_Stop].BUS_STOP_ADDRESS);
-        New_Bus_Stop.Set_Latitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LATITUDES);
-        New_Bus_Stop.Set_Longitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LONGITUDE);
-        Bus_Stops.push(New_Bus_Stop);
-    }
-
-    console.log(Bus_Stops.length);
-    alert(Bus_Stops[0].Stop_Address + " , " + Bus_Stops[0].Latitude + " , " + Bus_Stops[0].Longitude);
-
-
-}
-
-
-
-
 function School_Manager(){
-    this.Get_Bus_Stops_JSON = function () {
-        var Select_Drop_Down = document.getElementById("Select_Schools");
-        var School_ID = Select_Drop_Down.options[Select_Drop_Down.selectedIndex].value;
-        var Bus_Stop_Number_Handler = new Bus_Stop_Number_Manager();
-         var Bus_Stops_JSON = Bus_Stop_Number_Handler.Get_Drop_Down_Data(School_ID);
-        return Bus_Stops_JSON;
-
-        return this.Bus_Stops_JSON};
     this.Grab_Selected_School_ID = function (){
         var School_ID = document.getElementById("Select_Schools").value;
         return School_ID;
@@ -516,7 +413,6 @@ function School_Manager(){
             document.getElementById("Create_School_Name").value = "";
             document.getElementById("Create_School_Address").value = "";
         }
-
         Hide_School_GUI();
         Hide_Bus_Stop_Number_GUI();
         Hide_Bus_Stop_Detail_GUI();
@@ -673,9 +569,6 @@ function View_All_Buses_Manager(){
 
 }
 
-
-
-
 function Bus_Stop_Number_Manager(){
     this.Grab_Selected_Bus_Stop_Number_ID = function (){
         var Bus_Stop_Number_ID = document.getElementById("Select_Bus_Stop_Numbers").value;
@@ -689,14 +582,12 @@ function Bus_Stop_Number_Manager(){
         };
         Outgoing_Ajax(Ajax_Data);
         var Bus_Stops_Number_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-
-        if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html'){
+       if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html'){
             this.Clear_Form();
             this.Update_Drop_Down(Bus_Stops_Number_Data);
             this.Select_Listener();
         }
         return Bus_Stops_Number_Data;
-
     };
     this.Get_Update_Data = function(){
         var Bus_Stop_Number_ID = this.Grab_Selected_Bus_Stop_Number_ID();
@@ -1165,7 +1056,6 @@ function Hide_Bus_Stop_Detail_GUI(){
     }
 }
 
-//Below codes need to be refactored.
 function Check_Web_Storage() {
     if (typeof(Storage) !== "undefined") {
         Start_Web_Storage();
@@ -1223,16 +1113,46 @@ function Logout() {
     window.location.href = "user.html";
     localStorage.removeItem("email");
 }
-//Above code needs to be refactored
+// ------------------------------------------Ali coded items ABOVE --------------------------------//
+// ------------------------------------------Marlon coded items BELOW --------------------------------//
 
-function Process_User_Address(User_Address){
+
+function Process_User_Address(Raw_User_Address){
+    var Attention_Field_Color = "#FF0000";
+    var Valid_Field_Color = "#FFFFFF";
+    var User_Address_Field = new Change_Element("User_Address");
+    var School_Drop_Down = new Change_Element("Select_Schools");
     var School_ID = Get_School_ID();
-    var Validated_User_Address = Validate_User_Address_and_School_ID(User_Address, School_ID);
-    if(Validated_User_Address != false){
-        var Bus_Stops = Create_Bus_Stops_Array();
-        Find_Closest_Bus_Stop(Validated_User_Address, School_ID);
+    var User_Address = new Address_Object();
+
+    if(isUserAddressValid(Raw_User_Address) == true){
+        User_Address_Field.SetColor(Valid_Field_Color);
+        User_Address.Set_Location(Raw_User_Address);
+        User_Address.Get_LatLong();
+        User_Address.Set_Lat_Long_Location();
+    }
+    else {
+        alert("Please Enter a valid address!");
+        User_Address_Field.SetColor(Attention_Field_Color);
+        User_Address_Field.Select();
     }
 
+    var isUser_Address_School_ID_Valid = Validate_User_Address_and_School_ID(User_Address, School_ID);
+
+    if (isSchoolIDValid(School_ID) == false){
+        alert("Please Select your School");
+        School_Drop_Down.SetColor(Attention_Field_Color);
+        School_Drop_Down.Select();
+    }
+    if (isSchoolIDValid(School_ID) == true){
+        School_Drop_Down.SetColor(Valid_Field_Color);
+    }
+
+    if(isUser_Address_School_ID_Valid == true){
+        User_Address_Field.SetColor(Valid_Field_Color);
+        School_Drop_Down.SetColor(Valid_Field_Color);
+        Find_Closest_Bus_Stop(User_Address, School_ID);
+    }
 }
 
 function Process_User_Location(){
@@ -1260,34 +1180,8 @@ function Process_User_Location(){
 }
 
 function Validate_User_Address_and_School_ID(User_Address, School_ID){ //UT
-    var Attention_Field_Color = "#FF0000";
-    var Valid_Field_Color = "#FFFFFF";
-    var User_Address_Field = new Change_Element("User_Address");
-    var School_Drop_Down = new Change_Element("Select_Schools");
-    if (isUserAddressValid(User_Address) == false){
-        alert("Please Enter a valid address!");
-        User_Address_Field.SetColor(Attention_Field_Color);
-        User_Address_Field.Select();
-    }
-    if (isUserAddressValid(User_Address) == true){
-        User_Address_Field.SetColor(Valid_Field_Color);
-    }
-    if (isSchoolIDValid(School_ID) == false){
-        alert("Please Select your School");
-        School_Drop_Down.SetColor(Attention_Field_Color);
-        School_Drop_Down.Select();
-    }
-    if (isSchoolIDValid(School_ID) == true){
-        School_Drop_Down.SetColor(Valid_Field_Color);
-    }
-    if(isUserAddressValid(User_Address) == true && isSchoolIDValid(School_ID) == true && User_Address_Field.Element != null){
-        var Validated_User_Address = Format_User_Address(User_Address);
-        User_Address_Field.SetColor(Valid_Field_Color);
-        School_Drop_Down.SetColor(Valid_Field_Color);
-        return Validated_User_Address;
-    }
-    if(isUserAddressValid(User_Address) == true && isSchoolIDValid(School_ID) == true && User_Address_Field.Element == null){
-        return "Element is null only during Jasmine Testing";
+    if(isUserAddressLatLongValid(User_Address) == true && isSchoolIDValid(School_ID) == true){
+        return true;
     }
     else
         return false;
@@ -1312,6 +1206,16 @@ function isUserAddressValid(User_Address){ //UT
     }
 }
 
+function isUserAddressLatLongValid(User_Address){
+    if((typeof User_Address.Latitude != 'undefined' && typeof User_Address.Longitude != 'undefined' )){
+        return true;
+
+    }
+    else{
+        return false;
+    }
+}
+
 function Change_Element(Element_ID){ //UT
     this.Element = document.getElementById(Element_ID);
     this.SetColor = function(Color){
@@ -1328,17 +1232,12 @@ function Address_Object (){ //UT
     this.Longitude;
     this.Location;
     this.Lat_Long_Location;
-    this.New = function(){
-
-
-    }
     this.Set_Location = function(User_Address) {
         if(typeof User_Address != 'undefined' && User_Address != ""){
             this.Location = User_Address;
         }
         else {
             console.log("Cannot create Address location due to invalid input");
-            alert("Cannot create Address location due to invalid input");
         }
     };
     this.Get_LatLong = function () {
@@ -1352,9 +1251,9 @@ function Address_Object (){ //UT
     };
     this.Set_Lat_Long_Location = function(){
         if (typeof this.Latitude != 'number')
-            alert("Error: Latitude is invalid, it is of type " + typeof this.Latitude);
+            console.log("Error: Latitude is invalid, it is of type " + typeof this.Latitude);
         if (typeof this.Longitude != 'number')
-            alert("Error: Longitude is invalid, it is of type " + typeof this.Longitude);
+            console.log("Error: Longitude is invalid, it is of type " + typeof this.Longitude);
         if ( typeof this.Latitude == 'number' && typeof this.Longitude == 'number'){
             this.Lat_Long_Location = this.Latitude + "," + this.Longitude;
             return true;
@@ -1367,7 +1266,7 @@ function Address_Object (){ //UT
     this.Set_Longitude = function (Longitude){this.Longitude = Longitude};
 }
 
-function Format_User_Address(User_Address){//UT
+function Format_User_Address(User_Address){
     var Validated_User_Address = new Address_Object();
     if (Validated_User_Address.Lat_Long_Location == null ){
         Validated_User_Address.Set_Location(User_Address);
@@ -1379,25 +1278,27 @@ function Format_User_Address(User_Address){//UT
         return User_Address;
 }
 
-
 function Get_School_ID() {
     var School_Drop_Down = document.getElementById("Select_Schools");
     var School_ID = School_Drop_Down.options[School_Drop_Down.selectedIndex].value;
     return School_ID;
 }
 
-
 function Find_Closest_Bus_Stop(User_Address, School_ID){
-    alert("Will Call DB for School_ID " +School_ID);
-    var Bus_Stops = Get_Bus_Stops();
+    var Bus_Stops = Create_Bus_Stops_Array(School_ID);
     var Walking_Distance = new Walking_Distance_To_Stops();
     var New_Shortest_Bus_Stop = new Shortest_Bus_Stop();
-    Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
-    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
-    Bus_Stops =  Walking_Distance.Calculate(User_Address, Bus_Stops);
-    Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
-    New_Shortest_Bus_Stop.Map(User_Address, Bus_Stops[0]);
-    Show_Button_Map_5_Closest_Stops(User_Address, Bus_Stops);
+    if (Bus_Stops.length > 0){
+        Bus_Stops = Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops);
+        Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
+        Bus_Stops =  Walking_Distance.Calculate(User_Address, Bus_Stops);
+        Bus_Stops = Sort_Distance_To_Stops(Bus_Stops);
+        New_Shortest_Bus_Stop.Map(User_Address, Bus_Stops[0]);
+        Show_Button_Map_5_Closest_Stops(User_Address, Bus_Stops);
+    }
+    else
+        alert("Error: no Bus Stops could be processed or there are no Bus Stops for your School in the System")
+
 }
 
 function Show_Button_Map_5_Closest_Stops(User_Address, Bus_Stops){
@@ -1407,7 +1308,7 @@ function Show_Button_Map_5_Closest_Stops(User_Address, Bus_Stops){
     Map_Closest_5_Stops_Btn.addEventListener("click", function () {New_Bus_Stops_Group.Map(User_Address, Bus_Stops)});
 }
 
-function Bus_Stop_Object (){ //UT
+function Bus_Stop_Object (){
     this.Stop_Time;
     this.Stop_Address;
     this.Distance_to_Stop;
@@ -1422,14 +1323,12 @@ function Bus_Stop_Object (){ //UT
         }
         else {
             console.log("Cannot create Bus Stop Object because it is missing data");
-            alert("Cannot create Bus Stop Object because it is missing data");
         }
     };
-    this.Get_Coor = function() {alert("Hi")};
     this.Set_Stop_ID = function (Stop_ID) { this.Stop_ID = Stop_ID};
     this.Set_Stop_Time = function (Stop_Time) {this.Stop_Time = Stop_Time};
     this.Set_Stop_Address = function (Stop_Address) {this.Stop_Address = Stop_Address};
-    this.Set_Distance_to_User = function (Distance_to_User) {this.Distance_to_User = Distance_to_User};
+    this.Set_Distance_to_Stop = function (Distance_to_User) {this.Distance_to_Stop = Distance_to_User};
     this.Set_Latitude = function (Latitude) {this.Latitude = Latitude};
     this.Set_Longitude = function (Longitude){this.Longitude = Longitude};
     this.Set_Bus_Stop_Number = function (Bus_Stop_Number){this.Bus_Stop_Number = Bus_Stop_Number};
@@ -1451,43 +1350,54 @@ function Bus_Stop_Object (){ //UT
     };
 }
 
-function isBusStopValid(Bus_Stop_Object){//UT
-    if(typeof Bus_Stop_Object != 'undefined' && Bus_Stop_Object.Stop_Time != null && Bus_Stop_Object.Stop_Address != null){
-        return true;
+function Create_Bus_Stops_Array(School_ID){
+    var Bus = new View_All_Buses_Manager();
+    var Bus_Stops_JSON = Bus.Get_Drop_Down_Data(School_ID);    var Bus_Stops = [];
+    for (var Bus_Stop = 0; Bus_Stop < Bus_Stops_JSON.length ; Bus_Stop++) {
+        var New_Bus_Stop = new Bus_Stop_Object();
+        New_Bus_Stop.Set_Stop_ID(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER_ID);
+        New_Bus_Stop.Set_Bus_Stop_Number(Bus_Stops_JSON[Bus_Stop].BUS_STOP_NUMBER);
+        New_Bus_Stop.Set_Stop_Time(Bus_Stops_JSON[Bus_Stop].BUS_STOP_TIME);
+        New_Bus_Stop.Set_Stop_Address(Bus_Stops_JSON[Bus_Stop].BUS_STOP_ADDRESS);
+        New_Bus_Stop.Set_Latitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LATITUDE);
+        New_Bus_Stop.Set_Longitude(Bus_Stops_JSON[Bus_Stop].BUS_STOP_LONGITUDE);
+        if (isBusStopValid(New_Bus_Stop) == true){
+            console.log("Bus Stop "+ New_Bus_Stop.Stop_Address + " has " + New_Bus_Stop.Latitude + " and "+ New_Bus_Stop.Longitude);
+            Bus_Stops.push(New_Bus_Stop);
+        }
+        else
+            console.log("Bus Stop "+ Bus_Stops_JSON[Bus_Stop].BUS_STOP_ADDRESS + " has in valid info")
     }
-    else {
-        console.log("Bus Stop Object is invalid");
-        return false;
-    }
+    console.log(Bus_Stops);
+    return Bus_Stops;
 }
 
 
-
-
-function Get_Bus_Stops(){ //REPLACE
-    var Bus_Stops =[];
-    Bus_Stops[0]= {Stop_Time: "9:00", Stop_Address:"RIVERSIDE AV & HILL ST norwalk ct", Distance_to_Stop: 1, Latitude: 41.1215386, Longitude: -73.4238011};
-    Bus_Stops[1]= {Stop_Time:null, Stop_Address:"PONUS AV & ELLS ST norwalk ct", Distance_to_Stop: 1.5, Latitude: 41.1257694, Longitude: -73.4373563};
-    Bus_Stops[2]= {Stop_Time:null, Stop_Address:"PONUS AV & CORNWALL RD norwalk ct", Distance_to_Stop: 2.5, Latitude: 41.1258702, Longitude: -73.44233};
-    Bus_Stops[3]= {Stop_Time:null, Stop_Address:"GLEN AV & SHORT ST norwalk ct", Distance_to_Stop: 0.5, Latitude: 41.1305955, Longitude: -73.449364};
-    Bus_Stops[4]= {Stop_Time:null, Stop_Address:"LEDGEWOOD DR & STYLES LA norwalk ct", Distance_to_Stop: 2.5, Latitude: 41.1277236, Longitude: -73.4464775};
-    Bus_Stops[5]= {Stop_Time:null, Stop_Address:"STYLES AV & PENNY LA norwalk ct", Distance_to_Stop: 0.65, Latitude: 41.126766, Longitude: -73.4504417};
-    Bus_Stops[6]= {Stop_Time:null, Stop_Address:"PONUS AV & LANCASTER DR norwalk ct", Distance_to_Stop: 6, Latitude: 41.1249925, Longitude: -73.4469242};
-    Bus_Stops[7]= {Stop_Time:null, Stop_Address:"MAHER DR & STEPPINGSTONE PL norwalk ct", Distance_to_Stop: 1.2, Latitude: 41.120276, Longitude: -73.438289};
-    return Bus_Stops;
+function isBusStopValid(Bus_Stop_Object){
+    if(typeof Bus_Stop_Object != 'undefined' &&
+        Bus_Stop_Object.Stop_Time != null &&
+        Bus_Stop_Object.Stop_Address != null &&
+        typeof Bus_Stop_Object.Latitude != 'undefined' &&
+        typeof Bus_Stop_Object.Longitude != 'undefined'){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 function Calculate_Distance_To_Stops_Haversine(User_Address, Bus_Stops) {
     for (var Bus_Stop = 0; Bus_Stop < Bus_Stops.length; Bus_Stop++) {
         var Distance = Get_Distance_Haversine(User_Address, Bus_Stops[Bus_Stop]);
         console.log("Distance to Bus Stop " + Bus_Stops[Bus_Stop].Stop_Address + " is " + Distance);
-        Bus_Stops[Bus_Stop].Distance_to_Stop = Distance;
+        Bus_Stops[Bus_Stop].Set_Distance_to_Stop(Distance);
     }
     return Bus_Stops;
 }
 
-function Get_Distance_Haversine(User_Address, Bus_Stop) { //UT
+function Get_Distance_Haversine(User_Address, Bus_Stop) {
     var EarthRadius = 3959;
+    console.log("Bus Latitude: "+  Bus_Stop.Latitude + "   User Latitude: " + User_Address.Latitude);
     var Delta_Lat_Rads = Degrees_to_Radians(Bus_Stop.Latitude-User_Address.Latitude);
     var Delta_Lon_Rads = Degrees_to_Radians(Bus_Stop.Longitude-User_Address.Longitude);
     var a =
@@ -1500,14 +1410,22 @@ function Get_Distance_Haversine(User_Address, Bus_Stop) { //UT
     return Haversine_Distance;
 }
 
-function Degrees_to_Radians(deg) { //UT
+function Degrees_to_Radians(deg) {
     return deg * (Math.PI/180)
 }
 
+function Number_Stops_to_Use(Bus_Stops){
+    var Desired_Max_Number_of_Stops = 5;
+    var Max_Number_of_Stops = Bus_Stops.length;
+    if (Max_Number_of_Stops < Desired_Max_Number_of_Stops)
+        return  Max_Number_of_Stops;
+    else
+        return Desired_Max_Number_of_Stops;
+}
 
-function Walking_Distance_To_Stops() { //UT
+function Walking_Distance_To_Stops() {
     this.Calculate = function (User_Address, Bus_Stops) {
-        var Number_of_Stops = 5;
+        var Number_of_Stops = Number_Stops_to_Use(Bus_Stops);
         for (var Bus_Stop = 0; Bus_Stop < Number_of_Stops; Bus_Stop++) {
             var action = "Cal_Distance_PHP";
             var Read_Bus_Stops_Data = {User_Address: User_Address.Lat_Long_Location, Bus_Stop_Address: Bus_Stops[Bus_Stop].Stop_Address, action: action};
@@ -1516,11 +1434,11 @@ function Walking_Distance_To_Stops() { //UT
             Distance = Raw_Distance.split();
             var Distance_to_User = Distance[0];
             if(Distance[1] == 'mi')
-                Bus_Stops[Bus_Stop].Distance_to_Stop = Distance_to_User;
+                Bus_Stops[Bus_Stop].Set_Distance_to_Stop(Distance_to_User);
             if(Distance[1] == 'ft'){
                 var feet_in_a_mile = 5280;
                 var miles = Distance_to_User * (1/feet_in_a_mile);
-                Bus_Stops[Bus_Stop].Distance_to_Stop = miles;
+                Bus_Stops[Bus_Stop].Set_Distance_to_Stop(miles);
             }
             console.log("Distance to Bus Stop " + Bus_Stops[Bus_Stop].Stop_Address + " is " + Distance);
         }
@@ -1528,7 +1446,7 @@ function Walking_Distance_To_Stops() { //UT
     };
 }
 
-function Sort_Distance_To_Stops(Bus_Stops){ //UT
+function Sort_Distance_To_Stops(Bus_Stops){
     var swapped;
     var n = Bus_Stops.length-1;
     do {
@@ -1546,21 +1464,27 @@ function Sort_Distance_To_Stops(Bus_Stops){ //UT
     return Bus_Stops;
 }
 
-function Bus_Stops_Group() { //UT
+function Bus_Stops_Group() {
     this.Map = function (User_Address, Bus_Stops){
-        var Max_Number_of_Stops = 5;
+        var Max_Number_of_Stops = Number_Stops_to_Use(Bus_Stops);
         var map = new google.maps.Map(document.getElementById('map-canvas'));
         var bounds = new google.maps.LatLngBounds();
         var New_Marker = new Marker();
         var latlng = new google.maps.LatLng(User_Address.Latitude, User_Address.Longitude);
         var icon = "http://maps.google.com/mapfiles/kml/pal2/icon2.png";
-        New_Marker.Add(User_Address, icon, map);
+        var title = "Your Home";
+        New_Marker.Add(User_Address, icon, map, title);
         bounds.extend(latlng);
         map.fitBounds(bounds);
         for (var Bus_Stop = 0; Bus_Stop < Max_Number_of_Stops ; Bus_Stop++) {
             var icon_number = Bus_Stop+1;
             icon = "http://maps.google.com/mapfiles/kml/paddle/" + icon_number + ".png";
-            New_Marker.Add(Bus_Stops[Bus_Stop], icon, map);
+            var title = 'Bus Number: ' + Bus_Stops[Bus_Stop].Bus_Stop_Number + '<br />' +
+                'Bus Stop Address: ' + Bus_Stops[Bus_Stop].Stop_Address + '<br />' +
+                'Bus Stop Time: ' + Bus_Stops[Bus_Stop].Stop_Time + '<br />' +
+                'Distance to your Address/Location: ' + Bus_Stops[Bus_Stop].Distance_to_Stop.toFixed(2) + ' mi';
+
+                New_Marker.Add(Bus_Stops[Bus_Stop], icon, map, title);
             latlng = new google.maps.LatLng(Bus_Stops[Bus_Stop].Latitude, Bus_Stops[Bus_Stop].Longitude);
             bounds.extend(latlng);
             map.fitBounds(bounds);
@@ -1568,9 +1492,8 @@ function Bus_Stops_Group() { //UT
     }
 }
 
-function Marker(){ //UT
-    this.Add = function (Address, icon,  map){
-        var title = Address.Stop_Address;
+function Marker(){
+    this.Add = function (Address, icon,  map, title){
         var infowindow = new google.maps.InfoWindow();
         var latlng = new google.maps.LatLng(Address.Latitude, Address.Longitude);
         var marker = new google.maps.Marker({
@@ -1586,9 +1509,10 @@ function Marker(){ //UT
     };
 }
 
-function Shortest_Bus_Stop(){ //UT
+function Shortest_Bus_Stop(){
     this.Map = function (User_Address, Bus_Stop){
-        alert("The Closest Bus_Stop is " + Bus_Stop.Stop_Address + " which is " + Bus_Stop.Distance_to_Stop +" miles away");
+        alert("The Closest Bus_Stop is " + Bus_Stop.Stop_Address + " which is " + Bus_Stop.Distance_to_Stop.toFixed(2) +" miles away");
+        console.log(Bus_Stop);
         var latitude= 41.117744;
         var longitude = -73.4081575;
         var directionsDisplay;
@@ -1620,13 +1544,9 @@ function Shortest_Bus_Stop(){ //UT
             }
         });
     }
-
 }
 
-
-
-
-function isTimeValid(Time) {//UT
+function isTimeValid(Time) {
     var regex = /^([0]\d|[1][0-2]):([0-5]\d)\s?(?:AM|PM)$/i;
     var valid_flag = regex.test(Time);
     return valid_flag;
