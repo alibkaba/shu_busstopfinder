@@ -30,13 +30,13 @@ function Validate_action(){
 
 function DB_Operation($action){
 	switch($action) {
-		case "Create": Create();
+		case "Create_Seasons_Table": Create_Seasons_Table();
 			break;
-		case "Write": Write();
+		case "Write_In_Seasons_Table": Write_In_Seasons_Table();
 			break;
-		case "Update": Update();
+		case "Update_In_Seasons_Table": Update_In_Seasons_Table();
 			break;
-		case "Delete": Delete();
+		case "Delete_In_Seasons_Table": Delete_In_Seasons_Table();
 			break;
 		case "Get_States": Get_States();
 			break;
@@ -101,7 +101,7 @@ function DB_Operation($action){
 
 //create object for each. name the class what the strings are.
 //classes instead of cases.
-function Create(){
+function Create_Seasons_Table(){
 	global $PDOconn;
 
 	$Query = 'DROP TABLE IF EXISTS `djkabau1_BUSTOP`.`SEASONS` ;
@@ -117,7 +117,7 @@ ENGINE = InnoDB';
 	$PDOconn = null;
 }
 
-function Write(){
+function Write_In_Seasons_Table(){
 	global $PDOconn;
 	$New_Season = stripslashes($_POST["New_Season"]);
 
@@ -130,7 +130,7 @@ function Write(){
 	$PDOconn = null;
 }
 
-function Update(){
+function Update_In_Seasons_Table(){
 	global $PDOconn;
 	$New_Season = stripslashes($_POST["New_Season"]);
 	$Old_Season = stripslashes($_POST["Old_Season"]);
@@ -145,7 +145,7 @@ function Update(){
 	$PDOconn = null;
 }
 
-function Delete(){
+function Delete_In_Seasons_Table(){
 	global $PDOconn;
 
 	$Query = 'DROP TABLE IF EXISTS `djkabau1_BUSTOP`.`SEASONS` ';

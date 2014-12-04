@@ -32,24 +32,34 @@
     <favorites_list name="Find My Route" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.43549365">
+    <splitter split-orientation="horizontal" split-proportion="0.41671714">
       <split-first>
         <leaf>
           <file leaf-file-name="user.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/user.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="3.5961537" vertical-offset="1836" max-vertical-offset="2771">
+                <state vertical-scroll-proportion="-0.0" vertical-offset="1649" max-vertical-offset="2771">
                   <caret line="97" column="108" selection-start-line="97" selection-start-column="96" selection-end-line="97" selection-end-column="108" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="admin.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="admin.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/admin.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-9.483491" vertical-offset="8110" max-vertical-offset="9316">
-                  <caret line="4" column="7" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="7" />
+                <state vertical-scroll-proportion="-16.73077" vertical-offset="1775" max-vertical-offset="9316">
+                  <caret line="130" column="73" selection-start-line="130" selection-start-column="56" selection-end-line="130" selection-end-column="73" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="main_spec.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/spec/main_spec.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.21395881" vertical-offset="0" max-vertical-offset="874">
+                  <caret line="11" column="66" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
                   <folding />
                 </state>
               </provider>
@@ -58,41 +68,42 @@
           <file leaf-file-name="db.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/db.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-3.7884614" vertical-offset="7368" max-vertical-offset="10914">
-                  <caret line="445" column="71" selection-start-line="445" selection-start-column="71" selection-end-line="445" selection-end-column="71" />
+                <state vertical-scroll-proportion="-14.057693" vertical-offset="1768" max-vertical-offset="10914">
+                  <caret line="147" column="32" selection-start-line="147" selection-start-column="9" selection-end-line="147" selection-end-column="32" />
                   <folding>
-                    <marker date="1417551603547" expanded="true" signature="2781:2829" placeholder="DROP TABLE I..." />
-                    <marker date="1417551603547" expanded="true" signature="2832:3008" placeholder="CREATE TABLE..IF..." />
-                    <marker date="1417551603547" expanded="true" signature="3263:3301" placeholder="INSERT INTO ..." />
-                    <marker date="1417551603547" expanded="true" signature="3668:3720" placeholder="UPDATE SEASO..." />
-                    <marker date="1417551603547" expanded="true" signature="4045:4093" placeholder="DROP TABLE I..." />
-                    <marker date="1417551603547" expanded="true" signature="4303:4343" placeholder="SELECT * FRO..STATES..." />
-                    <marker date="1417551603547" expanded="true" signature="4602:4669" placeholder="SELECT * FRO..DISTRICTS..." />
-                    <marker date="1417551603547" expanded="true" signature="4986:5052" placeholder="SELECT * FRO..SCHOOLS..." />
-                    <marker date="1417551603547" expanded="true" signature="5375:5588" placeholder="SELECT x.BUS..BUS_STOPS_NUMBERS..." />
-                    <marker date="1417551603547" expanded="true" signature="5911:5989" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
-                    <marker date="1417551603547" expanded="true" signature="6330:6418" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
-                    <marker date="1417551603547" expanded="true" signature="6798:6854" placeholder="SELECT * FRO..USERS..." />
-                    <marker date="1417551603547" expanded="true" signature="7240:7282" placeholder="INSERT INTO ..." />
-                    <marker date="1417551603547" expanded="true" signature="7656:7716" placeholder="INSERT INTO ..." />
-                    <marker date="1417551603547" expanded="true" signature="8210:8285" placeholder="INSERT INTO ..." />
-                    <marker date="1417551603547" expanded="true" signature="8799:8869" placeholder="INSERT INTO ..." />
-                    <marker date="1417551603547" expanded="true" signature="9525:9662" placeholder="INSERT INTO ..." />
-                    <marker date="1417551603547" expanded="true" signature="10253:10294" placeholder="SELECT * FRO..STATES..." />
-                    <marker date="1417551603547" expanded="true" signature="10617:10664" placeholder="SELECT * FRO..DISTRICTS..." />
-                    <marker date="1417551603547" expanded="true" signature="10984:11027" placeholder="SELECT * FRO..SCHOOLS..." />
-                    <marker date="1417551603547" expanded="true" signature="11372:11434" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
-                    <marker date="1417551603547" expanded="true" signature="11788:11850" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
-                    <marker date="1417551603547" expanded="true" signature="12231:12286" placeholder="UPDATE STATE..." />
-                    <marker date="1417551603547" expanded="true" signature="12736:12800" placeholder="UPDATE DISTR..." />
-                    <marker date="1417551603547" expanded="true" signature="13313:13393" placeholder="UPDATE SCHOO..." />
-                    <marker date="1417551603547" expanded="true" signature="13939:14020" placeholder="UPDATE BUS_S..." />
-                    <marker date="1417551603547" expanded="true" signature="14722:14876" placeholder="UPDATE BUS_S..." />
-                    <marker date="1417551603547" expanded="true" signature="15481:15520" placeholder="DELETE FROM ..." />
-                    <marker date="1417551603547" expanded="true" signature="15841:15886" placeholder="DELETE FROM ..." />
-                    <marker date="1417551603547" expanded="true" signature="16204:16245" placeholder="DELETE FROM ..." />
-                    <marker date="1417551603547" expanded="true" signature="16588:16648" placeholder="DELETE FROM ..." />
-                    <marker date="1417551603547" expanded="true" signature="17000:17060" placeholder="DELETE FROM ..." />
+                    <marker date="1417648974574" expanded="true" signature="2925:2973" placeholder="DROP TABLE I..." />
+                    <marker date="1417648974574" expanded="true" signature="2925:3152" placeholder="SELECT wrong..wrongtable..." />
+                    <marker date="1417648974574" expanded="true" signature="2976:3152" placeholder="CREATE TABLE..IF..." />
+                    <marker date="1417648974574" expanded="true" signature="3424:3462" placeholder="INSERT INTO ..." />
+                    <marker date="1417648974574" expanded="true" signature="3846:3898" placeholder="UPDATE SEASO..." />
+                    <marker date="1417648974574" expanded="true" signature="4240:4288" placeholder="DROP TABLE I..." />
+                    <marker date="1417648974574" expanded="true" signature="4498:4538" placeholder="SELECT * FRO..STATES..." />
+                    <marker date="1417648974574" expanded="true" signature="4797:4864" placeholder="SELECT * FRO..DISTRICTS..." />
+                    <marker date="1417648974574" expanded="true" signature="5181:5247" placeholder="SELECT * FRO..SCHOOLS..." />
+                    <marker date="1417648974574" expanded="true" signature="5570:5783" placeholder="SELECT x.BUS..BUS_STOPS_NUMBERS..." />
+                    <marker date="1417648974574" expanded="true" signature="6106:6184" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
+                    <marker date="1417648974574" expanded="true" signature="6525:6613" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
+                    <marker date="1417648974574" expanded="true" signature="6993:7049" placeholder="SELECT * FRO..USERS..." />
+                    <marker date="1417648974574" expanded="true" signature="7435:7477" placeholder="INSERT INTO ..." />
+                    <marker date="1417648974574" expanded="true" signature="7851:7911" placeholder="INSERT INTO ..." />
+                    <marker date="1417648974574" expanded="true" signature="8405:8480" placeholder="INSERT INTO ..." />
+                    <marker date="1417648974574" expanded="true" signature="8994:9064" placeholder="INSERT INTO ..." />
+                    <marker date="1417648974574" expanded="true" signature="9720:9857" placeholder="INSERT INTO ..." />
+                    <marker date="1417648974574" expanded="true" signature="10448:10489" placeholder="SELECT * FRO..STATES..." />
+                    <marker date="1417648974574" expanded="true" signature="10812:10859" placeholder="SELECT * FRO..DISTRICTS..." />
+                    <marker date="1417648974574" expanded="true" signature="11179:11222" placeholder="SELECT * FRO..SCHOOLS..." />
+                    <marker date="1417648974574" expanded="true" signature="11567:11629" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
+                    <marker date="1417648974574" expanded="true" signature="11983:12045" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
+                    <marker date="1417648974574" expanded="true" signature="12426:12481" placeholder="UPDATE STATE..." />
+                    <marker date="1417648974574" expanded="true" signature="12931:12995" placeholder="UPDATE DISTR..." />
+                    <marker date="1417648974574" expanded="true" signature="13508:13588" placeholder="UPDATE SCHOO..." />
+                    <marker date="1417648974574" expanded="true" signature="14134:14215" placeholder="UPDATE BUS_S..." />
+                    <marker date="1417648974574" expanded="true" signature="14917:15071" placeholder="UPDATE BUS_S..." />
+                    <marker date="1417648974574" expanded="true" signature="15676:15715" placeholder="DELETE FROM ..." />
+                    <marker date="1417648974574" expanded="true" signature="16036:16081" placeholder="DELETE FROM ..." />
+                    <marker date="1417648974574" expanded="true" signature="16399:16440" placeholder="DELETE FROM ..." />
+                    <marker date="1417648974574" expanded="true" signature="16783:16843" placeholder="DELETE FROM ..." />
+                    <marker date="1417648974574" expanded="true" signature="17195:17255" placeholder="DELETE FROM ..." />
                   </folding>
                 </state>
               </provider>
@@ -105,8 +116,8 @@
           <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.5514874" vertical-offset="15413" max-vertical-offset="34017">
-                  <caret line="935" column="35" selection-start-line="935" selection-start-column="35" selection-end-line="935" selection-end-column="35" />
+                <state vertical-scroll-proportion="0.23340961" vertical-offset="646" max-vertical-offset="33558">
+                  <caret line="50" column="6" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
                   <folding />
                 </state>
               </provider>
@@ -115,7 +126,7 @@
           <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/css/main.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
+                <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="272">
                   <caret line="4" column="58" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="58" />
                   <folding />
                 </state>
@@ -131,7 +142,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/gmaps.js" />
         <option value="$PROJECT_DIR$/Marlon SpecRunner.html" />
-        <option value="$PROJECT_DIR$/spec/main_spec.js" />
         <option value="$PROJECT_DIR$/User.html" />
         <option value="$PROJECT_DIR$/dashboard Ali.html" />
         <option value="$PROJECT_DIR$/dashboard2.html" />
@@ -144,8 +154,9 @@
         <option value="$PROJECT_DIR$/admin.html" />
         <option value="$PROJECT_DIR$/user.html" />
         <option value="$PROJECT_DIR$/css/main.css" />
-        <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/db.php" />
+        <option value="$PROJECT_DIR$/spec/main_spec.js" />
+        <option value="$PROJECT_DIR$/src/main.js" />
       </list>
     </option>
   </component>
@@ -184,8 +195,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -215,6 +226,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Integrated_Find My Route" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spec" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -498,11 +523,14 @@
       <workItem from="1416544239132" duration="110193000" />
       <workItem from="1417486384552" duration="21150000" />
       <workItem from="1417539594194" duration="12210000" />
+      <workItem from="1417560658673" duration="629000" />
+      <workItem from="1417573027769" duration="9641000" />
+      <workItem from="1417638583958" duration="10987000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="232403000" />
+    <option name="totallyTimeSpent" value="253660000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1928" height="1060" extended-state="6" />
@@ -595,6 +623,236 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1649" max-vertical-offset="2771">
+          <caret line="97" column="108" selection-start-line="97" selection-start-column="96" selection-end-line="97" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1775" max-vertical-offset="9316">
+          <caret line="130" column="73" selection-start-line="130" selection-start-column="56" selection-end-line="130" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/main_spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3194" max-vertical-offset="6902">
+          <caret line="197" column="65" selection-start-line="197" selection-start-column="65" selection-end-line="197" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4971" max-vertical-offset="10914">
+          <caret line="311" column="65" selection-start-line="311" selection-start-column="47" selection-end-line="311" selection-end-column="65" />
+          <folding>
+            <marker date="1417648974574" expanded="true" signature="2925:2973" placeholder="DROP TABLE I..." />
+            <marker date="1417648974574" expanded="true" signature="2925:3152" placeholder="SELECT wrong..wrongtable..." />
+            <marker date="1417648974574" expanded="true" signature="2976:3152" placeholder="CREATE TABLE..IF..." />
+            <marker date="1417648974574" expanded="true" signature="3424:3462" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="3846:3898" placeholder="UPDATE SEASO..." />
+            <marker date="1417648974574" expanded="true" signature="4240:4288" placeholder="DROP TABLE I..." />
+            <marker date="1417648974574" expanded="true" signature="4498:4538" placeholder="SELECT * FRO..STATES..." />
+            <marker date="1417648974574" expanded="true" signature="4797:4864" placeholder="SELECT * FRO..DISTRICTS..." />
+            <marker date="1417648974574" expanded="true" signature="5181:5247" placeholder="SELECT * FRO..SCHOOLS..." />
+            <marker date="1417648974574" expanded="true" signature="5570:5783" placeholder="SELECT x.BUS..BUS_STOPS_NUMBERS..." />
+            <marker date="1417648974574" expanded="true" signature="6106:6184" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
+            <marker date="1417648974574" expanded="true" signature="6525:6613" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
+            <marker date="1417648974574" expanded="true" signature="6993:7049" placeholder="SELECT * FRO..USERS..." />
+            <marker date="1417648974574" expanded="true" signature="7435:7477" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="7851:7911" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="8405:8480" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="8994:9064" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="9720:9857" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="10448:10489" placeholder="SELECT * FRO..STATES..." />
+            <marker date="1417648974574" expanded="true" signature="10812:10859" placeholder="SELECT * FRO..DISTRICTS..." />
+            <marker date="1417648974574" expanded="true" signature="11179:11222" placeholder="SELECT * FRO..SCHOOLS..." />
+            <marker date="1417648974574" expanded="true" signature="11567:11629" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
+            <marker date="1417648974574" expanded="true" signature="11983:12045" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
+            <marker date="1417648974574" expanded="true" signature="12426:12481" placeholder="UPDATE STATE..." />
+            <marker date="1417648974574" expanded="true" signature="12931:12995" placeholder="UPDATE DISTR..." />
+            <marker date="1417648974574" expanded="true" signature="13508:13588" placeholder="UPDATE SCHOO..." />
+            <marker date="1417648974574" expanded="true" signature="14134:14215" placeholder="UPDATE BUS_S..." />
+            <marker date="1417648974574" expanded="true" signature="14917:15071" placeholder="UPDATE BUS_S..." />
+            <marker date="1417648974574" expanded="true" signature="15676:15715" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="16036:16081" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="16399:16440" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="16783:16843" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="17195:17255" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="34017">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="272">
+          <caret line="4" column="58" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1836" max-vertical-offset="2771">
+          <caret line="97" column="108" selection-start-line="97" selection-start-column="96" selection-end-line="97" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8110" max-vertical-offset="9316">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7368" max-vertical-offset="10914">
+          <caret line="445" column="71" selection-start-line="445" selection-start-column="71" selection-end-line="445" selection-end-column="71" />
+          <folding>
+            <marker date="1417648974574" expanded="true" signature="2925:2973" placeholder="DROP TABLE I..." />
+            <marker date="1417648974574" expanded="true" signature="2925:3152" placeholder="SELECT wrong..wrongtable..." />
+            <marker date="1417648974574" expanded="true" signature="2976:3152" placeholder="CREATE TABLE..IF..." />
+            <marker date="1417648974574" expanded="true" signature="3424:3462" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="3846:3898" placeholder="UPDATE SEASO..." />
+            <marker date="1417648974574" expanded="true" signature="4240:4288" placeholder="DROP TABLE I..." />
+            <marker date="1417648974574" expanded="true" signature="4498:4538" placeholder="SELECT * FRO..STATES..." />
+            <marker date="1417648974574" expanded="true" signature="4797:4864" placeholder="SELECT * FRO..DISTRICTS..." />
+            <marker date="1417648974574" expanded="true" signature="5181:5247" placeholder="SELECT * FRO..SCHOOLS..." />
+            <marker date="1417648974574" expanded="true" signature="5570:5783" placeholder="SELECT x.BUS..BUS_STOPS_NUMBERS..." />
+            <marker date="1417648974574" expanded="true" signature="6106:6184" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
+            <marker date="1417648974574" expanded="true" signature="6525:6613" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
+            <marker date="1417648974574" expanded="true" signature="6993:7049" placeholder="SELECT * FRO..USERS..." />
+            <marker date="1417648974574" expanded="true" signature="7435:7477" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="7851:7911" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="8405:8480" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="8994:9064" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="9720:9857" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="10448:10489" placeholder="SELECT * FRO..STATES..." />
+            <marker date="1417648974574" expanded="true" signature="10812:10859" placeholder="SELECT * FRO..DISTRICTS..." />
+            <marker date="1417648974574" expanded="true" signature="11179:11222" placeholder="SELECT * FRO..SCHOOLS..." />
+            <marker date="1417648974574" expanded="true" signature="11567:11629" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
+            <marker date="1417648974574" expanded="true" signature="11983:12045" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
+            <marker date="1417648974574" expanded="true" signature="12426:12481" placeholder="UPDATE STATE..." />
+            <marker date="1417648974574" expanded="true" signature="12931:12995" placeholder="UPDATE DISTR..." />
+            <marker date="1417648974574" expanded="true" signature="13508:13588" placeholder="UPDATE SCHOO..." />
+            <marker date="1417648974574" expanded="true" signature="14134:14215" placeholder="UPDATE BUS_S..." />
+            <marker date="1417648974574" expanded="true" signature="14917:15071" placeholder="UPDATE BUS_S..." />
+            <marker date="1417648974574" expanded="true" signature="15676:15715" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="16036:16081" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="16399:16440" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="16783:16843" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="17195:17255" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="34017">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="272">
+          <caret line="4" column="58" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1836" max-vertical-offset="2771">
+          <caret line="97" column="108" selection-start-line="97" selection-start-column="96" selection-end-line="97" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8110" max-vertical-offset="9316">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7368" max-vertical-offset="10914">
+          <caret line="445" column="71" selection-start-line="445" selection-start-column="71" selection-end-line="445" selection-end-column="71" />
+          <folding>
+            <marker date="1417648974574" expanded="true" signature="2925:2973" placeholder="DROP TABLE I..." />
+            <marker date="1417648974574" expanded="true" signature="2925:3152" placeholder="SELECT wrong..wrongtable..." />
+            <marker date="1417648974574" expanded="true" signature="2976:3152" placeholder="CREATE TABLE..IF..." />
+            <marker date="1417648974574" expanded="true" signature="3424:3462" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="3846:3898" placeholder="UPDATE SEASO..." />
+            <marker date="1417648974574" expanded="true" signature="4240:4288" placeholder="DROP TABLE I..." />
+            <marker date="1417648974574" expanded="true" signature="4498:4538" placeholder="SELECT * FRO..STATES..." />
+            <marker date="1417648974574" expanded="true" signature="4797:4864" placeholder="SELECT * FRO..DISTRICTS..." />
+            <marker date="1417648974574" expanded="true" signature="5181:5247" placeholder="SELECT * FRO..SCHOOLS..." />
+            <marker date="1417648974574" expanded="true" signature="5570:5783" placeholder="SELECT x.BUS..BUS_STOPS_NUMBERS..." />
+            <marker date="1417648974574" expanded="true" signature="6106:6184" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
+            <marker date="1417648974574" expanded="true" signature="6525:6613" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
+            <marker date="1417648974574" expanded="true" signature="6993:7049" placeholder="SELECT * FRO..USERS..." />
+            <marker date="1417648974574" expanded="true" signature="7435:7477" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="7851:7911" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="8405:8480" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="8994:9064" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="9720:9857" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="10448:10489" placeholder="SELECT * FRO..STATES..." />
+            <marker date="1417648974574" expanded="true" signature="10812:10859" placeholder="SELECT * FRO..DISTRICTS..." />
+            <marker date="1417648974574" expanded="true" signature="11179:11222" placeholder="SELECT * FRO..SCHOOLS..." />
+            <marker date="1417648974574" expanded="true" signature="11567:11629" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
+            <marker date="1417648974574" expanded="true" signature="11983:12045" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
+            <marker date="1417648974574" expanded="true" signature="12426:12481" placeholder="UPDATE STATE..." />
+            <marker date="1417648974574" expanded="true" signature="12931:12995" placeholder="UPDATE DISTR..." />
+            <marker date="1417648974574" expanded="true" signature="13508:13588" placeholder="UPDATE SCHOO..." />
+            <marker date="1417648974574" expanded="true" signature="14134:14215" placeholder="UPDATE BUS_S..." />
+            <marker date="1417648974574" expanded="true" signature="14917:15071" placeholder="UPDATE BUS_S..." />
+            <marker date="1417648974574" expanded="true" signature="15676:15715" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="16036:16081" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="16399:16440" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="16783:16843" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="17195:17255" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="34017">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="272">
+          <caret line="4" column="58" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="33660">
@@ -653,14 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/main_spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-57.857143" vertical-offset="4619" max-vertical-offset="6698">
-          <caret line="367" column="28" selection-start-line="367" selection-start-column="28" selection-end-line="367" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
@@ -669,17 +919,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.js">
+    <entry file="file://$PROJECT_DIR$/admin.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5514874" vertical-offset="15413" max-vertical-offset="34017">
-          <caret line="935" column="35" selection-start-line="935" selection-start-column="35" selection-end-line="935" selection-end-column="35" />
+        <state vertical-scroll-proportion="-16.73077" vertical-offset="1775" max-vertical-offset="9316">
+          <caret line="130" column="73" selection-start-line="130" selection-start-column="56" selection-end-line="130" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.5961537" vertical-offset="1836" max-vertical-offset="2771">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1649" max-vertical-offset="2771">
           <caret line="97" column="108" selection-start-line="97" selection-start-column="96" selection-end-line="97" selection-end-column="108" />
           <folding />
         </state>
@@ -687,49 +937,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/db.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.7884614" vertical-offset="7368" max-vertical-offset="10914">
-          <caret line="445" column="71" selection-start-line="445" selection-start-column="71" selection-end-line="445" selection-end-column="71" />
+        <state vertical-scroll-proportion="-14.057693" vertical-offset="1768" max-vertical-offset="10914">
+          <caret line="147" column="32" selection-start-line="147" selection-start-column="9" selection-end-line="147" selection-end-column="32" />
           <folding>
-            <marker date="1417551603547" expanded="true" signature="2781:2829" placeholder="DROP TABLE I..." />
-            <marker date="1417551603547" expanded="true" signature="2832:3008" placeholder="CREATE TABLE..IF..." />
-            <marker date="1417551603547" expanded="true" signature="3263:3301" placeholder="INSERT INTO ..." />
-            <marker date="1417551603547" expanded="true" signature="3668:3720" placeholder="UPDATE SEASO..." />
-            <marker date="1417551603547" expanded="true" signature="4045:4093" placeholder="DROP TABLE I..." />
-            <marker date="1417551603547" expanded="true" signature="4303:4343" placeholder="SELECT * FRO..STATES..." />
-            <marker date="1417551603547" expanded="true" signature="4602:4669" placeholder="SELECT * FRO..DISTRICTS..." />
-            <marker date="1417551603547" expanded="true" signature="4986:5052" placeholder="SELECT * FRO..SCHOOLS..." />
-            <marker date="1417551603547" expanded="true" signature="5375:5588" placeholder="SELECT x.BUS..BUS_STOPS_NUMBERS..." />
-            <marker date="1417551603547" expanded="true" signature="5911:5989" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
-            <marker date="1417551603547" expanded="true" signature="6330:6418" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
-            <marker date="1417551603547" expanded="true" signature="6798:6854" placeholder="SELECT * FRO..USERS..." />
-            <marker date="1417551603547" expanded="true" signature="7240:7282" placeholder="INSERT INTO ..." />
-            <marker date="1417551603547" expanded="true" signature="7656:7716" placeholder="INSERT INTO ..." />
-            <marker date="1417551603547" expanded="true" signature="8210:8285" placeholder="INSERT INTO ..." />
-            <marker date="1417551603547" expanded="true" signature="8799:8869" placeholder="INSERT INTO ..." />
-            <marker date="1417551603547" expanded="true" signature="9525:9662" placeholder="INSERT INTO ..." />
-            <marker date="1417551603547" expanded="true" signature="10253:10294" placeholder="SELECT * FRO..STATES..." />
-            <marker date="1417551603547" expanded="true" signature="10617:10664" placeholder="SELECT * FRO..DISTRICTS..." />
-            <marker date="1417551603547" expanded="true" signature="10984:11027" placeholder="SELECT * FRO..SCHOOLS..." />
-            <marker date="1417551603547" expanded="true" signature="11372:11434" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
-            <marker date="1417551603547" expanded="true" signature="11788:11850" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
-            <marker date="1417551603547" expanded="true" signature="12231:12286" placeholder="UPDATE STATE..." />
-            <marker date="1417551603547" expanded="true" signature="12736:12800" placeholder="UPDATE DISTR..." />
-            <marker date="1417551603547" expanded="true" signature="13313:13393" placeholder="UPDATE SCHOO..." />
-            <marker date="1417551603547" expanded="true" signature="13939:14020" placeholder="UPDATE BUS_S..." />
-            <marker date="1417551603547" expanded="true" signature="14722:14876" placeholder="UPDATE BUS_S..." />
-            <marker date="1417551603547" expanded="true" signature="15481:15520" placeholder="DELETE FROM ..." />
-            <marker date="1417551603547" expanded="true" signature="15841:15886" placeholder="DELETE FROM ..." />
-            <marker date="1417551603547" expanded="true" signature="16204:16245" placeholder="DELETE FROM ..." />
-            <marker date="1417551603547" expanded="true" signature="16588:16648" placeholder="DELETE FROM ..." />
-            <marker date="1417551603547" expanded="true" signature="17000:17060" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="2925:2973" placeholder="DROP TABLE I..." />
+            <marker date="1417648974574" expanded="true" signature="2925:3152" placeholder="SELECT wrong..wrongtable..." />
+            <marker date="1417648974574" expanded="true" signature="2976:3152" placeholder="CREATE TABLE..IF..." />
+            <marker date="1417648974574" expanded="true" signature="3424:3462" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="3846:3898" placeholder="UPDATE SEASO..." />
+            <marker date="1417648974574" expanded="true" signature="4240:4288" placeholder="DROP TABLE I..." />
+            <marker date="1417648974574" expanded="true" signature="4498:4538" placeholder="SELECT * FRO..STATES..." />
+            <marker date="1417648974574" expanded="true" signature="4797:4864" placeholder="SELECT * FRO..DISTRICTS..." />
+            <marker date="1417648974574" expanded="true" signature="5181:5247" placeholder="SELECT * FRO..SCHOOLS..." />
+            <marker date="1417648974574" expanded="true" signature="5570:5783" placeholder="SELECT x.BUS..BUS_STOPS_NUMBERS..." />
+            <marker date="1417648974574" expanded="true" signature="6106:6184" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
+            <marker date="1417648974574" expanded="true" signature="6525:6613" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
+            <marker date="1417648974574" expanded="true" signature="6993:7049" placeholder="SELECT * FRO..USERS..." />
+            <marker date="1417648974574" expanded="true" signature="7435:7477" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="7851:7911" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="8405:8480" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="8994:9064" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="9720:9857" placeholder="INSERT INTO ..." />
+            <marker date="1417648974574" expanded="true" signature="10448:10489" placeholder="SELECT * FRO..STATES..." />
+            <marker date="1417648974574" expanded="true" signature="10812:10859" placeholder="SELECT * FRO..DISTRICTS..." />
+            <marker date="1417648974574" expanded="true" signature="11179:11222" placeholder="SELECT * FRO..SCHOOLS..." />
+            <marker date="1417648974574" expanded="true" signature="11567:11629" placeholder="SELECT * FRO..BUS_STOPS_NUMBERS..." />
+            <marker date="1417648974574" expanded="true" signature="11983:12045" placeholder="SELECT * FRO..BUS_STOPS_DETAILS..." />
+            <marker date="1417648974574" expanded="true" signature="12426:12481" placeholder="UPDATE STATE..." />
+            <marker date="1417648974574" expanded="true" signature="12931:12995" placeholder="UPDATE DISTR..." />
+            <marker date="1417648974574" expanded="true" signature="13508:13588" placeholder="UPDATE SCHOO..." />
+            <marker date="1417648974574" expanded="true" signature="14134:14215" placeholder="UPDATE BUS_S..." />
+            <marker date="1417648974574" expanded="true" signature="14917:15071" placeholder="UPDATE BUS_S..." />
+            <marker date="1417648974574" expanded="true" signature="15676:15715" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="16036:16081" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="16399:16440" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="16783:16843" placeholder="DELETE FROM ..." />
+            <marker date="1417648974574" expanded="true" signature="17195:17255" placeholder="DELETE FROM ..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin.html">
+    <entry file="file://$PROJECT_DIR$/spec/main_spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.483491" vertical-offset="8110" max-vertical-offset="9316">
-          <caret line="4" column="7" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.21395881" vertical-offset="0" max-vertical-offset="874">
+          <caret line="11" column="66" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23340961" vertical-offset="646" max-vertical-offset="33558">
+          <caret line="50" column="6" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
           <folding />
         </state>
       </provider>
