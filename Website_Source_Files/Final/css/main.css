@@ -2,7 +2,7 @@ body {
     background-color: #f2f2f3;
 }
 
-#User_Address_Label, #User_Address, #Find_Closest_Bus_Stop, #Use_My_Location, #Select_Districts ,#Select_Schools, #Select_Bus_Stop_Numbers, #Select_Bus_Stops_Details, #View_All_Buses_Button ,#Update_State_Form_Button ,#Delete_State_Form_Button ,#Create_District_Form_Button ,#Update_District_Form_Button ,#Delete_District_Form_Button ,#Create_School_Form_Button ,#Update_School_Form_Button ,#Delete_School_Form_Button ,#Create_Bus_Stop_Number_Form_Button ,#Update_Bus_Stop_Number_Form_Button ,#Delete_Bus_Stop_Number_Form_Button,#Create_Bus_Stop_Details_Form_Button ,#Update_Bus_Stop_Details_Form_Button ,#Delete_Bus_Stop_Details_Form_Button {
+#Admin, #User_Address_Label, #User_Address, #Find_Closest_Bus_Stop, #Use_My_Location, #Select_Districts ,#Select_Schools, #Select_Bus_Stop_Numbers, #Select_Bus_Stops_Details, #View_All_Buses_Button ,#Update_State_Form_Button ,#Delete_State_Form_Button ,#Create_District_Form_Button ,#Update_District_Form_Button ,#Delete_District_Form_Button ,#Create_School_Form_Button ,#Update_School_Form_Button ,#Delete_School_Form_Button ,#Create_Bus_Stop_Number_Form_Button ,#Update_Bus_Stop_Number_Form_Button ,#Delete_Bus_Stop_Number_Form_Button,#Create_Bus_Stop_Details_Form_Button ,#Update_Bus_Stop_Details_Form_Button ,#Delete_Bus_Stop_Details_Form_Button {
     visibility: hidden;
 }
 

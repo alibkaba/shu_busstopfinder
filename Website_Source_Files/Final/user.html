@@ -29,11 +29,13 @@
                     <a href="user.html">User<span class="sr-only">(current)</span></a>
                 </li>
                 <li>
-					<li> <a href="admin.html">Admin</a> </li>
+                <li> <a href="admin.html" id="Admin">Admin</a> </li>
                 </li>
             </ul>
             <div class="nav navbar-nav navbar-right" style="margin-left: 2em">
                 <li><a data-target="#LoginModal" data-toggle="modal" href="#" id="Login"><span class="glyphicon glyphicon-log-in"></span>Login</a> </li>
+                <li> <a data-target="#AccountModal" data-toggle="modal" href="#" id="Account"><span class="glyphicon glyphicon-user"></span>Account</a> </li>
+                <li> <a data-target="#LogoutModal" data-toggle="modal" href="#" id="Logout" onclick="Logout();"><span class="glyphicon glyphicon-log-out"></span>Logout</a> </li>
             </div>
         </div>
     </div>
@@ -120,17 +122,16 @@
                 <h4 class="modal-title" id="myModalLabel">Login</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="post">
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for= "inputEmail3">Email</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="inputEmail3" placeholder="Email" type="email">
+                            <input class="form-control" id="inputEmail" placeholder="Email" type="email">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="inputPassword3">Password</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="inputPassword3"placeholder="Password" type="password">
+                            <input class="form-control" id="inputPassword"placeholder="Password" type="password">
                         </div>
                     </div>
                     <div class="form-group">
@@ -142,10 +143,9 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button class="btn btn-default" type="submit">Sign in</button>
+                            <button class="btn btn-default" type="button" onclick="Login();">Sign in</button>
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>

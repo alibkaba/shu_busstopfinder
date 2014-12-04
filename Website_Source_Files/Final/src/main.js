@@ -13,7 +13,8 @@ $(document).ready(function() {
             alert('Ajax failed');
         }
     });
-   Unit_Test();
+    Check_Web_Storage();
+    Main();
 });
 
 //code below works in Source_Files\Ali\Unit Testing\Integrated_Find My Route but not here
@@ -1175,16 +1176,25 @@ function Check_Web_Storage() {
 }
 
 function Start_Web_Storage() {
-    Storage_Email = localStorage.getItem("email");
+    var Storage_Email = localStorage.getItem("email");
     if (Storage_Email !== null) {
-        //return the person back to user and tell them to login
+        document.getElementById("Account").style.display = "block";
+        document.getElementById("Logout").style.display = "block";
+        document.getElementById("Admin").style.visibility = "visible";
+    }
+    else{
+        document.getElementById("Login").style.display = "block";
+        if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html') {
+            window.location.href = 'user.html';
+        }
     }
 }
 
-function Check_Login_Response(Email, Login_Data) {
-    if (Login_Data !== '0') {
+function Check_Login_Response(Email, Response) {
+    alert(Response);
+    if (Response !== "1") {
         localStorage.setItem("email", Email);
-        window.location.href = 'dashboard.html';
+        window.location.href = 'admin.html';
     }
     else {
         alert('Incorrect login credentials');
@@ -1199,31 +1209,21 @@ function Get_Login(Email, Encrypted_Password) {
         action: action
     };
     Outgoing_Ajax(Ajax_Data);
-    var Login_Data = jQuery.parseJSON(Incoming_Ajax_Data);
-    Check_Login_Response(Email, Login_Data);
+    var Response = jQuery.parseJSON(Incoming_Ajax_Data);
+    Check_Login_Response(Email, Response);
 }
 
 function Login() {
-    var Email = document.getElementById("Email").value;
-    var Password = document.getElementById("Password").value;
-    Encryption(Email, Password);
-}
-
-function Encryption(Email, Password) {
-    var Encrypted_Password = Password;
+    var Email = document.getElementById("inputEmail").value;
+    var Encrypted_Password = document.getElementById("inputPassword").value;
     Get_Login(Email, Encrypted_Password);
 }
 
 function Logout() {
-    End_Web_Storage(Email);
     window.location.href = "user.html";
     localStorage.removeItem("email");
 }
 //Above code needs to be refactored
-
-
-
-
 
 function Process_User_Address(User_Address){
     var School_ID = Get_School_ID();
