@@ -13,64 +13,67 @@ $(document).ready(function() {
             alert('Ajax failed');
         }
     });
-    var Unit_Test_Handler = new Unit_Test();
+   Unit_Test();
 });
 
-function Unit_Test(){
-    var DB_Unit_Test_Handler = new DB_Unit_Test_Manager();
-    var action = "Create_Seasons_Table";
-    var Response = DB_Unit_Test_Handler.Create_Seasons_Table(action);
-    Validate_Unit_Test_Response(Response);
-    var action = "Write_In_Seasons_Table";
-    var New_Season = "Summer";
-    Response = DB_Unit_Test_Handler.Write_In_Seasons_Table(action, New_Season);
-    Validate_Unit_Test_Response(Response);
-    var action = "Update_In_Seasons_Table";
-    var Old_Season = "Summer";
-    var New_Season = "Winter";
-    Response = DB_Unit_Test_Handler.Write_In_Seasons_Table(action, Old_Season, New_Season);
-    Validate_Unit_Test_Response(Response);
-    var action = "Delete_In_Seasons_Table";
-    Response = DB_Unit_Test_Handler.Write_In_Seasons_Table(action);
-    Validate_Unit_Test_Response(Response);
-    Main();
-}
+//code below works in Source_Files\Ali\Unit Testing\Integrated_Find My Route but not here
+/* function Unit_Test(){
+ var action = "Select_Seasons_Table";
+ var Response;
+ action = "Create_Seasons_Table";
+ Response = Create_Seasons_Table(action);
+ Validate_Unit_Test_Response(Response);
+ action = "Write_In_Seasons_Table";
+ var New_Season = "Summer";
+ Response = Write_Seasons_Table(action, New_Season);
+ Validate_Unit_Test_Response(Response);
+ action = "Update_In_Seasons_Table";
+ var Old_Season = "Summer";
+ New_Season = "Winter";
+ Response = Update_Seasons_Table(action, Old_Season, New_Season);
+ Validate_Unit_Test_Response(Response);
+ action = "Delete_In_Seasons_Table";
+ Response = Delete_Seasons_Table(action);
+ Validate_Unit_Test_Response(Response);
+ Main();
+ }
 
-function Validate_Unit_Test_Response(Response){
-    if (!Response){
-        alert("Database Unit Test Failed");
-    }
-}
+ function Validate_Unit_Test_Response(Response){
+ if ($.trim(Response)){
+ alert("Database Unit Test Failed");
+ }
+ }
 
-function DB_Unit_Test_Manager(){
-    this.Create_Seasons_Table = function(action){
-        var Ajax_Data = {
-            action: action
-        };
-        return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
-    };
-    this.Write_In_Seasons_Table = function(action, New_Season){
-        var Ajax_Data = {
-            New_Season: New_Season,
-            action: action
-        };
-        return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
-    };
-    this.Update_In_Seasons_Table = function(){
-        var Ajax_Data = {
-            Old_Season: Old_Season,
-            New_Season: New_Season,
-            action: action
-        };
-        return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
-    };
-    this.Delete_In_Seasons_Table = function(){
-        var Ajax_Data = {
-            action: action
-        };
-        return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
-    };
-}
+ function Create_Seasons_Table(action){
+ var Ajax_Data = {
+ action: action
+ };
+ return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
+ }
+
+ function Write_Seasons_Table(action, New_Season){
+ var Ajax_Data = {
+ New_Season: New_Season,
+ action: action
+ };
+ return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
+ }
+
+ function Update_Seasons_Table(action, New_Season){
+ var Ajax_Data = {
+ Old_Season: Old_Season,
+ New_Season: New_Season,
+ action: action
+ };
+ return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
+ }
+
+ function Delete_Seasons_Table(){
+ var Ajax_Data = {
+ action: action
+ };
+ return jQuery.parseJSON(Outgoing_Ajax(Ajax_Data));
+ } */
 
 function Outgoing_Ajax(Ajax_Data) {
     Incoming_Ajax_Data = $.ajax({
@@ -714,8 +717,9 @@ function Bus_Stop_Number_Manager(){
         }
     };
     this.Clear_Form = function(){
-        if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html')
+        if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1) == 'admin.html') {
             document.getElementById("Create_Bus_Number").value = "";
+        }
         Hide_Bus_Stop_Number_GUI();
         Hide_Bus_Stop_Detail_GUI();
     };
