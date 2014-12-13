@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<meta charset="utf-8" content="text/html" http-equiv="Content-Type">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<!-- <link href="css/main.css" rel="stylesheet" type="text/css"> -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="src/main.js" type="text/javascript"></script>
+	<script src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<title>Dashboard</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button> <a class="navbar-brand" href="users.html">Find My Bus Stop</a> </div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li> <a href="user.html">User</a> </li>
+					<li class="active"> <a href="dashboard.html">Dashboard<span class="sr-only">(current)</span></a> </li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right" id="navbar_right_placeholder">
+				<li> <a data-target="#AccountModal" data-toggle="modal" href="#" id="Account"><span class="glyphicon glyphicon-user"></span>Account</a> </li>
+				<li> <a data-target="#LogoutModal" data-toggle="modal" href="#" id="Logout" onclick="Logout();"><span class="glyphicon glyphicon-log-out"></span>Logout</a> </li>
+				<li><a data-target="#LoginModal" data-toggle="modal" href="#" id="Login"><span class="glyphicon glyphicon-log-in"></span>Login</a> </li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="modal fade" id="AccountModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Account</h4> </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<div class="text-center">
+							<button class="btn btn-primary" data-dismiss="modal" data-target="#ChangePasswordModal" data-toggle="modal" type="button">Change Password</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="text-center">
+							<button class="btn btn-primary" data-dismiss="modal" data-target="#CreateAccountModal" data-toggle="modal" type="button">Create an Account</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="text-center">
+							<button class="btn btn-primary" data-dismiss="modal" data-target="#DeleteAccountModal" data-toggle="modal" type="button">Delete an Account</button>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="ChangePasswordModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Account - Change Password</h4> </div>
+				<h4>Change Password</h4>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="Old_Password">Old</label>
+							<input class="form-control" id="Old_Password" placeholder="Enter your Old Password" type="password"> </div>
+						<div class="form-group">
+							<label for="New_PasswordA">New</label>
+							<input class="form-control" id="New_PasswordA" placeholder="Enter your New Password" type="password"> </div>
+						<div class="form-group">
+							<label for="New_PasswordB">Confirm</label>
+							<input class="form-control" id="New_PasswordB" placeholder="Confirm your New Password" type="password"> </div>
+						<div class="form-group">
+							<button class="btn btn-primary" type="button">Update</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" data-target="#AccountModal" data-toggle="modal" type="button">Back</button>
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="CreateAccountModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Login</h4> </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="Email">Email</label>
+						<input class="form-control" id="Email" placeholder="Enter an Email" type="email"> </div>
+					<div class="form-group">
+						<label for="Password">Password</label>
+						<input class="form-control" id="Password" placeholder="Enter aPassword" type="password"> </div>
+					<div class="form-group"></div>
+					<div class="form-group">
+						<button class="btn btn-default" type="button">Create</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" data-target="#AccountModal" data-toggle="modal" type="button">Back</button>
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="DeleteAccountModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Account - Delete Account</h4> </div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="Password">Verify Password</label>
+							<input class="form-control" id="Password" placeholder="Verify Password" type="password"> </div>
+						<div class="form-group">
+							<button class="btn btn-danger" id="Delete_Account_Alert" type="button" disabed="disabled">Delete</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" data-target="#AccountModal" data-toggle="modal" type="button">Back</button>
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+			<div class="text-center">
+				<select id="Select_States" onchange="Get_Districts(this.value)">
+					<option value=""> Select your State </option>
+				</select>
+				<br>
+				<button class="btn btn-success" data-target="#Display_Create_State_Form" data-toggle="modal" onclick="Clear_Create_State_Form()" type="button">Create</button>
+				<button class="btn btn-info" data-target="#UpdateStateModal" data-toggle="modal" onclick="Clear();Display_Update_State();" type="button">Update</button>
+				<button class="btn btn-danger" data-target="#DeleteStateModal" data-toggle="modal" onclick="Clear()" type="button">Delete</button>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="text-center">
+				<select id="Select_Districts" onchange="Get_Schools(this.value)">
+					<option value=""> Select your District </option>
+				</select>
+				<br>
+				<button class="btn btn-success" data-target="#Display_Create_District_Form" data-toggle="modal" id="Create_District_Modal_Button" onclick="Clear_Display_Create_District_Form()" type="button">Create</button>
+				<button class="btn btn-info" data-target="#UpdateDistrictModal" data-toggle="modal" id="Update_District_Modal_Button" onclick="Clear();Display_Update_District();" type="button">Update</button>
+				<button class="btn btn-danger" data-target="#DeleteDistrictModal" data-toggle="modal" id="Delete_District_Modal_Button" onclick="Clear()" type="button">Delete</button>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="text-center">
+				<select id="Select_Schools" onchange="Get_Bus_Stop_Numbers(this.value)">
+					<option value=""> Select your School </option>
+				</select>
+				<br>
+				<button class="btn btn-success" data-target="#Display_Create_School_Form" data-toggle="modal" onclick="Clear_Display_Create_School_Form()" type="button">Create</button>
+				<button class="btn btn-info" data-target="#UpdateSchoolModal" data-toggle="modal" onclick="Clear();Display_Update_School();" type="button">Update</button>
+				<button class="btn btn-danger" data-target="#DeleteSchoolModal" data-toggle="modal" onclick="Clear()" type="button">Delete</button>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="text-center">
+				<select id="Select_Bus_Stops" onchange="Get_Bus_Stop_Details(this.value)">
+					<option value=""> Select your Bus # </option>
+				</select>
+				<br>
+				<button class="btn btn-success" data-target="#BusModal" data-toggle="modal" id="View_All_Buses_Button" type="button">View All Buses</button>
+				<br>
+				<button class="btn btn-success" data-target="#Display_Create_Bus_Number_Form" data-toggle="modal" onclick="Clear_Display_Create_Bus_Number_Form()" type="button">Create</button>
+				<button class="btn btn-info" data-target="#UpdateBusStopNumberModal" data-toggle="modal" onclick="Clear();Display_Update_Bus_Stop_Number();" type="button">Update</button>
+				<button class="btn btn-danger" data-target="#DeleteBusStopNumberModal" data-toggle="modal" onclick="Clear()" type="button">Delete</button>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="text-center">
+				<select id="Select_Bus_Stops_Address" onchange="">
+					<option value=""> Select your Bus Stop Address </option>
+				</select>
+				<br>
+				<button class="btn btn-success" data-target="#Display_Create_Bus_Stop_Details_Form" data-toggle="modal" onclick="Clear_Display_Create_Bus_Stop_Details_Form()" type="button">Create</button>
+				<button class="btn btn-info" data-target="#UpdateBusStopDetailsModal" data-toggle="modal" onclick="Clear();Display_Update_Bus_Stop_Details();" type="button">Update</button>
+				<button class="btn btn-danger" data-target="#DeleteBusStopDetailsModal" data-toggle="modal" onclick="Clear()" type="button">Delete</button>
+			</div>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+	<div class="modal fade" id="BusModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">All Bus Stops</h4> </div>
+				<div class="modal-body">
+					<table class="table table-bordered" id="View_All_Bus_Stops">
+						<thead>
+							<tr>
+								<th>Bus #</th>
+								<th>Stop Time</th>
+								<th>Stop Address</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="EditBusStopModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Edit Bus Stops</h4> </div>
+				<div class="modal-body">
+					<table class="table table-bordered" id="Edit_All_Bus_Stops">
+						<thead>
+							<tr>
+								<th>Bus #</th>
+								<th>Stop Time</th>
+								<th>Stop Address</th>
+								<th>Update</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="Display_Create_State_Form" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Create a State</h4> </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="State_Name">State Name</label>
+						<input class="form-control" id="Create_State_Name" placeholder="Enter a State Name" type="text"> </div>
+					<div class="form-group">
+						<button class="btn btn-default" onclick="Create_State(Create_State_Name.value);" type="button">Create</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="Display_Create_District_Form" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Create a District</h4> </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="District_Name">District Name</label>
+						<input class="form-control" id="Create_District_Name" placeholder="Enter a District Name" type="text"> </div>
+					<div class="form-group">
+						<button class="btn btn-default" onclick="Create_District(Create_District_Name.value);" type="button">Create</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="Display_Create_School_Form" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Create a School</h4> </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="School_Name">School Name</label>
+						<input class="form-control" id="Create_School_Name" placeholder="Enter a School Name" type="text"> </div>
+					<div class="form-group">
+						<label for="School_Address">School Address</label>
+						<input class="form-control" id="Create_School_Address" placeholder="Enter a School Address" type="text"> </div>
+					<div class="form-group">
+						<button class="btn btn-default" onclick="Create_School(Create_School_Name.value, Create_School_Address.value);" type="button">Create</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="Display_Create_Bus_Number_Form" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Create a Bus Stop</h4> </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="Bus_Stop_Number">Bus Number</label>
+						<input class="form-control" id="Create_Bus_Number1" placeholder="Enter a Bus Number" type="text"> </div>
+					<div class="form-group">
+						<button class="btn btn-default" onclick="Create_Bus_Number(Create_Bus_Number1.value);" type="button">Create</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="Display_Create_Bus_Stop_Details_Form" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Create a Bus Stop Time and Address</h4> </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="Bus_Stop_Number">Bus Stop Time</label>
+						<input class="form-control" id="Create_Bus_Stop_Time" placeholder="Enter a Bus Stop Time" type="text"> </div>
+					<div class="form-group">
+						<label for="Bus_Stop_Number">Bus Stop Address</label>
+						<input class="form-control" id="Create_Bus_Stop_Address" placeholder="Enter a Bus Stop Address" type="text"> </div>
+					<div class="form-group">
+						<button class="btn btn-default" onclick="Create_Bus_Stop_Detail(Create_Bus_Stop_Time.value, Create_Bus_Stop_Address.value);" type="button">Create</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="UpdateStateModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Update a State</h4> </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="State_Name">State Name</label>
+						<input class="form-control" id="Update_State_Name" placeholder="Enter a State Name" type="text"> </div>
+					<div class="form-group">
+						<button class="btn btn-default" type="button" onclick="Update_State();">Update</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="UpdateDistrictModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Update a District</h4> </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="State_Name">District Name</label>
+						<input class="form-control" id="Update_District_Name" placeholder="Enter a District Name" type="text"> </div>
+					<div class="form-group">
+						<button class="btn btn-default" type="button" onclick="Update_District();">Update</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="UpdateSchoolModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Update a School</h4> </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="State_Name">School Name</label>
+						<input class="form-control" id="Update_School_Name" placeholder="Enter a School Name" type="text"> </div>
+					<div class="form-group">
+						<label for="State_Name">School Address</label>
+						<input class="form-control" id="Update_School_Address" placeholder="Enter a School Address" type="text"> </div>
+					<div class="form-group">
+						<button class="btn btn-default" type="button" onclick="Update_School();">Update</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="UpdateSchoolModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Update a Bus Number</h4> </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="State_Name">Bus Number Name</label>
+						<input class="form-control" id="Update_Bus_Number" placeholder="Enter a School Name" type="text"> </div>
+					<div class="form-group">
+						<button class="btn btn-default" type="button" onclick="Update_Bus_Number();">Update</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="DeleteStateModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Delete a State</h4> </div>
+				<div class="modal-body">
+					<div class="alert alert-danger" id="Delete_State_Place_Holder"></div>
+					<div class="form-group">
+						<button class="btn btn-danger" id="Delete_State" type="button">Yes</button>
+						<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="DeleteDistrictModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Delete a District</h4> </div>
+				<div class="modal-body">
+					<div class="alert alert-danger" id="Delete_District_Place_Holder"></div>
+					<div class="form-group">
+						<button class="btn btn-danger" id="Delete_District" type="button">Yes</button>
+						<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="DeleteSchoolModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button"><span>&times;</span><span class="sr-only">Close</span> </button>
+					<h4 class="modal-title">Delete a School</h4> </div>
+				<div class="modal-body">
+					<div class="alert alert-danger" id="Delete_School_Place_Holder"></div>
+					<div class="form-group">
+						<button class="btn btn-danger" id="Delete_School" type="button">Yes</button>
+						<button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+		<div class="text-center">
+			<div class="container-fluid" id="login_placeholder"></div>
+		</div>
+	</nav>
+</body>
+
+</html>

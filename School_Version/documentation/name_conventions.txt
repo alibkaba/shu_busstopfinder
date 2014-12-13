@@ -1,0 +1,262 @@
+Name Conventions
+
+== HTML/JAVASCRIPT
+== PHP
+== DB
+
+========================================
+========================================
+============HTML/JAVASCRIPT=============
+========================================
+========================================
+User ||| User ||| User ||| User ||| 
+<form>
+	id=state_form_id
+	
+	<select>
+	id=select_state_id
+	onchange=GET_District(this.value)
+	
+<form>
+	id=district_form_id
+	
+	<select>
+	id=select_district_id
+	onchange=GET_School(this.value)
+	
+<form>
+	id=school_form_id
+	
+	<select>
+	id=select_school_id
+	onchange=GET_BusStop(this.value)
+	
+<form>
+	id=school_form_id
+	
+	<select>
+	id=select_busstop_id
+
+Login ||| Login ||| Login ||| Login ||| 
+<form>
+id=login_form_id
+
+	text field:
+	id=email_id
+	name=email_name
+
+	text field:
+	id=password_id
+	name=password_name
+
+	input:
+	type:submit
+	id:register_id
+	name:register_name
+	value:Register
+	
+	
+Registration ||| Registration ||| Registration ||| Registration |||
+<form>
+id=registration_form_id
+
+	text field:
+	id=email_id
+	name=email_name
+
+	text field:
+	id=password_id
+	name=password_name
+
+	input:
+	type:submit
+	id:register_id
+	name:register_name
+	value:Register
+
+
+Forgot Password ||| Forgot Password ||| Forgot Password ||| Forgot Password |||
+<form>
+id=forgot_password_form_id
+
+	text field:
+	id=email_id
+	name=email_name
+
+	text field:
+	id=password_id
+	name=password_name
+
+Admin Dashboard ||| Admin Dashboard ||| Admin Dashboard ||| Admin Dashboard |||
+<div> state
+id=div_state_id
+
+	<select>
+	id=select_state_id
+	
+	<form>
+	id=state_form_id
+		
+		text field
+		id=state_name_id
+		name:state_name_name
+		
+		text field
+		id=state_abbv_id
+		name:state_abbv_id
+		
+		input:
+		type:submit
+		id:add_state_id
+		name:add_state_name
+		value:Add
+		
+		input:
+		type:submit
+		id:update_state_id
+		name:update_state_name
+		value:Update
+		
+		input:
+		type:submit
+		id:delete_state_id
+		name:delete_state_name
+		value:Delete
+	
+
+<div> district
+id=div_district_id
+
+	<select>
+	id=select_district_id
+	
+	<form>
+	id=district_form_id
+		
+		text field
+		id=district_name_id
+		name:district_name_name
+		
+		input:
+		type:submit
+		id:add_district_id
+		name:add_district_name
+		value:Add
+		
+		input:
+		type:submit
+		id:update_district_id
+		name:update_district_name
+		value:Update
+		
+		input:
+		type:submit
+		id:delete_district_id
+		name:delete_district_name
+		value:Delete
+	
+<div> school
+id=div_school_id
+
+	<select>
+	id=select_school_id
+	
+	<form>
+	id=school_form_id
+		
+		text field
+		id=school_name_id
+		name:school_name_name
+		
+		text field
+		id=school_address_id
+		name:school_address_name
+		
+		text field
+		id=school_city_id
+		name:school_name_name
+		
+		text field
+		id=school_city_id
+		name:school_city_name
+		
+		text field
+		id=school_zip_id
+		name:school_zip_name
+		
+		text field
+		id=school_phone_id
+		name:school_phone_name
+		
+		input:
+		type:submit
+		id:add_school_id
+		name:add_school_name
+		value:Add
+		
+		input:
+		type:submit
+		id:update_school_id
+		name:update_school_name
+		value:Update
+		
+		input:
+		type:submit
+		id:delete_school_id
+		name:delete_school_name
+		value:Delete
+	
+<div> busstop
+id=div_busstop_id
+
+	<select>
+	id=select_busstop_id
+	
+	<form>
+	id=busstop_form_id
+		
+		text field
+		id=busstop_number_id
+		name:busstop_number_name
+		
+		text field
+		id=busstop_stop_address_id
+		name:busstop_stop_address_name
+		
+		text field
+		id=busstop_stop_time_id
+		name:busstop_stop_time_name
+		
+		input:
+		type:submit
+		id:add_busstop_id
+		name:add_busstop_name
+		value:Add
+		
+		input:
+		type:submit
+		id:update_busstop_id
+		name:update_busstop_name
+		value:Update
+		
+		input:
+		type:submit
+		id:delete_busstop_id
+		name:delete_busstop_name
+		value:Delete
+
+========================================
+========================================
+=================PHP====================
+========================================
+========================================
+
+
+========================================
+========================================
+==================DB====================
+========================================
+========================================
+
+See Diagram:
+Database EER Diagram and ER Diagram for names used

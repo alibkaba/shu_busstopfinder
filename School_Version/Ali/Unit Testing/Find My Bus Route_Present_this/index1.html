@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" content="text/html" http-equiv="Content-Type">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/.min.css" rel=
+    "stylesheet">
+    <link href=
+    "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+    rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <script src=
+    "//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src=
+    "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<!-- <script type="text/javascript " src="js/jquery-1.11.1.min.js "></script> -->
+
+    <title>Welcome to Bus Stops</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" data-target=
+                "#bs-example-navbar-collapse-1" data-toggle="collapse" type=
+                "button"><span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span> <span class="icon-bar"></span>
+                <span class="icon-bar"></span></button> <a class="navbar-brand"
+                href="#">Bus Stops</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id=
+            "bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#">Home<span class=
+                        "sr-only">(current)</span></a>
+                    </li>
+
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="nav navbar-nav navbar-right" style=
+                "margin-left: 2em">
+                    <button class="btn btn-default navbar-btn" data-target=
+                    "#LoginModal" data-toggle="modal" type="button">Sign
+                    in</button> <button class="btn btn-default navbar-btn"
+                    data-target="#RegisterModal" data-toggle="modal" type=
+                    "button">Register</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="text-center">
+                <select id="Select_States" onchange=
+                "Read_Districts(this.value)">
+                    <option value=''>
+                        Select your State
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="text-center">
+                <select id="Select_Districts" onchange=
+                "Read_Schools(this.value)">
+                    <option value=''>
+                        Select your District
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="text-center">
+                <select id="Select_Schools" onchange=
+                "Read_Bus_Stops(this.value)">
+                    <option value=''>
+                        Select your School
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div id="map-canvas" style="float:left;width:50%; height:40%">
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <table class="table table-bordered" id="Bus_Stops_Table">
+                <thead>
+                    <tr>
+                        <th>Bus #</th>
+                        <th>Stop Time</th>
+                        <th>Stop Address</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <label for="address">Enter your address:</label> <input id=
+                "User_Address" type="text"> <button onclick=
+                "Calculate_Distance_To_Stops(User_Address.value)">Find Closest
+                Bus Stop</button> <button onclick=
+                "Get_Coordinates(User_Address.value)">Get Coordinates</button>
+                <button onclick="Use_My_Location()">Use My Location</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="addresses_panel" style="margin:20px;background-color:#FFEE77;">
+    </div>
+
+    <div id="directions_panel" style="margin:20px;background-color:#FFEE77;">
+    </div>
+
+    <div class="modal fade" id="LoginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type=
+                    "button"><span>&times;</span><span class=
+                    "sr-only">Close</span></button>
+
+                    <h4 class="modal-title" id="myModalLabel">Login</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for=
+                            "inputEmail3">Email</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" id="inputEmail3"
+                                placeholder="Email" type="email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for=
+                            "inputPassword3">Password</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" id="inputPassword3"
+                                placeholder="Password" type="password">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label><input type="checkbox"> Remember
+                                    me</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button class="btn btn-default" type=
+                                "submit">Sign in</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type=
+                    "button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

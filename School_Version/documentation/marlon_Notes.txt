@@ -1,0 +1,12 @@
+10-19-2014  2pm to 6:40pm
+Refactored Google API section, troubleshot async issue with passing variables
+
+9-28-2014
+
+-Created Data Flow Diagrams
+
+
+
+9-27-2014
+-Uploaded Data flow information for users
+-Added Google Maps required data elements

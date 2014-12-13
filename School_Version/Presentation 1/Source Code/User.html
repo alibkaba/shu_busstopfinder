@@ -1,0 +1,78 @@
+<!doctype = html>
+<html lang="en">
+<head>
+<meta charset = "UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="jquery-1.11.1.min.js"></script>
+<script src="js/main.js"></script> 
+<title>Find My Bus Stop</title>
+</head>
+<body>
+	
+	
+	
+	<div class="browsInfo" id="select_wrapper">
+		<h1>Find My Bus Stop</h1>
+
+		<form id="stateForm" style="display:block">
+			<h3>Select a State:</h3>
+			<select id="State" onchange="Get_Districts(State.value)">
+				<option value="">Select your state</option>
+				<option value="1">New York</option>
+				<option value="2">Connecticut</option>
+				<option value="3">New Hampshire</option>
+			</select>
+		</form>
+
+		<form id="districtForm" style="display:block">
+		<h3>Select a District:</h3>
+			<select id="District" onchange="Get_Schools(District.value)">
+				<option value="">Select your District</option>
+				<option value="Norwalk">Norwalk</option>
+				<option value="Fairfield">Fairfield</option>
+				<option value="Stratford">Stratford</option>
+			</select>
+		</form>
+
+		<form id="schoolForm" style="display:none">
+		<h3>Select a School:</h3>
+			<select id="School" onchange="Get_Bus_Routes(School.value)">
+				<option value="">Select your School</option>
+				<option value="Brien McMahon">Brien McMahon</option>
+				<option value="Rotton">Rotton</option>
+				<option value="Norwalk High">Norwalk High</option>
+			</select>
+		</form>
+		
+		<form id="busForm" style="display:none">
+		<h3>Select a bus rout:</h3>
+			<select id="Bus" onchange="busRoutSelect()">
+				<option value="">Select your Bus</option>
+				<option value="Rout401">Rout 401</option>
+				<option value="Rout402">Rout 402</option>
+				<option value="Rout404">Rout 404</option>
+			</select>
+		</form>
+		
+	</div>
+	<div id="list_wrapper" style="display:none">
+	</div>
+	
+	
+	<div>
+		<label for="address"> Enter your Home Address:</label> <input type="text" id="User_Address"/>	
+		<button onclick="Calculate_Distance_To_Stops(User_Address.value)">Find Closest Bus Stop</button>					
+	</div>
+					
+	<div id="addresses_panel"  style="margin:20px;background-color:#FFEE77;"></div>
+    <div id="directions_panel" style="margin:20px;background-color:#FFEE77;"></div>
+	<div id="map-canvas" style="float:left;width:50%; height:40%"></div>
+				
+				
+		
+
+	
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+Bus Route Data flow
+
+Admin features
+1)Admin account will be hard coded and will have an username and password
+2)The Admin account will be able to manage all aspects of the website, including approving State, District and school accounts
+Admin Page
+1)Admin Login page allows user to enter username and password, also has a forgot password link
+2)After successful login, admin is able to manage pending registrations, current registrations, and also manage State, District, and School accounts and reset passwords as needed
+Database Values:  Admin_Name, Admin_Email, Admin_Password
+
+User features
+1)User sees a page with a drop down to select   Search my Bus stop by selecting   [State] [District][School]      User selects state, which enables and populates District drop down, once selected enables and populates schools
+2)User selects School and the school information loads such as Name, address and phone number
+3)User is able to click a button to display a list of bus stops on that page or click find my bus
+4)When the user clicks find my bus the geolocation for their mobile device can be used and they have the option to use an address they can enter in a text field
+5)Then Google Maps API will calculate entered address to all bus stop addresses and find closes bus stop and provide info, it will also provide options for walking driving direction to that closes bus stop, then allowed to print or email those directions
+
+Database Values: State_Name, District_Name, SCHOOL_NAME, SCHOOL_ADDRESS, SCHOOL_PHONE, SCHOOL_ADMINISTRATOR_NAME, SCHOOL_ADMINSITRATOR_EMAIL, SCHOOL_ADMINISTRATOR_PHONE, SCHOOL_BUS_NUMBER, SCHOOL_BUS_NUMBER_STOP_ADDRESS, SCHOOL_BUS_NUMBER_TIME 
+
+Google Map API Address DB values:  Address_Name, Address_street1, Address_street2, Address_lat, Address_long, Address_StopTime
